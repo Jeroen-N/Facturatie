@@ -38,7 +38,11 @@ public class Klant {
 		this.Betaalwijze = Betaalwijze;
 	}
 
-	public void BerekenTotaalEigenRisico(){
+	public double BerekenTotaalEigenRisico(){
+		
+	}
+	
+	public String SetIncassoOfFactuur(){
 		
 	}
 	
