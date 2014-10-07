@@ -31,6 +31,11 @@ public class Klant {
 		this.Woonplaats = Woonplaats;
 		this.Geboortedatum = Geboortedatum;
 		this.TelefoonNr = TelefoonNr;
+		this.Email = Email;
+		this.ResterendEigenRisico = ResterendEigenRisico;
+		this.RekeningNr = RekeningNr;
+		this.Verzekering = Verzekering;
+		this.Betaalwijze = Betaalwijze;
 	}
 
 	public void BerekenTotaalEigenRisico(){
