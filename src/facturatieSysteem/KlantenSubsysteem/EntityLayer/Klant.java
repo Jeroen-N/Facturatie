@@ -39,10 +39,12 @@ public class Klant {
 	}
 
 	public double BerekenTotaalEigenRisico(){
+		return 0;
 		
 	}
 	
 	public String SetIncassoOfFactuur(){
+		return ;
 		
 	}
 	
