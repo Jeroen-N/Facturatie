@@ -2,6 +2,8 @@
 
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
+import java.util.Date;
+
 public class Klant {
 
 	private String BSN;
@@ -9,7 +11,13 @@ public class Klant {
 	private String Adres;
 	private String Postcode;
 	private String Woonplaats;
-	private date Geboortedatum;
+	private Date Geboortedatum;
+	private String TelefoonNr;
+	private String Email;
+	private String ResterendEigenRisico;
+	private int RekeningNr;
+	private VerzekeringPolis Verzekering;
+	private String Betaalwijze;
 	
 	public Klant(){
 		
