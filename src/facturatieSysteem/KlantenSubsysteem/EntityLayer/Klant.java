@@ -16,12 +16,20 @@ public class Klant {
 	private String TelefoonNr;
 	private String Email;
 	private String ResterendEigenRisico;
-	private int RekeningNr;
+	private String RekeningNr;
 	private VerzekeringPolis Verzekering;
 	private String Betaalwijze;
-	
-	public Klant(){
-		
+
+	public Klant(String BSN, String Naam, String Adres, String Postcode,
+			String Woonplaats, Date Geboortedatum, String TelefoonNr,
+			String Email, String ResterendEigenRisico, String RekeningNr,
+			VerzekeringPolis Verzekering, String Betaalwijze) {
+		this.BSN = BSN;
+		this.Naam = Naam;
+		this.Adres = Adres;
+		this.Postcode = Postcode;
+		this.Woonplaats = Woonplaats;
+		this.Geboortedatum = Geboortedatum;
 	}
-	
+
 }
