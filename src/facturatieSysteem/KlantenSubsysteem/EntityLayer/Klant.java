@@ -44,7 +44,18 @@ public class Klant {
 	}
 	
 	public String SetIncassoOfFactuur(){
-		return ;
+		return Email;
+		
+	}
+	
+	public VerzekeringPolis getVerzekering(){
+		return Verzekering;
+	}
+	
+	public boolean updateKlant(String BSN, String Naam, String Adres, String Postcode,
+			String Woonplaats, Date Geboortedatum, String TelefoonNr,
+			String Email, String ResterendEigenRisico, String RekeningNr,
+			VerzekeringPolis Verzekering, String Betaalwijze){
 		
 	}
 	
