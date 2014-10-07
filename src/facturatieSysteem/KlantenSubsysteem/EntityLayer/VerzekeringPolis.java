@@ -3,7 +3,7 @@ package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 import java.util.Date;
 
 public class VerzekeringPolis {
-// jkhasdkjf
+
 	private int PolisNummer;
 	private String VerzekeringsType;
 	private double ExtraEigenRisico;
