@@ -32,4 +32,8 @@ public class Klant {
 		this.Geboortedatum = Geboortedatum;
 	}
 
+	public void BerekenTotaalEigenRisico(){
+		
+	}
+	
 }
