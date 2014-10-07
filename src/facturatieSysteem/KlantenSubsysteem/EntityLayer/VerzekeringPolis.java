@@ -6,12 +6,16 @@ public class VerzekeringPolis {
 
 	private int PolisNummer;
 	private String VerzekeringsType;
-	private Double ExtraEigenRisico;
+	private double ExtraEigenRisico;
 	private Date StartDatum;
 	private Date EindDatum;
 	
-	public VerzekeringPolis(){
-		//
+	public VerzekeringPolis(int PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
+		this.PolisNummer = PolisNummer;
+		this.VerzekeringsType = VerzekeringsType;
+		this.ExtraEigenRisico = ExtraEigenRisico;
+		this.StartDatum = StartDatum;
+		this.EindDatum = EindDatum;
 	}
 	
 	public void NewVerzekering(){
