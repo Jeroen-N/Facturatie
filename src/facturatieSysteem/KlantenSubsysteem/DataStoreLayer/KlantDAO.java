@@ -8,10 +8,15 @@ public class KlantDAO {
 	private Klant klant;
 	private ArrayList<Klant> klantOverzicht;
 	
-	public ArrayList<Klant> getKlanten(){
+	public ArrayList<Klant> getKlantenXML(){
 		return klantOverzicht;
 	}
 	
+	public void updateKlantXML(Klant klant){
+		this.klant = klant;
+		
+		//updaten van gegevens van een klant
+	}
 	
 	public void verwijderKlantXML(Klant klant){
 		this.klant = klant;

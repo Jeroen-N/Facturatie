@@ -12,9 +12,11 @@ public class KlantManagerImpl implements KlantManager{
 	private ArrayList<Klant> klantOverzicht;
 	private ArrayList<Klant> zoekresultaat;
 	public ArrayList<Klant> getKlanten(){
-		//nog toe tevoegen:
-		//functie naar xml voor ophalen alle klanten
+		//functie voor het ophalen van klanten
 		
+		//nog toe tevoegen:
+		
+		//KlantDAO.getKlantenXML();
 		return klantOverzicht;
 	}
 	
@@ -37,7 +39,9 @@ public class KlantManagerImpl implements KlantManager{
 	}
 	
 	public void verwijderKlantXML(String BSN){
+		//functie voor het verwijderen van een klant uit xml
 		
+		//nog toe tevoegen:
 		//KlantDAO.verwijderKlantXML(klant);
 	}
 	
