@@ -30,6 +30,7 @@ public class Klant {
 		this.Postcode = Postcode;
 		this.Woonplaats = Woonplaats;
 		this.Geboortedatum = Geboortedatum;
+		this.TelefoonNr = TelefoonNr;
 	}
 
 	public void BerekenTotaalEigenRisico(){
