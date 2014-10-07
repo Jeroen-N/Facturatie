@@ -1,5 +1,12 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
-public class ImmutableFactuur {
+public interface ImmutableFactuur {
+	
+	public void toonFactuur();
+	
+	public boolean printFactuur();
 
+	public void berekenBTW();
+
+	public void berekenEigenRisico();
 }
