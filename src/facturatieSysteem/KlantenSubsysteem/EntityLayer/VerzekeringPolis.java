@@ -10,6 +10,10 @@ public class VerzekeringPolis {
 	private Date StartDatum;
 	private Date EindDatum;
 	
+	public VerzekeringPolis(){
+		//
+	}
+	
 	public void NewVerzekering(){
 		
 	}
