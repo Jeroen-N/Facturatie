@@ -1,6 +1,3 @@
-//test voor git; Xander Gerreman
-//test
-
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
 import java.util.Date;
@@ -42,7 +39,7 @@ public class Klant {
 	}
 
 	/*
-	 * In deze methode 
+	 * In deze methode wordt het totaal eigen risico ingevuld
 	 */
 	public void setTotaalEigenRisico(double eigenRisico) {
 		ResterendEigenRisico = eigenRisico;
@@ -60,10 +57,11 @@ public class Klant {
 
 	/*
 	 * Wat houdt deze functie in?
-	 */
+	 *
 	public String SetIncassoOfFactuur() {
-		return Email;
+		return ;
 	}
+	*/
 
 	/*
 	 * In deze methode wordt het verzekeringstype van de client opgevraagd. Dit
