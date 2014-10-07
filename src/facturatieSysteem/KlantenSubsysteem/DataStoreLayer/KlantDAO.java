@@ -4,23 +4,13 @@ import java.util.ArrayList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
-public class KlantDAO {
-	private Klant klant;
-	private ArrayList<Klant> klantOverzicht;
+public interface KlantDAO {
+
+	public ArrayList<Klant> getKlantenXML();
 	
-	public ArrayList<Klant> getKlantenXML(){
-		return klantOverzicht;
-	}
-	
-	public void updateKlantXML(Klant klant){
-		this.klant = klant;
-		
-		//updaten van gegevens van een klant
-	}
-	
-	public void verwijderKlantXML(Klant klant){
-		this.klant = klant;
-		
-		//verwijder klant uit XML
-	}
+	public boolean addKlantXML(Klant klant);
+
+	public boolean updateKlantXML(Klant klant);
+
+	public boolean verwijderKlantXML(Klant klant);
 }
