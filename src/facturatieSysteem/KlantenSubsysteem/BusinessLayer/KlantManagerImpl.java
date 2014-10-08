@@ -13,32 +13,19 @@ public class KlantManagerImpl implements KlantManager {
 	private ArrayList<Klant> zoekresultaat;
 	private KlantDAO KlantDAO;
 
-<<<<<<< HEAD
-	
-	public boolean createKlant(String BSN, String Naam, String Adres, String Postcode,
-			String Woonplaats, Date Geboortedatum, String TelefoonNr,
-			String Email, String RekeningNr, double ResterendEigenRisico, VerzekeringPolis Verzekering,
-			String Betaalwijze){
-		
-		klant = new Klant(BSN, Naam, Adres,  Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Verzekering, Betaalwijze);
-		
-		if (checkKlant(klant)){
-			//klant gegevens zijn correct ingevuld
-			if(KlantDAO.addKlantXML(klant)){
-=======
+
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, Date Geboortedatum,
-			String TelefoonNr, String Email, String RekeningNr,
+			String TelefoonNr, String Email, String RekeningNr, double ResterendEigenRisico,
 			VerzekeringPolis Verzekering, String Betaalwijze) {
 
 		klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
-				Geboortedatum, TelefoonNr, Email, RekeningNr, Verzekering,
+				Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Verzekering,
 				Betaalwijze);
 
 		if (checkKlant(klant)) {
 			// klant gegevens zijn correct ingevuld
 			if (KlantDAO.addKlantXML(klant)) {
->>>>>>> branch 'subsysteem1' of https://github.com/Jeroen-N/Facturatie.git
 				return true;
 			} else {
 				return false;
