@@ -11,40 +11,41 @@ public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
 	private ArrayList<Klant> klantOverzicht;
 	private ArrayList<Klant> zoekresultaat;
+	private KlantDAO KlantDAO;
 
-	
-	public boolean createKlant(String BSN, String Naam, String Adres, String Postcode,
-			String Woonplaats, Date Geboortedatum, String TelefoonNr,
-			String Email, String RekeningNr, VerzekeringPolis Verzekering,
-			String Betaalwijze){
-		
-		klant = new Klant(BSN, Naam, Adres,  Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, Verzekering, Betaalwijze);
-		
-		if (checkKlant(klant)){
-			//klant gegevens zijn correct ingevuld
-			if(KlantDAO.addKlantXML(klant)){
+	public boolean createKlant(String BSN, String Naam, String Adres,
+			String Postcode, String Woonplaats, Date Geboortedatum,
+			String TelefoonNr, String Email, String RekeningNr,
+			VerzekeringPolis Verzekering, String Betaalwijze) {
+
+		klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
+				Geboortedatum, TelefoonNr, Email, RekeningNr, Verzekering,
+				Betaalwijze);
+
+		if (checkKlant(klant)) {
+			// klant gegevens zijn correct ingevuld
+			if (KlantDAO.addKlantXML(klant)) {
 				return true;
-			}
-			else{
+			} else {
 				return false;
 			}
-		}
-		else{
-			//fout melding weergeven in gui dat gegevens niet correct zijn
+		} else {
+			// fout melding weergeven in gui dat gegevens niet correct zijn
 			return false;
 		}
 	}
-	
-	
+
+	@Override
 	public ArrayList<Klant> getKlanten() {
 		// functie voor het ophalen van klanten
 
 		// nog toe tevoegen:
 
 		return KlantDAO.getKlantenXML();
-		
+
 	}
 
+	@Override
 	public ArrayList<Klant> getKlant(Date Gebdatum) {
 		// functio voor het zoeken van klanten
 
@@ -67,10 +68,9 @@ public class KlantManagerImpl implements KlantManager {
 		// functie voor het verwijderen van een klant uit xml
 
 		// nog toe tevoegen:
-		if(KlantDAO.verwijderKlantXML(klant)){
+		if (KlantDAO.verwijderKlantXML(klant)) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
@@ -83,12 +83,6 @@ public class KlantManagerImpl implements KlantManager {
 
 	@Override
 	public ArrayList<Klant> klanten() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Klant klant() {
 		// TODO Auto-generated method stub
 		return null;
 	}
