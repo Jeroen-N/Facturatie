@@ -8,10 +8,7 @@ public interface KlantDAO {
 
 	//ik weet niet waarom dit static is maar anders krijg ik foutmeldingen.
 	
-	public static ArrayList<Klant> getKlantenXML() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ArrayList<Klant> getKlantenXML();
 	
 	public boolean addKlantXML(Klant klant);
 
