@@ -22,8 +22,12 @@ public class KlantManagerImpl implements KlantManager {
 		
 		if (checkKlant(klant)){
 			//klant gegevens zijn correct ingevuld
-			KlantDAO.addKlantXML(klant);
-			return true;
+			if(KlantDAO.addKlantXML(klant)){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else{
 			//fout melding weergeven in gui dat gegevens niet correct zijn
@@ -37,8 +41,8 @@ public class KlantManagerImpl implements KlantManager {
 
 		// nog toe tevoegen:
 
-		// KlantDAO.getKlantenXML();
-		return klantOverzicht;
+		return KlantDAO.getKlantenXML();
+		
 	}
 
 	public ArrayList<Klant> getKlant(Date Gebdatum) {
