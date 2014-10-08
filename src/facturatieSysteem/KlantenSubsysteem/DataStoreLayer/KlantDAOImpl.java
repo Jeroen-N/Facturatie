@@ -39,7 +39,8 @@ public class KlantDAOImpl implements KlantDAO {
 					DocumentBuilder db = dbf.newDocumentBuilder();
 
 					//parse using builder to get DOM representation of the XML file
-					 org.w3c.dom.Document dom = db.parse("Bureaublad/ClientFormat.xsd");
+					 //org.w3c.dom.Document dom = db.parse("Bureaublad/ClientFormat.xsd");
+					 org.w3c.dom.Document dom = db.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xsd");
 					
 					 org.w3c.dom.Element docEle = dom.getDocumentElement();
 
