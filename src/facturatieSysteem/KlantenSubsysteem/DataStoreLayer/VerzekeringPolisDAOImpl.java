@@ -6,7 +6,6 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
-	private VerzekeringPolis verzekering;
 	private ArrayList<VerzekeringPolis> VerzekeringOverzicht;
 
 	public ArrayList<VerzekeringPolis> getVerzekeringPolis() {

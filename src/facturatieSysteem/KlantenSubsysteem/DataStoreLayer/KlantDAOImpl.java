@@ -1,18 +1,19 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
-
-import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+
 import java.util.Date;
 
-import javax.swing.text.Document;
-import javax.swing.text.html.parser.AttributeList;
-import javax.swing.text.html.parser.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Node;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -29,92 +30,82 @@ public class KlantDAOImpl implements KlantDAO {
 	}
 	
 	public ArrayList<Klant> getKlantenXML() {
-
-		//get the factory
-				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-				try {
-
-					//Using factory get an instance of document builder
-					DocumentBuilder db = dbf.newDocumentBuilder();
-					
-					//parse using builder to get DOM representation of the XML file
-					 org.w3c.dom.Document dom = db.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xsd");
-					 //org.w3c.dom.Document dom = db.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xsd");
-					
-					 org.w3c.dom.Element docEle = dom.getDocumentElement();
-
-						//get a nodelist of elements
-						NodeList nl = docEle.getElementsByTagName("Client");	
-						
-						if(nl != null && nl.getLength() > 0) {
-							for(int i = 0 ; i < nl.getLength();i++) {
-
-								//get the employee element
-								Node el = nl.item(i);
-
-								//get the Employee object
-								Klant e = getKlant(el);
-
-								//add it to list
-								klantOverzicht.add(e);
-							}
-						}
-
-				}catch(ParserConfigurationException pce) {
-					pce.printStackTrace();
-				}catch(SAXException se) {
-					se.printStackTrace();
-				}catch(IOException ioe) {
-					ioe.printStackTrace();
-				}
-		
-		
-		
-				System.out.println("klhsdfadfsdfdsfadsfdsfadsvbdfgafasdfdsa");
-		return klantOverzicht;
-	}
-
-	private Klant getKlant(Node el) {
-
-		//for each <employee> element get text or int values of
-		//name ,id, age and name
-		String BSN = "hallo";
-		String Naam = getTextValue(el,"Name");
-		String Adres = getTextValue(el,"Adres");
-		String Postcode = getTextValue(el,"Postcode");
-		String Woonplaats = getTextValue(el,"Woonplaats");
-		Date Geboortedatum = null;
-		String TelefoonNr = getTextValue(el,"telefoonnummer");
-		String Email = getTextValue(el,"email");
-		String RekeningNr = getTextValue(el,"Rekekingnummer");
-		double ResterendEigenRisico = (Double) null;
-		VerzekeringPolis verzekering = null;
-		String Betaalwijze = getTextValue(el,"BetaalMethode");
-		System.out.println(Email);
-		AttributeList type = (AttributeList) ((DocumentBuilderFactory) el).getAttribute("type");
-
-		//Create a new Employee with the value read from the xml nodes
-		Klant e = new Klant(BSN, Naam, Adres,  Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr,ResterendEigenRisico, verzekering, Betaalwijze);
-
-		return e;
-	}
-	
-	
-	private String getTextValue(Node el2, String tagName) {
-		String textVal = null;
-		NodeList nl = ((org.w3c.dom.Document) el2).getElementsByTagName(tagName);
-		if(nl != null && nl.getLength() > 0) {
-			Node el = nl.item(0);
-			textVal = el.getFirstChild().getNodeValue();
+		klantOverzicht = new ArrayList<Klant>();
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		try{
+			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
+			Document document = dBuilder.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xml");
+			document.normalize();	
+			
+			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
+			NodeList clienten = rootElement.getElementsByTagName("Client");
+			for(int i = 0; i < clienten.getLength();i++){
+				Element clientElement = (Element) clienten.item(i);
+				String BSN = clientElement.getAttribute("BSN");
+				String Naam = clientElement.getElementsByTagName("Naam").item(0).getTextContent();
+				String Adres = clientElement.getElementsByTagName("Adres").item(0).getTextContent();
+				String Postcode = clientElement.getElementsByTagName("Postcode").item(0).getTextContent();
+				String Woonplaats = clientElement.getElementsByTagName("Woonplaats").item(0).getTextContent();
+				Date Geboortedatum = dateFormat.parse(clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent());
+				String TelefoonNr = clientElement.getElementsByTagName("Telefoonnummer").item(0).getTextContent();
+				String Email = clientElement.getElementsByTagName("Email").item(0).getTextContent();
+				Double ResterendEigenRisico = Double.parseDouble(clientElement.getElementsByTagName("ResterendEigenRisico").item(0).getTextContent());
+				String RekeningNr = clientElement.getElementsByTagName("Rekeningnummer").item(0).getTextContent();
+				String Betaalwijze= clientElement.getElementsByTagName("BetaalMethode").item(0).getTextContent();
+				/*
+				System.out.println("client: " + (i+1));
+				System.out.println(BSN);
+				System.out.println(Naam);
+				System.out.println(Adres);
+				System.out.println(Postcode);
+				System.out.println(Woonplaats);
+				System.out.println(Geboortedatum);
+				System.out.println(TelefoonNr);
+				System.out.println(Email);
+				System.out.println(ResterendEigenRisico);
+				System.out.println(RekeningNr);
+				System.out.println(Betaalwijze);
+				System.out.println();
+				*/
+				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
+				
+				String PolisNummer = polisElement.getAttribute("PolisNummer");
+				String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
+				Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
+				Date startDatum = dateFormat.parse(clientElement.getElementsByTagName("startDatum").item(0).getTextContent());
+				Date eindDatum = dateFormat.parse(clientElement.getElementsByTagName("eindDatum").item(0).getTextContent());
+				
+				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum); 
+				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Polis, Betaalwijze);
+				klantOverzicht.add(klant);
+				
+				/*
+				System.out.println(PolisNummer);
+				System.out.println(VerzekeringsType);
+				System.out.println(EigenRisico);
+				System.out.println(startDatum);
+				System.out.println(eindDatum);
+				System.out.println();
+				*/
+				
+			}
+			System.out.println("aantalklanten: "+klantOverzicht.size());
+		} catch (ParserConfigurationException e){
+			e.printStackTrace();
+		} catch (SAXException e){
+			e.printStackTrace();
+		} catch (IOException e){
+			e.printStackTrace();
+		} catch (DOMException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-
-		return textVal;
+		
+		
+		return klantOverzicht;	    
 	}
-
-
-	
-	
 	public boolean updateKlantXML(Klant klant) {
 		this.klant = klant;
 		return false;
