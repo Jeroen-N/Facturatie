@@ -39,7 +39,7 @@ public class Klant {
 	}
 
 	/*
-	 * In deze methode wordt het totaal eigen risico ingevuld
+	 * In deze methode wordt het totaal eigen risico ingesteld.
 	 */
 	public void setTotaalEigenRisico(double eigenRisico) {
 		ResterendEigenRisico = eigenRisico;
