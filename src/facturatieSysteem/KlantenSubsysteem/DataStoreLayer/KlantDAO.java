@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface KlantDAO {
-
-	//ik weet niet waarom dit static is maar anders krijg ik foutmeldingen.
 	
 	public ArrayList<Klant> getKlantenXML();
 	
