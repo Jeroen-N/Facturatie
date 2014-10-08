@@ -13,17 +13,10 @@ public interface KlantDAO {
 		return null;
 	}
 	
-	public static boolean addKlantXML(Klant klant) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean addKlantXML(Klant klant);
 
 	public boolean updateKlantXML(Klant klant);
 
-	
-	public static boolean verwijderKlantXML(Klant klant) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
+	public boolean verwijderKlantXML(Klant klant);
+
 }
