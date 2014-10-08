@@ -18,15 +18,21 @@ public class VerzekeringPolis {
 		this.EindDatum = EindDatum;
 	}
 	
-	public void NewVerzekering(){
+	
+	public boolean WijzigVerzekeringPolis(int PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
+		//zoek de bestaande polis door middel van het PolisNummer
 		
+		//voer de neuwe gegevens in, in de plaats van de oude gegevens.
+		
+		return true;
 	}
 	
-	public void WijzigVerzekering(){
+	public boolean RemoveVerzekeringPolis(int PolisNummer){
+		//zoek de polis door middel van het polisnummer
 		
-	}
-	
-	public void RemoveVerzekering(){
+		//verwijder de polis
+		
+		return false;
 		
 	}
 }
