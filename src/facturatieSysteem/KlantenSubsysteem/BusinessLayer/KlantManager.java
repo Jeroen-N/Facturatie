@@ -11,9 +11,9 @@ public interface KlantManager {
 
 	public Klant toonKlant(String BSN);
 
-	public void verwijderKlantXML(String BSN);
+	public boolean verwijderKlantXML(String BSN);
 
-	public void checkKlant(Klant klant);
+	public boolean checkKlant(Klant klant);
 
 	public ArrayList<Klant> klanten();
 
