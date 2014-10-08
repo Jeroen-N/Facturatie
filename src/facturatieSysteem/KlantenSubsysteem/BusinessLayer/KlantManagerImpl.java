@@ -15,10 +15,10 @@ public class KlantManagerImpl implements KlantManager {
 	
 	public boolean createKlant(String BSN, String Naam, String Adres, String Postcode,
 			String Woonplaats, Date Geboortedatum, String TelefoonNr,
-			String Email, String RekeningNr, VerzekeringPolis Verzekering,
+			String Email, String RekeningNr, double ResterendEigenRisico, VerzekeringPolis Verzekering,
 			String Betaalwijze){
 		
-		klant = new Klant(BSN, Naam, Adres,  Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, Verzekering, Betaalwijze);
+		klant = new Klant(BSN, Naam, Adres,  Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Verzekering, Betaalwijze);
 		
 		if (checkKlant(klant)){
 			//klant gegevens zijn correct ingevuld
