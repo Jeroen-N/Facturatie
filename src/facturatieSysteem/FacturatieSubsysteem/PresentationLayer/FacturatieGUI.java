@@ -1,63 +1,118 @@
 package facturatieSysteem.FacturatieSubsysteem.PresentationLayer;
 
-import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
-public class FacturatieGUI extends JFrame{
+public class FacturatieGUI{
 
-	private JFrame frame = new JFrame();
+	private JFrame frame;
 	private FacturatieManagerImpl facturatieManagerImpl;
-	private JPanel panel = new JPanel();
-	private JTextField zoekbalk = new JTextField();
-	private JButton zoekKnop = new JButton();
-	private JButton terugKnop = new JButton();
-	private JButton factureerKnop = new JButton();
-	private JButton openFactuurKnop = new JButton();
-	private JButton printFactuurKnop = new JButton();
-	private JTable overzicht = new JTable();
-	private JTextArea details = new JTextArea();
-	private JLabel paginaNaam = new JLabel();
+	private JPanel buttonPanel;
+	private JPanel headPanel;
+	private JPanel detailPanel;
+	private JPanel overzichtPanel;
+	private JTextField zoekbalk;
+	private JButton zoekKnop;
+	private JButton terugKnop;
+	private JButton factureerKnop;
+	private JButton openFactuurKnop;
+	private JButton printFactuurKnop;
+	private JTable overzicht;
+	private JTextArea details;
+	private JLabel paginaNaam;
+	private Container contentpane;
+	private Color GRAY;
 
 	public FacturatieGUI(FacturatieManagerImpl facturatieManagerImpl) {
 		this.facturatieManagerImpl = facturatieManagerImpl;
 		initComponents();
-		setVisible(true);
+
 	}
 
 	public void initComponents() {
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setExtendedState(MAXIMIZED_BOTH);
+		frame = new JFrame("Facturatiesysteem");
+		contentpane = frame.getContentPane();
+		contentpane.setLayout(new BorderLayout());
+		
+		// panels aanmaken
+		
+		buttonPanel = new JPanel();
+		overzichtPanel = new JPanel();
+		headPanel = new JPanel();
+		detailPanel = new JPanel();
+	
 
 		// Tekst initialiseren van de knoppen en labels.
+		details = new JTextArea();
+		details.setBackground(Color.LIGHT_GRAY); 
+		details.setPreferredSize(new Dimension(250,400));
+		details.setText("test");
+		Border border = BorderFactory.createLineBorder(Color.BLACK);
+		details.setBorder(BorderFactory.createCompoundBorder(border, 
+		            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+	
+		
+		paginaNaam = new JLabel();
 		paginaNaam.setText("Overzicht facturen");
+		
+		zoekKnop = new JButton();
 		zoekKnop.setText("Zoek");
+		
+		terugKnop = new JButton();
 		terugKnop.setText("Terug");
+		
+		
+		factureerKnop = new JButton();
 		factureerKnop.setText("Factureren");
+		
+		openFactuurKnop = new JButton();
 		openFactuurKnop.setText("Open factuur");
+		
+		printFactuurKnop = new JButton();
 		printFactuurKnop.setText("Print factuur");
+		
+		zoekbalk = new JTextField();
 		zoekbalk.setText("Vul factuurcode in");
 
 		// Tabel onderverdelen in kolommen en vastzetten.
+		overzicht = new JTable();
 		overzicht.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "Naam", "Datum", "Status" }));
 		overzicht.setEnabled(false);
 		overzicht.getTableHeader().setReorderingAllowed(false);
+		DefaultTableModel model = new DefaultTableModel();
+
+		
+		//panels vullen
+		buttonPanel.add(factureerKnop);
+		buttonPanel.add(openFactuurKnop);
+		buttonPanel.add(printFactuurKnop);
+		
+		overzichtPanel.add(overzicht);
+		
+		headPanel.add(paginaNaam);
+		headPanel.add(zoekKnop);
+		headPanel.add(terugKnop);
+		headPanel.add(zoekbalk);
+		
+		detailPanel.add(details);
+		
+		
+		contentpane.add(buttonPanel, BorderLayout.SOUTH);
+		contentpane.add(overzichtPanel, BorderLayout.CENTER);
+		contentpane.add(headPanel, BorderLayout.NORTH);
+		contentpane.add(detailPanel, BorderLayout.EAST);
+		frame.pack();
+		frame.setVisible(true);
 		
 	}
 

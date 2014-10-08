@@ -15,6 +15,11 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private BehandelingDAO behandelingDAO;
 	private FactuurDAO factuurDAO;
 	
+	public FacturatieManagerImpl(){
+		
+		
+	}
+	
 	@Override
 	public ArrayList<Klant> haalKlanten() {
 		// TODO Auto-generated method stub
