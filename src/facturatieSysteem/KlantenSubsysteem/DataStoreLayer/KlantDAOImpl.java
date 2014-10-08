@@ -37,16 +37,16 @@ public class KlantDAOImpl implements KlantDAO {
 
 					//Using factory get an instance of document builder
 					DocumentBuilder db = dbf.newDocumentBuilder();
-
+					
 					//parse using builder to get DOM representation of the XML file
-					 //org.w3c.dom.Document dom = db.parse("Bureaublad/ClientFormat.xsd");
-					 org.w3c.dom.Document dom = db.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xsd");
+					 org.w3c.dom.Document dom = db.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xsd");
+					 //org.w3c.dom.Document dom = db.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xsd");
 					
 					 org.w3c.dom.Element docEle = dom.getDocumentElement();
 
 						//get a nodelist of elements
 						NodeList nl = docEle.getElementsByTagName("Client");	
-					
+						
 						if(nl != null && nl.getLength() > 0) {
 							for(int i = 0 ; i < nl.getLength();i++) {
 
@@ -71,7 +71,7 @@ public class KlantDAOImpl implements KlantDAO {
 		
 		
 		
-		
+				System.out.println("klhsdfadfsdfdsfadsfdsfadsvbdfgafasdfdsa");
 		return klantOverzicht;
 	}
 
