@@ -35,7 +35,8 @@ public class KlantDAOImpl implements KlantDAO {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try{
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
-			Document document = dBuilder.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xml");
+			//Document document = dBuilder.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xml");
+			Document document = dBuilder.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xml");
 			document.normalize();	
 			
 			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
@@ -53,7 +54,7 @@ public class KlantDAOImpl implements KlantDAO {
 				Double ResterendEigenRisico = Double.parseDouble(clientElement.getElementsByTagName("ResterendEigenRisico").item(0).getTextContent());
 				String RekeningNr = clientElement.getElementsByTagName("Rekeningnummer").item(0).getTextContent();
 				String Betaalwijze= clientElement.getElementsByTagName("BetaalMethode").item(0).getTextContent();
-				/*
+				
 				System.out.println("client: " + (i+1));
 				System.out.println(BSN);
 				System.out.println(Naam);
@@ -67,7 +68,7 @@ public class KlantDAOImpl implements KlantDAO {
 				System.out.println(RekeningNr);
 				System.out.println(Betaalwijze);
 				System.out.println();
-				*/
+				
 				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
 				
 				String PolisNummer = polisElement.getAttribute("PolisNummer");
@@ -80,14 +81,14 @@ public class KlantDAOImpl implements KlantDAO {
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Polis, Betaalwijze);
 				klantOverzicht.add(klant);
 				
-				/*
+				
 				System.out.println(PolisNummer);
 				System.out.println(VerzekeringsType);
 				System.out.println(EigenRisico);
 				System.out.println(startDatum);
 				System.out.println(eindDatum);
 				System.out.println();
-				*/
+				
 				
 			}
 			System.out.println("aantalklanten: "+klantOverzicht.size());
