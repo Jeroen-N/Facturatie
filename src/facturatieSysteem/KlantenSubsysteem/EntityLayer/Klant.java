@@ -79,7 +79,7 @@ public class Klant {
 		return Naam;
 	}
 	
-	public Date Geboortedatum(){
+	public Date getGeboortedatum(){
 		return Geboortedatum;
 	}
 

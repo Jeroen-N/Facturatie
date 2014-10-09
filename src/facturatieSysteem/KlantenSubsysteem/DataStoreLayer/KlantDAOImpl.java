@@ -24,9 +24,7 @@ public class KlantDAOImpl implements KlantDAO {
 	private Klant klant;
 	private ArrayList<Klant> klantOverzicht;
 
-	public KlantDAOImpl(){
-		klantOverzicht = new ArrayList<Klant>();
-	}
+	
 	
 	public boolean addKlantXML(Klant klant){
 		this.klant = klant;
@@ -34,7 +32,7 @@ public class KlantDAOImpl implements KlantDAO {
 	}
 	
 	public ArrayList<Klant> getKlantenXML() {
-		//klantOverzicht = new ArrayList<Klant>();
+		klantOverzicht = new ArrayList<Klant>();
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try{

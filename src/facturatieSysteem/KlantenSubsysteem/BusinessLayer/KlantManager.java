@@ -7,7 +7,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface KlantManager {
 	
-	public ArrayList<Klant> getKlanten();
+	public  ArrayList<Klant> getKlanten();
 
 	public ArrayList<Klant> getKlant(Date Gebdatum);
 
