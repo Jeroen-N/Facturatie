@@ -6,17 +6,17 @@ import java.util.Date;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface KlantManager {
+	
+	public ArrayList<Klant> getKlanten();
 
 	public ArrayList<Klant> getKlant(Date Gebdatum);
 
 	public Klant toonKlant(String BSN);
 
-	public void verwijderKlantXML(String BSN);
+	public boolean verwijderKlantXML(String BSN);
 
-	public void checkKlant(Klant klant);
+	public boolean checkKlant(Klant klant);
 
 	public ArrayList<Klant> klanten();
-
-	public Klant klant();
 
 }

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: jenkins
+Build-Jdk: 1.5.0_22
+Created-By: Apache Maven 3.0.4
+Implementation-Title: JUnit
+Implementation-Vendor-Id: junit
+Implementation-Version: 4.12-beta-2
+Implementation-Vendor: JUnit
+

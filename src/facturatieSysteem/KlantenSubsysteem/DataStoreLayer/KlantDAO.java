@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface KlantDAO {
-
+	
 	public ArrayList<Klant> getKlantenXML();
 	
 	public boolean addKlantXML(Klant klant);
@@ -13,4 +13,5 @@ public interface KlantDAO {
 	public boolean updateKlantXML(Klant klant);
 
 	public boolean verwijderKlantXML(Klant klant);
+
 }

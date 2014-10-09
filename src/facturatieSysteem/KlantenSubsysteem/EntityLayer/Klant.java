@@ -23,7 +23,7 @@ public class Klant {
 	 */
 	public Klant(String BSN, String Naam, String Adres, String Postcode,
 			String Woonplaats, Date Geboortedatum, String TelefoonNr,
-			String Email, String RekeningNr, VerzekeringPolis Verzekering,
+			String Email, String RekeningNr, double ResterendEigenRisico, VerzekeringPolis Verzekering,
 			String Betaalwijze) {
 		this.BSN = BSN;
 		this.Naam = Naam;
@@ -34,6 +34,7 @@ public class Klant {
 		this.TelefoonNr = TelefoonNr;
 		this.Email = Email;
 		this.RekeningNr = RekeningNr;
+		this.ResterendEigenRisico = ResterendEigenRisico;
 		this.Verzekering = Verzekering;
 		this.Betaalwijze = Betaalwijze;
 	}
