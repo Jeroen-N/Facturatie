@@ -14,31 +14,39 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class FacturatieGUI{
 
-	private JFrame frame;
-	private FacturatieManagerImpl facturatieManagerImpl;
-	private JPanel buttonPanel;
-	private JPanel headPanel;
-	private JPanel detailPanel;
-	private JPanel overzichtPanel;
-	private JTextField zoekbalk;
-	private JButton zoekKnop;
-	private JButton terugKnop;
-	private JButton factureerKnop;
-	private JButton openFactuurKnop;
-	private JButton printFactuurKnop;
-	private JTable overzicht;
-	private JTextArea details;
-	private JLabel paginaNaam;
-	private Container contentpane;
-	private Color GRAY;
+	private static JFrame frame;
+	private static FacturatieManagerImpl facturatieManagerImpl;
+	private static JPanel buttonPanel;
+	private static JPanel headPanel;
+	private static JPanel detailPanel;
+	private static JPanel overzichtPanel;
+	private static JTextField zoekbalk;
+	private static JButton zoekKnop;
+	private static JButton terugKnop;
+	private static JButton factureerKnop;
+	private static JButton openFactuurKnop;
+	private static JButton printFactuurKnop;
+	private static JTable overzicht;
+	private static JTextArea details;
+	private static JLabel paginaNaam;
+	private static Container contentpane;
+	private static Color GRAY;
+	private static JScrollPane scrollPane = new JScrollPane();
+	private static JPanel mainPanel = new JPanel();
 
 	public FacturatieGUI(FacturatieManagerImpl facturatieManagerImpl) {
 		this.facturatieManagerImpl = facturatieManagerImpl;
-		initComponents();
-
+		FacturatieGUI();
 	}
 
-	public JPanel initComponents() {
+	public static JPanel FacturatieGUI(){
+		JPanel paneel = new JPanel();
+		paneel.setName("FACTURATIE");
+		paneel.add(scrollPane, BorderLayout.CENTER);
+		return initComponents();
+	}
+	
+	public static JPanel initComponents() {
 		frame = new JFrame("Facturatiesysteem");
 		contentpane = frame.getContentPane();
 		contentpane.setLayout(new BorderLayout());
@@ -111,8 +119,9 @@ public class FacturatieGUI{
 		contentpane.add(overzichtPanel, BorderLayout.CENTER);
 		contentpane.add(headPanel, BorderLayout.NORTH);
 		contentpane.add(detailPanel, BorderLayout.EAST);
-		frame.pack();
-		frame.setVisible(true);
+		
+		mainPanel.add(contentpane);
+		return mainPanel;
 		
 	}
 

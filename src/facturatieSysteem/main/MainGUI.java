@@ -24,7 +24,7 @@ public class MainGUI {
 	private String huidigPaneel;
 	private JScrollPane scrollPane;
 	private KlantGUI KlantGUI;
-	
+	private FacturatieGUI FacturatieGUI;
 	public MainGUI() {
 		
 		
@@ -110,7 +110,7 @@ public class MainGUI {
 					paneel = KlantGUI.KlantGUI();
 					break;
 				case "FACTURATIE":
-					//paneel = FacturatieGUI.initComponents();
+					paneel = FacturatieGUI.FacturatieGUI();
 					break;
 				case "VERZEKERING":
 					//paneel = betalingPaneel();
@@ -179,7 +179,7 @@ public class MainGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//setInhoudScrollPane(KlantGUI.KlantGUI());
+				setInhoudScrollPane(FacturatieGUI.FacturatieGUI());
 			}
 		});
 		
