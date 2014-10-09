@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
+import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAOImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
@@ -36,16 +37,25 @@ public class KlantManagerImpl implements KlantManager {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlanten()
+	 */
 	@Override
 	public ArrayList<Klant> getKlanten() {
 		// functie voor het ophalen van klanten
 
 		// nog toe tevoegen:
 
+		KlantDAOImpl klantDAO = new KlantDAOImpl();
 		return KlantDAO.getKlantenXML();
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlant(java.util.Date)
+	 */
 	@Override
 	public ArrayList<Klant> getKlant(Date Gebdatum) {
 		// functio voor het zoeken van klanten
@@ -55,6 +65,10 @@ public class KlantManagerImpl implements KlantManager {
 		return zoekresultaat;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#toonKlant(java.lang.String)
+	 */
 	public Klant toonKlant(String BSN) {
 		// functie voor het selecteren van een klant
 
@@ -65,6 +79,10 @@ public class KlantManagerImpl implements KlantManager {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#verwijderKlantXML(java.lang.String)
+	 */
 	public boolean verwijderKlantXML(String BSN) {
 		// functie voor het verwijderen van een klant uit xml
 
@@ -76,16 +94,47 @@ public class KlantManagerImpl implements KlantManager {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#checkKlant(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	 */
 	public boolean checkKlant(Klant klant) {
 		// nog toe tevoegen:
 		// controleer de waardes die ingevuld zijn
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#klanten()
+	 */
 	@Override
 	public ArrayList<Klant> klanten() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/*
+	 * 
+	 */
+	public boolean WijzigVerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
+		//zoek de bestaande polis door middel van het PolisNummer	
+		
+		//voer de neuwe gegevens in, in de plaats van de oude gegevens.
+		
+		return true;
+	}
+	
+	/*
+	 * 
+	 */
+	public boolean RemoveVerzekeringPolis(String PolisNummer){
+		//zoek de polis door middel van het polisnummer
+		
+		//verwijder de polis
+		
+		return false;
+		
 	}
 
 }
