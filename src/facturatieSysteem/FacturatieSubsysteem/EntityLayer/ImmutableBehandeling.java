@@ -1,5 +1,6 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
-public class ImmutableBehandeling {
+public interface ImmutableBehandeling {
 
+	public Behandeling getBehandelingen();
 }
