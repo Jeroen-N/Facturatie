@@ -47,7 +47,7 @@ public class KlantManagerImpl implements KlantManager {
 
 		// nog toe tevoegen:
 
-		KlantDAOImpl klantDAO = new KlantDAOImpl();
+		KlantDAOImpl KlantDAO = new KlantDAOImpl();
 		return KlantDAO.getKlantenXML();
 
 	}

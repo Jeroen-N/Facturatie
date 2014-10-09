@@ -19,21 +19,5 @@ public class VerzekeringPolis {
 	}
 	
 	
-	public boolean WijzigVerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
-		//zoek de bestaande polis door middel van het PolisNummer
-		
-		
-		//voer de neuwe gegevens in, in de plaats van de oude gegevens.
-		
-		return true;
-	}
-	
-	public boolean RemoveVerzekeringPolis(String PolisNummer){
-		//zoek de polis door middel van het polisnummer
-		
-		//verwijder de polis
-		
-		return false;
-		
-	}
+
 }
