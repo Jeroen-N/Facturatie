@@ -23,7 +23,8 @@ public class MainGUI {
 	private JLabel companyname;
 	private String huidigPaneel;
 	private JScrollPane scrollPane;
-
+	private KlantGUI KlantGUI;
+	
 	public MainGUI() {
 		
 		

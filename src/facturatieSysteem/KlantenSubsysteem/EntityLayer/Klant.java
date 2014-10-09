@@ -9,7 +9,7 @@ public class Klant {
 	private String Adres;
 	private String Postcode;
 	private String Woonplaats;
-	private Date Geboortedatum;
+	private String Geboortedatum;
 	private String TelefoonNr;
 	private String Email;
 	private double ResterendEigenRisico;
@@ -22,7 +22,7 @@ public class Klant {
 	 * en de basisgegevens van deze klant neergezet worden
 	 */
 	public Klant(String BSN, String Naam, String Adres, String Postcode,
-			String Woonplaats, Date Geboortedatum, String TelefoonNr,
+			String Woonplaats, String Geboortedatum, String TelefoonNr,
 			String Email, String RekeningNr, double ResterendEigenRisico, VerzekeringPolis Verzekering,
 			String Betaalwijze) {
 		this.BSN = BSN;
@@ -79,7 +79,7 @@ public class Klant {
 		return Naam;
 	}
 	
-	public Date getGeboortedatum(){
+	public String getGeboortedatum(){
 		return Geboortedatum;
 	}
 

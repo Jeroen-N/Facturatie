@@ -16,7 +16,7 @@ public class KlantManagerImpl implements KlantManager {
 
 
 	public boolean createKlant(String BSN, String Naam, String Adres,
-			String Postcode, String Woonplaats, Date Geboortedatum,
+			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr, double ResterendEigenRisico,
 			VerzekeringPolis Verzekering, String Betaalwijze) {
 

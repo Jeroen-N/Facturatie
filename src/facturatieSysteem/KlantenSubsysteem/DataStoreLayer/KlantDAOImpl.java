@@ -1,7 +1,7 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 
 
@@ -34,7 +34,7 @@ public class KlantDAOImpl implements KlantDAO {
 	public ArrayList<Klant> getKlantenXML() {
 		klantOverzicht = new ArrayList<Klant>();
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			
 		try{
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
 			Document document = dBuilder.parse("XML/ClientFormat.xml");
@@ -50,7 +50,7 @@ public class KlantDAOImpl implements KlantDAO {
 				String Adres = clientElement.getElementsByTagName("Adres").item(0).getTextContent();
 				String Postcode = clientElement.getElementsByTagName("Postcode").item(0).getTextContent();
 				String Woonplaats = clientElement.getElementsByTagName("Woonplaats").item(0).getTextContent();
-				Date Geboortedatum = dateFormat.parse(clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent());
+				String Geboortedatum = clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent();
 				String TelefoonNr = clientElement.getElementsByTagName("Telefoonnummer").item(0).getTextContent();
 				String Email = clientElement.getElementsByTagName("Email").item(0).getTextContent();
 				Double ResterendEigenRisico = Double.parseDouble(clientElement.getElementsByTagName("ResterendEigenRisico").item(0).getTextContent());
@@ -76,8 +76,8 @@ public class KlantDAOImpl implements KlantDAO {
 				String PolisNummer = polisElement.getAttribute("PolisNummer");
 				String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
 				Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-				Date startDatum = dateFormat.parse(clientElement.getElementsByTagName("startDatum").item(0).getTextContent());
-				Date eindDatum = dateFormat.parse(clientElement.getElementsByTagName("eindDatum").item(0).getTextContent());
+				String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
+				String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 				
 				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum); 
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Polis, Betaalwijze);
@@ -102,9 +102,7 @@ public class KlantDAOImpl implements KlantDAO {
 			e.printStackTrace();
 		} catch (DOMException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		} 
 		
 		
 		return klantOverzicht;	    

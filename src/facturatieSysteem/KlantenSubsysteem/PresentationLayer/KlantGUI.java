@@ -2,6 +2,7 @@ package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
 import java.awt.BorderLayout;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,9 +20,10 @@ public class KlantGUI {
 	private static KlantManagerImpl klantManager = new KlantManagerImpl();
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JTable klantList = new JTable();
-	public KlantGUI(KlantManagerImpl klantManager){
-		this.klantManager = klantManager;
-	}
+	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+	
+	
 	public static JPanel KlantGUI(){
 		JPanel paneel = new JPanel();
 		paneel.setName("KLANT");
@@ -49,7 +51,7 @@ public class KlantGUI {
                 String name = klant.getNaam();
 
                 String BSN = klant.getBSN();
-                Date geboorteDatum = klant.getGeboortedatum();
+                String geboorteDatum = klant.getGeboortedatum();
 
                 model.addRow(new Object[]{name /* Klantnaam */, BSN /* BSN */, geboorteDatum /* Price each */});
             }

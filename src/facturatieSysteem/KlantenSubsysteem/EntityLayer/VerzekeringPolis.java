@@ -7,10 +7,10 @@ public class VerzekeringPolis {
 	private String PolisNummer;
 	private String VerzekeringsType;
 	private double ExtraEigenRisico;
-	private Date StartDatum;
-	private Date EindDatum;
+	private String StartDatum;
+	private String EindDatum;
 	
-	public VerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
+	public VerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
 		this.PolisNummer = PolisNummer;
 		this.VerzekeringsType = VerzekeringsType;
 		this.ExtraEigenRisico = ExtraEigenRisico;
