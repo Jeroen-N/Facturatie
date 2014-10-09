@@ -35,8 +35,8 @@ public class KlantDAOImpl implements KlantDAO {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try{
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
-			//Document document = dBuilder.parse("C:/Users/Sander Blijlevens/Desktop/ClientFormat.xml");
-			Document document = dBuilder.parse("/Users/xandergerreman/Dropbox/_GroepB2/XML/GOED/ClientFormat.xml");
+			Document document = dBuilder.parse("XML/ClientFormat.xml");
+
 			document.normalize();	
 			
 			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
