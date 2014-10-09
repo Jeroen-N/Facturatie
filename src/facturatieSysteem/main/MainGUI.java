@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.KlantGUI;
 
 import java.util.*;
@@ -108,7 +109,7 @@ public class MainGUI {
 					paneel = KlantGUI.KlantGUI();
 					break;
 				case "BAR":
-					//paneel = serverenPaneel(Bestelling.Soort.BAR);
+					//paneel = FacturatieGUI.initComponents();
 					break;
 				case "BETALING":
 					//paneel = betalingPaneel();
@@ -136,7 +137,7 @@ public class MainGUI {
 		JPanel paneel = new JPanel();
 		paneel.setName("HOME");
 		
-		paneel.setLayout(new BoxLayout(paneel, BoxLayout.Y_AXIS));
+		paneel.setLayout(new BoxLayout(paneel, BoxLayout.X_AXIS));
 		
 		Dimension dimension = new Dimension(200,200);
 		

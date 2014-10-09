@@ -38,7 +38,7 @@ public class FacturatieGUI{
 
 	}
 
-	public void initComponents() {
+	public JPanel initComponents() {
 		frame = new JFrame("Facturatiesysteem");
 		contentpane = frame.getContentPane();
 		contentpane.setLayout(new BorderLayout());
