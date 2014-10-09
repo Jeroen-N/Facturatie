@@ -6,8 +6,13 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
-	private ArrayList<VerzekeringPolis> VerzekeringOverzicht;
+	private ArrayList<VerzekeringPolis> VerzekeringOverzicht = new ArrayList<VerzekeringPolis>();
 
+	public VerzekeringPolisDAOImpl(ArrayList<VerzekeringPolis> VerzekeringOverzicht){
+		//ArrayList<VerzekeringPolis> VerzekeringOverzicht = new ArrayList<>();
+		this.VerzekeringOverzicht = VerzekeringOverzicht;
+	}
+	
 	public ArrayList<VerzekeringPolis> getVerzekeringPolis() {
 		// ophalen van de klanten in het overzicht en opslaan in een arraylist.
 		return VerzekeringOverzicht;

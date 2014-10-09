@@ -108,10 +108,10 @@ public class MainGUI {
 				case "KLANT":
 					paneel = KlantGUI.KlantGUI();
 					break;
-				case "BAR":
+				case "FACTURATIE":
 					//paneel = FacturatieGUI.initComponents();
 					break;
-				case "BETALING":
+				case "VERZEKERING":
 					//paneel = betalingPaneel();
 					break;
 				default:

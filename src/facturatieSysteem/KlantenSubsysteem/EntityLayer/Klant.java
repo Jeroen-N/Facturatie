@@ -57,12 +57,11 @@ public class Klant {
 	}
 
 	/*
-	 * Wat houdt deze functie in?
-	 *
-	public String SetIncassoOfFactuur() {
-		return ;
+	 * Hierbij wordt de betaalwijze aangepast.
+	 */
+	public void SetIncassoOfFactuur(String Betaalwijze) {
+		this.Betaalwijze = Betaalwijze;
 	}
-	*/
 
 	/*
 	 * In deze methode wordt het verzekeringstype van de client opgevraagd. Dit
@@ -70,6 +69,18 @@ public class Klant {
 	 */
 	public VerzekeringPolis getVerzekering() {
 		return Verzekering;
+	}
+	
+	public String getBSN(){
+		return BSN;
+	}
+	
+	public String getNaam(){
+		return Naam;
+	}
+	
+	public Date Geboortedatum(){
+		return Geboortedatum;
 	}
 
 }
