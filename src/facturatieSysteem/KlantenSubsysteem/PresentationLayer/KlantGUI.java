@@ -1,17 +1,11 @@
 package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
 import java.awt.BorderLayout;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
@@ -20,7 +14,6 @@ public class KlantGUI {
 	private static KlantManagerImpl klantManager = new KlantManagerImpl();
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JTable klantList = new JTable();
-	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	
 	
