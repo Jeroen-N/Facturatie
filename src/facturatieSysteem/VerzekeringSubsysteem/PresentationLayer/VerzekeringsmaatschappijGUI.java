@@ -1,5 +1,11 @@
 package facturatieSysteem.VerzekeringSubsysteem.PresentationLayer;
 
-public class VerzekeringsmaatschappijGUI {
+import javax.swing.JPanel;
 
+public class VerzekeringsmaatschappijGUI {
+	
+	public JPanel VerzekeringsmaatschappijGUI(){
+		return null;
+			
+	}
 }

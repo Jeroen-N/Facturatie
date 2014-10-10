@@ -8,6 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class KlantGUI {
 
@@ -17,11 +19,16 @@ public class KlantGUI {
 
 	
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static JPanel KlantGUI(){
 		JPanel paneel = new JPanel();
+		paneel.setBackground(Color.PINK);
 		paneel.setName("KLANT");
+		paneel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		scrollPane.setViewportView(klantTotalList());
-		paneel.add(scrollPane, BorderLayout.CENTER);
+		paneel.add(scrollPane);
 		return paneel;
 	}
 	
