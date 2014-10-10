@@ -11,99 +11,103 @@ import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.Verzekeringstyp
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.KlantGUI;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
-	public class MainGUI {
+public class MainGUI {
 	private JFrame frame;
 	private KlantGUI KlantGUI;
 	private VerzekeringstypeGUI VerzekeringstypeGUI;
 	private VerzekeringsmaatschappijGUI VerzekeringsmaatschappijGUI;
+
 	public MainGUI() {
-	
-		
-		
+
 		makeFrame();
 	}
 
 	public void makeFrame() {
-		
-	
+
 		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.setExtendedState(MAXIMIZED_BOTH);
+		frame.getContentPane().setLayout(new CardLayout(0, 0));
+
+		final JPanel VerzekeringPanel = new JPanel();
+		frame.getContentPane().add(VerzekeringPanel, "name_30497855602569");
+		// VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
+		VerzekeringPanel.setVisible(false);
+
+		final JPanel VerzekeringsMaatschappijPanel = new JPanel();
+		frame.getContentPane().add(VerzekeringsMaatschappijPanel,
+				"name_30497881246570");
+
+		JPanel Klanten = new JPanel();
+		frame.getContentPane().add(Klanten, "name_31629163661906");
+		Klanten.setLayout(new BorderLayout(0, 0));
+
+		final JPanel KlantenPanel = new JPanel();
+		Klanten.add(KlantenPanel, BorderLayout.CENTER);
+		KlantenPanel.add(KlantGUI.KlantGUI());
+		KlantenPanel.setLayout(new BorderLayout(0, 0));
+
+		JPanel Header = new JPanel();
+		Klanten.add(Header, BorderLayout.NORTH);
+		Header.setBackground(Color.ORANGE);
+
+		JLabel lblFacturatiesysteem = new JLabel("FacturatieSysteem");
+		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
+		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
+				| Font.ITALIC, 26));
+		Header.setLayout(new BorderLayout(0, 0));
+		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
 		
-			frame.setExtendedState(MAXIMIZED_BOTH);
-			frame.getContentPane().setLayout(null);
-			
-			JPanel Header = new JPanel();
-			Header.setBackground(SystemColor.scrollbar);
-			Header.setBounds(0, 0, 1920, 90);
-			frame.getContentPane().add(Header);
-			Header.setLayout(null);
-			
-			JLabel lblFacturatiesysteem = new JLabel("FacturatieSysteem");
-			lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
-			lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 26));
-			lblFacturatiesysteem.setBounds(10, 11, 265, 66);
-			Header.add(lblFacturatiesysteem);
-			
-			final JPanel KlantenPanel = new JPanel();
-			KlantenPanel.setBounds(0, 89, 1919, 928);
-			frame.getContentPane().add(KlantenPanel);
-	        KlantenPanel.add(KlantGUI.KlantGUI());
-	        KlantenPanel.setVisible(false);
-	        
-	        final JPanel VerzekeringPanel = new JPanel();
-			VerzekeringPanel.setBounds(0, 89, 1919, 928);
-			frame.getContentPane().add(VerzekeringPanel);
-			//VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
-			VerzekeringPanel.setVisible(false);
-			
-			final JPanel VerzekeringsMaatschappijPanel = new JPanel();
-			VerzekeringsMaatschappijPanel.setBounds(0, 0, 10, 10);
-			frame.getContentPane().add(VerzekeringsMaatschappijPanel);
-			//VerzekeringsMaatschappijPanel.add(VerzekeringsmaatschappijGUI.VerzekeringsmaatschappijGUI());
-			VerzekeringPanel.setVisible(false);
-			
-			JButton btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
-			btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					KlantenPanel.setVisible(false);
-					VerzekeringPanel.setVisible(false);
-					VerzekeringsMaatschappijPanel.setVisible(true);
-				}
-			});
-			btnVerzekeringmaatschapij.setBounds(1720, 0, 200, 90);
-			Header.add(btnVerzekeringmaatschapij);
-			btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
-			
-			JButton btnVerzekeringbeheer = new JButton("VerzekeringBeheer");
-			btnVerzekeringbeheer.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					KlantenPanel.setVisible(false);
-					VerzekeringsMaatschappijPanel.setVisible(false);
-					VerzekeringPanel.setVisible(true);
-				}
-			});
-			btnVerzekeringbeheer.setBounds(1520, 0, 200, 90);
-			Header.add(btnVerzekeringbeheer);
-			btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
-			
-			JButton btnKlantenbeheer = new JButton("KlantenBeheer");
-			btnKlantenbeheer.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					VerzekeringPanel.setVisible(false);
-					VerzekeringsMaatschappijPanel.setVisible(false);
-					KlantenPanel.setVisible(true);
-				}
-			});
-			btnKlantenbeheer.setBounds(1320, 0, 200, 90);
-			Header.add(btnKlantenbeheer);
-			btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
-			
-			
-			
-			frame.setVisible(true);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.ORANGE);
+		Header.add(panel, BorderLayout.EAST);
+		panel.setLayout(new BorderLayout(0, 0));
 		
+				JButton btnVerzekeringmaatschapij = new JButton(
+						"Verzekeringmaatschapij");
+				panel.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
+				btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						KlantenPanel.setVisible(false);
+						// VerzekeringPanel.setVisible(false);
+						// VerzekeringsMaatschappijPanel.setVisible(true);
+					}
+				});
+				btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
+				
+						JButton btnVerzekeringbeheer = new JButton("VerzekeringBeheer");
+						panel.add(btnVerzekeringbeheer, BorderLayout.WEST);
+						btnVerzekeringbeheer.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								KlantenPanel.setVisible(false);
+								// VerzekeringsMaatschappijPanel.setVisible(false);
+								// VerzekeringPanel.setVisible(true);
+							}
+						});
+						btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
+						
+								JButton btnKlantenbeheer = new JButton("KlantenBeheer");
+								panel.add(btnKlantenbeheer, BorderLayout.CENTER);
+								btnKlantenbeheer.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// VerzekeringPanel.setVisible(false);
+										// VerzekeringsMaatschappijPanel.setVisible(false);
+										KlantenPanel.setVisible(true);
+									}
+								});
+								btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
+		KlantenPanel.setVisible(false);
+		// VerzekeringsMaatschappijPanel.add(VerzekeringsmaatschappijGUI.VerzekeringsmaatschappijGUI());
+		VerzekeringPanel.setVisible(false);
+
+		frame.setVisible(true);
+
 	}
 }
