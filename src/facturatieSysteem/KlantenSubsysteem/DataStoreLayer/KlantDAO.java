@@ -12,6 +12,6 @@ public interface KlantDAO {
 
 	public boolean updateKlantXML(Klant klant);
 
-	public boolean verwijderKlantXML(Klant klant);
+	public boolean verwijderKlantXML(String bSN);
 
 }

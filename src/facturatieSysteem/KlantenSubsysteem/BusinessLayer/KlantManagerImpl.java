@@ -37,23 +37,14 @@ public class KlantManagerImpl implements KlantManager {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlanten()
-	 */
+
 	@Override
 	public ArrayList<Klant> getKlanten() {
 		// functie voor het ophalen van klanten
-
-		// nog toe tevoegen:
 		return KlantDAO.getKlantenXML();
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlant(java.util.Date)
-	 */
 	@Override
 	public ArrayList<Klant> getKlant(Date Gebdatum) {
 		// functio voor het zoeken van klanten
@@ -63,10 +54,6 @@ public class KlantManagerImpl implements KlantManager {
 		return zoekresultaat;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#toonKlant(java.lang.String)
-	 */
 	public Klant toonKlant(String BSN) {
 		// functie voor het selecteren van een klant
 
@@ -74,7 +61,6 @@ public class KlantManagerImpl implements KlantManager {
 		// zoek klant uit de arraylist op basis van het BSN
 
 		return klant;
-
 	}
 
 	/*
@@ -85,27 +71,20 @@ public class KlantManagerImpl implements KlantManager {
 		// functie voor het verwijderen van een klant uit xml
 
 		// nog toe tevoegen:
-		if (KlantDAO.verwijderKlantXML(klant)) {
+		if (KlantDAO.verwijderKlantXML(BSN)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#checkKlant(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
-	 */
 	public boolean checkKlant(Klant klant) {
 		// nog toe tevoegen:
 		// controleer de waardes die ingevuld zijn
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#klanten()
-	 */
+
 	@Override
 	public ArrayList<Klant> klanten() {
 		// TODO Auto-generated method stub

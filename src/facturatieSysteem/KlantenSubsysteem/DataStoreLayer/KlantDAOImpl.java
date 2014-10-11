@@ -201,6 +201,7 @@ public class KlantDAOImpl implements KlantDAO {
 			newKlant.appendChild(document.createTextNode("\n\t"));//</Client>
 			rootElement.appendChild(document.createTextNode("\n"));//<Clienten/>
 		if(writeDocument()){
+			document.normalize();
 			return true;
 		}
 		else{
@@ -210,56 +211,6 @@ public class KlantDAOImpl implements KlantDAO {
 		
 	}
 	
-	public boolean writeDocument() {
-
-		try {
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(document);
-			StreamResult result = new StreamResult(new File(xmlPath));
-			transformer.transform(source, result);
-			return true;
-		} catch (TransformerConfigurationException e) {
-			
-		} catch (TransformerException e) {
-			
-		}
-		return false;
-	}
-	
-	private Schema getValidationSchema() {
-		Schema schema = null;
-
-		try {
-			String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-			SchemaFactory factory = SchemaFactory.newInstance(language);
-			System.out.println("getValidationSchema " + xsdPath);
-			schema = factory.newSchema(new File(xsdPath));
-		} catch (Exception e) {
-			System.out.println("Error reading schema file: " + e.getMessage());
-		}
-
-		return schema;
-	}
-	private boolean validateDocument(String xmlFile, Schema schema) {
-		
-		System.out.println("validateDocument");
-
-		boolean result = false;
-
-		try {
-			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(xmlFile));
-			result = true;
-			System.out.println("Valid XML: " + xmlFile);
-		} catch (IOException e) {
-			System.out.println("I/O error: " + e.getMessage());
-		} catch (SAXException e) {
-			System.out.println("Parse exception: " + e.getMessage());
-		}
-		return result;
-
-	}
 	
 	public ArrayList<Klant> getKlantenXML() {
 		klantOverzicht = new ArrayList<Klant>();
@@ -323,10 +274,7 @@ public class KlantDAOImpl implements KlantDAO {
 	
 		return klantOverzicht;	    
 	}
-	
 
-	
-	
 	public boolean updateKlantXML(Klant klant) {
 		this.klant = klant;
 		return false;
@@ -334,10 +282,75 @@ public class KlantDAOImpl implements KlantDAO {
 		// updaten van gegevens van een klant
 	}
 
-	public boolean verwijderKlantXML(Klant klant) {
-		this.klant = klant;
-		return false;
-		
+	public boolean verwijderKlantXML(String verwijderBSN) {
 		// verwijder klant uit XML
+		NodeList clienten = document.getElementsByTagName("Client");
+		for(int i = 0; i < clienten.getLength();i++){
+			Element clientElement = (Element) clienten.item(i);
+			String BSN = clientElement.getAttribute("BSN");
+			
+			if(BSN.equals(verwijderBSN)){
+				System.out.println("hij komt in if statement");
+				clientElement.getParentNode().removeChild(clientElement);
+			}
+		}
+		if(writeDocument()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
+	
+	public boolean writeDocument() {
+
+		try {
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(document);
+			StreamResult result = new StreamResult(new File(xmlPath));
+			transformer.transform(source, result);
+			return true;
+		} catch (TransformerConfigurationException e) {
+			
+		} catch (TransformerException e) {
+			
+		}
+		return false;
+	}
+	
+	private Schema getValidationSchema() {
+		Schema schema = null;
+
+		try {
+			String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+			SchemaFactory factory = SchemaFactory.newInstance(language);
+			System.out.println("getValidationSchema " + xsdPath);
+			schema = factory.newSchema(new File(xsdPath));
+		} catch (Exception e) {
+			System.out.println("Error reading schema file: " + e.getMessage());
+		}
+
+		return schema;
+	}
+	private boolean validateDocument(String xmlFile, Schema schema) {
+		
+		System.out.println("validateDocument");
+
+		boolean result = false;
+
+		try {
+			Validator validator = schema.newValidator();
+			validator.validate(new StreamSource(xmlFile));
+			result = true;
+			System.out.println("Valid XML: " + xmlFile);
+		} catch (IOException e) {
+			System.out.println("I/O error: " + e.getMessage());
+		} catch (SAXException e) {
+			System.out.println("Parse exception: " + e.getMessage());
+		}
+		return result;
+
+	}
+	
 }
