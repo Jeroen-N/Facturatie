@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
 	<Client BSN="236584595">
 		<ClientGegevens>
 			<Naam>Frank Graafmolen</Naam>
@@ -151,7 +149,7 @@
 					<Begintijd>11:00</Begintijd>
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>005</Praktijkruimte>
-					<Opmerking></Opmerking>
+					<Opmerking/>
 				</behandelafspraak>
 			</Behandeling>
 			<Behandeling id="96">
@@ -191,5 +189,5 @@
 				<Datum>06-09-2014</Datum>
 			</Diagnose>
 		</Diagnoses>
-	</Client>	
+	</Client>
 </Clienten>

@@ -13,7 +13,7 @@
                     <xs:element type="xs:string" name="Postcode"/>
                     <xs:element type="xs:string" name="Woonplaats"/>
                     <xs:element type="xs:string" name="Geboortedatum"/>
-                    <xs:element type="xs:int" name="Telefoonnummer"/>
+                    <xs:element type="xs:string" name="Telefoonnummer"/>
                     <xs:element type="xs:string" name="Email"/>
                     <xs:element type="xs:string" name="BetaalMethode"/>
                     <xs:element type="xs:string" name="ResterendEigenRisico"/>

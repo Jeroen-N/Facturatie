@@ -12,9 +12,9 @@ public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
 	private ArrayList<Klant> klantOverzicht;
 	private ArrayList<Klant> zoekresultaat;
-	private KlantDAO KlantDAO;
-
-
+	private KlantDAO KlantDAO = new KlantDAOImpl();
+	
+	
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr, double ResterendEigenRisico,
@@ -46,8 +46,6 @@ public class KlantManagerImpl implements KlantManager {
 		// functie voor het ophalen van klanten
 
 		// nog toe tevoegen:
-
-		KlantDAOImpl KlantDAO = new KlantDAOImpl();
 		return KlantDAO.getKlantenXML();
 
 	}

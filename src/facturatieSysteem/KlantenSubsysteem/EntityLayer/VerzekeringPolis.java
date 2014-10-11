@@ -18,6 +18,25 @@ public class VerzekeringPolis {
 		this.EindDatum = EindDatum;
 	}
 	
-	
+	public String getPolisNummer(){
+		return PolisNummer;
+		
+	}
+	public String getVerzekeringsType(){
+		return VerzekeringsType;
+		
+	}
+	public double getExtraEigenRisisco(){
+		return ExtraEigenRisico;
+		
+	}
+	public String getStartDatum(){
+		return StartDatum;
+		
+	}
+	public String getEindDatum(){
+		return EindDatum;
+		
+	}
 
 }

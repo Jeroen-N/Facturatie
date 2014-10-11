@@ -78,9 +78,32 @@ public class Klant {
 	public String getNaam(){
 		return Naam;
 	}
-	
+	public String getAdres(){
+		return Adres;
+	}
+	public String getPostcode(){
+		return Postcode;
+	}
+	public String getWoonplaats(){
+		return Woonplaats;
+	}
 	public String getGeboortedatum(){
 		return Geboortedatum;
 	}
-
+	public String getTelefoonnummer(){
+		return TelefoonNr;
+	}
+	public String getEmail(){
+		return Email;
+	}
+	public String getBetaalMethode(){
+		return Betaalwijze;
+	}
+	public Double getResterendEigenRisico(){
+		return ResterendEigenRisico;
+	}
+	public String getRekeningnummer(){
+		return RekeningNr;
+	}
+	
 }
