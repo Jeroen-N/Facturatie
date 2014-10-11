@@ -15,8 +15,6 @@ public interface KlantManager {
 			String TelefoonNr, String Email, String RekeningNr, double ResterendEigenRisico,
 			VerzekeringPolis Verzekering, String Betaalwijze);
 
-	public ArrayList<Klant> getKlant(Date Gebdatum);
-
 	public Klant toonKlant(String BSN);
 
 	public boolean verwijderKlantXML(String BSN);
@@ -24,5 +22,7 @@ public interface KlantManager {
 	public boolean checkKlant(Klant klant);
 
 	public ArrayList<Klant> klanten();
+
+	public ArrayList<Klant> findKlant(String gebDatum);
 
 }

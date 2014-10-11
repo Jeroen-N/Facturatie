@@ -16,14 +16,21 @@ public class testMain {
 		}
 		
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
-		
+
 		if(manager.verwijderKlantXML("125651201")){
 			System.out.println("Toegevoegde klant weer verwijdert");
 		}else{
 			System.out.println("verwijderen van klant mislukt");
 		}
-		
+
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
+	
+		if(manager.findKlant("06-09-1991").size() != 0){
+			System.out.println("aantal gevonden klanten: "+ manager.findKlant("06-09-1991").size());
+		}
+		else{
+			System.out.println("er zijn geen klanten gevonden");
+		}
 	}
 
 }

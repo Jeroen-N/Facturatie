@@ -26,32 +26,25 @@ public class KlantManagerImpl implements KlantManager {
 
 		if (checkKlant(klant)) {
 			// klant gegevens zijn correct ingevuld
-			if (KlantDAO.addKlantXML(klant)) {
-				return true;
-			} else {
-				return false;
-			}
+			return KlantDAO.addKlantXML(klant);
+			
 		} else {
 			// fout melding weergeven in gui dat gegevens niet correct zijn
 			return false;
 		}
 	}
 
-
 	@Override
 	public ArrayList<Klant> getKlanten() {
+		
 		// functie voor het ophalen van klanten
 		return KlantDAO.getKlantenXML();
 
 	}
 
-	@Override
-	public ArrayList<Klant> getKlant(Date Gebdatum) {
-		// functio voor het zoeken van klanten
-
-		// nog toe tevoegen:
-		// zoek klanten uit arraylist op bais van de geboortedatum
-		return zoekresultaat;
+	public ArrayList<Klant> findKlant(String gebDatum) {
+		return KlantDAO.findKlantXML(gebDatum);
+		
 	}
 
 	public Klant toonKlant(String BSN) {
@@ -71,11 +64,8 @@ public class KlantManagerImpl implements KlantManager {
 		// functie voor het verwijderen van een klant uit xml
 
 		// nog toe tevoegen:
-		if (KlantDAO.verwijderKlantXML(BSN)) {
-			return true;
-		} else {
-			return false;
-		}
+		return KlantDAO.verwijderKlantXML(BSN);
+		
 	}
 
 	public boolean checkKlant(Klant klant) {

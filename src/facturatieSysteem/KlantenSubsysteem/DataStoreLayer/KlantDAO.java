@@ -12,6 +12,8 @@ public interface KlantDAO {
 
 	public boolean updateKlantXML(Klant klant);
 
-	public boolean verwijderKlantXML(String bSN);
+	public boolean verwijderKlantXML(String BSN);
+
+	public ArrayList<Klant> findKlantXML(String gebDatum);
 
 }
