@@ -64,13 +64,13 @@ public class MainGUI {
 		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
 		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
 				| Font.ITALIC, 26));
-		Header.setLayout(new BorderLayout(0, 0));
+		Header.setLayout(new BorderLayout(5, 5));
 		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.ORANGE);
 		Header.add(panel, BorderLayout.EAST);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BorderLayout(0, 50));
 
 		JButton btnVerzekeringmaatschapij = new JButton(
 				"Verzekeringmaatschapij");
@@ -136,7 +136,7 @@ public class MainGUI {
 		
 		JPanel Klant_info = new JPanel();
 		KlantenPanel.add(Klant_info, BorderLayout.EAST);
-		Klant_info.setLayout(new BoxLayout(Klant_info, BoxLayout.X_AXIS));
+		Klant_info.setLayout(new BorderLayout(0, 0));
 		
 		final JTextArea Uitgebreide_Info = new JTextArea();
 		Uitgebreide_Info.setColumns(30);
@@ -150,6 +150,15 @@ public class MainGUI {
 			}
 		});
 
+		JPanel footer = new JPanel();
+		footer.setBackground(Color.ORANGE);
+		FlowLayout flowLayout = (FlowLayout) footer.getLayout();
+		KlantenPanel.add(footer, BorderLayout.SOUTH);
+		
+		JLabel lblCreatedByInfosys = new JLabel("Created by InfoSys");
+		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
+		footer.add(lblCreatedByInfosys);
+		
 		VerzekeringPanel.setVisible(false);
 		KlantenPanel.setVisible(true);
 
