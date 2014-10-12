@@ -104,4 +104,16 @@ public class KlantManagerImpl implements KlantManager {
 		
 	}
 
+	public String getInfo(String BSN){
+        for(Klant klant : klantOverzicht){
+        	System.out.println("Done2");
+            if(klant.getBSN().equals(BSN)){
+                //return klant.toString();
+            	System.out.println("Done3");
+            	return "Done";
+            }
+        }
+        return "Geen informatie";
+    }
+	
 }

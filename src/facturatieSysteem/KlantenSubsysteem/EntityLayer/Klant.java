@@ -23,8 +23,8 @@ public class Klant {
 	 */
 	public Klant(String BSN, String Naam, String Adres, String Postcode,
 			String Woonplaats, String Geboortedatum, String TelefoonNr,
-			String Email, String RekeningNr, double ResterendEigenRisico, VerzekeringPolis Verzekering,
-			String Betaalwijze) {
+			String Email, String RekeningNr, double ResterendEigenRisico,
+			VerzekeringPolis Verzekering, String Betaalwijze) {
 		this.BSN = BSN;
 		this.Naam = Naam;
 		this.Adres = Adres;
@@ -70,40 +70,61 @@ public class Klant {
 	public VerzekeringPolis getVerzekering() {
 		return Verzekering;
 	}
-	
-	public String getBSN(){
+
+	public String getBSN() {
 		return BSN;
 	}
-	
-	public String getNaam(){
+
+	public String getNaam() {
 		return Naam;
 	}
-	public String getAdres(){
+
+	public String getAdres() {
 		return Adres;
 	}
-	public String getPostcode(){
+
+	public String getPostcode() {
 		return Postcode;
 	}
-	public String getWoonplaats(){
+
+	public String getWoonplaats() {
 		return Woonplaats;
 	}
-	public String getGeboortedatum(){
+
+	public String getGeboortedatum() {
 		return Geboortedatum;
 	}
-	public String getTelefoonnummer(){
+
+	public String getTelefoonnummer() {
 		return TelefoonNr;
 	}
-	public String getEmail(){
+
+	public String getEmail() {
 		return Email;
 	}
-	public String getBetaalMethode(){
+
+	public String getBetaalMethode() {
 		return Betaalwijze;
 	}
-	public Double getResterendEigenRisico(){
+
+	public Double getResterendEigenRisico() {
 		return ResterendEigenRisico;
 	}
-	public String getRekeningnummer(){
+
+	public String getRekeningnummer() {
 		return RekeningNr;
 	}
-	
+
+	public String toString(){
+		return "BSN: " 						+ 	BSN 			+ "\n" +
+				"Naam: " 					+ 	Naam 			+ "\n" +
+				"GeboorteDatum: "			+	Geboortedatum	+ "\n" +
+				"Adres: "					+ 	Adres			+ "\n" +
+				"Postcode en woonplaats: " 	+ 	Postcode + " "	+ Woonplaats		+ "\n" +
+				"Telefoonnummer: "	 		+ 	TelefoonNr		+ "\n" +
+				"Email: " 					+ 	Email			+ "\n" +
+				"Betaalwijze: "				+	Betaalwijze		+ "\n" +
+				"Resterend eigen risico: "	+	ResterendEigenRisico + "\n" +
+				"Rekeningnummer: "			+	RekeningNr		+ "\n" ;
+	}
 }

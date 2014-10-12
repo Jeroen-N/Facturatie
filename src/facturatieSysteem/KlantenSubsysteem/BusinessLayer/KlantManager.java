@@ -24,5 +24,7 @@ public interface KlantManager {
 	public ArrayList<Klant> klanten();
 
 	public ArrayList<Klant> findKlant(String gebDatum);
+	
+	public String getInfo(String BSN);
 
 }
