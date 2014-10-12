@@ -17,6 +17,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
