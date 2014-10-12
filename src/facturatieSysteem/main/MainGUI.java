@@ -131,13 +131,6 @@ public class MainGUI {
 		Klanten.setLayout(new BorderLayout(0, 0));
 
 		Klant_Table = new JTable(data, columnNames);
-		Klant_Table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int row = Klant_Table.getSelectedRow();
-				Uitgebreide_Info.setText(KlantManager.getInfo(Klant_Table.getModel().getValueAt(row, 1).toString()));
-			}
-		});
 		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
 		Klanten.add(Klant_Table, BorderLayout.CENTER);
 		
@@ -145,9 +138,17 @@ public class MainGUI {
 		KlantenPanel.add(Klant_info, BorderLayout.EAST);
 		Klant_info.setLayout(new BoxLayout(Klant_info, BoxLayout.X_AXIS));
 		
-		JTextArea Uitgebreide_Info = new JTextArea();
+		final JTextArea Uitgebreide_Info = new JTextArea();
 		Uitgebreide_Info.setColumns(30);
 		Klant_info.add(Uitgebreide_Info);
+		Klant_Table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = Klant_Table.getSelectedRow();
+				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
+				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+			}
+		});
 
 		VerzekeringPanel.setVisible(false);
 		KlantenPanel.setVisible(true);

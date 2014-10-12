@@ -10,7 +10,6 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
-	private ArrayList<Klant> klantOverzicht;
 	private ArrayList<Klant> zoekresultaat;
 	private KlantDAO KlantDAO = new KlantDAOImpl();
 	
@@ -47,13 +46,14 @@ public class KlantManagerImpl implements KlantManager {
 		
 	}
 
-	public Klant toonKlant(String BSN) {
-		// functie voor het selecteren van een klant
+	public String toonKlant(String BSN) {
+		for(Klant klant : getKlanten()){
+            if(klant.getBSN().equals(BSN)){
+                return klant.toString();
+            }
+        }
+		return "niks gevonden";
 
-		// nog toe tevoegen:
-		// zoek klant uit de arraylist op basis van het BSN
-
-		return klant;
 	}
 
 	/*
@@ -103,17 +103,5 @@ public class KlantManagerImpl implements KlantManager {
 		return false;
 		
 	}
-
-	public String getInfo(String BSN){
-        for(Klant klant : klantOverzicht){
-        	System.out.println("Done2");
-            if(klant.getBSN().equals(BSN)){
-                //return klant.toString();
-            	System.out.println("Done3");
-            	return "Done";
-            }
-        }
-        return "Geen informatie";
-    }
 	
 }
