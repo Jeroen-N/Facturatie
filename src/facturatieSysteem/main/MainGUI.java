@@ -28,13 +28,13 @@ public class MainGUI {
 	private JTable Klant_Table;
 	private JPanel Header;
 	private KlantManagerImpl KlantManager = new KlantManagerImpl();
-	private JTextArea Uitgebreide_Info;
 
 	public MainGUI() {
 
 		makeFrame();
 	}
 
+	@SuppressWarnings("unused")
 	public void makeFrame() {
 
 		frame = new JFrame();
@@ -45,7 +45,7 @@ public class MainGUI {
 
 		final JPanel VerzekeringPanel = new JPanel();
 		frame.getContentPane().add(VerzekeringPanel, "name_30497855602569");
-		//VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
+		// VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
 		VerzekeringPanel.setVisible(false);
 
 		final JPanel VerzekeringsMaatschappijPanel = new JPanel();
@@ -133,19 +133,21 @@ public class MainGUI {
 		Klant_Table = new JTable(data, columnNames);
 		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
 		Klanten.add(Klant_Table, BorderLayout.CENTER);
-		
+
 		JPanel Klant_info = new JPanel();
 		KlantenPanel.add(Klant_info, BorderLayout.EAST);
 		Klant_info.setLayout(new BorderLayout(0, 0));
-		
+
 		final JTextArea Uitgebreide_Info = new JTextArea();
-		Uitgebreide_Info.setColumns(30);
+		Uitgebreide_Info.setColumns(40);
+		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int row = Klant_Table.getSelectedRow();
-				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
+				String b_s_n = Klant_Table.getModel().getValueAt(row, 1)
+						.toString();
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
 			}
 		});
@@ -154,11 +156,12 @@ public class MainGUI {
 		footer.setBackground(Color.ORANGE);
 		FlowLayout flowLayout = (FlowLayout) footer.getLayout();
 		KlantenPanel.add(footer, BorderLayout.SOUTH);
-		
+
 		JLabel lblCreatedByInfosys = new JLabel("Created by InfoSys");
-		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
+		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD
+				| Font.ITALIC, 12));
 		footer.add(lblCreatedByInfosys);
-		
+
 		VerzekeringPanel.setVisible(false);
 		KlantenPanel.setVisible(true);
 

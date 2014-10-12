@@ -116,15 +116,15 @@ public class Klant {
 	}
 
 	public String toString(){
-		return "BSN: " 						+ 	BSN 			+ "\n\n" +
-				"Naam: " 					+ 	Naam 			+ "\n\n" +
-				"GeboorteDatum: "			+	Geboortedatum	+ "\n\n" +
-				"Adres: "					+ 	Adres			+ "\n\n" +
-				"Postcode en woonplaats: " 	+ 	Postcode + " "	+ Woonplaats		+ "\n\n" +
-				"Telefoonnummer: "	 		+ 	TelefoonNr		+ "\n\n" +
-				"Email: " 					+ 	Email			+ "\n\n" +
-				"Betaalwijze: "				+	Betaalwijze		+ "\n\n" +
-				"Resterend eigen risico: "	+ "€" +	ResterendEigenRisico + "\n\n" +
-				"Rekeningnummer: "			+	RekeningNr		+ "\n\n" ;
+		return "BSN: \t\t" 						+ 	BSN 			+ "\n\n" +
+				"Naam: \t\t" 					+ 	Naam 			+ "\n\n" +
+				"GeboorteDatum: \t"				+	Geboortedatum	+ "\n\n" +
+				"Adres: \t\t"					+ 	Adres			+ "\n\n" +
+				"Postcode en woonplaats: \t" 	+ 	Postcode + " "	+ Woonplaats		+ "\n\n" +
+				"Telefoonnummer: \t"	 		+ 	TelefoonNr		+ "\n\n" +
+				"Email: \t\t" 					+ 	Email			+ "\n\n" +
+				"Betaalwijze: \t\t"				+	Betaalwijze		+ "\n\n" +
+				"Resterend eigen risico: \t"	+ "€" +	ResterendEigenRisico + "\n\n" +
+				"Rekeningnummer: \t"			+	RekeningNr		+ "\n\n" ;
 	}
 }

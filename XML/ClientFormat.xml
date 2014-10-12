@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
 	<Client BSN="236584595">
 		<ClientGegevens>
 			<Naam>Frank Graafmolen</Naam>
@@ -12,7 +14,7 @@
 			<ResterendEigenRisico>465.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0159845625</Rekeningnummer>
 		</ClientGegevens>
-		<VerzekeringPolis PolisNummer="126647"> 
+		<VerzekeringPolis PolisNummer="126647">
 			<VerzekeringType>009</VerzekeringType>
 			<EigenRisico>626.35</EigenRisico>
 			<startDatum>03-06-2012</startDatum>
@@ -94,7 +96,7 @@
 			</Diagnose>
 		</Diagnoses>
 	</Client>
-	
+
 	<Client BSN="136521598">
 		<ClientGegevens>
 			<Naam>Hans Jansen</Naam>
@@ -108,7 +110,7 @@
 			<ResterendEigenRisico>23.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0264158425</Rekeningnummer>
 		</ClientGegevens>
-		<VerzekeringPolis PolisNummer="265148"> 
+		<VerzekeringPolis PolisNummer="265148">
 			<VerzekeringType>001</VerzekeringType>
 			<EigenRisico>105.26</EigenRisico>
 			<startDatum>21-07-2013</startDatum>
@@ -140,7 +142,8 @@
 					<Begintijd>11:00</Begintijd>
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>004</Praktijkruimte>
-					<Opmerking>Client heeft nog steed veel last van onderrug tijdens het werk(metselaar)</Opmerking>
+					<Opmerking>Client heeft nog steed veel last van onderrug tijdens
+						het werk(metselaar)</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="265180">
 					<Sessie>2</Sessie>
@@ -149,7 +152,7 @@
 					<Begintijd>11:00</Begintijd>
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>005</Praktijkruimte>
-					<Opmerking/>
+					<Opmerking />
 				</behandelafspraak>
 			</Behandeling>
 			<Behandeling id="96">
@@ -167,7 +170,8 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Opmerking>Client heeft nek klachten van het vele werken achter de pc in een verkeerde houding</Opmerking>
+					<Opmerking>Client heeft nek klachten van het vele werken achter de
+						pc in een verkeerde houding</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="365412">
 					<Sessie>2</Sessie>
@@ -176,7 +180,8 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Opmerking>Client heeft oefening thuis goed uitgevoerd. er is al een lichte verbetering te zien</Opmerking>
+					<Opmerking>Client heeft oefening thuis goed uitgevoerd. er is al
+						een lichte verbetering te zien</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
 		</Behandelingen>
@@ -191,5 +196,5 @@
 		</Diagnoses>
 	</Client>
 
-	
+
 </Clienten>
