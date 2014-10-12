@@ -73,8 +73,8 @@ public class KlantManagerImpl implements KlantManager {
 		// controleer de waardes die ingevuld zijn
 		return true;
 	}
-
-
+	
+	
 	@Override
 	public ArrayList<Klant> klanten() {
 		// TODO Auto-generated method stub
