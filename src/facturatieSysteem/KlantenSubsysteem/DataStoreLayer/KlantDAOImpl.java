@@ -1,6 +1,7 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 import java.io.File;
 import java.io.IOException;
+import java.text.Format;
 import java.util.ArrayList;
 
 import javax.xml.XMLConstants;
@@ -151,7 +152,7 @@ public class KlantDAOImpl implements KlantDAO {
 			
 			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
 			Element eigenRisico = document.createElement("EigenRisico");
-			eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisisco())));
+			eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisico())));
 			verzekeringPolis.appendChild(eigenRisico);
 			
 			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
@@ -167,6 +168,7 @@ public class KlantDAOImpl implements KlantDAO {
 			verzekeringPolis.appendChild(document.createTextNode("\n\t\t"));//</VerzekeringPolis>
 			newKlant.appendChild(document.createTextNode("\n\t"));//</Client>
 			rootElement.appendChild(document.createTextNode("\n"));//<Clienten/>
+			
 		return writeDocument();
 	}
 	
@@ -300,6 +302,7 @@ public class KlantDAOImpl implements KlantDAO {
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
+			
 			DOMSource source = new DOMSource(document);
 			StreamResult result = new StreamResult(new File(xmlPath));
 			transformer.transform(source, result);

@@ -10,8 +10,10 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
+	private VerzekeringPolis polis;
 	private ArrayList<Klant> zoekresultaat;
 	private KlantDAO KlantDAO = new KlantDAOImpl();
+	private String errorMessage;
 	
 	
 	public boolean createKlant(String BSN, String Naam, String Adres,
@@ -23,12 +25,16 @@ public class KlantManagerImpl implements KlantManager {
 				Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Verzekering,
 				Betaalwijze);
 
-		if (checkKlant(klant)) {
+		errorMessage = checkKlant(klant);
+		System.out.println(errorMessage);
+		if (errorMessage == "") {
 			// klant gegevens zijn correct ingevuld
 			return KlantDAO.addKlantXML(klant);
 			
+			
 		} else {
 			// fout melding weergeven in gui dat gegevens niet correct zijn
+			//moet eigelijk errorMessage return'en
 			return false;
 		}
 	}
@@ -68,10 +74,54 @@ public class KlantManagerImpl implements KlantManager {
 		
 	}
 
-	public boolean checkKlant(Klant klant) {
+	public String checkKlant(Klant klant) {
+		errorMessage = "";
 		// nog toe tevoegen:
 		// controleer de waardes die ingevuld zijn
-		return true;
+		//BSN
+			if (!klant.getBSN().matches("([0-9]{9})")){
+				errorMessage = errorMessage +"\nBSN niet correct";
+			}
+		//Postcode
+			if(!klant.getPostcode().matches("([0-9]{4})([A-Z]{2})")){
+				errorMessage = errorMessage +"\nPostcode niet correct";
+			}
+		//Woonplaats
+			if(!klant.getWoonplaats().matches("([A-Z]{1})([a-z]{1,})")){
+				errorMessage = errorMessage +"\nWoonplaats niet correct ";
+			}
+		//GeboorteDatum	
+			if(!klant.getGeboortedatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
+				errorMessage = errorMessage +"\nGeboortedatum niet correct ";
+			}
+		//Telefoonnummer	
+			if (!klant.getTelefoonnummer().matches("([0-9]{10})") || 
+					!klant.getTelefoonnummer().substring(0,2).matches("06")){
+				 errorMessage =  errorMessage + "\nTelefoonnummer niet correct";
+			}
+		//Email
+			if (!klant.getEmail().matches("(.+)([@]{1})(.+)([.]{1})(.+)")){
+				 errorMessage =  errorMessage + "\nEmail niet correct";
+			}
+		polis = klant.getVerzekering();
+		//PolisNummer
+			if (!polis.getPolisNummer().matches("([0-9]{6})")){
+				errorMessage =  errorMessage + "\nPolisNummer niet correct";
+			}
+		//verzekeringType
+			if (!polis.getVerzekeringsType().matches("([0-9]{3})")){
+				errorMessage =  errorMessage + "\nVerzekeringsType niet correct";
+			}
+		//StartDatum	
+			if(!polis.getStartDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
+				errorMessage = errorMessage +"\nStart datum niet correct ";
+			}
+		//EindDatum	
+			if(!polis.getEindDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
+				errorMessage = errorMessage +"\nEind datum niet correct ";
+			}
+		//System.out.println(errorMessage);
+		return errorMessage;
 	}
 	
 	

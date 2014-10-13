@@ -26,7 +26,7 @@ public class VerzekeringPolis {
 		return VerzekeringsType;
 		
 	}
-	public double getExtraEigenRisisco(){
+	public double getExtraEigenRisico(){
 		return ExtraEigenRisico;
 		
 	}

@@ -19,7 +19,7 @@ public interface KlantManager {
 
 	public boolean verwijderKlantXML(String BSN);
 
-	public boolean checkKlant(Klant klant);
+	public String checkKlant(Klant klant);
 
 	public ArrayList<Klant> klanten();
 
