@@ -2,10 +2,11 @@ package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
 public class DAOFactoryFactuur {
 
-	public FactuurDAO getFactuurDAO(){
+	public FactuurDAO getFactuurDAO() {
 		return null;
 	}
-	public BehandelingDAO getBehandelingDAO(){
+
+	public BehandelingDAO getBehandelingDAO() {
 		return null;
 	}
 }

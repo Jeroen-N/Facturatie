@@ -14,12 +14,11 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private KlantDAO klantDAO;
 	private BehandelingDAO behandelingDAO;
 	private FactuurDAO factuurDAO;
-	
-	public FacturatieManagerImpl(){
-		
-		
+
+	public FacturatieManagerImpl() {
+
 	}
-	
+
 	@Override
 	public ArrayList<Klant> haalKlanten() {
 		// TODO Auto-generated method stub
@@ -35,7 +34,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	@Override
 	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

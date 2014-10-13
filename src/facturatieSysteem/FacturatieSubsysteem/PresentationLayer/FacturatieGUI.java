@@ -12,7 +12,7 @@ import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImp
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
-public class FacturatieGUI{
+public class FacturatieGUI {
 
 	private static JFrame frame;
 	private static FacturatieManagerImpl facturatieManagerImpl;
@@ -39,55 +39,52 @@ public class FacturatieGUI{
 		FacturatieGUI();
 	}
 
-	public static JPanel FacturatieGUI(){
+	public static JPanel FacturatieGUI() {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");
 		paneel.add(scrollPane, BorderLayout.CENTER);
 		return initComponents();
 	}
-	
+
 	public static JPanel initComponents() {
 		frame = new JFrame("Facturatiesysteem");
 		contentpane = frame.getContentPane();
 		contentpane.setLayout(new BorderLayout());
-		
+
 		// panels aanmaken
-		
+
 		buttonPanel = new JPanel();
 		overzichtPanel = new JPanel();
 		headPanel = new JPanel();
 		detailPanel = new JPanel();
-	
 
 		// Tekst initialiseren van de knoppen en labels.
 		details = new JTextArea();
-		details.setBackground(Color.LIGHT_GRAY); 
-		details.setPreferredSize(new Dimension(250,400));
+		details.setBackground(Color.LIGHT_GRAY);
+		details.setPreferredSize(new Dimension(250, 400));
 		details.setText("test");
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		details.setBorder(BorderFactory.createCompoundBorder(border, 
-		            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-	
-		
+		details.setBorder(BorderFactory.createCompoundBorder(border,
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
 		paginaNaam = new JLabel();
 		paginaNaam.setText("Overzicht facturen");
-		
+
 		zoekKnop = new JButton();
 		zoekKnop.setText("Zoek");
-		
+
 		terugKnop = new JButton();
 		terugKnop.setText("Terug");
-		
-		
+
 		factureerKnop = new JButton();
 		factureerKnop.setText("Factureren");
-		
+
 		openFactuurKnop = new JButton();
 		openFactuurKnop.setText("Open factuur");
-		
+
 		printFactuurKnop = new JButton();
 		printFactuurKnop.setText("Print factuur");
-		
+
 		zoekbalk = new JTextField();
 		zoekbalk.setText("Vul factuurcode in");
 
@@ -99,30 +96,28 @@ public class FacturatieGUI{
 		overzicht.getTableHeader().setReorderingAllowed(false);
 		DefaultTableModel model = new DefaultTableModel();
 
-		
-		//panels vullen
+		// panels vullen
 		buttonPanel.add(factureerKnop);
 		buttonPanel.add(openFactuurKnop);
 		buttonPanel.add(printFactuurKnop);
-		
+
 		overzichtPanel.add(overzicht);
-		
+
 		headPanel.add(paginaNaam);
 		headPanel.add(zoekKnop);
 		headPanel.add(terugKnop);
 		headPanel.add(zoekbalk);
-		
+
 		detailPanel.add(details);
-		
-		
+
 		contentpane.add(buttonPanel, BorderLayout.SOUTH);
 		contentpane.add(overzichtPanel, BorderLayout.CENTER);
 		contentpane.add(headPanel, BorderLayout.NORTH);
 		contentpane.add(detailPanel, BorderLayout.EAST);
-		
+
 		mainPanel.add(contentpane);
 		return mainPanel;
-		
+
 	}
 
 	public void toonFacturatieGUI() {
