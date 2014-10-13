@@ -21,17 +21,23 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="VerzekeringPolis">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element type="xs:string" name="VerzekeringType"/>
-                    <xs:element type="xs:float" name="EigenRisico"/>
-                    <xs:element type="xs:string" name="startDatum"/>
-                    <xs:element type="xs:string" name="eindDatum"/>
-                  </xs:sequence>
-                  <xs:attribute type="xs:int" name="PolisNummer"/>
-                </xs:complexType>
-              </xs:element>
+              <xs:element name= VerzekeringPolissen>
+              	<xs:complexType>
+              		<xs:sequence>
+		              	<xs:element name="VerzekeringPolis">
+		                	<xs:complexType>
+		                  		<xs:sequence>
+		                    	<xs:element type="xs:string" name="VerzekeringType"/>
+			                    <xs:element type="xs:float" name="EigenRisico"/>
+			                    <xs:element type="xs:string" name="startDatum"/>
+			                    <xs:element type="xs:string" name="eindDatum"/>
+			                  	</xs:sequence>
+			                <xs:attribute type=xs:int name="PolisNummer"/>
+			                </xs:complexType>
+			            </xs:element>
+	              	</xs:sequence>
+	            </xs:complexType>
+	          </xs:element>
               <xs:element name="facturen">
                 <xs:complexType>
                   <xs:sequence>

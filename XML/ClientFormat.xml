@@ -12,12 +12,20 @@
 			<ResterendEigenRisico>465.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0159845625</Rekeningnummer>
 		</ClientGegevens>
-		<VerzekeringPolis PolisNummer="126647">
-			<VerzekeringType>009</VerzekeringType>
-			<EigenRisico>626.35</EigenRisico>
-			<startDatum>03-06-2012</startDatum>
-			<eindDatum>03-06-2013</eindDatum>
-		</VerzekeringPolis>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="126647">
+				<VerzekeringType>009</VerzekeringType>
+				<EigenRisico>626.35</EigenRisico>
+				<startDatum>03-06-2012</startDatum>
+				<eindDatum>03-06-2013</eindDatum>
+			</VerzekeringPolis>
+			<VerzekeringPolis PolisNummer="029837">
+				<VerzekeringType>037</VerzekeringType>
+				<EigenRisico>800.00</EigenRisico>
+				<startDatum>03-06-2013</startDatum>
+				<eindDatum>03-06-2014</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
 		<facturen>
 			<factuur factuurNummer="159432">
 				<factuurDatum>21-08-2014</factuurDatum>

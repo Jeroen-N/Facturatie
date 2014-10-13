@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 public class VerzekeringstypeGUI {
 
-	public JPanel VerzekeringstypeGUI(){
+	public static JPanel VerzekeringstypeGUI(){
 		return null;
 		
 	}
