@@ -12,8 +12,9 @@ public interface KlantManager {
 	
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
-			String TelefoonNr, String Email, String RekeningNr, double ResterendEigenRisico,
-			VerzekeringPolis Verzekering, String Betaalwijze);
+			String TelefoonNr, String Email, String RekeningNr,
+			double ResterendEigenRisico,
+			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze);
 
 	public String toonKlant(String BSN);
 
@@ -24,5 +25,7 @@ public interface KlantManager {
 	public ArrayList<Klant> klanten();
 
 	public ArrayList<Klant> findKlant(String gebDatum);
+	
+	public String createPolisnummer();
 
 }

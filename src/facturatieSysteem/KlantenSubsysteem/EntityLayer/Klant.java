@@ -1,5 +1,6 @@
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Klant {
@@ -14,7 +15,7 @@ public class Klant {
 	private String Email;
 	private double ResterendEigenRisico;
 	private String RekeningNr;
-	private VerzekeringPolis Verzekering;
+	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
 	private String Betaalwijze;
 
 	/*
@@ -24,7 +25,7 @@ public class Klant {
 	public Klant(String BSN, String Naam, String Adres, String Postcode,
 			String Woonplaats, String Geboortedatum, String TelefoonNr,
 			String Email, String RekeningNr, double ResterendEigenRisico,
-			VerzekeringPolis Verzekering, String Betaalwijze) {
+			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze) {
 		this.BSN = BSN;
 		this.Naam = Naam;
 		this.Adres = Adres;
@@ -35,7 +36,7 @@ public class Klant {
 		this.Email = Email;
 		this.RekeningNr = RekeningNr;
 		this.ResterendEigenRisico = ResterendEigenRisico;
-		this.Verzekering = Verzekering;
+		this.VerzekeringPolissen = VerzekeringPolissen;
 		this.Betaalwijze = Betaalwijze;
 	}
 
@@ -67,8 +68,8 @@ public class Klant {
 	 * In deze methode wordt het verzekeringstype van de client opgevraagd. Dit
 	 * wordt gedaan door middel van de getType methode uit verzekeringsPolis
 	 */
-	public VerzekeringPolis getVerzekering() {
-		return Verzekering;
+	public ArrayList<VerzekeringPolis> getVerzekeringPolissen() {
+		return VerzekeringPolissen;
 	}
 
 	public String getBSN() {

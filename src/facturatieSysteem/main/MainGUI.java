@@ -46,7 +46,7 @@ public class MainGUI {
 
 		final JPanel VerzekeringPanel = new JPanel();
 		frame.getContentPane().add(VerzekeringPanel, "name_30497855602569");
-		VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
+		//VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
 		VerzekeringPanel.setVisible(false);
 
 		final JPanel VerzekeringsMaatschappijPanel = new JPanel();

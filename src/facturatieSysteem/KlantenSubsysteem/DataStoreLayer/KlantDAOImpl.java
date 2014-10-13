@@ -33,7 +33,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 public class KlantDAOImpl implements KlantDAO {
 	private String BSN;
 	private Klant klant;
-	private VerzekeringPolis polis;
+	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
 	private ArrayList<Klant> klantOverzicht;
 	private ArrayList<Klant> zoekResultaat;
 	private String xmlPath = "XML/ClientFormat.xml";
@@ -138,10 +138,12 @@ public class KlantDAOImpl implements KlantDAO {
 			rekeningnummer.appendChild(document.createTextNode(klant.getRekeningnummer()));
 			clientGegevens.appendChild(rekeningnummer);
 			
-		//VerzekeringPolis vullen	
-			polis = klant.getVerzekering();
+		//VerzekeringPolis vullen
+			//Checken of opmaak goed is
+			VerzekeringPolissen = klant.getVerzekeringPolissen();
 			
 			Attr polisNummer = document.createAttribute("PolisNummer");
+			for(VerzekeringPolis polis : VerzekeringPolissen){
 			polisNummer.setValue("" + polis.getPolisNummer());
 			verzekeringPolis.setAttributeNode(polisNummer);
 			
@@ -164,11 +166,11 @@ public class KlantDAOImpl implements KlantDAO {
 			Element eindDatum = document.createElement("eindDatum");
 			eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
 			verzekeringPolis.appendChild(eindDatum);
-			
+			}
 			verzekeringPolis.appendChild(document.createTextNode("\n\t\t"));//</VerzekeringPolis>
 			newKlant.appendChild(document.createTextNode("\n\t"));//</Client>
 			rootElement.appendChild(document.createTextNode("\n"));//<Clienten/>
-			
+
 		return writeDocument();
 	}
 	
@@ -213,8 +215,10 @@ public class KlantDAOImpl implements KlantDAO {
 				String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
 				String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 				
-				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum); 
-				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Polis, Betaalwijze);
+				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
+				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
+				VerzekeringPolissen.add(Polis);
+				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				klantOverzicht.add(klant);
 				
 				/*
@@ -264,7 +268,9 @@ public class KlantDAOImpl implements KlantDAO {
 				String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 				
 				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum); 
-				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, Polis, Betaalwijze);
+				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
+				VerzekeringPolissen.add(Polis);				
+				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				zoekResultaat.add(klant);
 				
 			}
