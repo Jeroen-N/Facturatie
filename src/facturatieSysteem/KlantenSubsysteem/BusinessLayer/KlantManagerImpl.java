@@ -112,7 +112,7 @@ public class KlantManagerImpl implements KlantManager {
 		VerzekeringPolissen = klant.getVerzekeringPolissen();
 		// PolisNummer
 		for(VerzekeringPolis polis : VerzekeringPolissen){
-		if (!polis.getPolisNummer().matches("([0-9]{6})")) {
+		if (!polis.getPolisNummer().matches("([0-9A-Z]{6})")) {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
 		}
 		// verzekeringType

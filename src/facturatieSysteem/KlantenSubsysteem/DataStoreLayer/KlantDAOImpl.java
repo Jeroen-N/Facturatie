@@ -67,25 +67,28 @@ public class KlantDAOImpl implements KlantDAO {
 	public boolean addKlantXML(Klant klant){
 		this.klant = klant;
 		
-		Node rootElement = document.getElementsByTagName("Clienten").item(0);
-		rootElement.appendChild(document.createTextNode("\n\t"));
+		Node clienten = document.getElementsByTagName("Clienten").item(0);
+		clienten.appendChild(document.createTextNode("\n\t"));
 		
 		//Elementen aanmaken
-		Element newKlant = document.createElement("Client");
+		Element client = document.createElement("Client");
 		Element clientGegevens = document.createElement("ClientGegevens");
+		Element verzekeringPolissen = document.createElement("VerzekeringPolissen");
 		Element verzekeringPolis = document.createElement("VerzekeringPolis");
 		
 		//Elementen ordenen
-		rootElement.appendChild(newKlant);
-		newKlant.appendChild(document.createTextNode("\n\t\t"));//<ClientGegevens>
-		newKlant.appendChild(clientGegevens);
-		newKlant.appendChild(document.createTextNode("\n\t\t"));//<ClientGegevens>
-		newKlant.appendChild(verzekeringPolis);
+		clienten.appendChild(client);
+			client.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
+			client.appendChild(clientGegevens);
+			client.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
+			client.appendChild(verzekeringPolissen);
+				verzekeringPolissen.appendChild(document.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
+				verzekeringPolissen.appendChild(verzekeringPolis);
 		
 		//Atribuut BSN aan client meegeven
 		Attr BSN = document.createAttribute("BSN");
 		BSN.setValue("" + klant.getBSN());
-		newKlant.setAttributeNode(BSN);
+		client.setAttributeNode(BSN);
 
 		//ClientGegevens vullen
 			clientGegevens.appendChild(document.createTextNode("\n\t\t\t"));//opmaak XML
@@ -137,39 +140,43 @@ public class KlantDAOImpl implements KlantDAO {
 			Element rekeningnummer = document.createElement("Rekeningnummer");
 			rekeningnummer.appendChild(document.createTextNode(klant.getRekeningnummer()));
 			clientGegevens.appendChild(rekeningnummer);
-			
+		
+			clientGegevens.appendChild(document.createTextNode("\n\t\t"));// </ClientGegevens>
 		//VerzekeringPolis vullen
-			//Checken of opmaak goed is
+
 			VerzekeringPolissen = klant.getVerzekeringPolissen();
 			
-			Attr polisNummer = document.createAttribute("PolisNummer");
 			for(VerzekeringPolis polis : VerzekeringPolissen){
-			polisNummer.setValue("" + polis.getPolisNummer());
-			verzekeringPolis.setAttributeNode(polisNummer);
-			
-			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
-			Element verzekeringsType = document.createElement("VerzekeringType");
-			verzekeringsType.appendChild(document.createTextNode(polis.getVerzekeringsType()));
-			verzekeringPolis.appendChild(verzekeringsType);
-			
-			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
-			Element eigenRisico = document.createElement("EigenRisico");
-			eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisico())));
-			verzekeringPolis.appendChild(eigenRisico);
-			
-			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
-			Element startDatum = document.createElement("startDatum");
-			startDatum.appendChild(document.createTextNode(polis.getStartDatum()));
-			verzekeringPolis.appendChild(startDatum);
-			
-			verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));
-			Element eindDatum = document.createElement("eindDatum");
-			eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
-			verzekeringPolis.appendChild(eindDatum);
+				Attr polisNummer = document.createAttribute("PolisNummer");
+				polisNummer.setValue("" + polis.getPolisNummer());
+				verzekeringPolis.setAttributeNode(polisNummer);
+				
+				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+				Element verzekeringsType = document.createElement("VerzekeringType");
+				verzekeringsType.appendChild(document.createTextNode(polis.getVerzekeringsType()));
+				verzekeringPolis.appendChild(verzekeringsType);
+				
+				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+				Element eigenRisico = document.createElement("EigenRisico");
+				eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisico())));
+				verzekeringPolis.appendChild(eigenRisico);
+				
+				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+				Element startDatum = document.createElement("startDatum");
+				startDatum.appendChild(document.createTextNode(polis.getStartDatum()));
+				verzekeringPolis.appendChild(startDatum);
+				
+				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+				Element eindDatum = document.createElement("eindDatum");
+				eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
+				verzekeringPolis.appendChild(eindDatum);
+				
+				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
 			}
-			verzekeringPolis.appendChild(document.createTextNode("\n\t\t"));//</VerzekeringPolis>
-			newKlant.appendChild(document.createTextNode("\n\t"));//</Client>
-			rootElement.appendChild(document.createTextNode("\n"));//<Clienten/>
+			
+			verzekeringPolissen.appendChild(document.createTextNode("\n\t\t"));// </VerzekeringPolissen>
+			client.appendChild(document.createTextNode("\n\t"));// </Client>
+			clienten.appendChild(document.createTextNode("\n"));// <Clienten/>
 
 		return writeDocument();
 	}
@@ -241,9 +248,10 @@ public class KlantDAOImpl implements KlantDAO {
 
 	public ArrayList<Klant> findKlantXML(String gebDatum){
 		zoekResultaat = new ArrayList<Klant>();
+		ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
 		
-		Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
-		NodeList clienten = rootElement.getElementsByTagName("Client");
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
 			String Geboortedatum = clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent();
@@ -259,25 +267,28 @@ public class KlantDAOImpl implements KlantDAO {
 				String RekeningNr = clientElement.getElementsByTagName("Rekeningnummer").item(0).getTextContent();
 				String Betaalwijze= clientElement.getElementsByTagName("BetaalMethode").item(0).getTextContent();
 			
-				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
+				Element polissenElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
+				NodeList polissen = clientElement.getElementsByTagName("VerzekeringPolis");
+				VerzekeringPolissen.clear();
+				for (int j = 0; j < polissen.getLength();j++){
+					Element polisElement = (Element) polissen.item(j);
+					String PolisNummer = polisElement.getAttribute("PolisNummer");
+					String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
+					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
+					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
+					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 				
-				String PolisNummer = polisElement.getAttribute("PolisNummer");
-				String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
-				Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-				String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
-				String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
-				
-				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum); 
-				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
-				VerzekeringPolissen.add(Polis);				
+					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
+					VerzekeringPolissen.add(Polis);	
+				}
+		
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				zoekResultaat.add(klant);
 				
 			}
-		}
 			
-		return zoekResultaat;
-		
+		}
+		return zoekResultaat;	
 	}
 	
 	public boolean updateKlantXML(Klant klant) {
@@ -295,7 +306,6 @@ public class KlantDAOImpl implements KlantDAO {
 			String BSN = clientElement.getAttribute("BSN");
 			
 			if(BSN.equals(verwijderBSN)){
-				System.out.println("hij komt in if statement");
 				clientElement.getParentNode().removeChild(clientElement);
 			}
 		}
@@ -335,8 +345,9 @@ public class KlantDAOImpl implements KlantDAO {
 
 		return schema;
 	}
+
 	private boolean validateDocument(String xmlFile, Schema schema) {
-		
+
 		System.out.println("validateDocument");
 
 		boolean result = false;

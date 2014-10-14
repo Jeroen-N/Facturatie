@@ -116,12 +116,14 @@
 			<ResterendEigenRisico>23.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0264158425</Rekeningnummer>
 		</ClientGegevens>
-		<VerzekeringPolis PolisNummer="265148">
-			<VerzekeringType>001</VerzekeringType>
-			<EigenRisico>105.26</EigenRisico>
-			<startDatum>21-07-2013</startDatum>
-			<eindDatum>21-07-2014</eindDatum>
-		</VerzekeringPolis>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="265148">
+				<VerzekeringType>001</VerzekeringType>
+				<EigenRisico>105.26</EigenRisico>
+				<startDatum>21-07-2013</startDatum>
+				<eindDatum>21-07-2014</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
 		<facturen>
 			<factuur factuurNummer="262641">
 				<factuurDatum>26-03-2014</factuurDatum>
