@@ -128,15 +128,7 @@ public class FacturatieGUI {
 
 	}
 
-	public void vulKlantenlijst(ArrayList<Klant> klanten) {
-
-	}
-
 	public void vulFacturenlijst(ArrayList<Factuur> facturen) {
-
-	}
-
-	public void toonKlant(String voornaam, String achternaam) {
 
 	}
 
