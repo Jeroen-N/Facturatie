@@ -22,8 +22,6 @@ public interface KlantManager {
 
 	public String checkKlant(Klant klant);
 
-	public ArrayList<Klant> klanten();
-
 	public ArrayList<Klant> findKlant(String gebDatum);
 	
 	public String createPolisnummer();

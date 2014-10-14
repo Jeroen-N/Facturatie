@@ -111,32 +111,32 @@ public class KlantManagerImpl implements KlantManager {
 		}
 		VerzekeringPolissen = klant.getVerzekeringPolissen();
 		// PolisNummer
+
 		for(VerzekeringPolis polis : VerzekeringPolissen){
 		if (!polis.getPolisNummer().matches("([0-9A-Z]{6})")) {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
 		}
+		
 		// verzekeringType
 		if (!polis.getVerzekeringsType().matches("([0-9]{3})")) {
 			errorMessage = errorMessage + "\nVerzekeringsType niet correct";
 		}
+		
 		// StartDatum
 		// zet het jaar op het actuele jaar.
 		if (!polis.getStartDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 			errorMessage = errorMessage + "\nStart datum niet correct ";
 		}
+		
 		// EindDatum
 		// zorgen dat einddatum niet eerder is dan startdatum
 		if (!polis.getEindDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 			errorMessage = errorMessage + "\nEind datum niet correct ";
-		}}
+		}
+
+		}
 		// System.out.println(errorMessage);
 		return errorMessage;
-	}
-
-	@Override
-	public ArrayList<Klant> klanten() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*
@@ -173,7 +173,7 @@ public class KlantManagerImpl implements KlantManager {
 		}
 		for (Klant klant : getKlanten()) {
 			for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
-				if(polis.getPolisNummer().equals(result)){
+				if (polis.getPolisNummer().equals(result)) {
 					createPolisnummer();
 				} else {
 					return new String(result);
@@ -181,7 +181,7 @@ public class KlantManagerImpl implements KlantManager {
 			}
 		}
 		return "EEEEEE";
-		
+
 	}
 
 }
