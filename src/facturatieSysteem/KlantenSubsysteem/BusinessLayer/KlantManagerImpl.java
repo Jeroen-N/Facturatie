@@ -109,9 +109,10 @@ public class KlantManagerImpl implements KlantManager {
 		if (!klant.getEmail().matches("(.+)([@]{1})(.+)([.]{1})(.+)")) {
 			errorMessage = errorMessage + "\nEmail niet correct";
 		}
+		
 		VerzekeringPolissen = klant.getVerzekeringPolissen();
+		
 		// PolisNummer
-
 		for(VerzekeringPolis polis : VerzekeringPolissen){
 		if (!polis.getPolisNummer().matches("([0-9A-Z]{6})")) {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
