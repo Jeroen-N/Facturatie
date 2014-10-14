@@ -125,7 +125,7 @@ public class Klant {
 				"Telefoonnummer: \t"	 		+ 	TelefoonNr		+ "\n\n" +
 				"Email: \t\t" 					+ 	Email			+ "\n\n" +
 				"Betaalwijze: \t\t"				+	Betaalwijze		+ "\n\n" +
-				"Resterend eigen risico: \t"	+ "€" +	ResterendEigenRisico + "\n\n" +
+				"Resterend eigen risico: \t"	+ "\u20ac" +	ResterendEigenRisico + "\n\n" +
 				"Rekeningnummer: \t"			+	RekeningNr		+ "\n\n" ;
 	}
 }
