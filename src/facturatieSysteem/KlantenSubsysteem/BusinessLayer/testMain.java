@@ -11,25 +11,34 @@ public class testMain {
 
 		KlantManager manager = new KlantManagerImpl();
 		VerzekeringPolissen = new ArrayList<VerzekeringPolis>();
-		
+		String polisNummer = manager.createPolisnummer();
+		VerzekeringPolis polis = new VerzekeringPolis(manager.createPolisnummer(), "007", 125.48, "01-01-2000", "31-12-2001");
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
 		
-		String polisNummer = manager.createPolisnummer();//moet nog automatisch aangemaakt worden.
-		VerzekeringPolissen.add(new VerzekeringPolis(polisNummer, "007", 125.48, "01-01-2000", "31-12-2001"));
-		if(manager.createKlant("125651201", "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso")){
+		String BSN = "125651201";
+		/*
+		VerzekeringPolissen.add(polis);
+		if(manager.createKlant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso")){
 			System.out.println("Klant succesvol toegevoegd");
 		}else{
 			System.out.println("Klant toevoegen mislukt");
 		}
+		*/
+		if(manager.addVerzekeringPolis(BSN, new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"))){
+			System.out.println("polis met polisNummer: "+polisNummer+" succesvol toegevoegd");
+		}else{
+			System.out.println("toevoegen polis mislukt");
+		}
 		
+		/*
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
 
-		if(manager.verwijderKlantXML("125651201")){
+		if(manager.verwijderKlantXML(BSN)){
 			System.out.println("Toegevoegde klant weer verwijdert");
 		}else{
 			System.out.println("verwijderen van klant mislukt");
 		}
-		
+		*/
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
 		
 		if(manager.findKlant("06-09-1991").size() != 0){
@@ -41,7 +50,6 @@ public class testMain {
 		else{
 			System.out.println("er zijn geen klanten gevonden");
 		}
-		
 		
 		
 		

@@ -140,29 +140,20 @@ public class KlantManagerImpl implements KlantManager {
 		return errorMessage;
 	}
 
-	/*
-	 * 
-	 */
-	public boolean WijzigVerzekeringPolis(String PolisNummer,
-			String VerzekeringsType, double ExtraEigenRisico, Date StartDatum,
-			Date EindDatum) {
-		// zoek de bestaande polis door middel van het PolisNummer
-
-		// voer de neuwe gegevens in, in de plaats van de oude gegevens.
-
-		return true;
+	public boolean addVerzekeringPolis(String BSN, VerzekeringPolis polis){
+		return KlantDAO.addPolisXML(BSN, polis);
 	}
 
-	/*
-	 * 
-	 */
+	public boolean WijzigVerzekeringPolis(VerzekeringPolis polis) {
+		// zoek de bestaande polis door middel van het PolisNummer
+		// voer de neuwe gegevens in, in de plaats van de oude gegevens.
+		return false;
+	}
+
 	public boolean RemoveVerzekeringPolis(String PolisNummer) {
 		// zoek de polis door middel van het polisnummer
-
 		// verwijder de polis
-
 		return false;
-
 	}
 
 	public String createPolisnummer() {
@@ -182,7 +173,6 @@ public class KlantManagerImpl implements KlantManager {
 			}
 		}
 		return "EEEEEE";
-
 	}
 
 }

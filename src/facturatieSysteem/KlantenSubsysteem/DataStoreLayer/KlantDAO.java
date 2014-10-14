@@ -3,6 +3,7 @@ package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 import java.util.ArrayList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public interface KlantDAO {
 	
@@ -15,5 +16,7 @@ public interface KlantDAO {
 	public boolean verwijderKlantXML(String BSN);
 
 	public ArrayList<Klant> findKlantXML(String gebDatum);
+
+	public boolean addPolisXML(String bSN, VerzekeringPolis polis);
 
 }

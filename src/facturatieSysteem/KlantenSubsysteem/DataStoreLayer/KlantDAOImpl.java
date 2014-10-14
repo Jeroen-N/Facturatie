@@ -65,6 +65,7 @@ public class KlantDAOImpl implements KlantDAO {
 	}
 	
 	public boolean addKlantXML(Klant klant){
+		try{
 		this.klant = klant;
 		
 		Node clienten = document.getElementsByTagName("Clienten").item(0);
@@ -179,6 +180,9 @@ public class KlantDAOImpl implements KlantDAO {
 			clienten.appendChild(document.createTextNode("\n"));// <Clienten/>
 
 		return writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
 	}
 	
 	public ArrayList<Klant> getKlantenXML() {
@@ -238,11 +242,10 @@ public class KlantDAOImpl implements KlantDAO {
 				*/
 				
 			}
-			
-			} catch (DOMException e) {
+
+		}catch(DOMException e){
 			e.printStackTrace();
-		} 
-	
+		}
 		return klantOverzicht;	    
 	}
 
@@ -300,6 +303,7 @@ public class KlantDAOImpl implements KlantDAO {
 
 	public boolean verwijderKlantXML(String verwijderBSN) {
 		// verwijder klant uit XML
+		try{
 		NodeList clienten = document.getElementsByTagName("Client");
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
@@ -309,8 +313,62 @@ public class KlantDAOImpl implements KlantDAO {
 				clientElement.getParentNode().removeChild(clientElement);
 			}
 		}
-		return writeDocument();
 		
+		return writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
+		
+	}
+	
+	public boolean addPolisXML(String addBSN, VerzekeringPolis polis){
+		try{
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		for(int i = 0; i < clienten.getLength();i++){
+			
+			Element clientElement = (Element) clienten.item(i);
+			String BSN = clientElement.getAttribute("BSN");
+			if(addBSN.equals(BSN)){
+				
+				Element verzekeringPolissen = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
+				Element verzekeringPolis = document.createElement("VerzekeringPolis");
+				verzekeringPolissen.appendChild(document.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
+				verzekeringPolissen.appendChild(verzekeringPolis);
+				
+					Attr polisNummer = document.createAttribute("PolisNummer");
+					polisNummer.setValue("" + polis.getPolisNummer());
+					verzekeringPolis.setAttributeNode(polisNummer);
+					
+					verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+					Element verzekeringsType = document.createElement("VerzekeringType");
+					verzekeringsType.appendChild(document.createTextNode(polis.getVerzekeringsType()));
+					verzekeringPolis.appendChild(verzekeringsType);
+					
+					verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+					Element eigenRisico = document.createElement("EigenRisico");
+					eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisico())));
+					verzekeringPolis.appendChild(eigenRisico);
+					
+					verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+					Element startDatum = document.createElement("startDatum");
+					startDatum.appendChild(document.createTextNode(polis.getStartDatum()));
+					verzekeringPolis.appendChild(startDatum);
+					
+					verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+					Element eindDatum = document.createElement("eindDatum");
+					eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
+					verzekeringPolis.appendChild(eindDatum);
+					
+					verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
+					
+			}
+		}
+		
+		return writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
 	}
 	
 	public boolean writeDocument() {

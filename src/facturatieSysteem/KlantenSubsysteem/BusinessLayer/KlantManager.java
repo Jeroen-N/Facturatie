@@ -26,4 +26,5 @@ public interface KlantManager {
 	
 	public String createPolisnummer();
 
+	public boolean addVerzekeringPolis(String BSN, VerzekeringPolis polis);
 }
