@@ -14,4 +14,10 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>pictures</name>
+			<value>file:/Users/xandergerreman/Google%20Drive/Periode%205/Proftaak/Facturatie/Pictures</value>
+		</variable>
+	</variableList>
 </projectDescription>

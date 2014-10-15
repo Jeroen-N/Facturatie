@@ -143,6 +143,19 @@ public class MainGUI {
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info);
+		
+		JPanel knoppen = new JPanel();
+		Klant_info.add(knoppen, BorderLayout.SOUTH);
+		knoppen.setLayout(new BorderLayout(0, 0));
+		
+		JPanel links = new JPanel();
+		knoppen.add(links, BorderLayout.WEST);
+		
+		JButton btnNewButton = new JButton("New button");
+		links.add(btnNewButton);
+		
+		JPanel rechts = new JPanel();
+		knoppen.add(rechts, BorderLayout.EAST);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
