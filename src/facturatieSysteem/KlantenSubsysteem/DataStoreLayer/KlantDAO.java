@@ -18,5 +18,7 @@ public interface KlantDAO {
 	public ArrayList<Klant> findKlantXML(String gebDatum);
 
 	public boolean addPolisXML(String bSN, VerzekeringPolis polis);
+	
+	public boolean updatePolisXML(VerzekeringPolis polis);
 
 }

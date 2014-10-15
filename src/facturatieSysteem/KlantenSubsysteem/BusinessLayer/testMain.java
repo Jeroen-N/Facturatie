@@ -36,6 +36,8 @@ public class testMain {
 			System.out.println("klant wijzigen mislukt");
 		}
 		
+		if(manager.WijzigVerzekeringPolis(polis));
+		
 		
 		/*
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());

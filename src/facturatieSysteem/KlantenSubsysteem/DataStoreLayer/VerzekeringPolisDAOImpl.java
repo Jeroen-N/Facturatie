@@ -8,11 +8,6 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
 	private ArrayList<VerzekeringPolis> VerzekeringOverzicht = new ArrayList<VerzekeringPolis>();
 
-	public VerzekeringPolisDAOImpl(ArrayList<VerzekeringPolis> VerzekeringOverzicht){
-		//ArrayList<VerzekeringPolis> VerzekeringOverzicht = new ArrayList<>();
-		this.VerzekeringOverzicht = VerzekeringOverzicht;
-	}
-	
 	public ArrayList<VerzekeringPolis> getVerzekeringPolis() {
 		// ophalen van de klanten in het overzicht en opslaan in een arraylist.
 		return VerzekeringOverzicht;
@@ -30,6 +25,12 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
 	public boolean verwijderVerzekeringPolisXML(VerzekeringPolis polis) {
 		// verwijderen van de verzekeringPolis in het xml bestand.
+		return false;
+	}
+
+	@Override
+	public boolean updatePolisXML(VerzekeringPolis polis) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

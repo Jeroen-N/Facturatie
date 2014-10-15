@@ -29,4 +29,6 @@ public interface KlantManager {
 	public boolean addVerzekeringPolis(String BSN, VerzekeringPolis polis);
 	
 	public boolean updateKlant(Klant klant);
+	
+	public boolean WijzigVerzekeringPolis(VerzekeringPolis polis);
 }

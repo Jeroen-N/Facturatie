@@ -150,8 +150,7 @@ public class KlantManagerImpl implements KlantManager {
 	}
 
 	public boolean WijzigVerzekeringPolis(VerzekeringPolis polis) {
-		// zoek de bestaande polis door middel van het PolisNummer
-		// voer de neuwe gegevens in, in de plaats van de oude gegevens.
+		KlantDAO.updatePolisXML(polis);
 		return false;
 	}
 

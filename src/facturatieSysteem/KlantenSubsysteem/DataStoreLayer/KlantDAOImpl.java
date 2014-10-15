@@ -318,8 +318,6 @@ public class KlantDAOImpl implements KlantDAO {
 				Element Betaalwijze= (Element) clientElement.getElementsByTagName("BetaalMethode").item(0);
 				
 				Naam.setTextContent(klant.getNaam());
-				
-				//Naam.appendChild(document.createTextNode(klant.getNaam()));
 				Adres.setTextContent(klant.getAdres());
 				Postcode.setTextContent(klant.getPostcode());
 				Woonplaats.setTextContent(klant.getWoonplaats());
@@ -401,6 +399,33 @@ public class KlantDAOImpl implements KlantDAO {
 			}
 		}
 		
+		return writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
+	}
+	
+	public boolean updatePolisXML(VerzekeringPolis polis) {
+		try{
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		for(int i = 0; i < clienten.getLength();i++){
+			Element clientElement = (Element) clienten.item(i);
+			String polisnummer = clientElement.getAttribute("PolisNummer");
+			if(polisnummer.equals(polis.getPolisNummer())){
+				
+
+				Element verzekeringsType = (Element) clientElement.getElementsByTagName("VerzekeringType");
+				Element eigenRisico = (Element) clientElement.getElementsByTagName("EigenRisico");
+				Element startDatum = (Element) clientElement.getElementsByTagName("startDatum");
+				Element eindDatum = (Element) clientElement.getElementsByTagName("eindDatum");
+				
+				verzekeringsType.setTextContent(polis.getVerzekeringsType());
+				eigenRisico.setTextContent(Double.toString((polis.getExtraEigenRisico())));
+				startDatum.setTextContent(polis.getStartDatum());
+				eindDatum.setTextContent(polis.getEindDatum());
+			}
+		}
 		return writeDocument();
 		}catch(DOMException e){
 			return false;
