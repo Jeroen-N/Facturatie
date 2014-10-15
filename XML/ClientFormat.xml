@@ -203,4 +203,33 @@
 			</Diagnose>
 		</Diagnoses>
 	</Client>
+
+	<Client BSN="125651201">
+		<ClientGegevens>
+			<Naam>piet jan henk</Naam>
+			<Adres>Marialaan 9a</Adres>
+			<Postcode>4834VG</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>10-06-1994</Geboortedatum>
+			<Telefoonnummer>0683144715</Telefoonnummer>
+			<Email>xpjgerre@avans.nl</Email>
+			<BetaalMethode>incoasso</BetaalMethode>
+			<ResterendEigenRisico>2.5</ResterendEigenRisico>
+			<Rekeningnummer>NL47RABO01326884668</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="9O6DWQ">
+				<VerzekeringType>007</VerzekeringType>
+				<EigenRisico>125.48</EigenRisico>
+				<startDatum>01-01-2000</startDatum>
+				<eindDatum>31-12-2001</eindDatum>
+			</VerzekeringPolis>
+		
+			<VerzekeringPolis PolisNummer="ALRW5K">
+				<VerzekeringType>007</VerzekeringType>
+				<EigenRisico>1125.48</EigenRisico>
+				<startDatum>01-01-2010</startDatum>
+				<eindDatum>31-12-2011</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
+	</Client>
 </Clienten>

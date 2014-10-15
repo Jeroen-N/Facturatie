@@ -50,6 +50,11 @@ public class KlantManagerImpl implements KlantManager {
 
 	}
 
+	public boolean updateKlant(Klant klant){
+		return KlantDAO.updateKlantXML(klant);
+	}
+	
+	
 	public ArrayList<Klant> findKlant(String gebDatum) {
 		return KlantDAO.findKlantXML(gebDatum);
 

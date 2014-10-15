@@ -16,19 +16,26 @@ public class testMain {
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
 		
 		String BSN = "125651201";
-		/*
+		
 		VerzekeringPolissen.add(polis);
 		if(manager.createKlant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso")){
 			System.out.println("Klant succesvol toegevoegd");
 		}else{
 			System.out.println("Klant toevoegen mislukt");
 		}
-		*/
+		
 		if(manager.addVerzekeringPolis(BSN, new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"))){
 			System.out.println("polis met polisNummer: "+polisNummer+" succesvol toegevoegd");
 		}else{
 			System.out.println("toevoegen polis mislukt");
 		}
+		
+		if(manager.updateKlant(new Klant(BSN, "piet jan henk", "Marialaan 9a", "4834VG", "Breda", "10-06-1994","0683144715","xpjgerre@avans.nl","NL47RABO01326884668",2.50,VerzekeringPolissen,"incoasso"))){
+			System.out.println("klant is gewijzigd");
+		}else{
+			System.out.println("klant wijzigen mislukt");
+		}
+		
 		
 		/*
 		System.out.println("aantalklanten: "+ manager.getKlanten().size());
@@ -43,7 +50,8 @@ public class testMain {
 		
 		if(manager.findKlant("06-09-1991").size() != 0){
 			System.out.println("aantal gevonden klanten: "+ manager.findKlant("06-09-1991").size());
-			for(Klant klant : manager.findKlant("06-09-1991")){
+			for(Klant klant : manager.getKlanten()){
+				
 				System.out.println("aantal Verzekeringen: "+ klant.getVerzekeringPolissen().size());
 			}
 		}

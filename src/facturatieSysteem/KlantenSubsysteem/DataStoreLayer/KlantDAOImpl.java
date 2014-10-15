@@ -219,16 +219,19 @@ public class KlantDAOImpl implements KlantDAO {
 				System.out.println();
 				*/
 				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
-				
-				String PolisNummer = polisElement.getAttribute("PolisNummer");
-				String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
-				Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-				String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
-				String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
-				
-				VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
+				NodeList polissen = clientElement.getElementsByTagName("VerzekeringPolis");
 				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
-				VerzekeringPolissen.add(Polis);
+				for (int j = 0; j < polissen.getLength();j++){				
+					String PolisNummer = polisElement.getAttribute("PolisNummer");
+					String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
+					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
+					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
+					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
+					
+					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
+					
+					VerzekeringPolissen.add(Polis);
+				}
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				klantOverzicht.add(klant);
 				
@@ -280,7 +283,7 @@ public class KlantDAOImpl implements KlantDAO {
 					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
 					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
 					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
-				
+					
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
 					VerzekeringPolissen.add(Polis);	
 				}
@@ -295,10 +298,43 @@ public class KlantDAOImpl implements KlantDAO {
 	}
 	
 	public boolean updateKlantXML(Klant klant) {
-		this.klant = klant;
-		return false;
-
-		// updaten van gegevens van een klant
+		try{
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		for(int i = 0; i < clienten.getLength();i++){
+			Element clientElement = (Element) clienten.item(i);
+			String BSN = clientElement.getAttribute("BSN");
+			if(BSN.equals(klant.getBSN())){
+				
+				Element Naam = (Element) clientElement.getElementsByTagName("Naam").item(0);
+				Element Adres = (Element) clientElement.getElementsByTagName("Adres").item(0);
+				Element Postcode = (Element) clientElement.getElementsByTagName("Postcode").item(0);
+				Element Woonplaats = (Element) clientElement.getElementsByTagName("Woonplaats").item(0);
+				Element Geboortedatum = (Element) clientElement.getElementsByTagName("Geboortedatum").item(0);
+				Element TelefoonNr = (Element) clientElement.getElementsByTagName("Telefoonnummer").item(0);
+				Element Email = (Element) clientElement.getElementsByTagName("Email").item(0);
+				Element ResterendEigenRisico = (Element) clientElement.getElementsByTagName("ResterendEigenRisico").item(0);
+				Element RekeningNr = (Element) clientElement.getElementsByTagName("Rekeningnummer").item(0);
+				Element Betaalwijze= (Element) clientElement.getElementsByTagName("BetaalMethode").item(0);
+				
+				Naam.setTextContent(klant.getNaam());
+				
+				//Naam.appendChild(document.createTextNode(klant.getNaam()));
+				Adres.setTextContent(klant.getAdres());
+				Postcode.setTextContent(klant.getPostcode());
+				Woonplaats.setTextContent(klant.getWoonplaats());
+				Geboortedatum.setTextContent(klant.getGeboortedatum());
+				TelefoonNr.setTextContent(klant.getTelefoonnummer());
+				Email.setTextContent(klant.getEmail());
+				Betaalwijze.setTextContent(klant.getBetaalMethode());
+				ResterendEigenRisico.setTextContent(Double.toString(klant.getResterendEigenRisico()));
+				RekeningNr.setTextContent(klant.getRekeningnummer());
+			}
+		}
+		return writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
 	}
 
 	public boolean verwijderKlantXML(String verwijderBSN) {
