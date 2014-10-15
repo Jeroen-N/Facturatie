@@ -6,20 +6,27 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
+
 import java.awt.Component;
+
 import javax.swing.JComboBox;
+
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
+
 import java.awt.Dimension;
 
 public class AddKlantDialog extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textFieldNaam;
 	private JTextField textFieldAchternaam;
 	private JTextField textFieldGebDatum;
@@ -36,23 +43,10 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldEigenRisico;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AddKlantDialog dialog = new AddKlantDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setResizable(false);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
-	public AddKlantDialog() {
+	@SuppressWarnings("rawtypes")
+	public AddKlantDialog(KlantManager manager) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -463,6 +457,9 @@ public class AddKlantDialog extends JDialog {
 							textFieldPolisNummer.setColumns(15);
 							splitPanePolisNummer
 									.setRightComponent(textFieldPolisNummer);
+							textFieldPolisNummer.setText(manager
+									.createPolisnummer());
+							textFieldPolisNummer.setEditable(false);
 						}
 					}
 					{
@@ -529,6 +526,7 @@ public class AddKlantDialog extends JDialog {
 							textFieldEigenRisico.setColumns(15);
 							splitPaneEigenRisico
 									.setRightComponent(textFieldEigenRisico);
+							textFieldEigenRisico.setEditable(false);
 						}
 					}
 					{
@@ -595,15 +593,6 @@ public class AddKlantDialog extends JDialog {
 					}
 				}
 			}
-			{
-				JPanel editKlant = new JPanel();
-				klantManager.addTab("Klant wijzigen", null, editKlant, null);
-			}
-			{
-				JPanel deleteKlant = new JPanel();
-				klantManager.addTab("Klant verwijderen", null, deleteKlant,
-						null);
-			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -622,5 +611,5 @@ public class AddKlantDialog extends JDialog {
 			}
 		}
 	}
-	
+
 }

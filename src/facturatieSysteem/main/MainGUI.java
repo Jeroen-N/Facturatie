@@ -150,9 +150,21 @@ public class MainGUI {
 		
 		JPanel links = new JPanel();
 		knoppen.add(links, BorderLayout.WEST);
+		links.setLayout(new BoxLayout(links, BoxLayout.Y_AXIS));
 		
-		JButton btnNewButton = new JButton("New button");
-		links.add(btnNewButton);
+		JButton button = new JButton("");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddKlantDialog addKlantDialog = new AddKlantDialog(KlantManager);
+				addKlantDialog.setVisible(true);
+			}
+		});
+		button.setAlignmentY(Component.TOP_ALIGNMENT);
+		button.setMinimumSize(new Dimension(0, 0));
+		button.setIcon(new ImageIcon("/Users/xandergerreman/Google Drive/Periode 5/Proftaak/Facturatie/Pictures/add-contact-icon-xsmall.png"));
+		links.add(button);
+		
 		
 		JPanel rechts = new JPanel();
 		knoppen.add(rechts, BorderLayout.EAST);
