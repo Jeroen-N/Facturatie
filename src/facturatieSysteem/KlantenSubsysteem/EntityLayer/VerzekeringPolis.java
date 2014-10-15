@@ -1,7 +1,5 @@
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
-import java.util.Date;
-
 public class VerzekeringPolis {
 
 	private String PolisNummer;

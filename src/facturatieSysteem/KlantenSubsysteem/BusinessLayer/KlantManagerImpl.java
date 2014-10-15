@@ -2,23 +2,29 @@ package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
+import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.DAOFactoryKlant;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAOImpl;
+import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO;
+import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAOImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
 	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
-	private ArrayList<Klant> zoekresultaat;
+	private DAOFactoryKlant DAOFactory = new DAOFactoryKlant();
 	private KlantDAO KlantDAO = new KlantDAOImpl();
+	private VerzekeringPolisDAO polisDAO = new VerzekeringPolisDAOImpl();
 	private String errorMessage;
-	private static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-			.toCharArray();
-
+	private static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+	
+	public KlantManagerImpl(){
+		DAOFactory.validateXML();
+	}
+	
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
@@ -42,22 +48,24 @@ public class KlantManagerImpl implements KlantManager {
 		}
 	}
 
-	@Override
 	public ArrayList<Klant> getKlanten() {
-
 		// functie voor het ophalen van klanten
 		return KlantDAO.getKlantenXML();
-
 	}
 
-	public boolean updateKlant(Klant klant){
+	public boolean updateKlant(String BSN, String Naam, String Adres,
+			String Postcode, String Woonplaats, String Geboortedatum,
+			String TelefoonNr, String Email, String RekeningNr,
+			double ResterendEigenRisico,
+			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
+		
+		Klant klant = new Klant(BSN,Naam,Adres,Postcode,Woonplaats,Geboortedatum,TelefoonNr,Email,RekeningNr,ResterendEigenRisico,VerzekeringPolissen,Betaalwijze); 
 		return KlantDAO.updateKlantXML(klant);
 	}
 	
 	
 	public ArrayList<Klant> findKlant(String gebDatum) {
 		return KlantDAO.findKlantXML(gebDatum);
-
 	}
 
 	public String toonKlant(String BSN) {
@@ -70,18 +78,8 @@ public class KlantManagerImpl implements KlantManager {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#
-	 * verwijderKlantXML(java.lang.String)
-	 */
 	public boolean verwijderKlantXML(String BSN) {
-		// functie voor het verwijderen van een klant uit xml
-
-		// nog toe tevoegen:
 		return KlantDAO.verwijderKlantXML(BSN);
-
 	}
 
 	public String checkKlant(Klant klant) {
@@ -144,22 +142,19 @@ public class KlantManagerImpl implements KlantManager {
 		// System.out.println(errorMessage);
 		return errorMessage;
 	}
-
-	public boolean addVerzekeringPolis(String BSN, VerzekeringPolis polis){
-		return KlantDAO.addPolisXML(BSN, polis);
+	
+	//create Verzekering Polis nog aan maken
+	
+	public boolean addVerzekeringPolisXML(String BSN, String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
+		return polisDAO.addVerzekeringPolisXML(BSN, polis);
 	}
-
-	public boolean WijzigVerzekeringPolis(VerzekeringPolis polis) {
-		KlantDAO.updatePolisXML(polis);
-		return false;
+	
+	public boolean updateVerzekeringPolisXML(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
+		return polisDAO.updateVerzekeringPolisXML(polis);
 	}
-
-	public boolean RemoveVerzekeringPolis(String PolisNummer) {
-		// zoek de polis door middel van het polisnummer
-		// verwijder de polis
-		return false;
-	}
-
+	
 	public String createPolisnummer() {
 		Random random = new SecureRandom();
 		char[] result = new char[6];
@@ -177,6 +172,5 @@ public class KlantManagerImpl implements KlantManager {
 			}
 		}
 		return "EEEEEE";
-	}
-
+	}	
 }

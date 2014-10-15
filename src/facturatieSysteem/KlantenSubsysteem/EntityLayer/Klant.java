@@ -1,7 +1,6 @@
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Klant {
 
