@@ -4,14 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.*;
-
+import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
+import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import static java.awt.Frame.MAXIMIZED_BOTH;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -21,6 +20,7 @@ public class MainGUI {
 	private JPanel Header;
 	private VerzekeringsmaatschappijManagerImpl VerzekeringManager = new VerzekeringsmaatschappijManagerImpl();
 	private KlantManagerImpl KlantManager = new KlantManagerImpl();
+	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 
 	public MainGUI() {
 
@@ -29,10 +29,10 @@ public class MainGUI {
 
 	@SuppressWarnings("unused")
 	public void makeFrame() {
-		//VerzekeringsManager tijdelijke hardcoded data aanmaken
+		// VerzekeringsManager tijdelijke hardcoded data aanmaken
 		VerzekeringManager.fill();
 
-		//Originele code..
+		// Originele code..
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -41,7 +41,7 @@ public class MainGUI {
 
 		final JPanel VerzekeringPanel = new JPanel();
 		frame.getContentPane().add(VerzekeringPanel, "name_30497855602569");
-		//VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
+		// VerzekeringPanel.add(VerzekeringstypeGUI.VerzekeringstypeGUI());
 		VerzekeringPanel.setVisible(false);
 
 		final JPanel VerzekeringsMaatschappijPanel = new JPanel();
@@ -51,6 +51,9 @@ public class MainGUI {
 		final JPanel KlantenPanel = new JPanel();
 		frame.getContentPane().add(KlantenPanel, "name_31629163661906");
 		KlantenPanel.setLayout(new BorderLayout(0, 0));
+
+		final JPanel FacturatiePanel = new JPanel();
+		frame.getContentPane().add(FacturatiePanel, "name_6096780048327");
 
 		Header = new JPanel();
 		KlantenPanel.add(Header, BorderLayout.NORTH);
@@ -77,6 +80,7 @@ public class MainGUI {
 				KlantenPanel.setVisible(false);
 				VerzekeringPanel.setVisible(false);
 				VerzekeringsMaatschappijPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
 			}
 		});
 		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
@@ -89,6 +93,7 @@ public class MainGUI {
 				KlantenPanel.setVisible(false);
 				VerzekeringsMaatschappijPanel.setVisible(false);
 				VerzekeringPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
 			}
 		});
 		btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
@@ -101,6 +106,7 @@ public class MainGUI {
 				VerzekeringPanel.setVisible(false);
 				VerzekeringsMaatschappijPanel.setVisible(false);
 				KlantenPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
 			}
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
@@ -138,31 +144,46 @@ public class MainGUI {
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info);
-		
+
 		JPanel knoppen = new JPanel();
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 		knoppen.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel links = new JPanel();
 		knoppen.add(links, BorderLayout.WEST);
 		links.setLayout(new BoxLayout(links, BoxLayout.Y_AXIS));
-		
+
 		JButton button = new JButton("");
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AddKlantDialog addKlantDialog = new AddKlantDialog(KlantManager);
+				AddKlantDialog addKlantDialog = new AddKlantDialog(
+						KlantManager, VerzekeringManager);
 				addKlantDialog.setVisible(true);
 			}
 		});
 		button.setAlignmentY(Component.TOP_ALIGNMENT);
 		button.setMinimumSize(new Dimension(0, 0));
-		button.setIcon(new ImageIcon("/Users/xandergerreman/Google Drive/Periode 5/Proftaak/Facturatie/Pictures/add-contact-icon-xsmall.png"));
+		button.setIcon(new ImageIcon(
+				"/Users/xandergerreman/Google Drive/Periode 5/Proftaak/Facturatie/Pictures/add-contact-icon-xsmall.png"));
 		links.add(button);
-		
-		
+
 		JPanel rechts = new JPanel();
 		knoppen.add(rechts, BorderLayout.EAST);
+
+		JButton btnFacturatie = new JButton("facturatie");
+		btnFacturatie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VerzekeringPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(false);
+				KlantenPanel.setVisible(false);
+				// FacturatieGUI facgui = new FacturatieGUI(facturatieManager);
+				FacturatiePanel.add(FacturatieGUI.FacturatieGUI());
+				FacturatiePanel.setVisible(true);
+			}
+		});
+		knoppen.add(btnFacturatie, BorderLayout.CENTER);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

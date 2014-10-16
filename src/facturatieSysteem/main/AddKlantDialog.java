@@ -1,26 +1,28 @@
 package facturatieSysteem.main;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
-
-import java.awt.Dimension;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class AddKlantDialog extends JDialog {
 	/**
@@ -41,29 +43,46 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldStartDatum;
 	private JTextField textFieldEindDatum;
 	private JTextField textFieldEigenRisico;
+	private JComboBox comboBoxMaatschappij;
+	private JComboBox comboBoxVerzekeringsType;
 
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings("rawtypes")
-	public AddKlantDialog(KlantManager manager) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public AddKlantDialog(KlantManager manager,
+			final VerzekeringsmaatschappijManager verManager) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
 		{
+			/*
+			 * JTabbedPane wordt aangemaakt
+			 */
 			JTabbedPane klantManager = new JTabbedPane(JTabbedPane.TOP);
 			getContentPane().add(klantManager, BorderLayout.CENTER);
 			{
+				/*
+				 * JPanel, de basispaneel, wordt aangemaakt
+				 */
 				JPanel addKlant = new JPanel();
 				klantManager.addTab("Klant toevoegen", null, addKlant, null);
 				addKlant.setLayout(new BorderLayout(0, 0));
 				{
+					/*
+					 * Om de verzekering en de klant te kunnen scheiden is er
+					 * gebruik gemaakt van een seperator
+					 */
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
 					addKlant.add(separator, BorderLayout.CENTER);
 				}
 				{
+					/*
+					 * Panel wordt aangemaakt om de klant gegevens in te kunnen
+					 * vullen.
+					 */
 					JPanel addKlant_1 = new JPanel();
 					addKlant.add(addKlant_1, BorderLayout.WEST);
 					addKlant_1.setLayout(new BoxLayout(addKlant_1,
@@ -463,6 +482,56 @@ public class AddKlantDialog extends JDialog {
 						}
 					}
 					{
+						JSplitPane splitPaneVerzekeringMaatschappij = new JSplitPane();
+						splitPaneVerzekeringMaatschappij
+								.setPreferredSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij
+								.setMinimumSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij
+								.setMaximumSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij.setDividerSize(0);
+						splitPaneVerzekeringMaatschappij.setBorder(null);
+						addKlant_2.add(splitPaneVerzekeringMaatschappij);
+						{
+							JLabel lblVerzekeringsmaatschappij = new JLabel(
+									"Maatschappij:");
+							lblVerzekeringsmaatschappij
+									.setPreferredSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setMinimumSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setMaximumSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblVerzekeringsmaatschappij
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneVerzekeringMaatschappij
+									.setLeftComponent(lblVerzekeringsmaatschappij);
+						}
+						{
+							final JComboBox comboBoxMaatschappij = new JComboBox();
+							splitPaneVerzekeringMaatschappij
+									.setRightComponent(comboBoxMaatschappij);
+							comboBoxMaatschappij.addItem("");
+							for (Verzekeringsmaatschappij maatschappij : verManager
+									.getVerzekeringsmaatschappijen()) {
+								comboBoxMaatschappij.addItem(maatschappij
+										.getNaam());
+							}
+							/*
+							 * work on it!
+							 */
+							comboBoxMaatschappij.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									for (Verzekeringstype type : verManager.getTypes(verManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+										comboBoxVerzekeringsType.addItem(type.getNaam());
+									}
+								}
+							});
+
+						}
+					}
+					{
 						JSplitPane splitPaneVerzekeringsType = new JSplitPane();
 						splitPaneVerzekeringsType.setMaximumSize(new Dimension(
 								300, 30));
@@ -491,9 +560,12 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							JComboBox comboBoxVerzekeringsType = new JComboBox();
-							splitPaneVerzekeringsType
-									.setRightComponent(comboBoxVerzekeringsType);
+							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 						}
+
+						
+						
+						
 					}
 					{
 						JSplitPane splitPaneEigenRisico = new JSplitPane();

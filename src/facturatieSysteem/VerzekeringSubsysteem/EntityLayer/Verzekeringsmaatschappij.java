@@ -83,7 +83,7 @@ public class Verzekeringsmaatschappij {
 	}
 	
 	public void addType(Verzekeringstype type){
-		types.add(type);
+		//types.add(type);
 	}
 	
 	public boolean deleteType(Verzekeringstype type){
