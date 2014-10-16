@@ -17,7 +17,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private FactuurDAO factuurDAO;
 
 	public FacturatieManagerImpl() {
-
+		this.factuurDAO = new FactuurDAO();
 	}
 
 	@Override
@@ -39,9 +39,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	@Override
-	public ArrayList<Klant> haalFacturen() {
+	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
 		// TODO Auto-generated method stub
-		return null;
+		return factuurDAO.haalFacturen(invoerBSN);
 	}
 
 }

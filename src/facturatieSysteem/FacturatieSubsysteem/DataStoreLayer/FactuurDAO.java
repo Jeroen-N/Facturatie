@@ -31,13 +31,20 @@ public class FactuurDAO implements FactuurDAOinf {
 	 * 
 	 * @return ArrayList van facturen van de desbetreffende klant
 	 */
-	public ArrayList<Factuur> haalFacturen(Klant klant) {
+	public ArrayList<Factuur> haalFacturen(String invoerBSN ) {
 		document = daoFactory.getDocument();
 		try{
-			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
-			NodeList factuur = rootElement.getElementsByTagName("factuur");
-			for(int i = 0; i < factuur.getLength();i++){
-				Element factuurElement = (Element) factuur.item(i);
+			 Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+			  NodeList clienten = clientenElement.getElementsByTagName("Client");
+			  for(int i = 0; i < clienten.getLength();i++){
+			   Element clientElement = (Element) clienten.item(i);
+			   String BSN = clientElement.getAttribute("BSN");
+			   if(BSN.equals(invoerBSN)){
+				   
+			   System.out.println("gsafsadfdsf");
+			NodeList factuurnode = clientenElement.getElementsByTagName("factuur");
+			for(int j = 0; j < factuurnode.getLength(); j++){
+				Element factuurElement = (Element) factuurnode.item(i);
 				int factuurNummer = Integer.parseInt(factuurElement.getAttribute("factuurNummer"));
 				long factuurDatum = Long.parseLong(factuurElement.getElementsByTagName("factuurDatum").item(0).getTextContent());
 				long vervalDatum = Long.parseLong(factuurElement.getElementsByTagName("vervalDatum").item(0).getTextContent());
@@ -65,7 +72,7 @@ public class FactuurDAO implements FactuurDAOinf {
 				
 			}
 
-		}catch(DOMException e){
+		}}}catch(DOMException e){
 			e.printStackTrace();
 		}
 		return facturen;	    
@@ -108,10 +115,10 @@ public class FactuurDAO implements FactuurDAOinf {
 		return facturen; */
 		
 		
-    }
+    
 
 	public Factuur maakFactuur(Klant klant) {
-
+/*
 		System.out.println("maakFactuur " + newFactuur.getFactuurNummer());
 
 		//
@@ -143,16 +150,20 @@ public class FactuurDAO implements FactuurDAOinf {
 		// Adding Reservations is left to the reader.
 
 		domdocument.writeDocument();
-
+*/
 		// TODO Return valid result from insertMember in XmlDOMMemberDAO
-		return 0;
+		return null;
 	}
+
+
+
 
 	@Override
 	public Factuur maakFactuur(Behandeling behandeling) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-}
 
 }
+
+

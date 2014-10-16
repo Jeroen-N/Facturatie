@@ -8,7 +8,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface FactuurDAOinf {
 
-	public ArrayList<Factuur> haalFacturen(Klant klant);
+	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
 	public Factuur maakFactuur(Behandeling behandeling);
 }

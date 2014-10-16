@@ -14,5 +14,5 @@ public interface FacturatieManager {
 
 	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen);
 
-	public ArrayList<Klant> haalFacturen();
+	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 }
