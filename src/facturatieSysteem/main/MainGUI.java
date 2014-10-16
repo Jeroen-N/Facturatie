@@ -7,20 +7,10 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
-import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringstypeGUI;
-import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.KlantenSubsysteem.PresentationLayer.KlantGUI;
 import static java.awt.Frame.MAXIMIZED_BOTH;
-
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,8 +19,8 @@ public class MainGUI {
 	private JFrame frame;
 	private JTable Klant_Table;
 	private JPanel Header;
-	private KlantManagerImpl KlantManager = new KlantManagerImpl();
 	private VerzekeringsmaatschappijManagerImpl VerzekeringManager = new VerzekeringsmaatschappijManagerImpl();
+	private KlantManagerImpl KlantManager = new KlantManagerImpl();
 
 	public MainGUI() {
 

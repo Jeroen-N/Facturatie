@@ -113,6 +113,7 @@ public class KlantDAOImpl implements KlantDAO {
 				verzekeringPolis.appendChild(verzekeringsType);
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
+				
 				Element eigenRisico = document.createElement("EigenRisico");
 				eigenRisico.appendChild(document.createTextNode(Double.toString(polis.getExtraEigenRisico())));
 				verzekeringPolis.appendChild(eigenRisico);
