@@ -3,6 +3,7 @@ package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 import java.util.ArrayList;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
@@ -35,6 +36,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
+	}
+
+	@Override
+	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij) {
+		return maatschappij.getTypes();
 	}
 
 }

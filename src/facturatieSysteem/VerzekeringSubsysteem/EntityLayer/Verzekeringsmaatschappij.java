@@ -5,6 +5,8 @@
  */
 package facturatieSysteem.VerzekeringSubsysteem.EntityLayer;
 
+import java.util.ArrayList;
+
 public class Verzekeringsmaatschappij {
 	private String Naam;
 	private String Adres; //Kan als straat+huisnummer apart..?
@@ -12,6 +14,7 @@ public class Verzekeringsmaatschappij {
 	private String Plaats;
 	private int KVK;
 	private int RekeningNR;
+	private ArrayList<Verzekeringstype> types;
 	
 	/*
 	 * @param Naam De naam van de verzekeringsmaatschappij
@@ -77,5 +80,17 @@ public class Verzekeringsmaatschappij {
 
 	public void setRekeningNR(int rekeningNR) {
 		RekeningNR = rekeningNR;
+	}
+	
+	public void addType(Verzekeringstype type){
+		types.add(type);
+	}
+	
+	public boolean deleteType(Verzekeringstype type){
+		return types.remove(type);
+	}
+	
+	public ArrayList<Verzekeringstype> getTypes(){
+		return types;
 	}
 }
