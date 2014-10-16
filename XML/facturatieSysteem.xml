@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facturatieSysteem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://myNameSpace.com verzekeringsmaatschappij.xsd">>
+   <verzekeringsmaatschappij>
+      <naam />
+      <adres />
+      <postcode />
+      <woonplaats />
+      <KVKNummer />
+      <rekeningNummer />
+   </verzekeringsmaatschappij>
+   <verzekeringsTypes>
+      <verzekeringsType id="001">
+         <naam>All-risk</naam>
+         <behandelCodes>
+            <behandelcode>001</behandelcode>
+            <behandelcode>002</behandelcode>
+            <behandelcode>003</behandelcode>
+            <behandelcode>004</behandelcode>
+            <behandelcode>005</behandelcode>
+            <behandelcode>006</behandelcode>
+            <behandelcode>007</behandelcode>
+            <behandelcode>008</behandelcode>
+            <behandelcode>009</behandelcode>
+            <behandelcode>010</behandelcode>
+         </behandelCodes>
+         <verplichtEigenRisico>€800</verplichtEigenRisico>
+      </verzekeringsType>
+      <verzekeringsType id="002">
+         <naam>Basic</naam>
+         <behandelCodes>
+            <behandelcode>001</behandelcode>
+            <behandelcode>004</behandelcode>
+            <behandelcode>005</behandelcode>
+            <behandelcode>007</behandelcode>
+            <behandelcode>008</behandelcode>
+         </behandelCodes>
+         <verplichtEigenRisico>€300</verplichtEigenRisico>
+      </verzekeringsType>
+   </verzekeringsTypes>
+</facturatieSysteem>
