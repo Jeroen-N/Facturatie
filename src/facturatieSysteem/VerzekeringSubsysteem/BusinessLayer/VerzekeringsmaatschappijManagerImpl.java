@@ -32,7 +32,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		return false;
 	}
-
+	
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
@@ -42,5 +42,15 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij) {
 		return maatschappij.getTypes();
 	}
-
+	
+	public void fill(){
+		Verzekeringsmaatschappij maatschappij1 = new Verzekeringsmaatschappij("Dikke shit", "Adres", "Postcode", "plaats", 123456789, 11111111);
+		Verzekeringstype type1 = new Verzekeringstype(1, 250, "Type 1");
+		Verzekeringstype type2 = new Verzekeringstype(1, 250, "Type 2");
+		maatschappij1.addType(type1);
+		maatschappij1.addType(type2);
+		this.addVerzekeringsmaatschappij(maatschappij1);
+		
+		System.out.println("DEBUG: Verzekeringen aangemaakt.");
+	}
 }

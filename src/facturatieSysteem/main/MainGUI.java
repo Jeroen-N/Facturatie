@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringstypeGUI;
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
@@ -29,6 +30,7 @@ public class MainGUI {
 	private JTable Klant_Table;
 	private JPanel Header;
 	private KlantManagerImpl KlantManager = new KlantManagerImpl();
+	private VerzekeringsmaatschappijManagerImpl VerzekeringManager = new VerzekeringsmaatschappijManagerImpl();
 
 	public MainGUI() {
 
@@ -37,7 +39,10 @@ public class MainGUI {
 
 	@SuppressWarnings("unused")
 	public void makeFrame() {
+		//VerzekeringsManager tijdelijke hardcoded data aanmaken
+		VerzekeringManager.fill();
 
+		//Originele code..
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
