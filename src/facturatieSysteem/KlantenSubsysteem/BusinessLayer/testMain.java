@@ -58,7 +58,7 @@ public class testMain {
 			}else{
 				System.out.println("Klant verwijderen Mislukt");
 			}	
-		*/		
+		*/					
 	}
 }
 

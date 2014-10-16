@@ -34,8 +34,16 @@ public class KlantManagerImpl implements KlantManager {
 		klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
 				Geboortedatum, TelefoonNr, Email, RekeningNr,
 				ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
-
+		
 		errorMessage = checkKlant(klant);
+		
+		for(int i = 0; i <getBSNs().size();i++){
+			if(getBSNs().get(i).equals(BSN)){
+				errorMessage = errorMessage + "BSN is al bekend";
+				break;
+			}
+		}
+		
 		System.out.println(errorMessage);
 		if (errorMessage == "") {
 			// klant gegevens zijn correct ingevuld
@@ -47,7 +55,7 @@ public class KlantManagerImpl implements KlantManager {
 			return false;
 		}
 	}
-
+	
 	public ArrayList<Klant> getKlanten() {
 		// functie voor het ophalen van klanten
 		return KlantDAO.getKlantenXML();
@@ -60,7 +68,17 @@ public class KlantManagerImpl implements KlantManager {
 			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
 		
 		Klant klant = new Klant(BSN,Naam,Adres,Postcode,Woonplaats,Geboortedatum,TelefoonNr,Email,RekeningNr,ResterendEigenRisico,VerzekeringPolissen,Betaalwijze); 
-		return KlantDAO.updateKlantXML(klant);
+		errorMessage = checkKlant(klant);
+		System.out.println(errorMessage);
+		if (errorMessage == "") {
+			// klant gegevens zijn correct ingevuld
+			return KlantDAO.updateKlantXML(klant);
+
+		} else {
+			// fout melding weergeven in gui dat gegevens niet correct zijn
+			// moet eigelijk errorMessage return'en
+			return false;
+		}
 	}
 	
 	
@@ -172,6 +190,13 @@ public class KlantManagerImpl implements KlantManager {
 			}
 		}
 		return "EEEEEE";
+	}
+
+	public ArrayList<String> getBSNs(){
+		new ArrayList<String>();
+		
+		return KlantDAO.getBSNs();
+		
 	}
 
 	

@@ -153,7 +153,8 @@
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>004</Praktijkruimte>
 					<Opmerking>Client heeft nog steed veel last van onderrug tijdens
-						het werk(metselaar)</Opmerking>
+						het werk(metselaar)
+					</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="265180">
 					<Sessie>2</Sessie>
@@ -181,7 +182,8 @@
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
 					<Opmerking>Client heeft nek klachten van het vele werken achter de
-						pc in een verkeerde houding</Opmerking>
+						pc in een verkeerde houding
+					</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="365412">
 					<Sessie>2</Sessie>
@@ -191,7 +193,8 @@
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
 					<Opmerking>Client heeft oefening thuis goed uitgevoerd. er is al
-						een lichte verbetering te zien</Opmerking>
+						een lichte verbetering te zien
+					</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
 		</Behandelingen>

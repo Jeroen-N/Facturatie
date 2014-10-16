@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
@@ -17,6 +18,7 @@ public class KlantDAOImpl implements KlantDAO {
 	private Klant klant;
 	private Document document;
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
+	private ArrayList<String> BSNs;
 	
 	public boolean addKlantXML(Klant klant){
 		document = daoFactory.getDocument();
@@ -314,6 +316,22 @@ public class KlantDAOImpl implements KlantDAO {
 			return false;
 		}
 		
+	}
+	
+	public ArrayList<String> getBSNs(){
+		BSNs = new ArrayList<String>();
+		document = daoFactory.getDocument();
+		try{
+			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
+			NodeList clienten = rootElement.getElementsByTagName("Client");
+			for(int i = 0; i < clienten.getLength();i++){
+				Element clientElement = (Element) clienten.item(i);
+				BSNs.add(clientElement.getAttribute("BSN"));
+			}
+		}catch(DOMException e){
+			e.printStackTrace();
+		}
+		return BSNs;
 	}
 	
 }

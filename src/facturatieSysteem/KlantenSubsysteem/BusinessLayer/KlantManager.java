@@ -35,5 +35,7 @@ public interface KlantManager {
 	
 	public String createPolisnummer();
 	
+	public ArrayList<String> getBSNs();
+	
 	
 }

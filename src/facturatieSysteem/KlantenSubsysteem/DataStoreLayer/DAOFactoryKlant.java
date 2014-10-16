@@ -40,7 +40,7 @@ public class DAOFactoryKlant {
 			
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
-			document = dBuilder.parse(getXMLFile());
+			document = dBuilder.parse(xmlPath);
 			 
 		} catch (ParserConfigurationException e){
 			e.printStackTrace();
@@ -107,16 +107,11 @@ public class DAOFactoryKlant {
 		return false;
 	}
 	
-	
-	public String getXMLFile(){
-		return xmlPath;
-	}
-	
 	public Document getDocument(){
 		try{
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
-			document = dBuilder.parse(getXMLFile());
+			document = dBuilder.parse(xmlPath);
 		} catch (ParserConfigurationException e){
 			e.printStackTrace();
 		} catch (SAXException e){
