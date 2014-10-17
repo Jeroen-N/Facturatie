@@ -4,13 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.*;
+
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -18,19 +21,18 @@ public class MainGUI {
 	private JFrame frame;
 	private JTable Klant_Table;
 	private JPanel Header;
-	private VerzekeringsmaatschappijManagerImpl VerzekeringManager = new VerzekeringsmaatschappijManagerImpl();
 	private KlantManagerImpl KlantManager = new KlantManagerImpl();
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
+	private VerzekeringsmaatschappijManager VerzekeringManager;
 
-	public MainGUI() {
-
+	public MainGUI(VerzekeringsmaatschappijManager manager) {
+		this.VerzekeringManager = manager;
 		makeFrame();
 	}
 
 	@SuppressWarnings("unused")
 	public void makeFrame() {
-		// VerzekeringsManager tijdelijke hardcoded data aanmaken
-		VerzekeringManager.fill();
+		
 
 		// Originele code..
 		frame = new JFrame();

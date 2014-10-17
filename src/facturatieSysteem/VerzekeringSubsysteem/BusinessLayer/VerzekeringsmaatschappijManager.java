@@ -16,4 +16,6 @@ public interface VerzekeringsmaatschappijManager {
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen();
 	
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
+	
+	public void fill();
 }
