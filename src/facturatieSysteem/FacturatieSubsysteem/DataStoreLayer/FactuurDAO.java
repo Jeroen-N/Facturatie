@@ -20,7 +20,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class FactuurDAO implements FactuurDAOinf {
 
-	private ArrayList<Factuur> facturen;
+	private ArrayList<Factuur> facturen = new ArrayList<Factuur>();
 	private Document document;
 	private DAOFactoryFactuur daoFactory = new DAOFactoryFactuur();
 	private Factuur factuur;
@@ -41,13 +41,13 @@ public class FactuurDAO implements FactuurDAOinf {
 			   String BSN = clientElement.getAttribute("BSN");
 			   if(BSN.equals(invoerBSN)){
 				   
-			   System.out.println("gsafsadfdsf");
+			   
 			NodeList factuurnode = clientenElement.getElementsByTagName("factuur");
 			for(int j = 0; j < factuurnode.getLength(); j++){
-				Element factuurElement = (Element) factuurnode.item(i);
+				Element factuurElement = (Element) factuurnode.item(j);
 				int factuurNummer = Integer.parseInt(factuurElement.getAttribute("factuurNummer"));
-				long factuurDatum = Long.parseLong(factuurElement.getElementsByTagName("factuurDatum").item(0).getTextContent());
-				long vervalDatum = Long.parseLong(factuurElement.getElementsByTagName("vervalDatum").item(0).getTextContent());
+				String factuurDatum = factuurElement.getElementsByTagName("factuurDatum").item(0).getTextContent();
+				String vervalDatum = factuurElement.getElementsByTagName("vervalDatum").item(0).getTextContent();
 		
 				/*
 				System.out.println("factuur: " + (i+1));
@@ -58,7 +58,7 @@ public class FactuurDAO implements FactuurDAOinf {
 				System.out.println();
 				*/
 			
-				factuur = new Factuur(factuurNummer, factuurDatum, vervalDatum, null);
+				factuur = new Factuur(factuurNummer, factuurDatum, vervalDatum, invoerBSN);
 				facturen.add(factuur);
 			
 				/*
