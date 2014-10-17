@@ -43,8 +43,8 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldStartDatum;
 	private JTextField textFieldEindDatum;
 	private JTextField textFieldEigenRisico;
-	private JComboBox comboBoxMaatschappij;
-	private JComboBox comboBoxVerzekeringsType;
+	private JComboBox<String> comboBoxMaatschappij;
+	private JComboBox<String> comboBoxVerzekeringsType;
 
 	/**
 	 * Create the dialog.
@@ -509,7 +509,7 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblVerzekeringsmaatschappij);
 						}
 						{
-							final JComboBox comboBoxMaatschappij = new JComboBox();
+							comboBoxMaatschappij = new JComboBox();
 							splitPaneVerzekeringMaatschappij
 									.setRightComponent(comboBoxMaatschappij);
 							comboBoxMaatschappij.addItem("");
@@ -523,6 +523,7 @@ public class AddKlantDialog extends JDialog {
 							 */
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
+									comboBoxVerzekeringsType.removeAllItems();;
 									for (Verzekeringstype type : verManager.getTypes(verManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
 										comboBoxVerzekeringsType.addItem(type.getNaam());
 									}
@@ -559,13 +560,9 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblVerzekeringstype);
 						}
 						{
-							JComboBox comboBoxVerzekeringsType = new JComboBox();
+							comboBoxVerzekeringsType = new JComboBox();
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 						}
-
-						
-						
-						
 					}
 					{
 						JSplitPane splitPaneEigenRisico = new JSplitPane();
