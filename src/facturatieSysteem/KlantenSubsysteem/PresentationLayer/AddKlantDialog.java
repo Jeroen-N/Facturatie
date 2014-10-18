@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
@@ -51,7 +52,7 @@ public class AddKlantDialog extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AddKlantDialog(KlantManager manager,
-			final VerzekeringsmaatschappijManager verManager) {
+			final VerzekeringsmaatschappijManager vermaatschappijManager, VerzekeringstypeManager vertypeManager) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -513,19 +514,19 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringMaatschappij
 									.setRightComponent(comboBoxMaatschappij);
 							comboBoxMaatschappij.addItem("");
-							for (Verzekeringsmaatschappij maatschappij : verManager
+							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager
 									.getVerzekeringsmaatschappijen()) {
 								comboBoxMaatschappij.addItem(maatschappij
 										.getNaam());
 							}
-							/*
-							 * work on it!
-							 */
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									comboBoxVerzekeringsType.removeAllItems();;
-									for (Verzekeringstype type : verManager.getTypes(verManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
-										comboBoxVerzekeringsType.addItem(type.getNaam());
+									comboBoxVerzekeringsType.addItem("");
+									if(comboBoxMaatschappij.getSelectedItem() != ""){
+										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+											comboBoxVerzekeringsType.addItem(type.getNaam());
+										}
 									}
 								}
 							});
@@ -562,6 +563,13 @@ public class AddKlantDialog extends JDialog {
 						{
 							comboBoxVerzekeringsType = new JComboBox();
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
+							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if(comboBoxMaatschappij.getSelectedItem() != ""){
+										//vertypeManager.getVerzekeringstype(comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico();
+									}
+								}
+							});
 						}
 					}
 					{

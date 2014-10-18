@@ -1,7 +1,11 @@
 package facturatieSysteem.main;
 
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManagerImpl;
 
 public class main {
 	public static void main(String[] args){
@@ -9,12 +13,15 @@ public class main {
 		//System.out.println(m1.haalFacturen("136521598"));
 		
 		//TODO: instantieer alle managers hier
-		VerzekeringsmaatschappijManager VerzekeringManager = new VerzekeringsmaatschappijManagerImpl();
+		KlantManager KlantManager = new KlantManagerImpl();
+		VerzekeringsmaatschappijManager MaatschappijManager = new VerzekeringsmaatschappijManagerImpl();
+		VerzekeringstypeManager TypeManager = new VerzekeringstypeManagerImpl();
+		
 		
 		// VerzekeringsManager tijdelijke hardcoded data aanmaken
-		VerzekeringManager.fill();
+		MaatschappijManager.fill();
 		
 		//TODO: Geef alle managers hier mee, ipv in de MainGUI aan te maken
-		new MainGUI(VerzekeringManager);
+		new MainGUI(KlantManager, MaatschappijManager, TypeManager);
 	}
 }

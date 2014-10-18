@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 
 public class KlantGUI {
 
+	//TODO Manager mag hier niet worden aangemaakt
 	private static KlantManagerImpl klantManager = new KlantManagerImpl();
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JTable klantList = new JTable();
@@ -43,7 +44,6 @@ public class KlantGUI {
         );
 		klantList.setEnabled(true);
 		klantList.getTableHeader().setReorderingAllowed(false);
-		
 		DefaultTableModel model = (DefaultTableModel) klantList.getModel();
         if (klantOverzicht.size() > 0) {
             for (Klant klant : klantOverzicht) {

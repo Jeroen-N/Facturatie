@@ -9,9 +9,11 @@ import javax.swing.*;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.event.MouseAdapter;
@@ -21,12 +23,15 @@ public class MainGUI {
 	private JFrame frame;
 	private JTable Klant_Table;
 	private JPanel Header;
-	private KlantManagerImpl KlantManager = new KlantManagerImpl();
+	private KlantManager KlantManager;
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
-	private VerzekeringsmaatschappijManager VerzekeringManager;
+	private VerzekeringsmaatschappijManager maatschappijManager;
+	private VerzekeringstypeManager typeManager;
 
-	public MainGUI(VerzekeringsmaatschappijManager manager) {
-		this.VerzekeringManager = manager;
+	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, VerzekeringstypeManager typeManager) {
+		this.KlantManager = klantManager;
+		this.maatschappijManager = verzekeringsmaatschappijmanager;
+		this.typeManager = typeManager;
 		makeFrame();
 	}
 
@@ -160,14 +165,14 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddKlantDialog addKlantDialog = new AddKlantDialog(
-						KlantManager, VerzekeringManager);
+						KlantManager, maatschappijManager, typeManager);
 				addKlantDialog.setVisible(true);
 			}
 		});
 		button.setAlignmentY(Component.TOP_ALIGNMENT);
 		button.setMinimumSize(new Dimension(0, 0));
 		button.setIcon(new ImageIcon(
-				"/Users/xandergerreman/Google Drive/Periode 5/Proftaak/Facturatie/Pictures/add-contact-icon-xsmall.png"));
+				"Pictures/add-contact-icon-xsmall.png"));
 		links.add(button);
 
 		JPanel rechts = new JPanel();
