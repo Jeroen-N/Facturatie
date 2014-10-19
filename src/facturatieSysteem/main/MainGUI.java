@@ -14,6 +14,7 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.event.MouseAdapter;
@@ -174,7 +175,26 @@ public class MainGUI {
 		button.setIcon(new ImageIcon(
 				"Pictures/add-contact-icon-xsmall.png"));
 		links.add(button);
-
+		
+		JButton btnChangeKlant = new JButton("Verander Klant");
+		btnChangeKlant.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+	//TODO Fout melding als er geen klant is geselecteerd en er of "Wijzigen klant wordt geklikt"
+				if (!Uitgebreide_Info.equals("")){
+					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
+							KlantManager, maatschappijManager, typeManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					changeKlantDialog.setVisible(true);
+				}
+				else{
+					System.out.println("geen klant geselecteerd");
+				}
+			}
+		});
+		btnChangeKlant.setAlignmentY(Component.TOP_ALIGNMENT);
+		btnChangeKlant.setMinimumSize(new Dimension(0, 0));
+		knoppen.add(btnChangeKlant, BorderLayout.CENTER);
+		
 		JPanel rechts = new JPanel();
 		knoppen.add(rechts, BorderLayout.EAST);
 
@@ -190,7 +210,7 @@ public class MainGUI {
 				FacturatiePanel.setVisible(true);
 			}
 		});
-		knoppen.add(btnFacturatie, BorderLayout.CENTER);
+		knoppen.add(btnFacturatie, BorderLayout.EAST);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

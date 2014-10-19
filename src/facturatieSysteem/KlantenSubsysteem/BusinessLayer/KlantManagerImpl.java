@@ -86,6 +86,16 @@ public class KlantManagerImpl implements KlantManager {
 		return KlantDAO.findKlantXML(gebDatum);
 	}
 
+	public Klant getKlant(String BSN){
+		for (Klant klant : getKlanten()) {
+			if (klant.getBSN().equals(BSN)) {
+				return klant;
+			}
+		}
+		return null;
+	}
+	
+	
 	public String toonKlant(String BSN) {
 		for (Klant klant : getKlanten()) {
 			if (klant.getBSN().equals(BSN)) {
