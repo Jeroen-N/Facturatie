@@ -1,3 +1,8 @@
+/* @author Jeroen Nuijten
+ * @version 0.2
+ * 
+ * De interface van de verzekeringsmaatschappij manager die wordt geimplementeerd
+ */
 package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
@@ -18,4 +23,10 @@ public interface VerzekeringsmaatschappijManager {
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
 	
 	public void fill();
+	
+	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
+	
+	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
+
+	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
 }

@@ -149,11 +149,6 @@ public class KlantManagerImpl implements KlantManager {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
 		}
 		
-		// verzekeringType
-		if (!polis.getVerzekeringsType().matches("([0-9]{3})")) {
-			errorMessage = errorMessage + "\nVerzekeringsType niet correct";
-		}
-		
 		// StartDatum
 		// zet het jaar op het actuele jaar.
 		if (!polis.getStartDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
@@ -172,6 +167,11 @@ public class KlantManagerImpl implements KlantManager {
 	}
 	
 	//create Verzekering Polis nog aan maken
+	
+	public VerzekeringPolis createPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
+		return polis;
+	}
 	
 	public boolean addVerzekeringPolisXML(String BSN, String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);

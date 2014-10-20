@@ -1,5 +1,5 @@
 /* @author Jeroen Nuijten
- * @version 0.1
+ * @version 0.2
  * 
  * Realiseert de verzekeringstype klasse, deze onderscheid de typen verzekeringen.
  */
@@ -9,7 +9,6 @@ public class Verzekeringstype {
 	private int VerzekeringsTypeID;
 	private int EigenRisico;
 	private String Naam;
-	private Verzekeringsmaatschappij maatschappij;
 	
 	/*
 	 * @param VerzekeringsTypeID Het ID van de verzekeringstype
@@ -22,6 +21,9 @@ public class Verzekeringstype {
 		this.Naam = Naam;
 	}
 	
+	/*
+	 * @return Het ID van het verzekeringstype
+	 */
 	public int getID(){
 		return VerzekeringsTypeID;
 	}
@@ -32,10 +34,23 @@ public class Verzekeringstype {
 		return EigenRisico;
 	}
 	
+	/*
+	 * @param EigenRisicio Het nieuwe eigen risico
+	 */
+	public void setEigenRisicio(int EigenRisico){
+		this.EigenRisico = EigenRisico;
+	}
+	
+	/*
+	 * @return De naam van het type
+	 */
 	public String getNaam(){
 		return Naam;
 	}
 	
+	/*
+	 * @param Naam De nieuwe naam van het type
+	 */
 	public void setNaam(String Naam){
 		this.Naam = Naam;
 	}

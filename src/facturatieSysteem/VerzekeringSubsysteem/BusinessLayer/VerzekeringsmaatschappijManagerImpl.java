@@ -1,3 +1,8 @@
+/* @author Jeroen Nuijten
+ * @version 0.2
+ * 
+ * De verzekeringsmaatschappij manager
+ */
 package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
@@ -43,13 +48,39 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return maatschappij.getTypes();
 	}
 	
+	@Override
+	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+		maatschappij.addType(type);
+	}
+	
+	@Override
+	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
+		for(Verzekeringstype type : this.getTypes(maatschappij)){
+			if(type.getNaam().equals(Naam)){
+				return type;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
+		for(Verzekeringstype type : this.getTypes(maatschappij)){
+			if(type.getNaam().equals(Naam)){
+				return maatschappij.deleteType(type);
+			}
+		}
+		return false;
+	}
+	
 	public void fill(){
-		Verzekeringsmaatschappij maatschappij1 = new Verzekeringsmaatschappij("Dikke shit", "Adres", "Postcode", "plaats", 123456789, 11111111);
+		Verzekeringsmaatschappij maatschappij1 = new Verzekeringsmaatschappij("Xander Gerritman Verzekeringsmaatschappij", "Ondergelopendijk 21", "3131XG", "Hulst", 123456789, 11111111);
 		Verzekeringstype type1 = new Verzekeringstype(1, 250, "Type 1");
 		Verzekeringstype type2 = new Verzekeringstype(1, 250, "Type 2");
-		maatschappij1.addType(type1);
-		maatschappij1.addType(type2);
+		this.addVerzekeringstype(maatschappij1, type1);
+		this.addVerzekeringstype(maatschappij1, type2);
 		this.addVerzekeringsmaatschappij(maatschappij1);
+		
 		
 		System.out.println("DEBUG: Verzekeringen aangemaakt.");
 	}
