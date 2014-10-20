@@ -42,7 +42,7 @@ public class FactuurDAO implements FactuurDAOinf {
 			   if(BSN.equals(invoerBSN)){
 				   
 			   
-			NodeList factuurnode = clientenElement.getElementsByTagName("factuur");
+			NodeList factuurnode = clientElement.getElementsByTagName("factuur");
 			for(int j = 0; j < factuurnode.getLength(); j++){
 				Element factuurElement = (Element) factuurnode.item(j);
 				int factuurNummer = Integer.parseInt(factuurElement.getAttribute("factuurNummer"));
