@@ -45,71 +45,110 @@ public class MainGUI {
 	@SuppressWarnings("unused")
 	public void makeFrame() {
 
-		// Originele code..
+		/*
+		 * Create the frame
+		 */
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(MAXIMIZED_BOTH);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
-		MainPanel = new JPanel();
-		frame.getContentPane().add(MainPanel);
-		MainPanel.setLayout(new CardLayout(0, 0));
-
-		FacturatiePanel = new JPanel();
-		MainPanel.add(FacturatiePanel, "name_11228791079497");
-		FacturatiePanel.setLayout(new BorderLayout(0, 0));
-
-		KlantenPanel = new JPanel();
-		MainPanel.add(KlantenPanel, "name_11236108644850");
-		KlantenPanel.setLayout(new BorderLayout(0, 0));
-
-		Klanten = new JPanel();
-		KlantenPanel.add(Klanten, BorderLayout.CENTER);
-		Klanten.setLayout(new BorderLayout(0, 0));
-
-		Klant_info = new JPanel();
-		KlantenPanel.add(Klant_info, BorderLayout.EAST);
-		Klant_info.setLayout(new BorderLayout(0, 0));
-
-		knoppen = new JPanel();
-		Klant_info.add(knoppen, BorderLayout.SOUTH);
-		knoppen.setLayout(new BorderLayout(0, 0));
-
-		links = new JPanel();
-		knoppen.add(links, BorderLayout.WEST);
-
-		rechts = new JPanel();
-		knoppen.add(rechts, BorderLayout.EAST);
-		rechts.setLayout(new BorderLayout(0, 0));
-
-		Footer = new JPanel();
-		frame.getContentPane().add(Footer, BorderLayout.SOUTH);
-		Footer.setBackground(Color.ORANGE);
-		FlowLayout fl_Footer = (FlowLayout) Footer.getLayout();
-		
-		VerzekeringPanel = new JPanel();
-		MainPanel.add(VerzekeringPanel, "name_11244230620371");
-		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
-
-		VerzekeringsMaatschappijPanel = new JPanel();
-		MainPanel.add(VerzekeringsMaatschappijPanel, "name_11248877742559");
-		VerzekeringsMaatschappijPanel.setLayout(new BorderLayout(0, 0));
-
+		/*
+		 * Create the Header
+		 */
 		Header = new JPanel();
 		frame.getContentPane().add(Header, BorderLayout.NORTH);
 		Header.setBackground(Color.ORANGE);
 		
+		/*
+		 * Add JLabel in header + add to header
+		 */
+		lblFacturatiesysteem = new JLabel("FacturatieSysteem");
+		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
+		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
+				| Font.ITALIC, 26));
+		Header.setLayout(new BorderLayout(5, 5));
+		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
+		
+		/*
+		 * Create the Panel in the header for the buttons + add to header
+		 */
 		Header_Button = new JPanel();
 		Header_Button.setBackground(Color.ORANGE);
 		Header.add(Header_Button, BorderLayout.EAST);
 		Header_Button.setLayout(new BorderLayout(0, 50));
-
-		lblCreatedByInfosys = new JLabel("Created by InfoSys");
-		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
-		Footer.add(lblCreatedByInfosys);
+		
+		/*
+		 * Create the verzekeringsmaatschappij button + add the button to header_button
+		 */
+		btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
+		Header_Button.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
+		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				KlantenPanel.setVisible(false);
+				VerzekeringPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
+			}
+		});
+		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
 
 		/*
-		 * Table aanmaken en vullen
+		 * Create the verzekeringbeheer button + add button to header_button
+		 */
+		btnVerzekeringbeheer = new JButton("VerzekeringBeheer");
+		Header_Button.add(btnVerzekeringbeheer, BorderLayout.WEST);
+		btnVerzekeringbeheer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				KlantenPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(false);
+				VerzekeringPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
+			}
+		});
+		btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
+
+		/*
+		 * Create the Klantenbeheer button + add button to header_button
+		 */
+		btnKlantenbeheer = new JButton("KlantenBeheer");
+		Header_Button.add(btnKlantenbeheer, BorderLayout.CENTER);
+		btnKlantenbeheer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VerzekeringPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(false);
+				KlantenPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
+			}
+		});
+		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
+		
+		/*
+		 * Create the Main Panel
+		 */
+		MainPanel = new JPanel();
+		frame.getContentPane().add(MainPanel);
+		MainPanel.setLayout(new CardLayout(0, 0));
+		
+		/*
+		 * Create panel + add to main panel
+		 */
+		KlantenPanel = new JPanel();
+		MainPanel.add(KlantenPanel, "name_11236108644850");
+		KlantenPanel.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * Create panel for the table
+		 */
+		Klanten = new JPanel();
+		KlantenPanel.add(Klanten, BorderLayout.CENTER);
+		Klanten.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * fill the table
 		 */
 		klanten = KlantManager.getKlanten();
 
@@ -130,7 +169,17 @@ public class MainGUI {
 		Klant_Table = new JTable(data, columnNames);
 		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
 		Klanten.add(Klant_Table, BorderLayout.CENTER);
-
+		
+		/*
+		 * Create panel for more information about klant
+		 */
+		Klant_info = new JPanel();
+		KlantenPanel.add(Klant_info, BorderLayout.EAST);
+		Klant_info.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * Add function to see more information
+		 */
 		Uitgebreide_Info = new JTextArea();
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
@@ -143,9 +192,26 @@ public class MainGUI {
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
 			}
 		});
-
+		
 		/*
-		 * Toevoegen van de klant knop wordt toegevoegd, en de action listener wordt eraan gekoppeld
+		 * add panel for buttons underneath more information panel
+		 */
+		knoppen = new JPanel();
+		Klant_info.add(knoppen, BorderLayout.SOUTH);
+		knoppen.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * In the buttons panel, make 2 sides, left and right to create 2 rows of buttons
+		 */
+		links = new JPanel();
+		knoppen.add(links, BorderLayout.WEST);
+		
+		rechts = new JPanel();
+		knoppen.add(rechts, BorderLayout.EAST);
+		rechts.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * Create addKlant button + add to left panel
 		 */
 		btnAddKlant = new JButton("");
 		btnAddKlant.addMouseListener(new MouseAdapter() {
@@ -164,9 +230,9 @@ public class MainGUI {
 		btnAddKlant.setIcon(new ImageIcon(
 				"Pictures/add-contact-icon-xsmall.png"));
 		links.add(btnAddKlant, BorderLayout.WEST);
-
+		
 		/*
-		 * Toevoegen van de knop klant veranderen en verwijderen + actionlistener
+		 * Create changeKlant button + add to left panel
 		 */
 		btnChangeKlant = new JButton("Verander Klant");
 		links.add(btnChangeKlant);
@@ -197,9 +263,9 @@ public class MainGUI {
 						btnChangeKlant.setEnabled(rowsAreSelected);
 					}
 				});
-
+		
 		/*
-		 * Facturatieknop wordt toegevoegd, en gekoppeld aan een actionlistener
+		 * Create facturatie button + add to right panel
 		 */
 		btnFacturatie = new JButton("facturatie");
 		rechts.add(btnFacturatie);
@@ -211,58 +277,54 @@ public class MainGUI {
 				FacturatiePanel.setVisible(true);
 			}
 		});
-
-		lblFacturatiesysteem = new JLabel("FacturatieSysteem");
-		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
-		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
-				| Font.ITALIC, 26));
-		Header.setLayout(new BorderLayout(5, 5));
-		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
-
-		btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
-		Header_Button.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
-		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				KlantenPanel.setVisible(false);
-				VerzekeringPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.setVisible(true);
-				FacturatiePanel.setVisible(false);
-			}
-		});
-		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
-
-		btnVerzekeringbeheer = new JButton("VerzekeringBeheer");
-		Header_Button.add(btnVerzekeringbeheer, BorderLayout.WEST);
-		btnVerzekeringbeheer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				KlantenPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.setVisible(false);
-				VerzekeringPanel.setVisible(true);
-				FacturatiePanel.setVisible(false);
-			}
-		});
-		btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
-
-		btnKlantenbeheer = new JButton("KlantenBeheer");
-		Header_Button.add(btnKlantenbeheer, BorderLayout.CENTER);
-		btnKlantenbeheer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VerzekeringPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.setVisible(false);
-				KlantenPanel.setVisible(true);
-				FacturatiePanel.setVisible(false);
-			}
-		});
-		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 		
+		/*
+		 * Create the footer
+		 */
+		Footer = new JPanel();
+		frame.getContentPane().add(Footer, BorderLayout.SOUTH);
+		Footer.setBackground(Color.ORANGE);
+		FlowLayout fl_Footer = (FlowLayout) Footer.getLayout();
+		
+		/*
+		 * Set text in the footer
+		 */
+		lblCreatedByInfosys = new JLabel("Created by InfoSys");
+		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
+		Footer.add(lblCreatedByInfosys);
+		
+		/*
+		 * Create facturatiePanel + add to mainpanel
+		 */
+		FacturatiePanel = new JPanel();
+		MainPanel.add(FacturatiePanel, "name_11228791079497");
+		FacturatiePanel.setLayout(new BorderLayout(0, 0));
+
+		/*
+		 * Create verzekeringPanel + add to mainpanel
+		 */
+		VerzekeringPanel = new JPanel();
+		MainPanel.add(VerzekeringPanel, "name_11244230620371");
+		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
+
+		/*
+		 * create verzekeringsmaatschappijpanel + add to mainpanel
+		 */
+		VerzekeringsMaatschappijPanel = new JPanel();
+		MainPanel.add(VerzekeringsMaatschappijPanel, "name_11248877742559");
+		VerzekeringsMaatschappijPanel.setLayout(new BorderLayout(0, 0));
+
+		/*
+		 * Set the visibility of the panels
+		 */
 		VerzekeringPanel.setVisible(false);
 		VerzekeringsMaatschappijPanel.setVisible(false);
 		KlantenPanel.setVisible(true);
 		FacturatiePanel.setVisible(false);
 		
+		/*
+		 * Set visibility of the frame
+		 */
 		frame.setVisible(true);
 
 	}
