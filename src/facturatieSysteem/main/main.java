@@ -4,8 +4,7 @@ import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class main {
 	public static void main(String[] args){
@@ -14,14 +13,12 @@ public class main {
 		
 		//TODO: instantieer alle managers hier
 		KlantManager KlantManager = new KlantManagerImpl();
-		VerzekeringsmaatschappijManager MaatschappijManager = new VerzekeringsmaatschappijManagerImpl();
-		VerzekeringstypeManager TypeManager = new VerzekeringstypeManagerImpl();
-		
+		VerzekeringsmaatschappijManager MaatschappijManager = new VerzekeringsmaatschappijManagerImpl();		
 		
 		// VerzekeringsManager tijdelijke hardcoded data aanmaken
 		MaatschappijManager.fill();
 		
 		//TODO: Geef alle managers hier mee, ipv in de MainGUI aan te maken
-		new MainGUI(KlantManager, MaatschappijManager, TypeManager);
+		new MainGUI(KlantManager, MaatschappijManager);
 	}
 }

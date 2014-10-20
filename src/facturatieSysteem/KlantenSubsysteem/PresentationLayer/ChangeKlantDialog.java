@@ -24,7 +24,6 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
@@ -61,7 +60,7 @@ public class ChangeKlantDialog extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ChangeKlantDialog(KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager, VerzekeringstypeManager vertypeManager, String BSN) {
+			final VerzekeringsmaatschappijManager vermaatschappijManager, String BSN) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
