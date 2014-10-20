@@ -1,3 +1,8 @@
+/* @author Jeroen Nuijten
+ * @version 0.2
+ * 
+ * De verzekeringsmaatschappij manager
+ */
 package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
