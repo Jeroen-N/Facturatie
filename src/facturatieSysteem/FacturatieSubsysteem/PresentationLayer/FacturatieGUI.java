@@ -14,7 +14,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class FacturatieGUI {
 
-	private static JFrame frame;
+	private static JFrame frame = new JFrame("Facturatiesysteem");
 	private static FacturatieManagerImpl facturatieManagerImpl;
 	private static JPanel buttonPanel;
 	private static JPanel headPanel;
@@ -47,7 +47,6 @@ public class FacturatieGUI {
 	}
 
 	public static JPanel initComponents() {
-		frame = new JFrame("Facturatiesysteem");
 		contentpane = frame.getContentPane();
 		contentpane.setLayout(new BorderLayout());
 
