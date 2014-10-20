@@ -23,4 +23,10 @@ public interface VerzekeringsmaatschappijManager {
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
 	
 	public void fill();
+	
+	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
+	
+	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
+
+	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
 }

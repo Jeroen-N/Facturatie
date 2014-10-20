@@ -11,7 +11,6 @@ import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImp
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
@@ -27,12 +26,10 @@ public class MainGUI {
 	private KlantManager KlantManager;
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl(); // aanmaken in de Main
 	private VerzekeringsmaatschappijManager maatschappijManager;
-	private VerzekeringstypeManager typeManager;
 
-	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, VerzekeringstypeManager typeManager) {
+	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
-		this.typeManager = typeManager;
 		makeFrame();
 	}
 
@@ -166,7 +163,7 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddKlantDialog addKlantDialog = new AddKlantDialog(
-						KlantManager, maatschappijManager, typeManager);
+						KlantManager, maatschappijManager);
 				addKlantDialog.setVisible(true);
 			}
 		});
@@ -183,7 +180,7 @@ public class MainGUI {
 	//TODO Fout melding als er geen klant is geselecteerd en er of "Wijzigen klant wordt geklikt"
 				if (!Uitgebreide_Info.equals("")){
 					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
-							KlantManager, maatschappijManager, typeManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+							KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
 					changeKlantDialog.setVisible(true);
 				}
 				else{

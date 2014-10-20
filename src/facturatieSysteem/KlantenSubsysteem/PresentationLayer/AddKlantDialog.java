@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
@@ -57,7 +56,8 @@ public class AddKlantDialog extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AddKlantDialog(final KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager, final VerzekeringstypeManager vertypeManager) {
+			final VerzekeringsmaatschappijManager vermaatschappijManager) {
+
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -527,6 +527,7 @@ public class AddKlantDialog extends JDialog {
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									comboBoxVerzekeringsType.removeAllItems();;
+									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
 										System.out.println("types combobox vullen");
@@ -572,13 +573,7 @@ public class AddKlantDialog extends JDialog {
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									if(comboBoxVerzekeringsType.getSelectedItem() != ""){
-										System.out.println(comboBoxVerzekeringsType.getSelectedItem().toString());
-										System.out.println(vertypeManager.getVerzekeringstype("Type 1"));
-										textFieldEigenRisico.setText(
-												Integer.toString(
-														vertypeManager.getVerzekeringstype(comboBoxVerzekeringsType.getSelectedItem().toString())
-																.getEigenRisico()));
-										
+										textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstype(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()),comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
 									}
 								}
 							});
