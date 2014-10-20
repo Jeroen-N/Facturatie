@@ -387,6 +387,7 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							comboBoxBetaalwijze = new JComboBox();
+							comboBoxBetaalwijze.addItem("Incasso");
 							splitPaneBetaalwijze
 									.setRightComponent(comboBoxBetaalwijze);
 						}
@@ -692,7 +693,19 @@ public class AddKlantDialog extends JDialog {
 					public void mouseClicked(MouseEvent e) {
 						ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
 						verzekeringPolissen.add(manager.createPolis(textFieldPolisNummer.getText(), comboBoxVerzekeringsType.getSelectedItem().toString(), Double.parseDouble(textFieldEigenRisico.getText()), textFieldStartDatum.getText(), textFieldEindDatum.getText()));
-						manager.createKlant(textFieldBSN.getText(), textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostCode.getText(), textFieldPlaats.getText(), textFieldGebDatum.getText(), textFieldTelefoonnummer.getText(), textFieldEmail.getText(), textFieldRkNummer.getText(), Double.parseDouble(textFieldEigenRisico.getText()), verzekeringPolissen, comboBoxBetaalwijze.getSelectedItem().toString());
+						manager.createKlant(
+								textFieldBSN.getText(), 
+								textFieldNaam.getText(), 
+								textFieldAdres.getText(), 
+								textFieldPostCode.getText(), 
+								textFieldPlaats.getText(), 
+								textFieldGebDatum.getText(), 
+								textFieldTelefoonnummer.getText(), 
+								textFieldEmail.getText(), 
+								textFieldRkNummer.getText(), 
+								Double.parseDouble(textFieldEigenRisico.getText()), 
+								verzekeringPolissen, 
+								comboBoxBetaalwijze.getSelectedItem().toString());
 					}
 				});
 			}

@@ -149,11 +149,6 @@ public class KlantManagerImpl implements KlantManager {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
 		}
 		
-		// verzekeringType
-		if (!polis.getVerzekeringsType().matches("([0-9]{3})")) {
-			errorMessage = errorMessage + "\nVerzekeringsType niet correct";
-		}
-		
 		// StartDatum
 		// zet het jaar op het actuele jaar.
 		if (!polis.getStartDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
