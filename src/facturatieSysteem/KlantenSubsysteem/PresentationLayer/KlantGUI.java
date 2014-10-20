@@ -1,6 +1,5 @@
 package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

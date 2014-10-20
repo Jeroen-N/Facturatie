@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringstypeManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
@@ -46,6 +48,7 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldStartDatum;
 	private JTextField textFieldEindDatum;
 	private JTextField textFieldEigenRisico;
+	private JComboBox<String> comboBoxBetaalwijze;
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
 
@@ -53,8 +56,8 @@ public class AddKlantDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AddKlantDialog(KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager, VerzekeringstypeManager vertypeManager) {
+	public AddKlantDialog(final KlantManager manager,
+			final VerzekeringsmaatschappijManager vermaatschappijManager, final VerzekeringstypeManager vertypeManager) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -383,7 +386,7 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblBetaalwijze);
 						}
 						{
-							JComboBox comboBoxBetaalwijze = new JComboBox();
+							comboBoxBetaalwijze = new JComboBox();
 							splitPaneBetaalwijze
 									.setRightComponent(comboBoxBetaalwijze);
 						}
@@ -526,6 +529,7 @@ public class AddKlantDialog extends JDialog {
 									comboBoxVerzekeringsType.removeAllItems();;
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
+										System.out.println("types combobox vullen");
 										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
@@ -567,8 +571,14 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										//vertypeManager.getVerzekeringstype(comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico();
+									if(comboBoxVerzekeringsType.getSelectedItem() != ""){
+										System.out.println(comboBoxVerzekeringsType.getSelectedItem().toString());
+										System.out.println(vertypeManager.getVerzekeringstype("Type 1"));
+										textFieldEigenRisico.setText(
+												Integer.toString(
+														vertypeManager.getVerzekeringstype(comboBoxVerzekeringsType.getSelectedItem().toString())
+																.getEigenRisico()));
+										
 									}
 								}
 							});
@@ -682,6 +692,14 @@ public class AddKlantDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				okButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
+						verzekeringPolissen.add(manager.createPolis(textFieldPolisNummer.getText(), comboBoxVerzekeringsType.getSelectedItem().toString(), Double.parseDouble(textFieldEigenRisico.getText()), textFieldStartDatum.getText(), textFieldEindDatum.getText()));
+						manager.createKlant(textFieldBSN.getText(), textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostCode.getText(), textFieldPlaats.getText(), textFieldGebDatum.getText(), textFieldTelefoonnummer.getText(), textFieldEmail.getText(), textFieldRkNummer.getText(), Double.parseDouble(textFieldEigenRisico.getText()), verzekeringPolissen, comboBoxBetaalwijze.getSelectedItem().toString());
+					}
+				});
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");

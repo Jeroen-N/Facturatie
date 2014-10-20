@@ -25,7 +25,7 @@ public class MainGUI {
 	private JTable Klant_Table;
 	private JPanel Header;
 	private KlantManager KlantManager;
-	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
+	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl(); // aanmaken in de Main
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private VerzekeringstypeManager typeManager;
 
