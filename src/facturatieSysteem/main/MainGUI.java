@@ -220,7 +220,8 @@ public class MainGUI {
 
 				AddKlantDialog addKlantDialog = new AddKlantDialog(
 						KlantManager, maatschappijManager);
-
+				addKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				addKlantDialog.setModal(true);
 				addKlantDialog.setVisible(true);
 			}
 		});
@@ -244,9 +245,11 @@ public class MainGUI {
 				if (btnChangeKlant.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
 					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
+							
 
 							KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-
+					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
 				} else {
 					System.out.println("geen klant geselecteerd");

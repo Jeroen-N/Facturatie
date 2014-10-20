@@ -20,6 +20,7 @@ public class KlantDAOImpl implements KlantDAO {
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
 	private ArrayList<String> BSNs;
 	
+	@Override
 	public boolean addKlantXML(Klant klant){
 		document = daoFactory.getDocument();
 		try{
@@ -28,13 +29,13 @@ public class KlantDAOImpl implements KlantDAO {
 		Node clienten = document.getElementsByTagName("Clienten").item(0);
 		clienten.appendChild(document.createTextNode("\n\t"));
 		
-		//Elementen aanmaken
+		//Create all Elements
 		Element client = document.createElement("Client");
 		Element clientGegevens = document.createElement("ClientGegevens");
 		Element verzekeringPolissen = document.createElement("VerzekeringPolissen");
 		Element verzekeringPolis = document.createElement("VerzekeringPolis");
 		
-		//Elementen ordenen
+		//Ordering Elements
 		clienten.appendChild(client);
 			client.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
 			client.appendChild(clientGegevens);
@@ -43,12 +44,12 @@ public class KlantDAOImpl implements KlantDAO {
 				verzekeringPolissen.appendChild(document.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
 				verzekeringPolissen.appendChild(verzekeringPolis);
 		
-		//Atribuut BSN aan client meegeven
+		//create Attribuur BSN
 		Attr BSN = document.createAttribute("BSN");
 		BSN.setValue("" + klant.getBSN());
 		client.setAttributeNode(BSN);
 
-		//ClientGegevens vullen
+		//fill ClientGegevens
 			clientGegevens.appendChild(document.createTextNode("\n\t\t\t"));//opmaak XML
 			Element naam = document.createElement("Naam");
 			naam.appendChild(document.createTextNode(klant.getNaam()));
@@ -100,7 +101,7 @@ public class KlantDAOImpl implements KlantDAO {
 			clientGegevens.appendChild(rekeningnummer);
 		
 			clientGegevens.appendChild(document.createTextNode("\n\t\t"));// </ClientGegevens>
-		//VerzekeringPolis vullen
+		//Fill ArrayList with Polissen
 
 			VerzekeringPolissen = klant.getVerzekeringPolissen();
 			
@@ -143,13 +144,16 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 	}
 	
+	@Override
 	public ArrayList<Klant> getKlantenXML() {
 		document = daoFactory.getDocument();
 		klantOverzicht = new ArrayList<Klant>();
 		try{
 			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
 			NodeList clienten = rootElement.getElementsByTagName("Client");
+			//loop through clients
 			for(int i = 0; i < clienten.getLength();i++){
+				//get client information
 				Element clientElement = (Element) clienten.item(i);
 				String BSN = clientElement.getAttribute("BSN");
 				String Naam = clientElement.getElementsByTagName("Naam").item(0).getTextContent();
@@ -180,17 +184,20 @@ public class KlantDAOImpl implements KlantDAO {
 				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
 				NodeList polissen = clientElement.getElementsByTagName("VerzekeringPolis");
 				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
-				for (int j = 0; j < polissen.getLength();j++){				
+				//loop through polissen of Client
+				for (int j = 0; j < polissen.getLength();j++){		
+					//get Polis information
 					String PolisNummer = polisElement.getAttribute("PolisNummer");
 					String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
 					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
 					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
 					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 					
+					//create Polis and add to ArrayList
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
-					
 					VerzekeringPolissen.add(Polis);
 				}
+				//create Klant add to ArrayList
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				klantOverzicht.add(klant);
 				
@@ -210,7 +217,8 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 		return klantOverzicht;	    
 	}
-
+	
+	@Override
 	public ArrayList<Klant> findKlantXML(String gebDatum){
 		document = daoFactory.getDocument();
 		zoekResultaat = new ArrayList<Klant>();
@@ -218,10 +226,12 @@ public class KlantDAOImpl implements KlantDAO {
 		
 		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
 		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		//loop through all clients
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
 			String Geboortedatum = clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent();
 			if(gebDatum.equals(Geboortedatum)){
+				//get all information of Client
 				String BSN = clientElement.getAttribute("BSN");
 				String Naam = clientElement.getElementsByTagName("Naam").item(0).getTextContent();
 				String Adres = clientElement.getElementsByTagName("Adres").item(0).getTextContent();
@@ -246,7 +256,7 @@ public class KlantDAOImpl implements KlantDAO {
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
 					VerzekeringPolissen.add(Polis);	
 				}
-		
+				//create Klant and add to ArrayList
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				zoekResultaat.add(klant);
 				
@@ -256,16 +266,18 @@ public class KlantDAOImpl implements KlantDAO {
 		return zoekResultaat;	
 	}
 	
+	@Override
 	public boolean updateKlantXML(Klant klant) {
 		document = daoFactory.getDocument();
 		try{
 		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
 		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		//loop through all clients
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
 			String BSN = clientElement.getAttribute("BSN");
 			if(BSN.equals(klant.getBSN())){
-				
+				//get all elements of Client
 				Element Naam = (Element) clientElement.getElementsByTagName("Naam").item(0);
 				Element Adres = (Element) clientElement.getElementsByTagName("Adres").item(0);
 				Element Postcode = (Element) clientElement.getElementsByTagName("Postcode").item(0);
@@ -277,6 +289,7 @@ public class KlantDAOImpl implements KlantDAO {
 				Element RekeningNr = (Element) clientElement.getElementsByTagName("Rekeningnummer").item(0);
 				Element Betaalwijze= (Element) clientElement.getElementsByTagName("BetaalMethode").item(0);
 				
+				//fill elements with the information
 				Naam.setTextContent(klant.getNaam());
 				Adres.setTextContent(klant.getAdres());
 				Postcode.setTextContent(klant.getPostcode());
@@ -295,17 +308,20 @@ public class KlantDAOImpl implements KlantDAO {
 			return false;
 		}
 	}
-
+	
+	@Override
 	public boolean verwijderKlantXML(String verwijderBSN) {
 		document = daoFactory.getDocument();
-		// verwijder klant uit XML
 		try{
-		NodeList clienten = document.getElementsByTagName("Client");
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
+		//loop through all clients
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
 			String BSN = clientElement.getAttribute("BSN");
 			
 			if(BSN.equals(verwijderBSN)){
+				//delete client
 				clientElement.getParentNode().removeChild(clientElement);
 				break;
 			}
@@ -318,13 +334,16 @@ public class KlantDAOImpl implements KlantDAO {
 		
 	}
 	
+	@Override
 	public ArrayList<String> getBSNs(){
 		BSNs = new ArrayList<String>();
 		document = daoFactory.getDocument();
 		try{
 			Element rootElement = (Element) document.getElementsByTagName("Clienten").item(0);
 			NodeList clienten = rootElement.getElementsByTagName("Client");
+			//loop through all clients
 			for(int i = 0; i < clienten.getLength();i++){
+				//add BSN to ArrayList
 				Element clientElement = (Element) clienten.item(i);
 				BSNs.add(clientElement.getAttribute("BSN"));
 			}

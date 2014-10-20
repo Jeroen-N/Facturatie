@@ -119,7 +119,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneBSN.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPaneBSN);
 						{
-							JLabel lblBsn = new JLabel("BSN:");
+							JLabel lblBsn = new JLabel("BSN: ");
 							lblBsn.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblBsn.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBsn.setPreferredSize(new Dimension(120, 16));
@@ -142,7 +142,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPaneNaam);
 						{
-							JLabel lblNaam = new JLabel("Naam:");
+							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblNaam.setPreferredSize(new Dimension(120, 16));
@@ -154,38 +154,6 @@ public class AddKlantDialog extends JDialog {
 							textFieldNaam = new JTextField();
 							splitPaneNaam.setRightComponent(textFieldNaam);
 							textFieldNaam.setColumns(15);
-						}
-					}
-					{
-						JSplitPane splitPaneAchterNaam = new JSplitPane();
-						splitPaneAchterNaam.setMinimumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setMaximumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setBorder(null);
-						splitPaneAchterNaam.setDividerSize(0);
-						splitPaneAchterNaam.setPreferredSize(new Dimension(300,
-								30));
-						addKlant_1.add(splitPaneAchterNaam);
-						{
-							JLabel lblAchternaam = new JLabel("Achternaam:");
-							lblAchternaam
-									.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblAchternaam
-									.setHorizontalAlignment(SwingConstants.RIGHT);
-							lblAchternaam.setPreferredSize(new Dimension(120,
-									16));
-							lblAchternaam
-									.setMinimumSize(new Dimension(120, 16));
-							lblAchternaam
-									.setMaximumSize(new Dimension(120, 16));
-							splitPaneAchterNaam.setLeftComponent(lblAchternaam);
-						}
-						{
-							textFieldAchternaam = new JTextField();
-							splitPaneAchterNaam
-									.setRightComponent(textFieldAchternaam);
-							textFieldAchternaam.setColumns(15);
 						}
 					}
 					{
@@ -201,7 +169,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_1.add(splitPaneGebDatum);
 						{
 							JLabel lblGeboortedatum = new JLabel(
-									"Geboortedatum:");
+									"Geboortedatum: ");
 							lblGeboortedatum
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblGeboortedatum
@@ -232,7 +200,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPaneAdres);
 						{
-							JLabel lblAdres = new JLabel("Adres:");
+							JLabel lblAdres = new JLabel("Adres: ");
 							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblAdres.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblAdres.setPreferredSize(new Dimension(120, 16));
@@ -258,7 +226,7 @@ public class AddKlantDialog extends JDialog {
 								30));
 						addKlant_1.add(splitPanePostCode);
 						{
-							JLabel lblPostcode = new JLabel("Postcode:");
+							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPostcode
@@ -286,7 +254,7 @@ public class AddKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPanePlaats);
 						{
-							JLabel lblPlaats = new JLabel("Plaats:");
+							JLabel lblPlaats = new JLabel("Plaats: ");
 							lblPlaats
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats
@@ -315,7 +283,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_1.add(splitPaneTelefoonnummer);
 						{
 							JLabel lblTelefoonnummer = new JLabel(
-									"Telefoonnummer:");
+									"Telefoonnummer: ");
 							lblTelefoonnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblTelefoonnummer
@@ -345,7 +313,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneEmail.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPaneEmail);
 						{
-							JLabel lblEmail = new JLabel("Email:");
+							JLabel lblEmail = new JLabel("Email: ");
 							lblEmail.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblEmail.setPreferredSize(new Dimension(120, 16));
@@ -371,7 +339,7 @@ public class AddKlantDialog extends JDialog {
 								300, 30));
 						addKlant_1.add(splitPaneBetaalwijze);
 						{
-							JLabel lblBetaalwijze = new JLabel("Betaalwijze:");
+							JLabel lblBetaalwijze = new JLabel("Betaalwijze: ");
 							lblBetaalwijze
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBetaalwijze
@@ -387,7 +355,9 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							comboBoxBetaalwijze = new JComboBox();
+							comboBoxBetaalwijze.addItem("");
 							comboBoxBetaalwijze.addItem("Incasso");
+							comboBoxBetaalwijze.addItem("Acceptgiro");
 							splitPaneBetaalwijze
 									.setRightComponent(comboBoxBetaalwijze);
 						}
@@ -405,7 +375,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_1.add(splitPaneRkNummer);
 						{
 							JLabel lblRekeningnummer = new JLabel(
-									"Rekeningnummer:");
+									"Rekeningnummer: ");
 							lblRekeningnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblRekeningnummer
@@ -464,7 +434,7 @@ public class AddKlantDialog extends JDialog {
 						splitPanePolisNummer.setBorder(null);
 						addKlant_2.add(splitPanePolisNummer);
 						{
-							JLabel lblPolisnummer = new JLabel("Polisnummer:");
+							JLabel lblPolisnummer = new JLabel("Polisnummer: ");
 							lblPolisnummer.setPreferredSize(new Dimension(120,
 									16));
 							lblPolisnummer
@@ -501,7 +471,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_2.add(splitPaneVerzekeringMaatschappij);
 						{
 							JLabel lblVerzekeringsmaatschappij = new JLabel(
-									"Maatschappij:");
+									"Maatschappij: ");
 							lblVerzekeringsmaatschappij
 									.setPreferredSize(new Dimension(120, 16));
 							lblVerzekeringsmaatschappij
@@ -554,7 +524,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_2.add(splitPaneVerzekeringsType);
 						{
 							JLabel lblVerzekeringstype = new JLabel(
-									"Verzekeringstype:");
+									"Verzekeringstype: ");
 							lblVerzekeringstype.setPreferredSize(new Dimension(
 									120, 16));
 							lblVerzekeringstype.setMinimumSize(new Dimension(
@@ -592,7 +562,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneEigenRisico.setBorder(null);
 						addKlant_2.add(splitPaneEigenRisico);
 						{
-							JLabel lblEigenRisico = new JLabel("Eigen Risico:");
+							JLabel lblEigenRisico = new JLabel("Eigen Risico: ");
 							lblEigenRisico.setPreferredSize(new Dimension(120,
 									16));
 							lblEigenRisico
@@ -626,7 +596,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneStartDatum.setBorder(null);
 						addKlant_2.add(splitPaneStartDatum);
 						{
-							JLabel lblStartDatum = new JLabel("Start datum:");
+							JLabel lblStartDatum = new JLabel("Start datum: ");
 							lblStartDatum.setPreferredSize(new Dimension(120,
 									16));
 							lblStartDatum
@@ -658,7 +628,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneEindDatum.setBorder(null);
 						addKlant_2.add(splitPaneEindDatum);
 						{
-							JLabel lblEindDatum = new JLabel("Eind datum:");
+							JLabel lblEindDatum = new JLabel("Eind datum: ");
 							lblEindDatum
 									.setPreferredSize(new Dimension(120, 16));
 							lblEindDatum.setMinimumSize(new Dimension(120, 16));

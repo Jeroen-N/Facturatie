@@ -125,7 +125,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneBSN.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPaneBSN);
 						{
-							JLabel lblBsn = new JLabel("BSN:");
+							JLabel lblBsn = new JLabel("BSN: ");
 							lblBsn.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblBsn.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBsn.setPreferredSize(new Dimension(120, 16));
@@ -150,7 +150,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPaneNaam);
 						{
-							JLabel lblNaam = new JLabel("Naam:");
+							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblNaam.setPreferredSize(new Dimension(120, 16));
@@ -167,39 +167,6 @@ public class ChangeKlantDialog extends JDialog {
 						}
 					}
 					{
-						JSplitPane splitPaneAchterNaam = new JSplitPane();
-						splitPaneAchterNaam.setMinimumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setMaximumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setBorder(null);
-						splitPaneAchterNaam.setDividerSize(0);
-						splitPaneAchterNaam.setPreferredSize(new Dimension(300,
-								30));
-						changeKlant_1.add(splitPaneAchterNaam);
-						{
-							JLabel lblAchternaam = new JLabel("Achternaam:");
-							lblAchternaam
-									.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblAchternaam
-									.setHorizontalAlignment(SwingConstants.RIGHT);
-							lblAchternaam.setPreferredSize(new Dimension(120,
-									16));
-							lblAchternaam
-									.setMinimumSize(new Dimension(120, 16));
-							lblAchternaam
-									.setMaximumSize(new Dimension(120, 16));
-							splitPaneAchterNaam.setLeftComponent(lblAchternaam);
-						}
-						{
-							textFieldAchternaam = new JTextField();
-							splitPaneAchterNaam.setRightComponent(textFieldAchternaam);
-							textFieldAchternaam.setText("AchterNaam");
-							textFieldAchternaam.setEditable(false);
-							textFieldAchternaam.setColumns(15);
-						}
-					}
-					{
 						JSplitPane splitPaneGebDatum = new JSplitPane();
 						splitPaneGebDatum
 								.setMinimumSize(new Dimension(300, 30));
@@ -212,7 +179,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_1.add(splitPaneGebDatum);
 						{
 							JLabel lblGeboortedatum = new JLabel(
-									"Geboortedatum:");
+									"Geboortedatum: ");
 							lblGeboortedatum
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblGeboortedatum
@@ -244,7 +211,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPaneAdres);
 						{
-							JLabel lblAdres = new JLabel("Adres:");
+							JLabel lblAdres = new JLabel("Adres: ");
 							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblAdres.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblAdres.setPreferredSize(new Dimension(120, 16));
@@ -272,7 +239,7 @@ public class ChangeKlantDialog extends JDialog {
 								30));
 						changeKlant_1.add(splitPanePostCode);
 						{
-							JLabel lblPostcode = new JLabel("Postcode:");
+							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPostcode
@@ -301,7 +268,7 @@ public class ChangeKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPanePlaats);
 						{
-							JLabel lblPlaats = new JLabel("Plaats:");
+							JLabel lblPlaats = new JLabel("Plaats: ");
 							lblPlaats
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats
@@ -332,7 +299,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_1.add(splitPaneTelefoonnummer);
 						{
 							JLabel lblTelefoonnummer = new JLabel(
-									"Telefoonnummer:");
+									"Telefoonnummer: ");
 							lblTelefoonnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblTelefoonnummer
@@ -363,7 +330,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneEmail.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPaneEmail);
 						{
-							JLabel lblEmail = new JLabel("Email:");
+							JLabel lblEmail = new JLabel("Email: ");
 							lblEmail.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblEmail.setPreferredSize(new Dimension(120, 16));
@@ -391,7 +358,7 @@ public class ChangeKlantDialog extends JDialog {
 								300, 30));
 						changeKlant_1.add(splitPaneBetaalwijze);
 						{
-							JLabel lblBetaalwijze = new JLabel("Betaalwijze:");
+							JLabel lblBetaalwijze = new JLabel("Betaalwijze: ");
 							lblBetaalwijze
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBetaalwijze
@@ -425,7 +392,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_1.add(splitPaneRkNummer);
 						{
 							JLabel lblRekeningnummer = new JLabel(
-									"Rekeningnummer:");
+									"Rekeningnummer: ");
 							lblRekeningnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblRekeningnummer
@@ -482,7 +449,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneBSN.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPaneBSN);
 						{
-							JLabel lblBsn = new JLabel("BSN:");
+							JLabel lblBsn = new JLabel("BSN: ");
 							lblBsn.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblBsn.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBsn.setPreferredSize(new Dimension(120, 16));
@@ -507,7 +474,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPaneNaam);
 						{
-							JLabel lblNaam = new JLabel("Naam:");
+							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblNaam.setPreferredSize(new Dimension(120, 16));
@@ -523,38 +490,6 @@ public class ChangeKlantDialog extends JDialog {
 						}
 					}
 					{
-						JSplitPane splitPaneAchterNaam = new JSplitPane();
-						splitPaneAchterNaam.setMinimumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setMaximumSize(new Dimension(300,
-								30));
-						splitPaneAchterNaam.setBorder(null);
-						splitPaneAchterNaam.setDividerSize(0);
-						splitPaneAchterNaam.setPreferredSize(new Dimension(300,
-								30));
-						changeKlant_2.add(splitPaneAchterNaam);
-						{
-							JLabel lblAchternaam = new JLabel("Achternaam:");
-							lblAchternaam
-									.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblAchternaam
-									.setHorizontalAlignment(SwingConstants.RIGHT);
-							lblAchternaam.setPreferredSize(new Dimension(120,
-									16));
-							lblAchternaam
-									.setMinimumSize(new Dimension(120, 16));
-							lblAchternaam
-									.setMaximumSize(new Dimension(120, 16));
-							splitPaneAchterNaam.setLeftComponent(lblAchternaam);
-						}
-						{
-							textFieldAchternaam2 = new JTextField();
-							splitPaneAchterNaam.setRightComponent(textFieldAchternaam2);
-							textFieldAchternaam2.setText("AchterNaam");
-							textFieldAchternaam2.setColumns(15);
-						}
-					}
-					{
 						JSplitPane splitPaneGebDatum = new JSplitPane();
 						splitPaneGebDatum
 								.setMinimumSize(new Dimension(300, 30));
@@ -567,7 +502,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_2.add(splitPaneGebDatum);
 						{
 							JLabel lblGeboortedatum = new JLabel(
-									"Geboortedatum:");
+									"Geboortedatum: ");
 							lblGeboortedatum
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblGeboortedatum
@@ -598,7 +533,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPaneAdres);
 						{
-							JLabel lblAdres = new JLabel("Adres:");
+							JLabel lblAdres = new JLabel("Adres: ");
 							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblAdres.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblAdres.setPreferredSize(new Dimension(120, 16));
@@ -625,7 +560,7 @@ public class ChangeKlantDialog extends JDialog {
 								30));
 						changeKlant_2.add(splitPanePostCode);
 						{
-							JLabel lblPostcode = new JLabel("Postcode:");
+							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPostcode
@@ -653,7 +588,7 @@ public class ChangeKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPanePlaats);
 						{
-							JLabel lblPlaats2 = new JLabel("Plaats:");
+							JLabel lblPlaats2 = new JLabel("Plaats: ");
 							lblPlaats2
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats2
@@ -683,7 +618,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_2.add(splitPaneTelefoonnummer);
 						{
 							JLabel lblTelefoonnummer = new JLabel(
-									"Telefoonnummer:");
+									"Telefoonnummer: ");
 							lblTelefoonnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblTelefoonnummer
@@ -713,7 +648,7 @@ public class ChangeKlantDialog extends JDialog {
 						splitPaneEmail.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPaneEmail);
 						{
-							JLabel lblEmail = new JLabel("Email:");
+							JLabel lblEmail = new JLabel("Email: ");
 							lblEmail.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 							lblEmail.setPreferredSize(new Dimension(120, 16));
@@ -740,7 +675,7 @@ public class ChangeKlantDialog extends JDialog {
 								300, 30));
 						changeKlant_2.add(splitPaneBetaalwijze);
 						{
-							JLabel lblBetaalwijze = new JLabel("Betaalwijze:");
+							JLabel lblBetaalwijze = new JLabel("Betaalwijze: ");
 							lblBetaalwijze
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblBetaalwijze
@@ -756,7 +691,9 @@ public class ChangeKlantDialog extends JDialog {
 						}
 						{
 							JComboBox comboBoxBetaalwijze2 = new JComboBox();
-							comboBoxBetaalwijze2.addItem(klant.getBetaalMethode());
+							comboBoxBetaalwijze2.addItem("");
+							comboBoxBetaalwijze2.addItem("Incasso");
+							comboBoxBetaalwijze2.addItem("Acceptgiro");
 							comboBoxBetaalwijze2.setEditable(false);
 							splitPaneBetaalwijze.setRightComponent(comboBoxBetaalwijze2);
 						}
@@ -774,7 +711,7 @@ public class ChangeKlantDialog extends JDialog {
 						changeKlant_2.add(splitPaneRkNummer);
 						{
 							JLabel lblRekeningnummer = new JLabel(
-									"Rekeningnummer:");
+									"Rekeningnummer: ");
 							lblRekeningnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblRekeningnummer
