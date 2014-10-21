@@ -181,8 +181,8 @@ public class KlantDAOImpl implements KlantDAO {
 				System.out.println(Betaalwijze);
 				System.out.println();
 				*/
-				Element polisElement = (Element) rootElement.getElementsByTagName("VerzekeringPolis").item(0);
-				NodeList polissen = clientElement.getElementsByTagName("VerzekeringPolis");
+				Element polisElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
+				NodeList polissen = polisElement.getElementsByTagName("VerzekeringPolis");
 				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
 				//loop through polissen of Client
 				for (int j = 0; j < polissen.getLength();j++){		
