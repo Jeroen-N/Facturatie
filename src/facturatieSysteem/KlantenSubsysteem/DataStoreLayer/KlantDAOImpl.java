@@ -181,17 +181,18 @@ public class KlantDAOImpl implements KlantDAO {
 				System.out.println(Betaalwijze);
 				System.out.println();
 				*/
-				Element polisElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
-				NodeList polissen = polisElement.getElementsByTagName("VerzekeringPolis");
+				Element polissenElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
+				NodeList polissen = polissenElement.getElementsByTagName("VerzekeringPolis");
 				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
 				//loop through polissen of Client
-				for (int j = 0; j < polissen.getLength();j++){		
+				for (int j = 0; j < polissen.getLength();j++){	
+					Element polisElement = (Element) polissen.item(j);
 					//get Polis information
 					String PolisNummer = polisElement.getAttribute("PolisNummer");
-					String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
-					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
-					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
+					String VerzekeringsType = polisElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
+					Double EigenRisico = Double.parseDouble(polisElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
+					String startDatum = polisElement.getElementsByTagName("startDatum").item(0).getTextContent();
+					String eindDatum = polisElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 					
 					//create Polis and add to ArrayList
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
