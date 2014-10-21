@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
@@ -36,6 +38,10 @@ public class MainGUI {
 	@SuppressWarnings("unused")
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
+	private JTextArea PolisInfo;
+	private JSeparator separator;
+	private JPanel Info_Polis;
+	private JScrollPane scroll;
 	
 	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
 		this.KlantManager = klantManager;
@@ -181,15 +187,20 @@ public class MainGUI {
 		 * Add function to see more information
 		 */
 		Uitgebreide_Info = new JTextArea();
+		Uitgebreide_Info.setRows(25);
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
-		Klant_info.add(Uitgebreide_Info);
+		Klant_info.add(Uitgebreide_Info, BorderLayout.NORTH);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int row = Klant_Table.getSelectedRow();
 				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+				PolisInfo.removeAll();
+				for(String s : KlantManager.toonPolis(b_s_n)){
+					PolisInfo.append(s + System.getProperty("line.separator"));
+				}
 			}
 		});
 		
@@ -204,8 +215,34 @@ public class MainGUI {
 				});
 		
 		/*
-		 * add panel for buttons underneath more information panel
+		 * 
 		 */
+		Info_Polis = new JPanel();
+		Klant_info.add(Info_Polis, BorderLayout.CENTER);
+		Info_Polis.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * 
+		 */
+		PolisInfo = new JTextArea();
+		//Info_Polis.add(PolisInfo, BorderLayout.CENTER);
+		PolisInfo.setEditable(false);
+
+		/*
+		 * 
+		 */
+		scroll = new JScrollPane(PolisInfo);
+		Info_Polis.add(scroll);
+		
+		/*
+		 * 
+		 */
+		separator = new JSeparator();
+		Info_Polis.add(separator, BorderLayout.NORTH);
+		
+		/*
+		 * add panel for buttons underneath more information panel
+		 */		
 		knoppen = new JPanel();
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 		knoppen.setLayout(new BorderLayout(0, 0));

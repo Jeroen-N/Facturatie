@@ -25,6 +25,8 @@ public interface KlantManager {
 	
 	public String toonKlant(String BSN);
 	
+	public ArrayList<String> toonPolis(String BSN);
+	
 	public Klant getKlant(String BSN);
 	
 	public boolean verwijderKlantXML(String BSN);

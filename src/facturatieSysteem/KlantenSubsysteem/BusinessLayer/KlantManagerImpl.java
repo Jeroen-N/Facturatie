@@ -2,6 +2,8 @@ package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.DAOFactoryKlant;
@@ -19,6 +21,7 @@ public class KlantManagerImpl implements KlantManager {
 	private VerzekeringPolisDAO polisDAO = new VerzekeringPolisDAOImpl();
 	private String errorMessage;
 	private static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+	private ArrayList<String> polissen = new ArrayList<>();
 	
 	public KlantManagerImpl(){
 		DAOFactory.validateXML();
@@ -77,7 +80,23 @@ public class KlantManagerImpl implements KlantManager {
 			}
 		}
 		return "niks gevonden";
-
+	}
+	
+	public ArrayList<String> toonPolis(String BSN){
+		polissen.clear();
+		for (Klant klant : getKlanten()) {
+			if (klant.getBSN().equals(BSN)) {
+				for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
+					System.out.println(polis.getPolisNummer());
+					polissen.add(polis.toString());
+					//polissen.add("");
+				}
+				//Collections.sort(polissen);
+				
+				return polissen;
+			}
+		}
+		return null;
 	}
 
 	public boolean verwijderKlantXML(String BSN) {

@@ -18,23 +18,30 @@ public class VerzekeringPolis {
 	
 	public String getPolisNummer(){
 		return PolisNummer;
-		
 	}
+	
 	public String getVerzekeringsType(){
 		return VerzekeringsType;
-		
 	}
+	
 	public double getExtraEigenRisico(){
 		return ExtraEigenRisico;
-		
 	}
+	
 	public String getStartDatum(){
 		return StartDatum;
-		
 	}
+	
 	public String getEindDatum(){
 		return EindDatum;
-		
+	}
+	
+	public String toString(){
+		return "Polisnummer: \t\t" 				+ 	PolisNummer 		+ "\n\n" +
+				"Verzekeringstype: \t\t" 		+ 	VerzekeringsType 	+ "\n\n" +
+				"Totaal eigen risico: \t"		+	ExtraEigenRisico	+ "\n\n" +
+				"Start datum: \t"				+ 	StartDatum			+ "\n\n" +
+				"Eind datum: \t"				+	EindDatum			+ "\n\n" ;
 	}
 
 }

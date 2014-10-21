@@ -216,7 +216,7 @@
 			<Geboortedatum>31-12-1995</Geboortedatum>
 			<Telefoonnummer>0625231500</Telefoonnummer>
 			<Email>Sander@gmail.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>Incasso</BetaalMethode>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>123654789</Rekeningnummer>
 		</ClientGegevens>
@@ -245,7 +245,7 @@
 			<Geboortedatum>10-06-1994</Geboortedatum>
 			<Telefoonnummer>0683144715</Telefoonnummer>
 			<Email>xander@gerreman.nl</Email>
-			<BetaalMethode/>
+			<BetaalMethode>Incasso</BetaalMethode>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>NL92SNSB0938762937</Rekeningnummer>
 		</ClientGegevens>
@@ -268,7 +268,7 @@
 			<Geboortedatum>29-03-1984</Geboortedatum>
 			<Telefoonnummer>0692733671</Telefoonnummer>
 			<Email>Simon@cowell.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>Incasso</BetaalMethode>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>US23AB093002974604</Rekeningnummer>
 		</ClientGegevens>
@@ -291,7 +291,7 @@
 			<Geboortedatum>29-02-1980</Geboortedatum>
 			<Telefoonnummer>0683901123</Telefoonnummer>
 			<Email>fdruiloor@hotmail.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>Incasso</BetaalMethode>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>NL04RABO0709283381</Rekeningnummer>
 		</ClientGegevens>
