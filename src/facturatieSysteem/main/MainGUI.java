@@ -3,11 +3,19 @@ package facturatieSysteem.main;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
@@ -33,6 +41,7 @@ public class MainGUI {
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie, btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer;
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
+	private DefaultTableModel dataModel;
 	
 	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
 		this.KlantManager = klantManager;
@@ -159,16 +168,23 @@ public class MainGUI {
 			data[i][1] = klant.getBSN();
 			data[i][2] = klant.getGeboortedatum();
 			data[i][3] = klant.getAdres();
-
 			i++;
 		}
 
 		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
-		Klant_Table = new JTable(data, columnNames){
+		
+		Vector gegevens = new Vector();
+		Vector columns = new Vector(Arrays.asList(columnNames));
+		
+		dataModel = new DefaultTableModel(data, columns);
+		Klant_Table.setModel(dataModel);
+		/*
+		 * Klant_Table = new JTable(data, columnNames){
 			public boolean isCellEditable(int rowIndex, int mColIndex){
 				return false;
 			}
 		};
+		*/
 		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
 		Klanten.add(Klant_Table, BorderLayout.CENTER);
 		
@@ -224,7 +240,7 @@ public class MainGUI {
 						KlantManager, maatschappijManager);
 				addKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addKlantDialog.setModal(true);
-				addKlantDialog.setVisible(true);
+				addKlantDialog.setVisible(true);				
 			}
 		});
 		links.setLayout(new BorderLayout(0, 0));
@@ -246,13 +262,16 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangeKlant.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
-					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
-							
-
-							KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
 					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
+					changeKlantDialog.addWindowListener(new WindowAdapter() {
+						public void windowClosed(WindowEvent e) {
+					    	System.out.println("window is closed");
+					    	
+					    }
+					});
 				} else {
 					System.out.println("geen klant geselecteerd");
 				}
@@ -268,6 +287,7 @@ public class MainGUI {
 						btnChangeKlant.setEnabled(rowsAreSelected);
 					}
 				});
+		
 		
 		/*
 		 * Create facturatie button + add to right panel
@@ -331,6 +351,6 @@ public class MainGUI {
 		 * Set visibility of the frame
 		 */
 		frame.setVisible(true);
-		
+
 	}
 }

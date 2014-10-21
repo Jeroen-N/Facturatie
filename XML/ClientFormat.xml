@@ -209,14 +209,14 @@
 
 	<Client BSN="123456789">
 		<ClientGegevens>
-			<Naam>Sander</Naam>
+			<Naam>Sander Blijlevens</Naam>
 			<Adres>Schijfstraat 26B</Adres>
 			<Postcode>4847SM</Postcode>
 			<Woonplaats>Teteringen</Woonplaats>
-			<Geboortedatum>31-12-1995</Geboortedatum>
+			<Geboortedatum>31-12-1994</Geboortedatum>
 			<Telefoonnummer>0625231500</Telefoonnummer>
 			<Email>Sander@gmail.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
+			<BetaalMethode/>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>123654789</Rekeningnummer>
 		</ClientGegevens>

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 
 
@@ -50,11 +52,12 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldTelefoonnummer2;
 	private JTextField textFieldEmail2;
 	private JTextField textFieldRkNummer2;
+	private JComboBox comboBoxBetaalwijze2;
 	/**
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public ChangeKlantDialog(KlantManager manager,
+	public ChangeKlantDialog(final KlantManager manager,
 			final VerzekeringsmaatschappijManager vermaatschappijManager, String BSN) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -63,7 +66,7 @@ public class ChangeKlantDialog extends JDialog {
 		/*
 		 * Klant wordt opgehaald
 		 */
-		Klant klant = manager.getKlant(BSN);
+		final Klant klant = manager.getKlant(BSN);
 		
 		{
 			/*
@@ -690,7 +693,7 @@ public class ChangeKlantDialog extends JDialog {
 									.setLeftComponent(lblBetaalwijze);
 						}
 						{
-							JComboBox comboBoxBetaalwijze2 = new JComboBox();
+							comboBoxBetaalwijze2 = new JComboBox();
 							comboBoxBetaalwijze2.addItem("");
 							comboBoxBetaalwijze2.addItem("Incasso");
 							comboBoxBetaalwijze2.addItem("Acceptgiro");
@@ -744,6 +747,26 @@ public class ChangeKlantDialog extends JDialog {
 				okButton.setActionCommand("Wijzigen");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				okButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						manager.updateKlant(
+								textFieldBSN2.getText(), 
+								textFieldNaam2.getText(), 
+								textFieldAdres2.getText(), 
+								textFieldPostCode2.getText(), 
+								textFieldPlaats2.getText(), 
+								textFieldGebDatum2.getText(), 
+								textFieldTelefoonnummer2.getText(), 
+								textFieldEmail2.getText(), 
+								textFieldRkNummer2.getText(), 
+								klant.getResterendEigenRisico(), 
+								klant.getVerzekeringPolissen(), 
+								comboBoxBetaalwijze2.getSelectedItem().toString());
+						dispose();
+						
+					}
+				});
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
