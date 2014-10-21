@@ -112,7 +112,7 @@
 			<Geboortedatum>23-01-1965</Geboortedatum>
 			<Telefoonnummer>0626548523</Telefoonnummer>
 			<Email>hansjansen@hotmail.com</Email>
-			<BetaalMethode>met je moeder</BetaalMethode>
+			<BetaalMethode>Incasso</BetaalMethode>
 			<ResterendEigenRisico>23.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0264158425</Rekeningnummer>
 		</ClientGegevens>
@@ -207,5 +207,128 @@
 		</Diagnoses>
 	</Client>
 
+<<<<<<< HEAD
 	
+=======
+	<Client BSN="123456789">
+		<ClientGegevens>
+			<Naam>Sander Blijlevens</Naam>
+			<Adres>Schijfstraat 26B</Adres>
+			<Postcode>4847SM</Postcode>
+			<Woonplaats>Teteringen</Woonplaats>
+			<Geboortedatum>31-12-1995</Geboortedatum>
+			<Telefoonnummer>0625231500</Telefoonnummer>
+			<Email>Sander@gmail.com</Email>
+			<BetaalMethode/>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>123654789</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="NTSA1O">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-01-1095</startDatum>
+				<eindDatum>31-12-1095</eindDatum>
+			</VerzekeringPolis>
+		
+			<VerzekeringPolis PolisNummer="5XYEUF">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-02-0003</startDatum>
+				<eindDatum>01-02-0004</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
+	</Client>
+
+	<Client BSN="918273645">
+		<ClientGegevens>
+			<Naam>Xander Gerreman</Naam>
+			<Adres>Marialaan 9a</Adres>
+			<Postcode>4834AJ</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>10-06-1994</Geboortedatum>
+			<Telefoonnummer>0683144715</Telefoonnummer>
+			<Email>xander@gerreman.nl</Email>
+			<BetaalMethode/>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>NL92SNSB0938762937</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="VG6EJP">
+				<VerzekeringType>Type 2</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>30-10-2014</startDatum>
+				<eindDatum>30-10-2015</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+	</Client>
+
+	<Client BSN="864213579">
+		<ClientGegevens>
+			<Naam>Simon Cowell</Naam>
+			<Adres>Beaverly Hills Street 13C</Adres>
+			<Postcode>9268BQ</Postcode>
+			<Woonplaats>Los Angeles</Woonplaats>
+			<Geboortedatum>29-03-1984</Geboortedatum>
+			<Telefoonnummer>0692733671</Telefoonnummer>
+			<Email>Simon@cowell.com</Email>
+			<BetaalMethode/>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>US23AB093002974604</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="G5AK56">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-11-2014</startDatum>
+				<eindDatum>01-11-2015</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+	</Client>
+
+	<Client BSN="987656789">
+		<ClientGegevens>
+			<Naam>Flappy Druiloor</Naam>
+			<Adres>Allerheiligeweg 14A</Adres>
+			<Postcode>4863GH</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>29-02-1980</Geboortedatum>
+			<Telefoonnummer>0683901123</Telefoonnummer>
+			<Email>fdruiloor@hotmail.com</Email>
+			<BetaalMethode/>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>NL04RABO0709283381</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="2AZ5EF">
+				<VerzekeringType>Type 2</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-12-2014</startDatum>
+				<eindDatum>01-12-2014</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+	</Client>
+
+	<Client BSN="123451234">
+		<ClientGegevens>
+			<Naam>Patty Brard</Naam>
+			<Adres>De Bijster 83</Adres>
+			<Postcode>8204BQ</Postcode>
+			<Woonplaats>Amsterdam</Woonplaats>
+			<Geboortedatum>04-06-1975</Geboortedatum>
+			<Telefoonnummer>0602944814</Telefoonnummer>
+			<Email>brardp@patty.nl</Email>
+			<BetaalMethode>Incasso</BetaalMethode>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>NL34ASNB02974027202</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="4VX8LD">
+				<VerzekeringType>Type 2</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>06-10-2014</startDatum>
+				<eindDatum>06-10-2015</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+	</Client>
+>>>>>>> origin/master
 </Clienten>

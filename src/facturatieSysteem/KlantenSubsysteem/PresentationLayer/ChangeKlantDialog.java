@@ -688,6 +688,7 @@ public class ChangeKlantDialog extends JDialog {
 						}
 						{
 							comboBoxBetaalwijze2 = new JComboBox();
+							comboBoxBetaalwijze2.setName(klant.getBetaalMethode());
 							comboBoxBetaalwijze2.addItem("");
 							comboBoxBetaalwijze2.addItem("Incasso");
 							comboBoxBetaalwijze2.addItem("Acceptgiro");

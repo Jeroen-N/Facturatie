@@ -706,6 +706,7 @@ public class AddKlantDialog extends JDialog {
 									showConfirmationWindow("Toevoegen klant mislukt");
 								}
 							}
+							dispose();
 						}
 						else{
 							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
