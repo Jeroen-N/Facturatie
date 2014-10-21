@@ -149,15 +149,6 @@ public class MainGUI {
 		KlantenPanel.setLayout(new BorderLayout(0, 0));
 		
 		/*
-		 * Create panel for the table
-		 */
-		/*
-		KlantenTablePanel = new JPanel();
-		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
-		KlantenTablePanel.setLayout(new BorderLayout(0, 0));
-		*/
-		
-		/*
 		 * fill the table
 		 */
 		klanten = KlantManager.getKlanten();
@@ -182,14 +173,9 @@ public class MainGUI {
 			}
 		};
 		
-		//KlantenTablePanel.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
-		//KlantenTablePanel.add(Klant_Table, BorderLayout.CENTER);
 		KlantenTablePanel = new JScrollPane(Klant_Table);
 		Klant_Table.setFillsViewportHeight(true);
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
-		
-		
-		
 		
 		/*
 		 * Create panel for more information about klant
@@ -271,9 +257,33 @@ public class MainGUI {
 					changeKlantDialog.setVisible(true);
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
-					    	System.out.println("window is closed");
+					    	//System.out.println("window is closed");
+							KlantenPanel.removeAll();
+					    	klanten = KlantManager.getKlanten();
 
-					    }
+							data = new String[klanten.size()][4];
+
+							int i = 0;
+
+							for (Klant klant : klanten) {
+								data[i][0] = klant.getNaam();
+								data[i][1] = klant.getBSN();
+								data[i][2] = klant.getGeboortedatum();
+								data[i][3] = klant.getAdres();
+								i++;
+							}
+
+							String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
+							
+							Klant_Table = new JTable(data, columnNames){
+								public boolean isCellEditable(int rowIndex, int mColIndex){
+									return false;
+								}
+							};
+							KlantenTablePanel = new JScrollPane(Klant_Table);
+							Klant_Table.setFillsViewportHeight(true);
+							KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
+						}
 					});
 				} else {
 					System.out.println("geen klant geselecteerd");
