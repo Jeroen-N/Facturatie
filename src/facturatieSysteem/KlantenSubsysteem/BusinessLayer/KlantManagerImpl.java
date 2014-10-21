@@ -86,13 +86,9 @@ public class KlantManagerImpl implements KlantManager {
 		polissen.clear();
 		for (Klant klant : getKlanten()) {
 			if (klant.getBSN().equals(BSN)) {
-				for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
-					System.out.println(polis.getPolisNummer());
-					polissen.add(polis.toString());
-					//polissen.add("");
-				}
-				//Collections.sort(polissen);
-				
+				for(int i = klant.getVerzekeringPolissen().size(); i > 0; i--){
+					polissen.add((klant.getVerzekeringPolissen().get(i-1)).toString());
+				}				
 				return polissen;
 			}
 		}

@@ -38,10 +38,10 @@ public class VerzekeringPolis {
 	
 	public String toString(){
 		return "Polisnummer: \t\t" 				+ 	PolisNummer 		+ "\n\n" +
-				"Verzekeringstype: \t\t" 		+ 	VerzekeringsType 	+ "\n\n" +
+				"Verzekeringstype: \t" 		+ 	VerzekeringsType 	+ "\n\n" +
 				"Totaal eigen risico: \t"		+	ExtraEigenRisico	+ "\n\n" +
-				"Start datum: \t"				+ 	StartDatum			+ "\n\n" +
-				"Eind datum: \t"				+	EindDatum			+ "\n\n" ;
+				"Start datum: \t\t"				+ 	StartDatum			+ "\n\n" +
+				"Eind datum: \t\t"				+	EindDatum			+ "\n\n" ;
 	}
 
 }

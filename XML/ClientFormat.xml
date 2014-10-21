@@ -325,6 +325,12 @@
 				<startDatum>06-10-2014</startDatum>
 				<eindDatum>06-10-2015</eindDatum>
 			</VerzekeringPolis>
-		</VerzekeringPolissen>
+		
+			<VerzekeringPolis PolisNummer="94FS36">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>06-10-2015</startDatum>
+				<eindDatum>06-10-2016</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
 	</Client>
 </Clienten>
