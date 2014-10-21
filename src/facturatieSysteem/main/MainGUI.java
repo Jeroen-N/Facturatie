@@ -203,6 +203,16 @@ public class MainGUI {
 			}
 		});
 		
+		Klant_Table.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
+						btnChangeKlant.setEnabled(rowsAreSelected);
+						btnAddPolis.setEnabled(rowsAreSelected);
+					}
+				});
+		
 		/*
 		 * add panel for buttons underneath more information panel
 		 */
@@ -261,7 +271,10 @@ public class MainGUI {
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
 					    	//System.out.println("window is closed");
+							
 							KlantenPanel.removeAll();
+							Klant_info.removeAll();
+							
 					    	klanten = KlantManager.getKlanten();
 
 							data = new String[klanten.size()][4];
@@ -286,6 +299,49 @@ public class MainGUI {
 							KlantenTablePanel = new JScrollPane(Klant_Table);
 							Klant_Table.setFillsViewportHeight(true);
 							KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
+
+							/*
+							 * Create panel for more information about klant
+							 */
+							Klant_info = new JPanel();
+							KlantenPanel.add(Klant_info, BorderLayout.EAST);
+							Klant_info.setLayout(new BorderLayout(0, 0));
+							
+							/*
+							 * Add function to see more information
+							 */
+							Uitgebreide_Info = new JTextArea();
+							Uitgebreide_Info.setColumns(40);
+							Uitgebreide_Info.setEditable(false);
+							Klant_info.add(Uitgebreide_Info);
+							Klant_Table.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									int row = Klant_Table.getSelectedRow();
+									String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
+									Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+								}
+							});
+							
+							/*
+							 * add panel for buttons underneath more information panel
+							 */
+							Klant_info.add(knoppen, BorderLayout.SOUTH);
+							
+							btnAddPolis.setEnabled(false);
+							btnChangeKlant.setEnabled(false);
+							
+							Klant_Table.getSelectionModel().addListSelectionListener(
+									new ListSelectionListener() {
+										@Override
+										public void valueChanged(ListSelectionEvent e) {
+											boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
+											btnAddPolis.setEnabled(rowsAreSelected);
+											btnChangeKlant.setEnabled(rowsAreSelected);
+										}
+									});
+							KlantenPanel.setVisible(false);
+							KlantenPanel.setVisible(true);
 						}
 					});
 				} else {
@@ -295,28 +351,12 @@ public class MainGUI {
 		});
 		btnChangeKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnChangeKlant.setMinimumSize(new Dimension(0, 0));
-		Klant_Table.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					@Override
-					public void valueChanged(ListSelectionEvent e) {
-						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
-						btnChangeKlant.setEnabled(rowsAreSelected);
-					}
-				});
 		
 		btnAddPolis = new JButton("Toevoegen Polis");
 		links.add(btnAddPolis, BorderLayout.EAST);
 		btnAddPolis.setEnabled(false);
 		btnAddPolis.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnAddPolis.setMinimumSize(new Dimension(0, 0));
-		Klant_Table.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					@Override
-					public void valueChanged(ListSelectionEvent e) {
-						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
-						btnAddPolis.setEnabled(rowsAreSelected);
-					}
-				});
 		btnAddPolis.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
