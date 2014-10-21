@@ -207,9 +207,6 @@
 		</Diagnoses>
 	</Client>
 
-<<<<<<< HEAD
-	
-=======
 	<Client BSN="123456789">
 		<ClientGegevens>
 			<Naam>Sander Blijlevens</Naam>
@@ -330,5 +327,4 @@
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 	</Client>
->>>>>>> origin/master
 </Clienten>
