@@ -285,10 +285,10 @@
 	<Client BSN="987656789">
 		<ClientGegevens>
 			<Naam>Flappy Druiloor</Naam>
-			<Adres>Allerheiligeweg 14A</Adres>
+			<Adres>Allerheiligeweg 14</Adres>
 			<Postcode>4863GH</Postcode>
 			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>29-02-1980</Geboortedatum>
+			<Geboortedatum>29-02-1989</Geboortedatum>
 			<Telefoonnummer>0683901123</Telefoonnummer>
 			<Email>fdruiloor@hotmail.com</Email>
 			<BetaalMethode>Incasso</BetaalMethode>

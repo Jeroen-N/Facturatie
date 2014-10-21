@@ -75,9 +75,7 @@ public class AddVerzekeringPolisDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				addVerzekeringPolis = new JPanel();
-				JPanel deleteVerzekeringPolis = new JPanel();
 				klantManager.addTab("Polis Toevoegen", null, addVerzekeringPolis, null);
-				klantManager.addTab("Polis verwijderen",null, deleteVerzekeringPolis, null);
 				addVerzekeringPolis.setLayout(new BorderLayout(0, 0));
 				{
 					/*
@@ -87,7 +85,6 @@ public class AddVerzekeringPolisDialog extends JDialog {
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
 					addVerzekeringPolis.add(separator, BorderLayout.CENTER);
-					deleteVerzekeringPolis.add(separator, BorderLayout.CENTER);
 				}
 				{
 					/*

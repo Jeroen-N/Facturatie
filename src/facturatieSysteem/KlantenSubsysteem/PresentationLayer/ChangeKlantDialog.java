@@ -30,7 +30,7 @@ public class ChangeKlantDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel changeKlant, deleteKlant, changeKlant_1;
+	private JPanel changeKlant, changeKlant_1;
 	private JTextField textFieldNaam;
 	private JTextField textFieldGebDatum;
 	private JTextField textFieldBSN;
@@ -76,7 +76,6 @@ public class ChangeKlantDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				changeKlant = new JPanel();
-				deleteKlant = new JPanel();
 				klantManager.addTab("Klant wijzigen", null, changeKlant, null);
 				changeKlant.setLayout(new BorderLayout(0, 0));
 				{
@@ -735,7 +734,6 @@ public class ChangeKlantDialog extends JDialog {
 					}
 				}
 			}
-			
 		}
 		{
 			JPanel buttonChangePane = new JPanel();
@@ -749,6 +747,21 @@ public class ChangeKlantDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						String errorMessage = manager.checkKlant(
+								"999999999",
+								textFieldNaam2.getText(),
+								textFieldAdres2.getText(), 
+								textFieldPostCode2.getText(),
+								textFieldPlaats2.getText(),
+								textFieldGebDatum2.getText(),
+								textFieldTelefoonnummer2.getText(),
+								textFieldEmail2.getText(),
+								textFieldRkNummer2.getText(),
+								comboBoxBetaalwijze2.getSelectedItem().toString());
+						if (!errorMessage.equals("")){
+							showConfirmationWindow(errorMessage);
+						}
+						else{
 						manager.updateKlant(
 								textFieldBSN2.getText(), 
 								textFieldNaam2.getText(), 
@@ -763,6 +776,7 @@ public class ChangeKlantDialog extends JDialog {
 								klant.getVerzekeringPolissen(), 
 								comboBoxBetaalwijze2.getSelectedItem().toString());
 						dispose();	
+						}
 					}
 				});
 			}
@@ -801,4 +815,8 @@ public class ChangeKlantDialog extends JDialog {
 			
 		}
 	}
+	public void showConfirmationWindow(String message) {
+		 Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
+	}	
 }

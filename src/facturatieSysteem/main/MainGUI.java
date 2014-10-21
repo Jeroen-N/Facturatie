@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MainGUI {
+	private Integer row, selected;
 	private JFrame frame;
 	private JTable Klant_Table;
 	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel, VerzekeringsMaatschappijPanel, knoppen, Klant_info, links, rechts, VerzekeringPanel, Header_Button;
@@ -194,7 +195,7 @@ public class MainGUI {
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int row = Klant_Table.getSelectedRow();
+				row = Klant_Table.getSelectedRow();
 				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
 				PolisInfo.removeAll();
@@ -455,9 +456,11 @@ public class MainGUI {
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int row = Klant_Table.getSelectedRow();
+				row = Klant_Table.getSelectedRow();
 				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
+				
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+				
 			}
 		});
 		
@@ -479,8 +482,12 @@ public class MainGUI {
 					}
 				});
 		
+		Klant_Table.setRowSelectionInterval(row, row);
+		Uitgebreide_Info.setText(KlantManager.toonKlant(Klant_Table.getModel().getValueAt(row, 1).toString()));
 		KlantenPanel.revalidate();
 		KlantenPanel.repaint();
+
+		//System.out.println(row);
 		
 		//KlantenPanel.setVisible(false);
 		//KlantenPanel.setVisible(true);
