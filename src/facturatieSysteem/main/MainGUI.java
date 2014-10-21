@@ -198,7 +198,7 @@ public class MainGUI {
 				row = Klant_Table.getSelectedRow();
 				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
-				PolisInfo.removeAll();
+				PolisInfo.setText("");
 				for(String s : KlantManager.toonPolis(b_s_n)){
 					PolisInfo.append(s + System.getProperty("line.separator"));
 				}
