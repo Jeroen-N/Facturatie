@@ -12,4 +12,5 @@ public interface FactuurDAOinf {
 
 	public boolean maakFactuur(Klant klant, ArrayList<Behandeling> behandelingen);
 	
+	public ArrayList<Factuur> haalAlleFacturen();
 }

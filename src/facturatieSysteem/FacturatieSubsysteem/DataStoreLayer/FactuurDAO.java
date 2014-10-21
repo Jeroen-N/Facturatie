@@ -1,6 +1,9 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -79,6 +82,7 @@ public class FactuurDAO implements FactuurDAOinf {
 
 	public boolean maakFactuur(Klant klant, ArrayList<Behandeling> behandelingen) {
 		document = daoFactory.getDocument();
+		boolean b = false;
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -94,162 +98,116 @@ public class FactuurDAO implements FactuurDAOinf {
 
 					// Create all Elements
 					Element factuurtje = document.createElement("Factuur");
-					Element clientGegevens = document
-							.createElement("ClientGegevens");
-					Element verzekeringPolissen = document
-							.createElement("VerzekeringPolissen");
-					Element verzekeringPolis = document
-							.createElement("VerzekeringPolis");
+					Element factuurDatum = document
+							.createElement("factuurDatum");
+					Element vervalDatum = document.createElement("vervalDatum");
 
 					// Ordering Elements
 					factuur.appendChild(factuurtje);
-					client.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
-					client.appendChild(clientGegevens);
-					client.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
-					client.appendChild(verzekeringPolissen);
-					verzekeringPolissen.appendChild(document
-							.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
-					verzekeringPolissen.appendChild(verzekeringPolis);
+					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
+					factuurtje.appendChild(factuurDatum);
+					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
+					factuurtje.appendChild(vervalDatum);
 
 					// create Attribuur BSN
-					Attr BSN = document.createAttribute("BSN");
-					BSN.setValue("" + klant.getBSN());
-					client.setAttributeNode(BSN);
+					Attr factuurNummer = document
+							.createAttribute("factuurDatum");
 
-					// fill ClientGegevens
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));// opmaak XML
-					Element naam = document.createElement("Naam");
-					naam.appendChild(document.createTextNode(klant.getNaam()));
-					clientGegevens.appendChild(naam);
+					// Maak een tijdelijke lijst aan van alle facturen die er
+					// zijn en bepaal hier het hoogste factuurnummer
+					ArrayList<Factuur> alleFacturen = haalAlleFacturen();
+					int n1 = 0;
+					int n2 = 0;
+					for (Factuur lijstFactuur : alleFacturen) {
+						n1 = lijstFactuur.getFactuurNummer();
 
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element adres = document.createElement("Adres");
-					adres.appendChild(document.createTextNode(klant.getAdres()));
-					clientGegevens.appendChild(adres);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element postcode = document.createElement("Postcode");
-					postcode.appendChild(document.createTextNode(klant
-							.getPostcode()));
-					clientGegevens.appendChild(postcode);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element woonplaats = document.createElement("Woonplaats");
-					woonplaats.appendChild(document.createTextNode(klant
-							.getWoonplaats()));
-					clientGegevens.appendChild(woonplaats);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element geboortedatum = document
-							.createElement("Geboortedatum");
-					geboortedatum.appendChild(document.createTextNode(klant
-							.getGeboortedatum()));
-					clientGegevens.appendChild(geboortedatum);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element telefoonnummer = document
-							.createElement("Telefoonnummer");
-					telefoonnummer.appendChild(document.createTextNode(klant
-							.getTelefoonnummer()));
-					clientGegevens.appendChild(telefoonnummer);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element email = document.createElement("Email");
-					email.appendChild(document.createTextNode(klant.getEmail()));
-					clientGegevens.appendChild(email);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element betaalMethode = document
-							.createElement("BetaalMethode");
-					betaalMethode.appendChild(document.createTextNode(klant
-							.getBetaalMethode()));
-					clientGegevens.appendChild(betaalMethode);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element resterendEigenRisico = document
-							.createElement("ResterendEigenRisico");
-					resterendEigenRisico.appendChild(document
-							.createTextNode(Double.toString(klant
-									.getResterendEigenRisico())));
-					clientGegevens.appendChild(resterendEigenRisico);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t\t"));
-					Element rekeningnummer = document
-							.createElement("Rekeningnummer");
-					rekeningnummer.appendChild(document.createTextNode(klant
-							.getRekeningnummer()));
-					clientGegevens.appendChild(rekeningnummer);
-
-					clientGegevens.appendChild(document
-							.createTextNode("\n\t\t"));// </ClientGegevens>
-					// Fill ArrayList with Polissen
-
-					VerzekeringPolissen = klant.getVerzekeringPolissen();
-
-					for (VerzekeringPolis polis : VerzekeringPolissen) {
-						Attr polisNummer = document
-								.createAttribute("PolisNummer");
-						polisNummer.setValue("" + polis.getPolisNummer());
-						verzekeringPolis.setAttributeNode(polisNummer);
-
-						verzekeringPolis.appendChild(document
-								.createTextNode("\n\t\t\t\t"));
-						Element verzekeringsType = document
-								.createElement("VerzekeringType");
-						verzekeringsType.appendChild(document
-								.createTextNode(polis.getVerzekeringsType()));
-						verzekeringPolis.appendChild(verzekeringsType);
-
-						verzekeringPolis.appendChild(document
-								.createTextNode("\n\t\t\t\t"));
-
-						Element eigenRisico = document
-								.createElement("EigenRisico");
-						eigenRisico.appendChild(document.createTextNode(Double
-								.toString(polis.getExtraEigenRisico())));
-						verzekeringPolis.appendChild(eigenRisico);
-
-						verzekeringPolis.appendChild(document
-								.createTextNode("\n\t\t\t\t"));
-						Element startDatum = document
-								.createElement("startDatum");
-						startDatum.appendChild(document.createTextNode(polis
-								.getStartDatum()));
-						verzekeringPolis.appendChild(startDatum);
-
-						verzekeringPolis.appendChild(document
-								.createTextNode("\n\t\t\t\t"));
-						Element eindDatum = document.createElement("eindDatum");
-						eindDatum.appendChild(document.createTextNode(polis
-								.getEindDatum()));
-						verzekeringPolis.appendChild(eindDatum);
-
-						verzekeringPolis.appendChild(document
-								.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
+						if (n1 >= n2) {
+							n2 = n1;
+						}
 					}
 
-					verzekeringPolissen.appendChild(document
-							.createTextNode("\n\t\t"));// </VerzekeringPolissen>
-					client.appendChild(document.createTextNode("\n\t"));// </Client>
-					clienten.appendChild(document.createTextNode("\n"));// <Clienten/>
+					// Maak het factuurnummer het hoogste nummer.
+					factuurNummer.setValue("" + n2 + 1);
+					factuurtje.setAttributeNode(factuurNummer);
 
-					return daoFactory.writeDocument();
+					// Vul factuurDatum door huidige datum op te halen en als tekst weg te zetten
+					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date date = new Date();
+					
+					String vandaag = dateFormat.format(date);
+					factuurDatum.appendChild(document
+							.createTextNode("\n\t\t\t"));// opmaak XML
+					Element fDatum = document.createElement("");
+					fDatum.appendChild(document.createTextNode(vandaag));
+					factuurDatum.appendChild(fDatum);
+
+					// Vul vervalDatum
+					vervalDatum
+							.appendChild(document.createTextNode("\n\t\t\t"));
+					Element vDatum = document.createElement("vervalDatum");
+					vDatum.appendChild(document.createTextNode(klant.getAdres()));
+					vervalDatum.appendChild(vDatum);
+
+					// Sluit het document af
+					factuurtje.appendChild(document.createTextNode("\n\t"));// <Factuurtje/>
+					factuur.appendChild(document.createTextNode("\n"));// <Facturen/>
+
+					if (daoFactory.writeDocument()) {
+						b = true;
+
+					}
 				}
 			}
 		} catch (DOMException e) {
-			return false;
+			b = false;
 		}
-
+		return b;
 	}
 
+	public ArrayList<Factuur> haalAlleFacturen() {
+		document = daoFactory.getDocument();
+		try {
+			Element clientenElement = (Element) document.getElementsByTagName(
+					"Clienten").item(0);
+			NodeList clienten = clientenElement.getElementsByTagName("Client");
+			for (int i = 0; i < clienten.getLength(); i++) {
+				Element clientElement = (Element) clienten.item(i);
+				String BSN = clientElement.getAttribute("BSN");
+
+				NodeList factuurnode = clientElement
+						.getElementsByTagName("factuur");
+				for (int j = 0; j < factuurnode.getLength(); j++) {
+					Element factuurElement = (Element) factuurnode.item(j);
+					int factuurNummer = Integer.parseInt(factuurElement
+							.getAttribute("factuurNummer"));
+					String factuurDatum = factuurElement
+							.getElementsByTagName("factuurDatum").item(0)
+							.getTextContent();
+					String vervalDatum = factuurElement
+							.getElementsByTagName("vervalDatum").item(0)
+							.getTextContent();
+
+					/*
+					 * System.out.println("factuur: " + (i+1));
+					 * System.out.println(factuurNummer);
+					 * System.out.println(factuurDatum);
+					 * System.out.println(vervalDatum);
+					 * 
+					 * System.out.println();
+					 */
+
+					factuur = new Factuur(factuurNummer, factuurDatum,
+							vervalDatum, BSN);
+					facturen.add(factuur);
+
+				}
+
+			}
+
+		} catch (DOMException e) {
+			e.printStackTrace();
+		}
+		return facturen;
+
+	}
 }
