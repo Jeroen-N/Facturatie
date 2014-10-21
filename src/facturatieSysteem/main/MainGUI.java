@@ -166,7 +166,11 @@ public class MainGUI {
 		}
 
 		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
-		Klant_Table = new JTable(data, columnNames);
+		Klant_Table = new JTable(data, columnNames){
+			public boolean isCellEditable(int rowIndex, int mColIndex){
+				return false;
+			}
+		};
 		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
 		Klanten.add(Klant_Table, BorderLayout.CENTER);
 		
