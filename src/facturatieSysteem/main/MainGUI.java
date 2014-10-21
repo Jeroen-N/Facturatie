@@ -224,6 +224,8 @@ public class MainGUI {
 		 * Create addKlant button + add to left panel
 		 */
 		btnAddKlant = new JButton("");
+		btnAddKlant.setMargin(new Insets(0, 0, 0, 0));
+		btnAddKlant.setIconTextGap(0);
 		btnAddKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
