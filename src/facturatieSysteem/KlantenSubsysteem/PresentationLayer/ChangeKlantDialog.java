@@ -87,7 +87,9 @@ public class ChangeKlantDialog extends JDialog {
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
 					changeKlant.add(separator, BorderLayout.CENTER);
-					deleteKlant.add(separator, BorderLayout.CENTER);
+					JSeparator separator2 = new JSeparator();
+					separator.setOrientation(SwingConstants.VERTICAL);
+					deleteKlant.add(separator2, BorderLayout.CENTER);
 				}
 				{
 					/*
@@ -690,6 +692,7 @@ public class ChangeKlantDialog extends JDialog {
 						}
 						{
 							comboBoxBetaalwijze2 = new JComboBox();
+							comboBoxBetaalwijze2.setName(klant.getBetaalMethode());
 							comboBoxBetaalwijze2.addItem("");
 							comboBoxBetaalwijze2.addItem("Incasso");
 							comboBoxBetaalwijze2.addItem("Acceptgiro");

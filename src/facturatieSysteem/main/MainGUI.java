@@ -6,17 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
@@ -41,9 +33,9 @@ public class MainGUI {
 	private ArrayList<Klant> klanten;
 	private JTextArea Uitgebreide_Info;
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie, btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer, btnAddPolis;
+	@SuppressWarnings("unused")
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
-	private DefaultTableModel dataModel;
 	
 	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
 		this.KlantManager = klantManager;
@@ -51,7 +43,7 @@ public class MainGUI {
 		makeFrame();
 	}
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "serial" })
 	public void makeFrame() {
 
 		/*
@@ -152,8 +144,6 @@ public class MainGUI {
 		/*
 		 * fill the table
 		 */
-		
-		
 		klanten = KlantManager.getKlanten();
 
 		data = new String[klanten.size()][4];
@@ -237,12 +227,20 @@ public class MainGUI {
 		btnAddKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				AddKlantDialog addKlantDialog = new AddKlantDialog(
 						KlantManager, maatschappijManager);
 				addKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addKlantDialog.setModal(true);
-				addKlantDialog.setVisible(true);				
+				addKlantDialog.setVisible(true);
+				addKlantDialog.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+				    	//System.out.println("window is closed");
+						KlantenPanel.removeAll();
+						Klant_info.removeAll();
+						insertTable();
+				    	
+					}
+				});
 			}
 		});
 		links.setLayout(new BorderLayout(0, 0));
@@ -271,77 +269,10 @@ public class MainGUI {
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
 					    	//System.out.println("window is closed");
-							
 							KlantenPanel.removeAll();
 							Klant_info.removeAll();
-							
-					    	klanten = KlantManager.getKlanten();
-
-							data = new String[klanten.size()][4];
-
-							int i = 0;
-
-							for (Klant klant : klanten) {
-								data[i][0] = klant.getNaam();
-								data[i][1] = klant.getBSN();
-								data[i][2] = klant.getGeboortedatum();
-								data[i][3] = klant.getAdres();
-								i++;
-							}
-
-							String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
-							
-							Klant_Table = new JTable(data, columnNames){
-								public boolean isCellEditable(int rowIndex, int mColIndex){
-									return false;
-								}
-							};
-							KlantenTablePanel = new JScrollPane(Klant_Table);
-							Klant_Table.setFillsViewportHeight(true);
-							KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
-
-							/*
-							 * Create panel for more information about klant
-							 */
-							Klant_info = new JPanel();
-							KlantenPanel.add(Klant_info, BorderLayout.EAST);
-							Klant_info.setLayout(new BorderLayout(0, 0));
-							
-							/*
-							 * Add function to see more information
-							 */
-							Uitgebreide_Info = new JTextArea();
-							Uitgebreide_Info.setColumns(40);
-							Uitgebreide_Info.setEditable(false);
-							Klant_info.add(Uitgebreide_Info);
-							Klant_Table.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									int row = Klant_Table.getSelectedRow();
-									String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
-									Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
-								}
-							});
-							
-							/*
-							 * add panel for buttons underneath more information panel
-							 */
-							Klant_info.add(knoppen, BorderLayout.SOUTH);
-							
-							btnAddPolis.setEnabled(false);
-							btnChangeKlant.setEnabled(false);
-							
-							Klant_Table.getSelectionModel().addListSelectionListener(
-									new ListSelectionListener() {
-										@Override
-										public void valueChanged(ListSelectionEvent e) {
-											boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
-											btnAddPolis.setEnabled(rowsAreSelected);
-											btnChangeKlant.setEnabled(rowsAreSelected);
-										}
-									});
-							KlantenPanel.setVisible(false);
-							KlantenPanel.setVisible(true);
+							insertTable();
+					    	
 						}
 					});
 				} else {
@@ -365,6 +296,14 @@ public class MainGUI {
 					addVerzekeringPolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					addVerzekeringPolisDialog.setModal(true);
 					addVerzekeringPolisDialog.setVisible(true);
+					addVerzekeringPolisDialog.addWindowListener(new WindowAdapter() {
+						public void windowClosed(WindowEvent e) {
+					    	//System.out.println("window is closed");
+							KlantenPanel.removeAll();
+							Klant_info.removeAll();
+							insertTable();
+						}
+					});
 				}
 				
 			}
@@ -431,7 +370,81 @@ public class MainGUI {
 		 * Set visibility of the frame
 		 */
 		frame.setVisible(true);
+	}
+	
+	@SuppressWarnings({ "serial"})
+	public void insertTable(){
+		klanten = KlantManager.getKlanten();
 
+		data = new String[klanten.size()][4];
+
+		int i = 0;
+
+		for (Klant klant : klanten) {
+			data[i][0] = klant.getNaam();
+			data[i][1] = klant.getBSN();
+			data[i][2] = klant.getGeboortedatum();
+			data[i][3] = klant.getAdres();
+			i++;
+		}
+
+		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
+		
+		Klant_Table = new JTable(data, columnNames){
+			public boolean isCellEditable(int rowIndex, int mColIndex){
+				return false;
+			}
+		};
+		KlantenTablePanel = new JScrollPane(Klant_Table);
+		Klant_Table.setFillsViewportHeight(true);
+		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
+
+		/*
+		 * Create panel for more information about klant
+		 */
+		Klant_info = new JPanel();
+		KlantenPanel.add(Klant_info, BorderLayout.EAST);
+		Klant_info.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * Add function to see more information
+		 */
+		Uitgebreide_Info = new JTextArea();
+		Uitgebreide_Info.setColumns(40);
+		Uitgebreide_Info.setEditable(false);
+		Klant_info.add(Uitgebreide_Info);
+		Klant_Table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = Klant_Table.getSelectedRow();
+				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
+				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+			}
+		});
+		
+		/*
+		 * add panel for buttons underneath more information panel
+		 */
+		Klant_info.add(knoppen, BorderLayout.SOUTH);
+		
+		btnAddPolis.setEnabled(false);
+		btnChangeKlant.setEnabled(false);
+		
+		Klant_Table.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
+						btnAddPolis.setEnabled(rowsAreSelected);
+						btnChangeKlant.setEnabled(rowsAreSelected);
+					}
+				});
+		
+		KlantenPanel.revalidate();
+		KlantenPanel.repaint();
+		
+		//KlantenPanel.setVisible(false);
+		//KlantenPanel.setVisible(true);
 	}
 	
 }
