@@ -698,13 +698,11 @@ public class AddVerzekeringPolisDialog extends JDialog {
 										textFieldEindDatum.getText())){
 									showConfirmationWindow("Polis Teovoegen Mislukt");
 								}
-
 							}
 						}
 						else{
 							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
 						}
-						
 					}
 				});
 			}

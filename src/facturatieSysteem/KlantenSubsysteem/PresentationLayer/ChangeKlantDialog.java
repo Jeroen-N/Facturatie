@@ -759,8 +759,7 @@ public class ChangeKlantDialog extends JDialog {
 								klant.getResterendEigenRisico(), 
 								klant.getVerzekeringPolissen(), 
 								comboBoxBetaalwijze2.getSelectedItem().toString());
-						dispose();
-						
+						dispose();	
 					}
 				});
 			}
