@@ -207,32 +207,5 @@
 		</Diagnoses>
 	</Client>
 
-	<Client BSN="123456789">
-		<ClientGegevens>
-			<Naam>Xander Gerreman</Naam>
-			<Adres>Schijfstraat 26B</Adres>
-			<Postcode>4847SM</Postcode>
-			<Woonplaats>Teteringen</Woonplaats>
-			<Geboortedatum>31-12-1994</Geboortedatum>
-			<Telefoonnummer>0625231500</Telefoonnummer>
-			<Email>Sander@gmail.com</Email>
-			<BetaalMethode>in natura</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>123654789</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="NTSA1O">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-01-1095</startDatum>
-				<eindDatum>31-12-1095</eindDatum>
-			</VerzekeringPolis>
-		
-			<VerzekeringPolis PolisNummer="5XYEUF">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-02-0003</startDatum>
-				<eindDatum>01-02-0004</eindDatum>
-			</VerzekeringPolis></VerzekeringPolissen>
-	</Client>
+	
 </Clienten>

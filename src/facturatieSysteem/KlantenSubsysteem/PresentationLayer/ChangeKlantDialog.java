@@ -6,11 +6,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -28,7 +30,7 @@ public class ChangeKlantDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel changeKlant;
+	private JPanel changeKlant, deleteKlant, changeKlant_1;
 	private JTextField textFieldNaam;
 	private JTextField textFieldGebDatum;
 	private JTextField textFieldBSN;
@@ -53,7 +55,7 @@ public class ChangeKlantDialog extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ChangeKlantDialog(final KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager, String BSN) {
+			final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -63,7 +65,6 @@ public class ChangeKlantDialog extends JDialog {
 		 */
 		final Klant klant = manager.getKlant(BSN);
 
-		
 		{
 			/*
 			 * JTabbedPane wordt aangemaakt
@@ -75,26 +76,23 @@ public class ChangeKlantDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				changeKlant = new JPanel();
-				JPanel deleteKlant = new JPanel();
+				deleteKlant = new JPanel();
 				klantManager.addTab("Klant wijzigen", null, changeKlant, null);
-				klantManager.addTab("Klant verwijderen",null, deleteKlant, null);
 				changeKlant.setLayout(new BorderLayout(0, 0));
 				{
 					/*
-					 * Om de verzekering en de klant te kunnen scheiden is er
+					 * Om de oude en nieuwe klant gegevens te scheiden is er
 					 * gebruik gemaakt van een seperator
 					 */
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
 					changeKlant.add(separator, BorderLayout.CENTER);
-					deleteKlant.add(separator, BorderLayout.CENTER);
 				}
 				{
 					/*
-					 * Panel wordt aangemaakt om de klant gegevens in te kunnen
-					 * vullen.
+					 * Panel wordt aangemaakt om de oude klant gegevens weer te geven
 					 */
-					JPanel changeKlant_1 = new JPanel();
+					changeKlant_1 = new JPanel();
 					changeKlant.add(changeKlant_1, BorderLayout.WEST);
 					changeKlant_1.setLayout(new BoxLayout(changeKlant_1,
 							BoxLayout.Y_AXIS));
@@ -733,15 +731,16 @@ public class ChangeKlantDialog extends JDialog {
 					}
 				}
 			}
+			
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			changeKlant.add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonChangePane = new JPanel();
+			buttonChangePane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			changeKlant.add(buttonChangePane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Wijzigen");
 				okButton.setActionCommand("Wijzigen");
-				buttonPane.add(okButton);
+				buttonChangePane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
@@ -764,6 +763,27 @@ public class ChangeKlantDialog extends JDialog {
 				});
 			}
 			{
+				JButton vervijderButton = new JButton("Verwijderen");
+				vervijderButton.setActionCommand("Verwijderen");
+				vervijderButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						 Component frame = null;
+						int n = JOptionPane.showConfirmDialog(
+							    frame,
+							    "Weet uw zeker dat u "+textFieldNaam.getText()+" wilt verwijderen",
+							    "fuck jou",
+							    JOptionPane.YES_NO_OPTION);
+						if(n == 0){
+							manager.verwijderKlantXML(BSN);
+							dispose();
+						}
+						
+					}
+				});
+				buttonChangePane.add(vervijderButton);
+			}
+			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
@@ -772,9 +792,9 @@ public class ChangeKlantDialog extends JDialog {
 						dispose();
 					}
 				});
-				buttonPane.add(cancelButton);
+				buttonChangePane.add(cancelButton);
 			}
+			
 		}
 	}
-
 }
