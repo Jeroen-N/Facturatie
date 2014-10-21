@@ -226,7 +226,6 @@ public class MainGUI {
 		 * 
 		 */
 		PolisInfo = new JTextArea();
-		//Info_Polis.add(PolisInfo, BorderLayout.CENTER);
 		PolisInfo.setEditable(false);
 
 		/*
@@ -458,8 +457,11 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				row = Klant_Table.getSelectedRow();
 				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
-				
 				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+				PolisInfo.setText("");
+				for(String s : KlantManager.toonPolis(b_s_n)){
+					PolisInfo.append(s + System.getProperty("line.separator"));
+				}
 				
 			}
 		});
@@ -481,6 +483,27 @@ public class MainGUI {
 						btnChangeKlant.setEnabled(rowsAreSelected);
 					}
 				});
+		
+		/*
+		 * 
+		 */
+		Info_Polis = new JPanel();
+		Klant_info.add(Info_Polis, BorderLayout.CENTER);
+		Info_Polis.setLayout(new BorderLayout(0, 0));
+		
+		/*
+		 * 
+		 */
+		PolisInfo = new JTextArea();
+		PolisInfo.setEditable(false);
+		scroll = new JScrollPane(PolisInfo);
+		Info_Polis.add(scroll);
+		
+		/*
+		 * 
+		 */
+		separator = new JSeparator();
+		Info_Polis.add(separator, BorderLayout.NORTH);
 		
 		Klant_Table.setRowSelectionInterval(row, row);
 		Uitgebreide_Info.setText(KlantManager.toonKlant(Klant_Table.getModel().getValueAt(row, 1).toString()));
