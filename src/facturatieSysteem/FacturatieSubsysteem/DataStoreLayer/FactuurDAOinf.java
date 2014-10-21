@@ -10,5 +10,6 @@ public interface FactuurDAOinf {
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
-	public Factuur maakFactuur(Behandeling behandeling);
+	public boolean maakFactuur(Klant klant, ArrayList<Behandeling> behandelingen);
+	
 }

@@ -77,49 +77,179 @@ public class FactuurDAO implements FactuurDAOinf {
 
 	}
 
-	public Factuur maakFactuur(Klant klant) {
-		/*
-		 * System.out.println("maakFactuur " + newFactuur.getFactuurNummer());
-		 * 
-		 * // // For consistency reasons, we should check whether the newMember
-		 * // doesn't already exist in our data source. Since this file is only
-		 * // for demonstration purpose, we do not perform that check here. //
-		 * 
-		 * // Get the members element, of which there is only one. Node
-		 * rootElement = document.getElementsByTagName("facturen").item(0);
-		 * 
-		 * // Create the member with its attributes and sub-elements Element
-		 * factuur = document.createElement("factuur");
-		 * rootElement.appendChild(factuur);
-		 * 
-		 * Element factuurnummer = document.createElement("factuurnummer");
-		 * factuurnummer
-		 * .appendChild(document.createTextNode(newFactuur.getFactuurNummer()));
-		 * factuur.appendChild(factuurnummer);
-		 * 
-		 * Element factuurDatum = document.createElement("factuurDatum");
-		 * factuurDatum
-		 * .appendChild(document.createTextNode(newFactuur.getFactuurDatum()));
-		 * factuur.appendChild(factuurDatum);
-		 * 
-		 * Element vervalDatum = document.createElement("vervalDatum");
-		 * vervalDatum
-		 * .appendChild(document.createTextNode(newFactuur.getVervalDatum()));
-		 * vervalDatum.appendChild(vervalDatum);
-		 * 
-		 * 
-		 * // Adding Reservations is left to the reader.
-		 * 
-		 * domdocument.writeDocument();
-		 */
-		// TODO Return valid result from insertMember in XmlDOMMemberDAO
-		return null;
-	}
+	public boolean maakFactuur(Klant klant, ArrayList<Behandeling> behandelingen) {
+		document = daoFactory.getDocument();
+		try {
+			Element clientenElement = (Element) document.getElementsByTagName(
+					"Clienten").item(0);
+			NodeList clienten = clientenElement.getElementsByTagName("Client");
+			for (int i = 0; i < clienten.getLength(); i++) {
+				Element clientElement = (Element) clienten.item(i);
+				String BSN = clientElement.getAttribute("BSN");
+				if (BSN.equals(klant.getBSN())) {
 
-	@Override
-	public Factuur maakFactuur(Behandeling behandeling) {
-		// TODO Auto-generated method stub
-		return null;
+					Node factuur = document.getElementsByTagName("Facturen")
+							.item(0);
+					factuur.appendChild(document.createTextNode("\n\t"));
+
+					// Create all Elements
+					Element factuurtje = document.createElement("Factuur");
+					Element clientGegevens = document
+							.createElement("ClientGegevens");
+					Element verzekeringPolissen = document
+							.createElement("VerzekeringPolissen");
+					Element verzekeringPolis = document
+							.createElement("VerzekeringPolis");
+
+					// Ordering Elements
+					factuur.appendChild(factuurtje);
+					client.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
+					client.appendChild(clientGegevens);
+					client.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
+					client.appendChild(verzekeringPolissen);
+					verzekeringPolissen.appendChild(document
+							.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
+					verzekeringPolissen.appendChild(verzekeringPolis);
+
+					// create Attribuur BSN
+					Attr BSN = document.createAttribute("BSN");
+					BSN.setValue("" + klant.getBSN());
+					client.setAttributeNode(BSN);
+
+					// fill ClientGegevens
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));// opmaak XML
+					Element naam = document.createElement("Naam");
+					naam.appendChild(document.createTextNode(klant.getNaam()));
+					clientGegevens.appendChild(naam);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element adres = document.createElement("Adres");
+					adres.appendChild(document.createTextNode(klant.getAdres()));
+					clientGegevens.appendChild(adres);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element postcode = document.createElement("Postcode");
+					postcode.appendChild(document.createTextNode(klant
+							.getPostcode()));
+					clientGegevens.appendChild(postcode);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element woonplaats = document.createElement("Woonplaats");
+					woonplaats.appendChild(document.createTextNode(klant
+							.getWoonplaats()));
+					clientGegevens.appendChild(woonplaats);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element geboortedatum = document
+							.createElement("Geboortedatum");
+					geboortedatum.appendChild(document.createTextNode(klant
+							.getGeboortedatum()));
+					clientGegevens.appendChild(geboortedatum);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element telefoonnummer = document
+							.createElement("Telefoonnummer");
+					telefoonnummer.appendChild(document.createTextNode(klant
+							.getTelefoonnummer()));
+					clientGegevens.appendChild(telefoonnummer);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element email = document.createElement("Email");
+					email.appendChild(document.createTextNode(klant.getEmail()));
+					clientGegevens.appendChild(email);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element betaalMethode = document
+							.createElement("BetaalMethode");
+					betaalMethode.appendChild(document.createTextNode(klant
+							.getBetaalMethode()));
+					clientGegevens.appendChild(betaalMethode);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element resterendEigenRisico = document
+							.createElement("ResterendEigenRisico");
+					resterendEigenRisico.appendChild(document
+							.createTextNode(Double.toString(klant
+									.getResterendEigenRisico())));
+					clientGegevens.appendChild(resterendEigenRisico);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t\t"));
+					Element rekeningnummer = document
+							.createElement("Rekeningnummer");
+					rekeningnummer.appendChild(document.createTextNode(klant
+							.getRekeningnummer()));
+					clientGegevens.appendChild(rekeningnummer);
+
+					clientGegevens.appendChild(document
+							.createTextNode("\n\t\t"));// </ClientGegevens>
+					// Fill ArrayList with Polissen
+
+					VerzekeringPolissen = klant.getVerzekeringPolissen();
+
+					for (VerzekeringPolis polis : VerzekeringPolissen) {
+						Attr polisNummer = document
+								.createAttribute("PolisNummer");
+						polisNummer.setValue("" + polis.getPolisNummer());
+						verzekeringPolis.setAttributeNode(polisNummer);
+
+						verzekeringPolis.appendChild(document
+								.createTextNode("\n\t\t\t\t"));
+						Element verzekeringsType = document
+								.createElement("VerzekeringType");
+						verzekeringsType.appendChild(document
+								.createTextNode(polis.getVerzekeringsType()));
+						verzekeringPolis.appendChild(verzekeringsType);
+
+						verzekeringPolis.appendChild(document
+								.createTextNode("\n\t\t\t\t"));
+
+						Element eigenRisico = document
+								.createElement("EigenRisico");
+						eigenRisico.appendChild(document.createTextNode(Double
+								.toString(polis.getExtraEigenRisico())));
+						verzekeringPolis.appendChild(eigenRisico);
+
+						verzekeringPolis.appendChild(document
+								.createTextNode("\n\t\t\t\t"));
+						Element startDatum = document
+								.createElement("startDatum");
+						startDatum.appendChild(document.createTextNode(polis
+								.getStartDatum()));
+						verzekeringPolis.appendChild(startDatum);
+
+						verzekeringPolis.appendChild(document
+								.createTextNode("\n\t\t\t\t"));
+						Element eindDatum = document.createElement("eindDatum");
+						eindDatum.appendChild(document.createTextNode(polis
+								.getEindDatum()));
+						verzekeringPolis.appendChild(eindDatum);
+
+						verzekeringPolis.appendChild(document
+								.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
+					}
+
+					verzekeringPolissen.appendChild(document
+							.createTextNode("\n\t\t"));// </VerzekeringPolissen>
+					client.appendChild(document.createTextNode("\n\t"));// </Client>
+					clienten.appendChild(document.createTextNode("\n"));// <Clienten/>
+
+					return daoFactory.writeDocument();
+				}
+			}
+		} catch (DOMException e) {
+			return false;
+		}
+
 	}
 
 }

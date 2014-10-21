@@ -11,7 +11,7 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		// TODO Fix deze test?
 		int i = 0;
 		FacturatieManagerImpl m1 = new FacturatieManagerImpl();
-		facturen = m1.haalFacturen("136521598");
+		facturen = m1.haalFacturen("123456789");
 		for(Factuur factuur : facturen){
 		System.out.println(factuur.getBSN());
 		System.out.println(factuur.getFactuurNummer());

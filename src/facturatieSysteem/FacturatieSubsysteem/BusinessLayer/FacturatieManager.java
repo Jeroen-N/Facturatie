@@ -8,9 +8,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public interface FacturatieManager {
 
-	public ArrayList<Klant> haalKlanten();
-
-	public Factuur factureer(Klant klant);
+	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen);
 
 	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen);
 

@@ -9,7 +9,6 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
-
 public class FacturatieManagerImpl implements FacturatieManager {
 
 	private KlantDAO klantDAO;
@@ -21,15 +20,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	@Override
-	public ArrayList<Klant> haalKlanten() {
-		
-		return null;
-	}
-
-	@Override
-	public Factuur factureer(Klant klant) {
+	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen) {
 		// TODO Auto-generated method stub
-		return null;
+		return true;
 	}
 
 	@Override
