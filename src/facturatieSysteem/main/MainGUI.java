@@ -23,6 +23,7 @@ import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
@@ -38,7 +39,7 @@ public class MainGUI {
 	private String[][] data;
 	private ArrayList<Klant> klanten;
 	private JTextArea Uitgebreide_Info;
-	private JButton btnAddKlant, btnChangeKlant, btnFacturatie, btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer;
+	private JButton btnAddKlant, btnChangeKlant, btnFacturatie, btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer, btnAddPolis;
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private DefaultTableModel dataModel;
@@ -157,6 +158,8 @@ public class MainGUI {
 		/*
 		 * fill the table
 		 */
+		
+		
 		klanten = KlantManager.getKlanten();
 
 		data = new String[klanten.size()][4];
@@ -249,7 +252,7 @@ public class MainGUI {
 		 * Create changeKlant button + add to left panel
 		 */
 		btnChangeKlant = new JButton("Verander Klant");
-		links.add(btnChangeKlant);
+		links.add(btnChangeKlant, BorderLayout.CENTER);
 		btnChangeKlant.setEnabled(false);
 		btnChangeKlant.addMouseListener(new MouseAdapter() {
 			@Override
@@ -315,7 +318,31 @@ public class MainGUI {
 					}
 				});
 		
-		
+		btnAddPolis = new JButton("Toevoegen Polis");
+		links.add(btnAddPolis, BorderLayout.EAST);
+		btnAddPolis.setEnabled(false);
+		btnAddPolis.setAlignmentY(Component.TOP_ALIGNMENT);
+		btnAddPolis.setMinimumSize(new Dimension(0, 0));
+		Klant_Table.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
+						btnAddPolis.setEnabled(rowsAreSelected);
+					}
+				});
+		btnAddPolis.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (btnChangeKlant.isEnabled()) {
+					AddVerzekeringPolisDialog addVerzekeringPolisDialog =  new AddVerzekeringPolisDialog(KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					addVerzekeringPolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					addVerzekeringPolisDialog.setModal(true);
+					addVerzekeringPolisDialog.setVisible(true);
+				}
+				
+			}
+		});
 		/*
 		 * Create facturatie button + add to right panel
 		 */
@@ -380,4 +407,5 @@ public class MainGUI {
 		frame.setVisible(true);
 
 	}
+	
 }

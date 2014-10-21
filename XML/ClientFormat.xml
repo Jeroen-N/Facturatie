@@ -8,7 +8,7 @@
 			<Geboortedatum>06-09-1990</Geboortedatum>
 			<Telefoonnummer>0659845129</Telefoonnummer>
 			<Email>frankgraafmolen@gmail.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>incasso</BetaalMethode>
 			<ResterendEigenRisico>465.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0159845625</Rekeningnummer>
 		</ClientGegevens>
@@ -107,12 +107,12 @@
 		<ClientGegevens>
 			<Naam>Hans Jansen</Naam>
 			<Adres>Parieweg 12</Adres>
-			<Postcode>9846GH</Postcode>
-			<Woonplaats>Breda</Woonplaats>
+			<Woonplaats>Breda</Woonplaats><Postcode>9846GH</Postcode>
+			
 			<Geboortedatum>23-01-1965</Geboortedatum>
 			<Telefoonnummer>0626548523</Telefoonnummer>
 			<Email>hansjansen@hotmail.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>met je moeder</BetaalMethode>
 			<ResterendEigenRisico>23.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0264158425</Rekeningnummer>
 		</ClientGegevens>
@@ -216,7 +216,7 @@
 			<Geboortedatum>31-12-1995</Geboortedatum>
 			<Telefoonnummer>0625231500</Telefoonnummer>
 			<Email>Sander@gmail.com</Email>
-			<BetaalMethode/>
+			<BetaalMethode>in nataru</BetaalMethode>
 			<ResterendEigenRisico>250.0</ResterendEigenRisico>
 			<Rekeningnummer>123654789</Rekeningnummer>
 		</ClientGegevens>
@@ -227,6 +227,12 @@
 				<startDatum>01-01-1095</startDatum>
 				<eindDatum>31-12-1095</eindDatum>
 			</VerzekeringPolis>
-		</VerzekeringPolissen>
+		
+			<VerzekeringPolis PolisNummer="5XYEUF">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-02-0003</startDatum>
+				<eindDatum>01-02-0004</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
 	</Client>
 </Clienten>

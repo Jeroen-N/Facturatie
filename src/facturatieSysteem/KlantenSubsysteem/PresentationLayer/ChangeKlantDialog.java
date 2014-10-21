@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +20,6 @@ import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 
 
@@ -33,7 +30,6 @@ public class ChangeKlantDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JPanel changeKlant;
 	private JTextField textFieldNaam;
-	private JTextField textFieldAchternaam;
 	private JTextField textFieldGebDatum;
 	private JTextField textFieldBSN;
 	private JTextField textFieldAdres;
@@ -43,7 +39,6 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldEmail;
 	private JTextField textFieldRkNummer;
 	private JTextField textFieldNaam2;
-	private JTextField textFieldAchternaam2;
 	private JTextField textFieldGebDatum2;
 	private JTextField textFieldBSN2;
 	private JTextField textFieldAdres2;
@@ -52,7 +47,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldTelefoonnummer2;
 	private JTextField textFieldEmail2;
 	private JTextField textFieldRkNummer2;
-	private JComboBox comboBoxBetaalwijze2;
+	private JComboBox<String> comboBoxBetaalwijze2;
 	/**
 	 * Create the dialog.
 	 */
@@ -67,6 +62,7 @@ public class ChangeKlantDialog extends JDialog {
 		 * Klant wordt opgehaald
 		 */
 		final Klant klant = manager.getKlant(BSN);
+
 		
 		{
 			/*

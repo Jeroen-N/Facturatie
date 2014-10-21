@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,12 +22,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-public class AddKlantDialog extends JDialog {
+
+public class AddVerzekeringPolisDialog extends JDialog {
 	/**
 	 * 
 	 */
@@ -43,25 +42,28 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldTelefoonnummer;
 	private JTextField textFieldEmail;
 	private JTextField textFieldRkNummer;
+	private JPanel addVerzekeringPolis;
 	private JTextField textFieldPolisNummer;
 	private JTextField textFieldStartDatum;
 	private JTextField textFieldEindDatum;
 	private JTextField textFieldEigenRisico;
-	private JComboBox<String> comboBoxBetaalwijze;
+
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
-
 	/**
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AddKlantDialog(final KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager) {
-
+	public AddVerzekeringPolisDialog(final KlantManager manager,
+			final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
+		/*
+		 * Klant wordt opgehaald
+		 */
+		final Klant klant = manager.getKlant(BSN);
 		{
 			/*
 			 * JTabbedPane wordt aangemaakt
@@ -72,9 +74,11 @@ public class AddKlantDialog extends JDialog {
 				/*
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
-				JPanel addKlant = new JPanel();
-				klantManager.addTab("Klant toevoegen", null, addKlant, null);
-				addKlant.setLayout(new BorderLayout(0, 0));
+				addVerzekeringPolis = new JPanel();
+				JPanel deleteVerzekeringPolis = new JPanel();
+				klantManager.addTab("Polis Toevoegen", null, addVerzekeringPolis, null);
+				klantManager.addTab("Polis verwijderen",null, deleteVerzekeringPolis, null);
+				addVerzekeringPolis.setLayout(new BorderLayout(0, 0));
 				{
 					/*
 					 * Om de verzekering en de klant te kunnen scheiden is er
@@ -82,16 +86,17 @@ public class AddKlantDialog extends JDialog {
 					 */
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
-					addKlant.add(separator, BorderLayout.CENTER);
+					addVerzekeringPolis.add(separator, BorderLayout.CENTER);
+					deleteVerzekeringPolis.add(separator, BorderLayout.CENTER);
 				}
 				{
 					/*
 					 * Panel wordt aangemaakt om de klant gegevens in te kunnen
 					 * vullen.
 					 */
-					JPanel addKlant_1 = new JPanel();
-					addKlant.add(addKlant_1, BorderLayout.WEST);
-					addKlant_1.setLayout(new BoxLayout(addKlant_1,
+					JPanel addPolis_1 = new JPanel();
+					addVerzekeringPolis.add(addPolis_1, BorderLayout.WEST);
+					addPolis_1.setLayout(new BoxLayout(addPolis_1,
 							BoxLayout.Y_AXIS));
 					{
 						JPanel panel = new JPanel();
@@ -100,13 +105,13 @@ public class AddKlantDialog extends JDialog {
 						panel.setPreferredSize(new Dimension(300, 20));
 						panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 						panel.setAlignmentY(Component.TOP_ALIGNMENT);
-						addKlant_1.add(panel);
+						addPolis_1.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblKlant = new JLabel("Klant");
-							lblKlant.setPreferredSize(new Dimension(32, 20));
-							lblKlant.setMinimumSize(new Dimension(32, 20));
-							lblKlant.setMaximumSize(new Dimension(32, 20));
+							JLabel lblKlant = new JLabel("Klant Gegevens");
+							lblKlant.setPreferredSize(new Dimension(100, 20));
+							lblKlant.setMinimumSize(new Dimension(100, 20));
+							lblKlant.setMaximumSize(new Dimension(100, 20));
 							panel.add(lblKlant, BorderLayout.WEST);
 						}
 					}
@@ -117,7 +122,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneBSN.setBorder(null);
 						splitPaneBSN.setDividerSize(0);
 						splitPaneBSN.setPreferredSize(new Dimension(300, 30));
-						addKlant_1.add(splitPaneBSN);
+						addPolis_1.add(splitPaneBSN);
 						{
 							JLabel lblBsn = new JLabel("BSN: ");
 							lblBsn.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -130,6 +135,8 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldBSN = new JTextField();
 							splitPaneBSN.setRightComponent(textFieldBSN);
+							textFieldBSN.setText(klant.getBSN());
+							textFieldBSN.setEditable(false);
 							textFieldBSN.setColumns(15);
 						}
 					}
@@ -140,7 +147,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneNaam.setBorder(null);
 						splitPaneNaam.setDividerSize(0);
 						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
-						addKlant_1.add(splitPaneNaam);
+						addPolis_1.add(splitPaneNaam);
 						{
 							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -153,6 +160,8 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldNaam = new JTextField();
 							splitPaneNaam.setRightComponent(textFieldNaam);
+							textFieldNaam.setText(klant.getNaam());
+							textFieldNaam.setEditable(false);
 							textFieldNaam.setColumns(15);
 						}
 					}
@@ -166,7 +175,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneGebDatum.setDividerSize(0);
 						splitPaneGebDatum.setPreferredSize(new Dimension(300,
 								30));
-						addKlant_1.add(splitPaneGebDatum);
+						addPolis_1.add(splitPaneGebDatum);
 						{
 							JLabel lblGeboortedatum = new JLabel(
 									"Geboortedatum: ");
@@ -185,8 +194,9 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							textFieldGebDatum = new JTextField();
-							splitPaneGebDatum
-									.setRightComponent(textFieldGebDatum);
+							splitPaneGebDatum.setRightComponent(textFieldGebDatum);
+							textFieldGebDatum.setText(klant.getGeboortedatum());
+							textFieldGebDatum.setEditable(false);
 							textFieldGebDatum.setColumns(15);
 
 						}
@@ -198,7 +208,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneAdres.setBorder(null);
 						splitPaneAdres.setDividerSize(0);
 						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
-						addKlant_1.add(splitPaneAdres);
+						addPolis_1.add(splitPaneAdres);
 						{
 							JLabel lblAdres = new JLabel("Adres: ");
 							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -211,6 +221,8 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldAdres = new JTextField();
 							splitPaneAdres.setRightComponent(textFieldAdres);
+							textFieldAdres.setText(klant.getAdres());
+							textFieldAdres.setEditable(false);
 							textFieldAdres.setColumns(15);
 						}
 					}
@@ -224,7 +236,7 @@ public class AddKlantDialog extends JDialog {
 						splitPanePostCode.setDividerSize(0);
 						splitPanePostCode.setPreferredSize(new Dimension(300,
 								30));
-						addKlant_1.add(splitPanePostCode);
+						addPolis_1.add(splitPanePostCode);
 						{
 							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
@@ -239,8 +251,9 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							textFieldPostCode = new JTextField();
-							splitPanePostCode
-									.setRightComponent(textFieldPostCode);
+							splitPanePostCode.setRightComponent(textFieldPostCode);
+							textFieldPostCode.setText(klant.getPostcode());
+							textFieldPostCode.setEditable(false);
 							textFieldPostCode.setColumns(15);
 						}
 					}
@@ -252,7 +265,7 @@ public class AddKlantDialog extends JDialog {
 						splitPanePlaats.setDividerSize(0);
 						splitPanePlaats
 								.setPreferredSize(new Dimension(300, 30));
-						addKlant_1.add(splitPanePlaats);
+						addPolis_1.add(splitPanePlaats);
 						{
 							JLabel lblPlaats = new JLabel("Plaats: ");
 							lblPlaats
@@ -267,6 +280,8 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldPlaats = new JTextField();
 							splitPanePlaats.setRightComponent(textFieldPlaats);
+							textFieldPlaats.setText(klant.getWoonplaats());
+							textFieldPlaats.setEditable(false);
 							textFieldPlaats.setColumns(15);
 						}
 					}
@@ -280,7 +295,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneTelefoonnummer.setDividerSize(0);
 						splitPaneTelefoonnummer.setPreferredSize(new Dimension(
 								300, 30));
-						addKlant_1.add(splitPaneTelefoonnummer);
+						addPolis_1.add(splitPaneTelefoonnummer);
 						{
 							JLabel lblTelefoonnummer = new JLabel(
 									"Telefoonnummer: ");
@@ -299,8 +314,9 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							textFieldTelefoonnummer = new JTextField();
-							splitPaneTelefoonnummer
-									.setRightComponent(textFieldTelefoonnummer);
+							splitPaneTelefoonnummer.setRightComponent(textFieldTelefoonnummer);
+							textFieldTelefoonnummer.setText(klant.getTelefoonnummer());
+							textFieldTelefoonnummer.setEditable(false);
 							textFieldTelefoonnummer.setColumns(15);
 						}
 					}
@@ -311,7 +327,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneEmail.setBorder(null);
 						splitPaneEmail.setDividerSize(0);
 						splitPaneEmail.setPreferredSize(new Dimension(300, 30));
-						addKlant_1.add(splitPaneEmail);
+						addPolis_1.add(splitPaneEmail);
 						{
 							JLabel lblEmail = new JLabel("Email: ");
 							lblEmail.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -324,6 +340,8 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldEmail = new JTextField();
 							splitPaneEmail.setRightComponent(textFieldEmail);
+							textFieldEmail.setText(klant.getEmail());
+							textFieldEmail.setEditable(false);
 							textFieldEmail.setColumns(15);
 						}
 					}
@@ -337,7 +355,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneBetaalwijze.setDividerSize(0);
 						splitPaneBetaalwijze.setPreferredSize(new Dimension(
 								300, 30));
-						addKlant_1.add(splitPaneBetaalwijze);
+						addPolis_1.add(splitPaneBetaalwijze);
 						{
 							JLabel lblBetaalwijze = new JLabel("Betaalwijze: ");
 							lblBetaalwijze
@@ -354,12 +372,10 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblBetaalwijze);
 						}
 						{
-							comboBoxBetaalwijze = new JComboBox();
-							comboBoxBetaalwijze.addItem("");
-							comboBoxBetaalwijze.addItem("Incasso");
-							comboBoxBetaalwijze.addItem("Acceptgiro");
-							splitPaneBetaalwijze
-									.setRightComponent(comboBoxBetaalwijze);
+							JComboBox comboBoxBetaalwijze = new JComboBox();
+							comboBoxBetaalwijze.addItem(klant.getBetaalMethode());
+							//comboBoxBetaalwijze.setEditable(false);
+							splitPaneBetaalwijze.setRightComponent(comboBoxBetaalwijze);
 						}
 					}
 					{
@@ -372,7 +388,7 @@ public class AddKlantDialog extends JDialog {
 						splitPaneRkNummer.setDividerSize(0);
 						splitPaneRkNummer.setPreferredSize(new Dimension(300,
 								30));
-						addKlant_1.add(splitPaneRkNummer);
+						addPolis_1.add(splitPaneRkNummer);
 						{
 							JLabel lblRekeningnummer = new JLabel(
 									"Rekeningnummer: ");
@@ -391,16 +407,19 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							textFieldRkNummer = new JTextField();
-							splitPaneRkNummer
-									.setRightComponent(textFieldRkNummer);
+							splitPaneRkNummer.setRightComponent(textFieldRkNummer);
+							textFieldRkNummer.setText(klant.getRekeningnummer());
+							textFieldRkNummer.setEditable(false);
 							textFieldRkNummer.setColumns(15);
 						}
+		
 					}
 				}
+				
 				{
-					JPanel addKlant_2 = new JPanel();
-					addKlant.add(addKlant_2, BorderLayout.EAST);
-					addKlant_2.setLayout(new BoxLayout(addKlant_2,
+					JPanel addPolis_2 = new JPanel();
+					addVerzekeringPolis.add(addPolis_2, BorderLayout.EAST);
+					addPolis_2.setLayout(new BoxLayout(addPolis_2,
 							BoxLayout.Y_AXIS));
 					{
 						JPanel panel = new JPanel();
@@ -409,18 +428,19 @@ public class AddKlantDialog extends JDialog {
 						panel.setMinimumSize(new Dimension(300, 20));
 						panel.setAlignmentY(0.0f);
 						panel.setAlignmentX(0.0f);
-						addKlant_2.add(panel);
+						addPolis_2.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblVerzekering = new JLabel("Verzekering");
-							lblVerzekering.setPreferredSize(new Dimension(74,
+							JLabel lblVerzekering = new JLabel("Polis Toevoegen");
+							lblVerzekering.setPreferredSize(new Dimension(100,
 									20));
 							lblVerzekering
-									.setMinimumSize(new Dimension(74, 20));
+									.setMinimumSize(new Dimension(100, 20));
 							lblVerzekering
-									.setMaximumSize(new Dimension(74, 20));
+									.setMaximumSize(new Dimension(100, 20));
 							panel.add(lblVerzekering, BorderLayout.NORTH);
 						}
+						
 					}
 					{
 						JSplitPane splitPanePolisNummer = new JSplitPane();
@@ -432,7 +452,7 @@ public class AddKlantDialog extends JDialog {
 								300, 30));
 						splitPanePolisNummer.setDividerSize(0);
 						splitPanePolisNummer.setBorder(null);
-						addKlant_2.add(splitPanePolisNummer);
+						addPolis_2.add(splitPanePolisNummer);
 						{
 							JLabel lblPolisnummer = new JLabel("Polisnummer: ");
 							lblPolisnummer.setPreferredSize(new Dimension(120,
@@ -468,7 +488,7 @@ public class AddKlantDialog extends JDialog {
 								.setMaximumSize(new Dimension(300, 30));
 						splitPaneVerzekeringMaatschappij.setDividerSize(0);
 						splitPaneVerzekeringMaatschappij.setBorder(null);
-						addKlant_2.add(splitPaneVerzekeringMaatschappij);
+						addPolis_2.add(splitPaneVerzekeringMaatschappij);
 						{
 							JLabel lblVerzekeringsmaatschappij = new JLabel(
 									"Maatschappij: ");
@@ -521,7 +541,7 @@ public class AddKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						splitPaneVerzekeringsType.setDividerSize(0);
 						splitPaneVerzekeringsType.setBorder(null);
-						addKlant_2.add(splitPaneVerzekeringsType);
+						addPolis_2.add(splitPaneVerzekeringsType);
 						{
 							JLabel lblVerzekeringstype = new JLabel(
 									"Verzekeringstype: ");
@@ -560,7 +580,7 @@ public class AddKlantDialog extends JDialog {
 								30));
 						splitPaneEigenRisico.setDividerSize(0);
 						splitPaneEigenRisico.setBorder(null);
-						addKlant_2.add(splitPaneEigenRisico);
+						addPolis_2.add(splitPaneEigenRisico);
 						{
 							JLabel lblEigenRisico = new JLabel("Eigen Risico: ");
 							lblEigenRisico.setPreferredSize(new Dimension(120,
@@ -594,7 +614,7 @@ public class AddKlantDialog extends JDialog {
 								30));
 						splitPaneStartDatum.setDividerSize(0);
 						splitPaneStartDatum.setBorder(null);
-						addKlant_2.add(splitPaneStartDatum);
+						addPolis_2.add(splitPaneStartDatum);
 						{
 							JLabel lblStartDatum = new JLabel("Start datum: ");
 							lblStartDatum.setPreferredSize(new Dimension(120,
@@ -626,7 +646,7 @@ public class AddKlantDialog extends JDialog {
 								.setMaximumSize(new Dimension(300, 30));
 						splitPaneEindDatum.setDividerSize(0);
 						splitPaneEindDatum.setBorder(null);
-						addKlant_2.add(splitPaneEindDatum);
+						addPolis_2.add(splitPaneEindDatum);
 						{
 							JLabel lblEindDatum = new JLabel("Eind datum: ");
 							lblEindDatum
@@ -642,38 +662,26 @@ public class AddKlantDialog extends JDialog {
 						{
 							textFieldEindDatum = new JTextField();
 							textFieldEindDatum.setColumns(15);
-							splitPaneEindDatum
-									.setRightComponent(textFieldEindDatum);
+							splitPaneEindDatum.setRightComponent(textFieldEindDatum);
 						}
-					}
+				}
 				}
 			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			addVerzekeringPolis.add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
+				JButton okButton = new JButton("Polis Toevoegen");
+				okButton.setActionCommand("Polis Toevoegen");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if (!comboBoxMaatschappij.getSelectedItem().equals("")){
-							String errorMessage = manager.checkKlant(
-									textFieldBSN.getText(),
-									textFieldNaam.getText(),
-									textFieldAdres.getText(), 
-									textFieldPostCode.getText(),
-									textFieldPlaats.getText(),
-									textFieldGebDatum.getText(),
-									textFieldTelefoonnummer.getText(),
-									textFieldEmail.getText(),
-									textFieldRkNummer.getText(),
-									comboBoxBetaalwijze.getSelectedItem().toString()) +
-							manager.checkPolis(
+							String errorMessage =	manager.checkPolis(
 									textFieldPolisNummer.getText(),
 									comboBoxVerzekeringsType.getSelectedItem().toString(), 
 									textFieldStartDatum.getText(), 
@@ -682,34 +690,21 @@ public class AddKlantDialog extends JDialog {
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
-								ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
-								verzekeringPolissen.add(
-										manager.createPolis
-										(textFieldPolisNummer.getText(), 
-												comboBoxVerzekeringsType.getSelectedItem().toString(), 
-												Double.parseDouble(textFieldEigenRisico.getText()),
-												textFieldStartDatum.getText(), 
-												textFieldEindDatum.getText()));
-								if( !manager.createKlant(
-										textFieldBSN.getText(), 
-										textFieldNaam.getText(), 
-										textFieldAdres.getText(), 
-										textFieldPostCode.getText(), 
-										textFieldPlaats.getText(), 
-										textFieldGebDatum.getText(), 
-										textFieldTelefoonnummer.getText(), 
-										textFieldEmail.getText(), 
-										textFieldRkNummer.getText(), 
-										Double.parseDouble(textFieldEigenRisico.getText()), 
-										verzekeringPolissen, 
-										comboBoxBetaalwijze.getSelectedItem().toString())){
-									showConfirmationWindow("Toevoegen klant mislukt");
+								if(!manager.addVerzekeringPolisXML(BSN,
+										textFieldPolisNummer.getText(), 
+										comboBoxVerzekeringsType.getSelectedItem().toString(), 
+										Double.parseDouble(textFieldEigenRisico.getText()),
+										textFieldStartDatum.getText(), 
+										textFieldEindDatum.getText())){
+									showConfirmationWindow("Polis Teovoegen Mislukt");
 								}
+
 							}
 						}
 						else{
 							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
 						}
+						
 					}
 				});
 			}
@@ -724,12 +719,12 @@ public class AddKlantDialog extends JDialog {
 				});
 				buttonPane.add(cancelButton);
 			}
-		} 
+		}
 	}
-	
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);
 
 	}	
+
 }
