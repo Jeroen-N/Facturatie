@@ -661,46 +661,54 @@ public class AddKlantDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						String errorMessage = manager.checkKlant(
-								textFieldBSN.getText(),
-								textFieldNaam.getText(),
-								textFieldAdres.getText(), 
-								textFieldPostCode.getText(),
-								textFieldPlaats.getText(),
-								textFieldGebDatum.getText(),
-								textFieldTelefoonnummer.getText(),
-								textFieldEmail.getText(),
-								textFieldRkNummer.getText(),
-								comboBoxBetaalwijze.getSelectedItem().toString()) +
-						manager.checkPolis(
-								textFieldPolisNummer.getText(),
-								textFieldStartDatum.getText(), 
-								textFieldEindDatum.getText());
-						if (errorMessage != ""){
-							showConfirmationWindow(errorMessage);
-						}else{
-							ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
-							verzekeringPolissen.add(manager.createPolis(textFieldPolisNummer.getText(), comboBoxVerzekeringsType.getSelectedItem().toString(), Double.parseDouble(textFieldEigenRisico.getText()), textFieldStartDatum.getText(), textFieldEindDatum.getText()));
-							if( manager.createKlant(
-									textFieldBSN.getText(), 
-									textFieldNaam.getText(), 
+						if (!comboBoxMaatschappij.getSelectedItem().equals("")){
+							String errorMessage = manager.checkKlant(
+									textFieldBSN.getText(),
+									textFieldNaam.getText(),
 									textFieldAdres.getText(), 
-									textFieldPostCode.getText(), 
-									textFieldPlaats.getText(), 
-									textFieldGebDatum.getText(), 
-									textFieldTelefoonnummer.getText(), 
-									textFieldEmail.getText(), 
-									textFieldRkNummer.getText(), 
-									Double.parseDouble(textFieldEigenRisico.getText()), 
-									verzekeringPolissen, 
-									comboBoxBetaalwijze.getSelectedItem().toString())){
-								
+									textFieldPostCode.getText(),
+									textFieldPlaats.getText(),
+									textFieldGebDatum.getText(),
+									textFieldTelefoonnummer.getText(),
+									textFieldEmail.getText(),
+									textFieldRkNummer.getText(),
+									comboBoxBetaalwijze.getSelectedItem().toString()) +
+							manager.checkPolis(
+									textFieldPolisNummer.getText(),
+									comboBoxVerzekeringsType.getSelectedItem().toString(), 
+									textFieldStartDatum.getText(), 
+									textFieldEindDatum.getText());
+							System.out.println(errorMessage);
+							if (!errorMessage.equals("")){
+								showConfirmationWindow(errorMessage);
+							}else{
+								ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
+								verzekeringPolissen.add(
+										manager.createPolis
+										(textFieldPolisNummer.getText(), 
+												comboBoxVerzekeringsType.getSelectedItem().toString(), 
+												Double.parseDouble(textFieldEigenRisico.getText()),
+												textFieldStartDatum.getText(), 
+												textFieldEindDatum.getText()));
+								if( manager.createKlant(
+										textFieldBSN.getText(), 
+										textFieldNaam.getText(), 
+										textFieldAdres.getText(), 
+										textFieldPostCode.getText(), 
+										textFieldPlaats.getText(), 
+										textFieldGebDatum.getText(), 
+										textFieldTelefoonnummer.getText(), 
+										textFieldEmail.getText(), 
+										textFieldRkNummer.getText(), 
+										Double.parseDouble(textFieldEigenRisico.getText()), 
+										verzekeringPolissen, 
+										comboBoxBetaalwijze.getSelectedItem().toString())){
+								}
 							}
 						}
-						
-							
-							
-					
+						else{
+							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
+						}
 					}
 				});
 			}

@@ -142,7 +142,7 @@ public class KlantManagerImpl implements KlantManager {
 		
 		// Telefoonnummer
 		if (!TelefoonNr.matches("([0-9]{10})")
-				|| !klant.getTelefoonnummer().substring(0, 2).matches("06")) {
+				|| !TelefoonNr.substring(0, 2).matches("06")) {
 			if (TelefoonNr.length() < 1) {
 				errorMessage = errorMessage + "\nTelefoonnummer niet ingevuld";
 			}
@@ -173,11 +173,15 @@ public class KlantManagerImpl implements KlantManager {
 		return errorMessage;
 	}
 	
-	public String checkPolis(String PolisNummer, String StartDatum, String EindDatum){
+	public String checkPolis(String PolisNummer, String type, String StartDatum, String EindDatum){
 		errorMessage = "";
 		// PolisNummer
 		if (!PolisNummer.matches("([0-9A-Z]{6})")) {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
+		}
+		
+		if (type.length() < 1) {
+			errorMessage = errorMessage + "\nGeen verzekeringstype gekozen";
 		}
 		
 		// StartDatum

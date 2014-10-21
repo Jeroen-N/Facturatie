@@ -272,8 +272,7 @@ public class MainGUI {
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
 					    	System.out.println("window is closed");
-					    	
-					    	
+
 					    }
 					});
 				} else {

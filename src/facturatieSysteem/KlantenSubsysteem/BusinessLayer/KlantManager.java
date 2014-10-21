@@ -31,7 +31,7 @@ public interface KlantManager {
 	
 	public String checkKlant(String BSN, String Naam, String Adres, String Postcode, String Woonplaats, String Geboortedatum,String TelefoonNr, String Email, String RkNummer, String Betaalwijze);
 	
-	public String checkPolis(String PolisNummer, String StartDatum, String EindDatum);
+	public String checkPolis(String PolisNummer, String type, String StartDatum, String EindDatum);
 	
 	public VerzekeringPolis createPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum);
 	
