@@ -32,7 +32,7 @@ import java.awt.event.MouseEvent;
 public class MainGUI {
 	private JFrame frame;
 	private JTable Klant_Table;
-	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel, VerzekeringsMaatschappijPanel, Klanten, knoppen, Klant_info, links, rechts, VerzekeringPanel, Header_Button;
+	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel, VerzekeringsMaatschappijPanel, KlantenTablePanel, knoppen, Klant_info, links, rechts, VerzekeringPanel, Header_Button;
 	private KlantManager KlantManager;
 	private JLabel lblCreatedByInfosys, lblFacturatiesysteem;
 	private String[][] data;
@@ -150,9 +150,9 @@ public class MainGUI {
 		/*
 		 * Create panel for the table
 		 */
-		Klanten = new JPanel();
-		KlantenPanel.add(Klanten, BorderLayout.CENTER);
-		Klanten.setLayout(new BorderLayout(0, 0));
+		KlantenTablePanel = new JPanel();
+		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
+		KlantenTablePanel.setLayout(new BorderLayout(0, 0));
 		
 		/*
 		 * fill the table
@@ -173,20 +173,15 @@ public class MainGUI {
 
 		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
 		
-		Vector gegevens = new Vector();
-		Vector columns = new Vector(Arrays.asList(columnNames));
 		
-		dataModel = new DefaultTableModel(data, columns);
-		Klant_Table.setModel(dataModel);
-		/*
-		 * Klant_Table = new JTable(data, columnNames){
+		Klant_Table = new JTable(data, columnNames){
 			public boolean isCellEditable(int rowIndex, int mColIndex){
 				return false;
 			}
 		};
-		*/
-		Klanten.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
-		Klanten.add(Klant_Table, BorderLayout.CENTER);
+		
+		KlantenTablePanel.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
+		KlantenTablePanel.add(Klant_Table, BorderLayout.CENTER);
 		
 		/*
 		 * Create panel for more information about klant
@@ -269,7 +264,37 @@ public class MainGUI {
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
 					    	System.out.println("window is closed");
+					    	//Klant_Table.removeAll();
+					    	//KlantenTablePanel.removeAll();
+					    	KlantenTablePanel.repaint();
+					    	//klanten.clear();
 					    	
+					    	klanten = KlantManager.getKlanten();
+					    	data = new String[klanten.size()][4];
+
+							int i = 0;
+
+							for (Klant klant : klanten) {
+								data[i][0] = klant.getNaam();
+								data[i][1] = klant.getBSN();
+								data[i][2] = klant.getGeboortedatum();
+								data[i][3] = klant.getAdres();
+								i++;
+							}
+
+							String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
+							/*
+							Klant_Table = new JTable(data, columnNames){
+								public boolean isCellEditable(int rowIndex, int mColIndex){
+									return false;
+								}
+							};
+							
+							KlantenTablePanel.add(Klant_Table.getTableHeader(), BorderLayout.PAGE_START);
+							KlantenTablePanel.add(Klant_Table, BorderLayout.CENTER);
+							*/
+							KlantenTablePanel.revalidate();
+							
 					    }
 					});
 				} else {

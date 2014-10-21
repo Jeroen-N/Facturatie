@@ -5,10 +5,10 @@
 			<Adres>Kerkstraat 1</Adres>
 			<Postcode>1234AB</Postcode>
 			<Woonplaats>Amsterdam</Woonplaats>
-			<Geboortedatum>06-09-1991</Geboortedatum>
+			<Geboortedatum>06-09-1990</Geboortedatum>
 			<Telefoonnummer>0659845129</Telefoonnummer>
 			<Email>frankgraafmolen@gmail.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
+			<BetaalMethode/>
 			<ResterendEigenRisico>465.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0159845625</Rekeningnummer>
 		</ClientGegevens>
@@ -106,13 +106,13 @@
 	<Client BSN="136521598">
 		<ClientGegevens>
 			<Naam>Hans Jansen</Naam>
-			<Adres>Parieweg 1</Adres>
+			<Adres>Parieweg 12</Adres>
 			<Postcode>9846GH</Postcode>
 			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>23-01-1960</Geboortedatum>
+			<Geboortedatum>23-01-1965</Geboortedatum>
 			<Telefoonnummer>0626548523</Telefoonnummer>
 			<Email>hansjansen@hotmail.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
+			<BetaalMethode/>
 			<ResterendEigenRisico>23.26</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0264158425</Rekeningnummer>
 		</ClientGegevens>
@@ -213,7 +213,7 @@
 			<Adres>Schijfstraat 26B</Adres>
 			<Postcode>4847SM</Postcode>
 			<Woonplaats>Teteringen</Woonplaats>
-			<Geboortedatum>31-12-1994</Geboortedatum>
+			<Geboortedatum>31-12-1995</Geboortedatum>
 			<Telefoonnummer>0625231500</Telefoonnummer>
 			<Email>Sander@gmail.com</Email>
 			<BetaalMethode/>
