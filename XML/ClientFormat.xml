@@ -5,7 +5,7 @@
 			<Adres>Kerkstraat 1</Adres>
 			<Postcode>1234AB</Postcode>
 			<Woonplaats>Amsterdam</Woonplaats>
-			<Geboortedatum>06-09-1990</Geboortedatum>
+			<Geboortedatum>06-09-1994</Geboortedatum>
 			<Telefoonnummer>0659845129</Telefoonnummer>
 			<Email>frankgraafmolen@gmail.com</Email>
 			<BetaalMethode/>
@@ -106,10 +106,10 @@
 	<Client BSN="136521598">
 		<ClientGegevens>
 			<Naam>Hans Jansen</Naam>
-			<Adres>Parieweg 12</Adres>
+			<Adres>Parieweg 1</Adres>
 			<Postcode>9846GH</Postcode>
 			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>23-01-1965</Geboortedatum>
+			<Geboortedatum>23-01-1968</Geboortedatum>
 			<Telefoonnummer>0626548523</Telefoonnummer>
 			<Email>hansjansen@hotmail.com</Email>
 			<BetaalMethode/>
