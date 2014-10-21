@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -34,7 +35,6 @@ public class AddKlantDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldNaam;
-	private JTextField textFieldAchternaam;
 	private JTextField textFieldGebDatum;
 	private JTextField textFieldBSN;
 	private JTextField textFieldAdres;
@@ -661,21 +661,46 @@ public class AddKlantDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
-						verzekeringPolissen.add(manager.createPolis(textFieldPolisNummer.getText(), comboBoxVerzekeringsType.getSelectedItem().toString(), Double.parseDouble(textFieldEigenRisico.getText()), textFieldStartDatum.getText(), textFieldEindDatum.getText()));
-						manager.createKlant(
-								textFieldBSN.getText(), 
-								textFieldNaam.getText(), 
+						String errorMessage = manager.checkKlant(
+								textFieldBSN.getText(),
+								textFieldNaam.getText(),
 								textFieldAdres.getText(), 
-								textFieldPostCode.getText(), 
-								textFieldPlaats.getText(), 
-								textFieldGebDatum.getText(), 
-								textFieldTelefoonnummer.getText(), 
-								textFieldEmail.getText(), 
-								textFieldRkNummer.getText(), 
-								Double.parseDouble(textFieldEigenRisico.getText()), 
-								verzekeringPolissen, 
-								comboBoxBetaalwijze.getSelectedItem().toString());
+								textFieldPostCode.getText(),
+								textFieldPlaats.getText(),
+								textFieldGebDatum.getText(),
+								textFieldTelefoonnummer.getText(),
+								textFieldEmail.getText(),
+								textFieldRkNummer.getText(),
+								comboBoxBetaalwijze.getSelectedItem().toString()) +
+						manager.checkPolis(
+								textFieldPolisNummer.getText(),
+								textFieldStartDatum.getText(), 
+								textFieldEindDatum.getText());
+						if (errorMessage != ""){
+							showConfirmationWindow(errorMessage);
+						}else{
+							ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
+							verzekeringPolissen.add(manager.createPolis(textFieldPolisNummer.getText(), comboBoxVerzekeringsType.getSelectedItem().toString(), Double.parseDouble(textFieldEigenRisico.getText()), textFieldStartDatum.getText(), textFieldEindDatum.getText()));
+							if( manager.createKlant(
+									textFieldBSN.getText(), 
+									textFieldNaam.getText(), 
+									textFieldAdres.getText(), 
+									textFieldPostCode.getText(), 
+									textFieldPlaats.getText(), 
+									textFieldGebDatum.getText(), 
+									textFieldTelefoonnummer.getText(), 
+									textFieldEmail.getText(), 
+									textFieldRkNummer.getText(), 
+									Double.parseDouble(textFieldEigenRisico.getText()), 
+									verzekeringPolissen, 
+									comboBoxBetaalwijze.getSelectedItem().toString())){
+								
+							}
+						}
+						
+							
+							
+					
 					}
 				});
 			}
@@ -690,7 +715,12 @@ public class AddKlantDialog extends JDialog {
 				});
 				buttonPane.add(cancelButton);
 			}
-		}
+		} 
 	}
+	
+	public void showConfirmationWindow(String message) {
+		 Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
 
+	}	
 }

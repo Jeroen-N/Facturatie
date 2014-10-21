@@ -14,7 +14,6 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class KlantManagerImpl implements KlantManager {
 	private Klant klant;
-	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
 	private DAOFactoryKlant DAOFactory = new DAOFactoryKlant();
 	private KlantDAO KlantDAO = new KlantDAOImpl();
 	private VerzekeringPolisDAO polisDAO = new VerzekeringPolisDAOImpl();
@@ -33,27 +32,10 @@ public class KlantManagerImpl implements KlantManager {
 
 		klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
 				Geboortedatum, TelefoonNr, Email, RekeningNr,
-				ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
+				ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);		
 		
-		errorMessage = checkKlant(klant);
-		
-		for(int i = 0; i <getBSNs().size();i++){
-			if(getBSNs().get(i).equals(BSN)){
-				errorMessage = errorMessage + "BSN is al bekend";
-				break;
-			}
-		}
-		
-		System.out.println(errorMessage);
-		if (errorMessage == "") {
-			// klant gegevens zijn correct ingevuld
 			return KlantDAO.addKlantXML(klant);
 
-		} else {
-			// fout melding weergeven in gui dat gegevens niet correct zijn
-			// moet eigelijk errorMessage return'en
-			return false;
-		}
 	}
 	
 	public ArrayList<Klant> getKlanten() {
@@ -68,17 +50,9 @@ public class KlantManagerImpl implements KlantManager {
 			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
 		
 		Klant klant = new Klant(BSN,Naam,Adres,Postcode,Woonplaats,Geboortedatum,TelefoonNr,Email,RekeningNr,ResterendEigenRisico,VerzekeringPolissen,Betaalwijze); 
-		errorMessage = checkKlant(klant);
-		System.out.println(errorMessage);
-		if (errorMessage == "") {
-			// klant gegevens zijn correct ingevuld
+
 			return KlantDAO.updateKlantXML(klant);
 
-		} else {
-			// fout melding weergeven in gui dat gegevens niet correct zijn
-			// moet eigelijk errorMessage return'en
-			return false;
-		}
 	}
 	
 	
@@ -110,63 +84,125 @@ public class KlantManagerImpl implements KlantManager {
 		return KlantDAO.verwijderKlantXML(BSN);
 	}
 
-	public String checkKlant(Klant klant) {
+	public String checkKlant(String BSN, String Naam, String Adres, String Postcode, String Woonplaats, String Geboortedatum,String TelefoonNr, String Email, String RkNummer, String Betaalwijze) {
 		errorMessage = "";
 		// nog toe tevoegen:
 		// controleer de waardes die ingevuld zijn
+		
 		// BSN
-		if (!klant.getBSN().matches("([0-9]{9})")) {
-			errorMessage = errorMessage + "\nBSN niet correct";
+		if (!BSN.matches("([0-9]{9})")) {
+			if (BSN.length() < 1) {
+				errorMessage = errorMessage + "\nBSN niet ingevuld";
+			}
+			else{
+					errorMessage = errorMessage + "\nBSN niet correct";
+			}
 		}
-		// Postcode
-		if (!klant.getPostcode().matches("([0-9]{4})([A-Z]{2})")) {
-			errorMessage = errorMessage + "\nPostcode niet correct";
+		else{
+			for(int i = 0; i <getBSNs().size();i++){
+				if((getBSNs().get(i)).equals(BSN)){
+				    errorMessage = errorMessage + "BSN is al bekend";
+				    break;
+				}
+			}
 		}
-		// Woonplaats
-		if (!klant.getWoonplaats().matches("([A-Z]{1})([a-z]{1,})")) {
-			errorMessage = errorMessage + "\nWoonplaats niet correct ";
+		// Naam
+		if (Naam.length() < 1) {
+			errorMessage = errorMessage + "\nNaam niet ingevuld";
 		}
+		
 		// GeboorteDatum
-		if (!klant.getGeboortedatum().matches(
-				"([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+		if (!Geboortedatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+			if (Geboortedatum.length() < 1) {
+				errorMessage = errorMessage + "\nGeboortedatum niet ingevuld";
+			}else{
 			errorMessage = errorMessage + "\nGeboortedatum niet correct ";
+			}
 		}
+		
+		// adres
+		if (Adres.length() < 1) {
+			errorMessage = errorMessage + "\nAdres niet ingevuld";
+		}
+		
+		// Postcode
+		if (!Postcode.matches("([0-9]{4})([A-Z]{2})")) {
+			if (Postcode.length() < 1) {
+				errorMessage = errorMessage + "\nPostcode niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nPostcode niet correct";
+			}
+		}
+		
+		//woonplaats
+		if (Woonplaats.length() < 1) {
+			errorMessage = errorMessage + "\nWoonplaats niet ingevuld";
+		}
+		
 		// Telefoonnummer
-		if (!klant.getTelefoonnummer().matches("([0-9]{10})")
+		if (!TelefoonNr.matches("([0-9]{10})")
 				|| !klant.getTelefoonnummer().substring(0, 2).matches("06")) {
-			errorMessage = errorMessage + "\nTelefoonnummer niet correct";
+			if (TelefoonNr.length() < 1) {
+				errorMessage = errorMessage + "\nTelefoonnummer niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nTelefoonnummer niet correct";
+			}
 		}
+		
 		// Email
-		if (!klant.getEmail().matches("(.+)([@]{1})(.+)([.]{1})(.+)")) {
-			errorMessage = errorMessage + "\nEmail niet correct";
+		if (!Email.matches("(.+)([@]{1})(.+)([.]{1})(.+)")) {
+			if (Email.length() < 1) {
+				errorMessage = errorMessage + "\nEmailadres niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nEmailadres niet correct";
+			}
 		}
 		
-		VerzekeringPolissen = klant.getVerzekeringPolissen();
+		//Betaalwijze
+		if (Betaalwijze.length() < 1) {
+			errorMessage = errorMessage + "\nEr is geen betaalwijze gekozen";
+		}
 		
+		//RekeningNummer
+		if (RkNummer.length() < 1) {
+			errorMessage = errorMessage + "\nRekeningnummer niet ingevuld";
+		}
+		return errorMessage;
+	}
+	
+	public String checkPolis(String PolisNummer, String StartDatum, String EindDatum){
+		errorMessage = "";
 		// PolisNummer
-		for(VerzekeringPolis polis : VerzekeringPolissen){
-		if (!polis.getPolisNummer().matches("([0-9A-Z]{6})")) {
+		if (!PolisNummer.matches("([0-9A-Z]{6})")) {
 			errorMessage = errorMessage + "\nPolisNummer niet correct";
 		}
 		
 		// StartDatum
 		// zet het jaar op het actuele jaar.
-		if (!polis.getStartDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
-			errorMessage = errorMessage + "\nStart datum niet correct ";
+		if (!StartDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+			if (StartDatum.length() < 1) {
+				errorMessage = errorMessage + "\nStart datum niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nStart datum niet correct ";
+			}			
 		}
 		
 		// EindDatum
 		// zorgen dat einddatum niet eerder is dan startdatum
-		if (!polis.getEindDatum().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
-			errorMessage = errorMessage + "\nEind datum niet correct ";
+		if (!EindDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+			if (EindDatum.length() < 1) {
+				errorMessage = errorMessage + "\nEind datum niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nEind datum niet correct ";
+			}	
 		}
-
-		}
-		// System.out.println(errorMessage);
 		return errorMessage;
 	}
-	
-	//create Verzekering Polis nog aan maken
 	
 	public VerzekeringPolis createPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);

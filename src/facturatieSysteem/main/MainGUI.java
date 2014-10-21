@@ -21,8 +21,6 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
 public class MainGUI {
 	private JFrame frame;
 	private JTable Klant_Table;
@@ -333,6 +331,6 @@ public class MainGUI {
 		 * Set visibility of the frame
 		 */
 		frame.setVisible(true);
-
+		
 	}
 }
