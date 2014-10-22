@@ -255,6 +255,24 @@
 				<startDatum>10-10-2014</startDatum>
 				<eindDatum>10-10-2015</eindDatum>
 			</VerzekeringPolis>
-		</VerzekeringPolissen>
+		
+			<VerzekeringPolis PolisNummer="S004W0">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>10-10-2015</startDatum>
+				<eindDatum>10-10-2016</eindDatum>
+			</VerzekeringPolis>
+			<VerzekeringPolis PolisNummer="S004W0">
+				<VerzekeringType>Type 1</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>10-10-2015</startDatum>
+				<eindDatum>10-10-2016</eindDatum>
+			</VerzekeringPolis>
+			<VerzekeringPolis PolisNummer="7UE6WC">
+				<VerzekeringType>Type 2</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-01-0001</startDatum>
+				<eindDatum>01-01-0002</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
 	</Client>
 </Clienten>

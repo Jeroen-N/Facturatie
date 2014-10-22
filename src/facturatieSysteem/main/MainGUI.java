@@ -25,6 +25,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeVerzekeringPolisDialog;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.event.MouseAdapter;
@@ -265,7 +266,7 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangePolis.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
-					ChangeVerzekeringsPolisDialog changeKlantDialog = new ChangeVerzekeringsPolisDialog(KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					ChangeVerzekeringPolisDialog changeKlantDialog = new ChangeVerzekeringPolisDialog(KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
 					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);

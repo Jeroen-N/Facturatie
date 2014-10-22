@@ -694,6 +694,8 @@ public class AddVerzekeringPolisDialog extends JDialog {
 										textFieldStartDatum.getText(), 
 										textFieldEindDatum.getText())){
 									showConfirmationWindow("Polis Teovoegen Mislukt");
+								}else{
+									dispose();
 								}
 							}
 						}
