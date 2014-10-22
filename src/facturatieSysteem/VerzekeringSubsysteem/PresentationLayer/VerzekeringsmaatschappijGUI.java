@@ -1,37 +1,51 @@
 package facturatieSysteem.VerzekeringSubsysteem.PresentationLayer;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
+
 import javax.swing.JScrollPane;
+
 import java.awt.Dimension;
 import java.awt.Frame;
+
 import javax.swing.JList;
+
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
+import facturatieSysteem.main.*;
 
 public class VerzekeringsmaatschappijGUI extends JFrame {
 
-	private JPanel facturatiePane;
+	private JPanel VerzekeringPanel;
 	private JTextField zoekVeld;
 
 	/**
 	 * Create the frame.
 	 */
 	public VerzekeringsmaatschappijGUI() {
+
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		facturatiePane = new JPanel();
-		facturatiePane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		facturatiePane.setLayout(new BorderLayout(0, 0));
+		VerzekeringPanel = new JPanel();
+		VerzekeringPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
 
 		// / Header paneel
 		JPanel headerpaneel = new JPanel();
-		facturatiePane.add(headerpaneel, BorderLayout.NORTH);
+		VerzekeringPanel.add(headerpaneel, BorderLayout.NORTH);
 		headerpaneel.setLayout(new BorderLayout(0, 0));
 
 		JButton btnTerug = new JButton("Terug");
@@ -43,21 +57,22 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		// /Terugknop action
 		btnTerug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				facturatiePane.setVisible(false);
-				///mainPanel.setVisible(true);
+				VerzekeringPanel.setVisible(false);
+			/*	KlantenPanel.setVisible(true);*/
+
 			}
 		});
-		
-		/// Zoekveld
+
+		// / Zoekveld
 		zoekVeld = new JTextField();
 		zoekVeld.setSize(new Dimension(6, 20));
 		zoekVeld.setMaximumSize(new Dimension(6, 20));
 		headerpaneel.add(zoekVeld, BorderLayout.WEST);
 		zoekVeld.setColumns(10);
 
-		/// Tabel Paneel
+		// / Tabel Paneel
 		JPanel tabelpaneel = new JPanel();
-		facturatiePane.add(tabelpaneel, BorderLayout.CENTER);
+		VerzekeringPanel.add(tabelpaneel, BorderLayout.CENTER);
 		tabelpaneel.setLayout(new BorderLayout(0, 0));
 
 		// / Totaal lijst
@@ -68,26 +83,45 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 
 		// / Info Paneel (Rechterkant)
 		JPanel infopaneel = new JPanel();
-		facturatiePane.add(infopaneel, BorderLayout.EAST);
+		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
 		infopaneel.setLayout(new BorderLayout(5, 5));
 
 		JPanel knoppenPaneel = new JPanel();
+		knoppenPaneel.setPreferredSize(new Dimension(250, 40));
+		knoppenPaneel.setMaximumSize(new Dimension(250, 250));
 		infopaneel.add(knoppenPaneel, BorderLayout.SOUTH);
 
 		// / Info/knoppen Paneel + de Knoppen en Lijst
-		JButton btnToevoegen = new JButton("Toevoegen");
-		btnToevoegen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
+		final JButton btnToevoegen = new JButton("Toevoegen");
+		btnToevoegen.addMouseListener(new MouseAdapter() {
+			/*@Override
+			public void mouseClicked(MouseEvent e) {
+				if (btnWijzigen.isEnabled()) {
+					AddVerzekeringDialog addVerzekeringDialog =  new AddVerzekeringDialog(VerzekeringsmaatschappijManager, maatschappijManager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 1).toString());
+					addVerzekeringDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					addVerzekeringDialog.setModal(true);
+					addVerzekeringDialog.setVisible(true);
+					addVerzekeringDialog.addWindowListener(new WindowAdapter() {
+						public void windowClosed(WindowEvent e) {
+					    	System.out.println("window is closed");
+							VerzekeringPanel.removeAll();
+							//Verzekering_info.removeAll();
+							//insertTable();
+						} 
+					});
+				}
+				
+			} */
+			
 		});
 		knoppenPaneel.setLayout(new BorderLayout(0, 0));
-		knoppenPaneel.add(btnToevoegen, BorderLayout.NORTH);
-
+		knoppenPaneel.add(btnToevoegen, BorderLayout.WEST);
+		
 		JButton btnWijzigen = new JButton("Wijzigen");
 		knoppenPaneel.add(btnWijzigen, BorderLayout.CENTER);
-
+		
 		JButton btnVerwijderen = new JButton("Verwijderen");
-		knoppenPaneel.add(btnVerwijderen, BorderLayout.SOUTH);
+		knoppenPaneel.add(btnVerwijderen, BorderLayout.EAST);
 
 		JList list = new JList();
 		infopaneel.add(list, BorderLayout.CENTER);
