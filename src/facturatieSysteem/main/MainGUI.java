@@ -60,6 +60,7 @@ public class MainGUI {
 	// Get a logger instance for the current class
 	static Logger logger = Logger.getLogger(MainGUI.class);
 	private JButton btnChangePolis;
+	private JButton btnReset;
 
 	public MainGUI(KlantManager klantManager,
 			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
@@ -247,6 +248,18 @@ public class MainGUI {
 			}
 		});
 		Klant_zoeken.add(btnZoekKlant,BorderLayout.EAST );
+		
+		btnReset = new JButton("Reset");
+		btnReset.setIconTextGap(0);
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Klant_Table.removeAll();
+				fillTable();
+				Uitgebreide_Info.setText("");
+				PolisInfo.setText("");
+			}
+		});
+		Klant_zoeken.add(btnReset);
 
 		/*
 		 * Create panel for more information about klant

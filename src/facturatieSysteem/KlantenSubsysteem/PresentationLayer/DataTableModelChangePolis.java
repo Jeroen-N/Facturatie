@@ -1,36 +1,33 @@
-package facturatieSysteem.main;
+package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.table.AbstractTableModel;
-import org.apache.log4j.Logger;
-import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
-/**
- * This class provides a data model for the JTable component in the UI. Using this data model
- * enables us to quickly perform operations on the table containing member information. The contents of 
- * this data model are automatically displayed in the corresponding JTable. 
- * 
- * @author Robin Schellius
- */
-@SuppressWarnings("serial")
-public class DataTableModelVerzekeringen extends AbstractTableModel {
+import javax.swing.table.AbstractTableModel;
+
+import org.apache.log4j.Logger;
+
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
+import facturatieSysteem.main.DataTableModel;
+
+public class DataTableModelChangePolis extends AbstractTableModel{
 
 	private Vector<String[]> cache; // will hold String[] objects . . .
 	private int colCount;
 	private String[] headers;
 
 	// Get a logger instance for the current class
-	static Logger logger = Logger.getLogger(DataTableModelVerzekeringen.class);
+	static Logger logger = Logger.getLogger(DataTableModel.class);
 
 	/**
 	 * Constructor.
 	 */
-	public DataTableModelVerzekeringen() {
+	public DataTableModelChangePolis() {
 		logger.debug("Constructor");
 
 		// colcount is hardcoded here; change if you want to display more columns.
-		colCount = 4;
+		colCount = 5;
 		headers = new String[colCount];
 		cache = new Vector<String[]>();
 	}
@@ -67,27 +64,24 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 	 * 
 	 * @param members ArrayList containing the values to be set.
 	 */
-	public void setValues(ArrayList<Verzekeringsmaatschappij> verzekeringen) {
+	public void setValues(ArrayList<VerzekeringPolis> verPolis) {
 		
-		logger.debug("setValues RemoteMemberInfo");
+		logger.debug("setValues klanten");
 		int colcount = getColumnCount();
-		int rowcount = verzekeringen.size();
+		int rowcount = verPolis.size();
 		String[][] values = new String[rowcount][colcount];
 		
-		for(int i = 0; i < verzekeringen.size(); i++) 
+		for(int i = 0; i < verPolis.size(); i++) 
 		{
-			Verzekeringsmaatschappij verzekering = verzekeringen.get(i);
+			VerzekeringPolis polis = verPolis.get(i);
 			
-			String naam = verzekering.getNaam();
-			String adres = verzekering.getAdres();
-			String postcode = verzekering.getPostcode();
-			String plaats = verzekering.getPlaats();
-			String KVK = Integer.toString(i); verzekering.getKVK();
-			String RekeningNr = Integer.toString(i); verzekering.getRekeningNR();
+			String Polisnummer = polis.getPolisNummer();
+			String VerzekeringsType = polis.getVerzekeringsType();
+			String eigenRisico = String.valueOf(polis.getExtraEigenRisico());
+			String startdatum = polis.getStartDatum();
+			String einddatum = polis.getEindDatum();
 			
-			
-			
-			String[] value = { naam, adres, postcode, plaats, KVK, RekeningNr};
+			String[] value = { Polisnummer, VerzekeringsType, eigenRisico, startdatum, einddatum};
 	
 			values[i] = value;
 		}
@@ -136,4 +130,5 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		return ((String[]) cache.elementAt(row))[col];
 	}
+	
 }

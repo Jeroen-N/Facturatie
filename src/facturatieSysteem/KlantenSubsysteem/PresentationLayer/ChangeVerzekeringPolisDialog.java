@@ -1,11 +1,14 @@
 package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,12 +16,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.main.DataTableModel;
+import facturatieSysteem.main.MainGUI;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.TableColumn;
+
+import org.apache.log4j.Logger;
 
 
 public class ChangeVerzekeringPolisDialog extends JDialog {
@@ -27,17 +41,27 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel changeVerzekeringPolis, changePolis_1, changePolis_2, buttonPane;
-	private JTable table;
+	private JTable polistable;
+	private JScrollPane polisScrollPane;
+	
+	// The datamodel to be displayed in the JTable.
+	private DataTableModelChangePolis dataTableModelChangePolis;
+	private ArrayList<VerzekeringPolis> polissen = null;
+	
+	// Get a logger instance for the current class
+	static Logger logger = Logger.getLogger(MainGUI.class);
+	
 	/**
 	 * Create the dialog.
 	 */
-	public ChangeVerzekeringPolisDialog(final KlantManager manager,
-			final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
+	@SuppressWarnings("serial")
+	public ChangeVerzekeringPolisDialog(final KlantManager manager, final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 632, 480);
+		setBounds(100, 100, 795, 509);
 		getContentPane().setLayout(new BorderLayout());
-		manager.getKlant(BSN);
+		dataTableModelChangePolis = new DataTableModelChangePolis();
+		final Klant klant = manager.getKlant(BSN);
 		{
 			/*
 			 * JTabbedPane wordt aangemaakt
@@ -86,9 +110,35 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						}
 					}
 					{
-						table = new JTable();
-						changePolis_1.add(table, BorderLayout.CENTER);
-					}
+						polistable = new JTable(dataTableModelChangePolis) {
+							public boolean isCellEditable(int rowIndex, int mColIndex) {
+								return false;
+							}
+						};
+						String[] headers = new String[] { "Polisnummer", "Type", "Eigen risico", "Start datum", "Eind datum" };
+						dataTableModelChangePolis.setTableHeader(headers);
+						
+						TableColumn column = column = polistable.getColumnModel().getColumn(0);
+						column.setPreferredWidth(6);
+						
+						polistable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						
+						polissen = klant.getVerzekeringPolissen();
+						int count = (polissen == null) ? 0 : polissen.size();
+						
+						if(count > 0){
+							dataTableModelChangePolis.setValues(polissen);
+						}
+						
+						polisScrollPane = new JScrollPane(polistable);
+						polistable.setFillsViewportHeight(true);
+						polisScrollPane.setBorder(new TitledBorder(new LineBorder(new Color(
+								0, 0, 0)), "Polislijst", TitledBorder.LEADING,
+								TitledBorder.TOP, null, null));
+						polistable.getTableHeader().setReorderingAllowed(false);
+						polistable.getTableHeader().setResizingAllowed(false);
+						changePolis_1.add(polisScrollPane, BorderLayout.CENTER);
+						}
 					}
 				}
 				
@@ -118,6 +168,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						}
 					}
 				}
+				
+				
 			}
 		
 		{
