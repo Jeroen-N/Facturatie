@@ -264,7 +264,7 @@ public class ChangeKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						changeKlant_1.add(splitPanePlaats);
 						{
-							JLabel lblPlaats = new JLabel("Plaats: ");
+							JLabel lblPlaats = new JLabel("WoonPlaats: ");
 							lblPlaats
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats
@@ -584,7 +584,7 @@ public class ChangeKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						changeKlant_2.add(splitPanePlaats);
 						{
-							JLabel lblPlaats2 = new JLabel("Plaats: ");
+							JLabel lblPlaats2 = new JLabel("WoonPlaats: ");
 							lblPlaats2
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats2

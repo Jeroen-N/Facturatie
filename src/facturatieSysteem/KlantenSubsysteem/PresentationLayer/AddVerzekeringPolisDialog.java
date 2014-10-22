@@ -264,7 +264,7 @@ public class AddVerzekeringPolisDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						addPolis_1.add(splitPanePlaats);
 						{
-							JLabel lblPlaats = new JLabel("Plaats: ");
+							JLabel lblPlaats = new JLabel("WoonPlaats: ");
 							lblPlaats
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats

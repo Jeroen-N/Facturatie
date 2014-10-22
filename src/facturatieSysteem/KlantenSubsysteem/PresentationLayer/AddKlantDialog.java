@@ -254,7 +254,7 @@ public class AddKlantDialog extends JDialog {
 								.setPreferredSize(new Dimension(300, 30));
 						addKlant_1.add(splitPanePlaats);
 						{
-							JLabel lblPlaats = new JLabel("Plaats: ");
+							JLabel lblPlaats = new JLabel("WoonPlaats: ");
 							lblPlaats
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPlaats
@@ -497,11 +497,11 @@ public class AddKlantDialog extends JDialog {
 							}
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									comboBoxVerzekeringsType.removeAllItems();;
+									comboBoxVerzekeringsType.removeAllItems();
 									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										System.out.println("types combobox vullen");
+										
 										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
@@ -543,7 +543,8 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									if(comboBoxVerzekeringsType.getSelectedItem() != ""){
+									textFieldEigenRisico.setText("");
+									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""){
 										textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstype(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()),comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
 									}
 								}
