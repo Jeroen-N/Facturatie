@@ -34,10 +34,6 @@ public class DAOFactoryFactuur {
 	public FactuurDAO getFactuurDAO() {
 		return new FactuurDAO();
 	}
-
-	public BehandelingDAO getBehandelingDAO() {
-		return new BehandelingDAO();
-	}
 	
 	public Document validateXML(){
 		try{

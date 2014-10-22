@@ -2,7 +2,6 @@ package facturatieSysteem.FacturatieSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
 
-import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
@@ -11,17 +10,18 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class FacturatieManagerImpl implements FacturatieManager {
 
-	private KlantDAO klantDAO;
-	private BehandelingDAO behandelingDAO;
 	private FactuurDAO factuurDAO;
+	private ArrayList<Factuur> facturen;
 
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO();
+
+		facturen = new ArrayList<>();
 	}
 
 	@Override
 	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen) {
-		// TODO Auto-generated method stub
+		facturen = factuurDAO.haalFacturen(klant.getBSN());
 		return true;
 	}
 
