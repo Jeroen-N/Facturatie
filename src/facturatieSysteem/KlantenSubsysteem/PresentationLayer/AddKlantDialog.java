@@ -490,10 +490,8 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringMaatschappij
 									.setRightComponent(comboBoxMaatschappij);
 							comboBoxMaatschappij.addItem("");
-							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager
-									.getVerzekeringsmaatschappijen()) {
-								comboBoxMaatschappij.addItem(maatschappij
-										.getNaam());
+							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+								comboBoxMaatschappij.addItem(maatschappij.getNaam());
 							}
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {

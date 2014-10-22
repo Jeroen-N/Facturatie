@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 
 public class ChangeVerzekeringPolisDialog extends JDialog {
@@ -25,6 +27,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel changeVerzekeringPolis, changePolis_1, changePolis_2, buttonPane;
+	private JTable table;
 	/**
 	 * Create the dialog.
 	 */
@@ -64,8 +67,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 					 */
 					changePolis_1 = new JPanel();
 					changeVerzekeringPolis.add(changePolis_1, BorderLayout.WEST);
-					changePolis_1.setLayout(new BoxLayout(changePolis_1,
-							BoxLayout.Y_AXIS));
+					changePolis_1.setLayout(new BorderLayout(0, 0));
 					{
 						JPanel panel = new JPanel();
 						panel.setMinimumSize(new Dimension(300, 20));
@@ -73,7 +75,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						panel.setPreferredSize(new Dimension(300, 20));
 						panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 						panel.setAlignmentY(Component.TOP_ALIGNMENT);
-						changePolis_1.add(panel);
+						changePolis_1.add(panel, BorderLayout.NORTH);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
 							JLabel lblKlant = new JLabel("Polissen");
@@ -82,7 +84,11 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							lblKlant.setMaximumSize(new Dimension(100, 20));
 							panel.add(lblKlant, BorderLayout.WEST);
 						}
-					}		
+					}
+					{
+						table = new JTable();
+						changePolis_1.add(table, BorderLayout.CENTER);
+					}
 					}
 				}
 				

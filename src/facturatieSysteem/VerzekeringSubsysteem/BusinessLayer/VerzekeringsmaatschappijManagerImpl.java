@@ -40,7 +40,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 	
-	public static ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
+	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
 	}
 
