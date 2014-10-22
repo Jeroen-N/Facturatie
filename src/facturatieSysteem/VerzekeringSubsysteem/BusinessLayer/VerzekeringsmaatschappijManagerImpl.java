@@ -7,11 +7,13 @@ package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
 
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
+	private VerzekeringsmaatschappijDAOImpl VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 	
 	@Override
 	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
@@ -73,15 +75,16 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 	
+	public void importData(ArrayList<Verzekeringsmaatschappij> lijst){
+		for(Verzekeringsmaatschappij maatschappij : lijst){
+			this.addVerzekeringsmaatschappij(maatschappij);
+		}
+	}
+	
 	public void fill(){
-		Verzekeringsmaatschappij maatschappij1 = new Verzekeringsmaatschappij("Xander Gerritman Verzekeringsmaatschappij", "Ondergelopendijk 21", "3131XG", "Hulst", 123456789, 11111111);
-		Verzekeringstype type1 = new Verzekeringstype(1, 250, "Type 1");
-		Verzekeringstype type2 = new Verzekeringstype(1, 250, "Type 2");
-		this.addVerzekeringstype(maatschappij1, type1);
-		this.addVerzekeringstype(maatschappij1, type2);
-		this.addVerzekeringsmaatschappij(maatschappij1);
-		
-		
-		System.out.println("DEBUG: Verzekeringen aangemaakt.");
+		//MBV DAO aanmaken gegevens
+		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
+		this.importData(lijst);
+		System.out.println("Dit is een konijn konijn konijn");
 	}
 }

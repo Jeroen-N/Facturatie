@@ -5,20 +5,24 @@
  */
 package facturatieSysteem.VerzekeringSubsysteem.EntityLayer;
 
+import java.util.ArrayList;
+
 public class Verzekeringstype {
 	private int VerzekeringsTypeID;
 	private int EigenRisico;
 	private String Naam;
+	private ArrayList<String> behandelcodes = new ArrayList<>();
 	
 	/*
 	 * @param VerzekeringsTypeID Het ID van de verzekeringstype
 	 * @param EigenRisico Het eigen risico van het type verzekering
 	 * @param behandelcodes de behandelcodes
 	 */
-	public Verzekeringstype(int VerzekeringsTypeID, int EigenRisico, String Naam){
+	public Verzekeringstype(int VerzekeringsTypeID, int EigenRisico, String Naam, ArrayList<String> behandelcodes){
 		this.VerzekeringsTypeID = VerzekeringsTypeID;
 		this.EigenRisico = EigenRisico;
 		this.Naam = Naam;
+		this.behandelcodes = behandelcodes;
 	}
 	
 	/*
