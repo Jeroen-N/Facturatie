@@ -292,7 +292,8 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				KlantenPanel.setVisible(false);
-				FacturatiePanel.add(FacturatieGUI.FacturatieGUI());
+				Klant fact = KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+				FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact));
 				FacturatiePanel.setVisible(true);
 			}
 		});		

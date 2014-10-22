@@ -51,8 +51,8 @@ public class FactuurDAO implements FactuurDAOinf {
 							.getElementsByTagName("factuur");
 					for (int j = 0; j < factuurnode.getLength(); j++) {
 						Element factuurElement = (Element) factuurnode.item(j);
-						int factuurNummer = Integer.parseInt(factuurElement
-								.getAttribute("factuurNummer"));
+						String factuurNummer = factuurElement
+								.getAttribute("factuurNummer");
 						String factuurDatum = factuurElement
 								.getElementsByTagName("factuurDatum").item(0)
 								.getTextContent();
@@ -72,7 +72,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						 */
 
 						factuur = new Factuur(factuurNummer, factuurDatum,
-								vervalDatum, invoerBSN, eigenRisico);
+								vervalDatum, invoerBSN, 00, null);
 						facturen.add(factuur);
 
 					}
@@ -104,16 +104,7 @@ public class FactuurDAO implements FactuurDAOinf {
 
 					// Maak een tijdelijke lijst aan van alle facturen die er
 					// zijn en bepaal hier het hoogste factuurnummer
-					ArrayList<Factuur> alleFacturen = haalAlleFacturen();
-					int n1 = 0;
-					int n2 = 0;
-					for (Factuur lijstFactuur : alleFacturen) {
-						n1 = lijstFactuur.getFactuurNummer();
-
-						if (n1 >= n2) {
-							n2 = n1;
-						}
-					}
+				
 
 					// Maak het factuurnummer het hoogste nummer.
 					// factuurNummer.setValue("" + n2 + 1);
@@ -202,17 +193,21 @@ public class FactuurDAO implements FactuurDAOinf {
 						.getElementsByTagName("Factuur");
 				for (int j = 0; j < factuurnode.getLength(); j++) {
 					Element factuurElement = (Element) factuurnode.item(j);
-					int factuurNummer = Integer.parseInt(factuurElement
-							.getAttribute("FactuurNummer"));
+					String factuurNummer = factuurElement
+							.getAttribute("FactuurNummer");
 					String factuurDatum = factuurElement
 							.getElementsByTagName("FactuurDatum").item(0)
 							.getTextContent();
 					String vervalDatum = factuurElement
 							.getElementsByTagName("VervalDatum").item(0)
 							.getTextContent();
+					
+					//TODO in xml zetten zodat deze een waarde heeft
 					//double eigenRisico = Double.parseDouble(factuurElement
-						//	.getElementsByTagName("EigenRisico").item(0)
+							//.getElementsByTagName("EigenRisico").item(0)
 							//.getTextContent());
+					
+					//TODO status meegeven! 
 					/*
 					 * System.out.println("factuur: " + (i+1));
 					 * System.out.println(factuurNummer);
@@ -223,7 +218,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					 */
 
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN, 00);
+							vervalDatum, BSN, 00, null);
 					facturen.add(factuur);
 
 				}

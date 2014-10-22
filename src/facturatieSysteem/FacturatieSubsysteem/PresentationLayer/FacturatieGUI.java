@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
@@ -31,18 +34,21 @@ public class FacturatieGUI {
 	private static JLabel paginaNaam;
 	private static Container contentpane;
 	private static Color GRAY;
+	private static JScrollPane factuurTablePanel;
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JPanel mainPanel = new JPanel();
+	private static Klant klant;
+	private static ArrayList<Factuur> facturen;
+	private static DataTableModelFactuur dataTableModel;
 
-	public FacturatieGUI(FacturatieManagerImpl facturatieManagerImpl) {
-		this.facturatieManagerImpl = facturatieManagerImpl;
-		FacturatieGUI();
-	}
-
-	public static JPanel FacturatieGUI() {
+	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");
 		paneel.add(scrollPane, BorderLayout.CENTER);
+		facturatieManagerImpl = factManagerImpl;
+		klant = klnt;
+		facturen = new ArrayList<>();
+		dataTableModel = new DataTableModelFactuur();
 		return initComponents();
 	}
 
@@ -88,19 +94,40 @@ public class FacturatieGUI {
 		zoekbalk.setText("Vul factuurcode in");
 
 		// Tabel onderverdelen in kolommen en vastzetten.
-		overzicht = new JTable();
-		overzicht.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Naam", "Datum", "Status" }));
-		overzicht.setEnabled(false);
-		overzicht.getTableHeader().setReorderingAllowed(false);
-		DefaultTableModel model = new DefaultTableModel();
+		overzicht = new JTable(dataTableModel){
+		/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+	};
+	String[] headers = new String[] { "Factuurnummer", "Factuurdatum", "Vervaldatum", "Status"};
+	dataTableModel.setTableHeader(headers);
+
+	TableColumn column = overzicht.getColumnModel().getColumn(0);
+	column.setPreferredWidth(6);
+
+	// Handle row selection, only one row can be selected
+	overzicht.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	
+	fillTable(klant);
+	
+	factuurTablePanel = new JScrollPane(overzicht);
+	overzicht.setFillsViewportHeight(true);
+	factuurTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
+			0, 0, 0)), "Facturenlijst", TitledBorder.LEADING,
+			TitledBorder.TOP, null, null));
+	overzichtPanel.add(factuurTablePanel, BorderLayout.CENTER);
 
 		// panels vullen
 		buttonPanel.add(factureerKnop);
 		buttonPanel.add(openFactuurKnop);
 		buttonPanel.add(printFactuurKnop);
 
-		overzichtPanel.add(overzicht);
+		//overzichtPanel.add(overzicht);
 
 		headPanel.add(paginaNaam);
 		headPanel.add(zoekKnop);
@@ -133,5 +160,14 @@ public class FacturatieGUI {
 
 	public void toonFactuur(Factuur factuur) {
 
+	}
+	
+	public static void fillTable(Klant klant){
+		facturen = facturatieManagerImpl.haalFacturen(klant.getBSN());
+		int count = (facturen == null) ? 0 : facturen.size();
+		
+		if(count > 0){
+		dataTableModel.setValues(facturen);
+		}
 	}
 }

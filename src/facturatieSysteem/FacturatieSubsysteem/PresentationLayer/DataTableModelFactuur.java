@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.FacturatieSubsysteem.PresentationLayer;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.log4j.Logger;
 
+import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 /**
@@ -17,19 +18,19 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
  * @author Robin Schellius
  */
 @SuppressWarnings("serial")
-public class DataTableModel extends AbstractTableModel {
+public class DataTableModelFactuur extends AbstractTableModel {
 
 	private Vector<String[]> cache; // will hold String[] objects . . .
 	private int colCount;
 	private String[] headers;
 
 	// Get a logger instance for the current class
-	static Logger logger = Logger.getLogger(DataTableModel.class);
+	static Logger logger = Logger.getLogger(DataTableModelFactuur.class);
 
 	/**
 	 * Constructor.
 	 */
-	public DataTableModel() {
+	public DataTableModelFactuur() {
 		logger.debug("Constructor");
 
 		// colcount is hardcoded here; change if you want to display more columns.
@@ -70,23 +71,24 @@ public class DataTableModel extends AbstractTableModel {
 	 * 
 	 * @param members ArrayList containing the values to be set.
 	 */
-	public void setValues(ArrayList<Klant> klanten) {
+	public void setValues(ArrayList<Factuur> facturen) {
 		
-		logger.debug("setValues klanten");
+		logger.debug("");
 		int colcount = getColumnCount();
-		int rowcount = klanten.size();
+		int rowcount = facturen.size();
 		String[][] values = new String[rowcount][colcount];
 		
-		for(int i = 0; i < klanten.size(); i++) 
+		for(int i = 0; i < facturen.size(); i++) 
 		{
-			Klant klant = klanten.get(i);
+		Factuur factuur = facturen.get(i);
 			
-			String memberNaam = klant.getNaam();
-			String bsn = klant.getBSN();
-			String gebDatum = klant.getGeboortedatum();
-			String adres = klant.getAdres();
+			String nummer = factuur.getFactuurNummer();
+			String datum = factuur.getFactuurDatum();
+			String vDatum = factuur.getVervalDatum();
+			String status = factuur.getStatus();
+
 			
-			String[] value = { memberNaam, bsn, gebDatum, adres};
+			String[] value = { nummer, datum, vDatum, status};
 	
 			values[i] = value;
 		}

@@ -31,12 +31,13 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		int n1 = 0;
 		int n2 = 0;
 		for (Factuur lijstFactuur : facturen) {
-			n1 = lijstFactuur.getFactuurNummer();
+			n1 = Integer.parseInt(lijstFactuur.getFactuurNummer());
 
 			if (n1 >= n2) {
 				n2 = n1;
 			}
 		}
+		String factuurNummer = Integer.toString(n2);
 		
 		//De factuurdatum aanmaken
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

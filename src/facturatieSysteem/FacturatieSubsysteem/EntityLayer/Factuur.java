@@ -4,20 +4,32 @@ import java.util.ArrayList;
 
 public class Factuur implements ImmutableFactuur {
 
-	private int factuurNummer;
+	private String factuurNummer;
 	private String factuurDatum;
 	private String vervalDatum;
 	private String BSN;
 	private ArrayList<Behandeling> behandelingen;
 	private double eigenRisico;
+	private String status;
 
-	public Factuur(int factuurNummer, String factuurDatum, String vervalDatum, String BSN, double eigenRisico) {
+	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double eigenRisico, String status) {
 		this.factuurNummer = factuurNummer;
 		this.factuurDatum = factuurDatum;
 		this.vervalDatum = vervalDatum;
 		this.BSN = BSN;
 		this.eigenRisico = eigenRisico;
 		behandelingen = new ArrayList<>();
+		this.status = status;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
@@ -54,12 +66,12 @@ public class Factuur implements ImmutableFactuur {
 	}
 
 
-	public int getFactuurNummer() {
+	public String getFactuurNummer() {
 		return factuurNummer;
 	}
 
 
-	public void setFactuurNummer(int factuurNummer) {
+	public void setFactuurNummer(String factuurNummer) {
 		this.factuurNummer = factuurNummer;
 	}
 
