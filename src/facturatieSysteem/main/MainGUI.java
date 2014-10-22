@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
+import javax.swing.text.DefaultCaret;
 
 import org.apache.log4j.Logger;
 
@@ -238,6 +239,8 @@ public class MainGUI {
 		PolisInfo.setEditable(false);
 		scroll = new JScrollPane(PolisInfo);
 		Info_Polis.add(scroll);
+		DefaultCaret caret = (DefaultCaret) PolisInfo.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		separator = new JSeparator();
 		Info_Polis.add(separator, BorderLayout.NORTH);
 
@@ -431,7 +434,9 @@ public class MainGUI {
 		 */
 		frame.setVisible(true);
 	}
-	
+	/*
+	 * Methode om de table te kunnen vullen en updaten
+	 */
 	public void fillTable(){
 		memberList = KlantManager.getKlanten();
 		int count = (memberList == null) ? 0 : memberList.size();
@@ -441,6 +446,9 @@ public class MainGUI {
 		}
 	}
 	
+	/*
+	 * Methode om het informatie veld te kunnen vullen en updaten
+	 */
 	public void fillField(int row){
 		String b_s_n = Klant_Table.getModel().getValueAt(row, 1)
 				.toString();

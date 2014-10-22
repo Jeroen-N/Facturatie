@@ -3,7 +3,7 @@
 		<ClientGegevens>
 			<Naam>Frank Graafmolen</Naam>
 			<Adres>Kerkstraat 1</Adres>
-			<Postcode>1234AB</Postcode>
+			<Postcode>1234AA</Postcode>
 			<Woonplaats>Amsterdam</Woonplaats>
 			<Geboortedatum>06-09-1995</Geboortedatum>
 			<Telefoonnummer>0659845129</Telefoonnummer>
@@ -34,7 +34,7 @@
 					<BehandelingID>59</BehandelingID>
 					<BehandelingID>96</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico></EigenRisico>
+				<EigenRisico/>
 			</Factuur>
 			<Factuur FactuurNummer="256410">
 				<FactuurDatum>09-06-2014</FactuurDatum>
@@ -43,7 +43,7 @@
 					<BehandelingID>01</BehandelingID>
 					<BehandelingID>9606</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico></EigenRisico>
+				<EigenRisico/>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>
@@ -146,7 +146,7 @@
 					<BehandelingID>5</BehandelingID>
 					<BehandelingID>6</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico></EigenRisico>
+				<EigenRisico/>
 			</Factuur>
 			<Factuur FactuurNummer="268410">
 				<FactuurDatum>09-06-2014</FactuurDatum>
@@ -155,7 +155,7 @@
 					<BehandelingID>011</BehandelingID>
 					<BehandelingID>16</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico></EigenRisico>
+				<EigenRisico/>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>

@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Pictures"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Applications/eclipse/plugins/org.apache.log4j_1.2.15.v201012070815.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/xandergerreman/Google Drive/Periode 5/Proftaak/Facturatie/Libraries/org.apache.log4j_1.2.15.v201012070815.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Facturatiesysteem/Libraries/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
