@@ -9,28 +9,28 @@
 							<xs:element type="xs:string" name="adres"/>
 							<xs:element type="xs:string" name="postcode"/>
 							<xs:element type="xs:string" name="woonplaats"/>
-							<xs:element type="xs:string" name="KVKNummer"/>
-							<xs:element type="xs:string" name="rekeningNummer"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			<xs:element name="verzekeringsTypes">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="verzekeringsType" maxOccurs="unbounded" minOccurs="0">
+							<xs:element type="xs:integer" name="KVKNummer"/>
+							<xs:element type="xs:integer" name="rekeningNummer"/>
+							<xs:element name="verzekeringsTypes">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element type="xs:string" name="naam"/>
-										<xs:element name="behandelCodes">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element type="xs:byte" name="behandelcode" maxOccurs="unbounded" minOccurs="0"/>
+									<xs:element name="verzekeringsType" maxOccurs="unbounded" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element type="xs:string" name="naam"/>
+													<xs:element name="behandelCodes">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:byte" name="behandelcode" maxOccurs="unbounded" minOccurs="0"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element type="xs:string" name="verplichtEigenRisico"/>
 												</xs:sequence>
+												<xs:attribute type="xs:byte" name="id" use="optional"/>
 											</xs:complexType>
 										</xs:element>
-										<xs:element type="xs:string" name="verplichtEigenRisico"/>
 									</xs:sequence>
-									<xs:attribute type="xs:byte" name="id" use="optional"/>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
