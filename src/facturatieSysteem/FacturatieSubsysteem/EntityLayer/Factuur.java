@@ -1,17 +1,43 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
+import java.util.ArrayList;
+
 public class Factuur implements ImmutableFactuur {
 
 	private int factuurNummer;
 	private String factuurDatum;
 	private String vervalDatum;
 	private String BSN;
+	private ArrayList<Behandeling> behandelingen;
+	private double eigenRisico;
 
-	public Factuur(int factuurNummer, String factuurDatum, String vervalDatum, String BSN) {
+	public Factuur(int factuurNummer, String factuurDatum, String vervalDatum, String BSN, double eigenRisico) {
 		this.factuurNummer = factuurNummer;
 		this.factuurDatum = factuurDatum;
 		this.vervalDatum = vervalDatum;
 		this.BSN = BSN;
+		this.eigenRisico = eigenRisico;
+		behandelingen = new ArrayList<>();
+	}
+
+
+	public ArrayList<Behandeling> getBehandelingen() {
+		return behandelingen;
+	}
+
+
+	public void setBehandelingen(ArrayList<Behandeling> behandelingen) {
+		this.behandelingen = behandelingen;
+	}
+
+
+	public double getEigenRisico() {
+		return eigenRisico;
+	}
+
+
+	public void setEigenRisico(double eigenRisico) {
+		this.eigenRisico = eigenRisico;
 	}
 
 
