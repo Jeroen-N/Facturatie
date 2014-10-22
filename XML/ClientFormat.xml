@@ -26,26 +26,26 @@
 				<eindDatum>03-06-2014</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
-		<facturen>
-			<factuur factuurNummer="262510">
-				<factuurDatum>09-06-2014</factuurDatum>
-				<vervalDatum>09-07-2014</vervalDatum>
+		<Facturen>
+			<Factuur FactuurNummer="262510">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
 					<BehandelingID>59</BehandelingID>
 					<BehandelingID>96</BehandelingID>
 				</FactuurBehandelingen>
 				<EigenRisico></EigenRisico>
-			</factuur>
-			<factuur factuurNummer="265410">
-				<factuurDatum>09-06-2014</factuurDatum>
-				<vervalDatum>09-07-2014</vervalDatum>
+			</Factuur>
+			<Factuur FactuurNummer="256410">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
-					<BehandelingID>59</BehandelingID>
-					<BehandelingID>96</BehandelingID>
+					<BehandelingID>01</BehandelingID>
+					<BehandelingID>9606</BehandelingID>
 				</FactuurBehandelingen>
 				<EigenRisico></EigenRisico>
-			</factuur>
-		</facturen>
+			</Factuur>
+		</Facturen>
 		<Behandelingen>
 			<Behandeling id="12">
 				<behandelgegevens>
@@ -62,7 +62,7 @@
 					<Begintijd>13:00</Begintijd>
 					<Eindtijd>14:00</Eindtijd>
 					<Praktijkruimte>002</Praktijkruimte>
-					
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="126549">
@@ -72,6 +72,7 @@
 					<Begintijd>12:00</Begintijd>
 					<Eindtijd>12:30</Eindtijd>
 					<Praktijkruimte>003</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
@@ -90,6 +91,7 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="365412">
@@ -99,6 +101,7 @@
 					<Begintijd>09:00</Begintijd>
 					<Eindtijd>10:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
@@ -135,26 +138,26 @@
 				<eindDatum>21-07-2014</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
-		<facturen>
-			<factuur factuurNummer="262510">
-				<factuurDatum>09-06-2014</factuurDatum>
-				<vervalDatum>09-07-2014</vervalDatum>
+		<Facturen>
+			<Factuur FactuurNummer="267510">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
-					<BehandelingID>59</BehandelingID>
-					<BehandelingID>96</BehandelingID>
+					<BehandelingID>5</BehandelingID>
+					<BehandelingID>6</BehandelingID>
 				</FactuurBehandelingen>
 				<EigenRisico></EigenRisico>
-			</factuur>
-			<factuur factuurNummer="265410">
-				<factuurDatum>09-06-2014</factuurDatum>
-				<vervalDatum>09-07-2014</vervalDatum>
+			</Factuur>
+			<Factuur FactuurNummer="268410">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
-					<BehandelingID>59</BehandelingID>
-					<BehandelingID>96</BehandelingID>
+					<BehandelingID>011</BehandelingID>
+					<BehandelingID>16</BehandelingID>
 				</FactuurBehandelingen>
 				<EigenRisico></EigenRisico>
-			</factuur>
-		</facturen>
+			</Factuur>
+		</Facturen>
 		<Behandelingen>
 			<Behandeling id="59">
 				<behandelgegevens>
@@ -171,6 +174,7 @@
 					<Begintijd>11:00</Begintijd>
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>004</Praktijkruimte>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client heeft nog steed veel last van onderrug tijdens
 						het werk(metselaar)
 					</Opmerking>
@@ -182,6 +186,7 @@
 					<Begintijd>11:00</Begintijd>
 					<Eindtijd>12:00</Eindtijd>
 					<Praktijkruimte>005</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking/>
 				</behandelafspraak>
 			</Behandeling>
@@ -200,6 +205,7 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking>Client heeft nek klachten van het vele werken achter de
 						pc in een verkeerde houding
 					</Opmerking>
@@ -211,6 +217,7 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking>Client heeft oefening thuis goed uitgevoerd. er is al
 						een lichte verbetering te zien
 					</Opmerking>
@@ -226,132 +233,5 @@
 				<Datum>06-09-2014</Datum>
 			</Diagnose>
 		</Diagnoses>
-	</Client>
-
-	<Client BSN="123456789">
-		<ClientGegevens>
-			<Naam>Sander Blijlevens</Naam>
-			<Adres>Schijfstraat 26B</Adres>
-			<Postcode>4847SM</Postcode>
-			<Woonplaats>Teteringen</Woonplaats>
-			<Geboortedatum>31-12-1995</Geboortedatum>
-			<Telefoonnummer>0625231500</Telefoonnummer>
-			<Email>Sander@gmail.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>123654789</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="NTSA1O">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-01-1095</startDatum>
-				<eindDatum>31-12-1095</eindDatum>
-			</VerzekeringPolis>
-		
-			<VerzekeringPolis PolisNummer="5XYEUF">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-02-0003</startDatum>
-				<eindDatum>01-02-0004</eindDatum>
-			</VerzekeringPolis></VerzekeringPolissen>
-	</Client>
-
-	<Client BSN="918273645">
-		<ClientGegevens>
-			<Naam>Xander Gerreman</Naam>
-			<Adres>Marialaan 9a</Adres>
-			<Postcode>4834AJ</Postcode>
-			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>10-06-1994</Geboortedatum>
-			<Telefoonnummer>0683144715</Telefoonnummer>
-			<Email>xander@gerreman.nl</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>NL92SNSB0938762937</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="VG6EJP">
-				<VerzekeringType>Type 2</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>30-10-2014</startDatum>
-				<eindDatum>30-10-2015</eindDatum>
-			</VerzekeringPolis>
-		</VerzekeringPolissen>
-	</Client>
-
-	<Client BSN="864213579">
-		<ClientGegevens>
-			<Naam>Simon Cowell</Naam>
-			<Adres>Beaverly Hills Street 13C</Adres>
-			<Postcode>9268BQ</Postcode>
-			<Woonplaats>Los Angeles</Woonplaats>
-			<Geboortedatum>29-03-1984</Geboortedatum>
-			<Telefoonnummer>0692733671</Telefoonnummer>
-			<Email>Simon@cowell.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>US23AB093002974604</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="G5AK56">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-11-2014</startDatum>
-				<eindDatum>01-11-2015</eindDatum>
-			</VerzekeringPolis>
-		</VerzekeringPolissen>
-	</Client>
-
-	<Client BSN="987656789">
-		<ClientGegevens>
-			<Naam>Flappy Druiloor</Naam>
-			<Adres>Allerheiligeweg 14</Adres>
-			<Postcode>4863GH</Postcode>
-			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>29-02-1989</Geboortedatum>
-			<Telefoonnummer>0683901123</Telefoonnummer>
-			<Email>fdruiloor@hotmail.com</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>NL04RABO0709283381</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="2AZ5EF">
-				<VerzekeringType>Type 2</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>01-12-2014</startDatum>
-				<eindDatum>01-12-2014</eindDatum>
-			</VerzekeringPolis>
-		</VerzekeringPolissen>
-	</Client>
-
-	<Client BSN="123451234">
-		<ClientGegevens>
-			<Naam>Patty Brard</Naam>
-			<Adres>De Bijster 83</Adres>
-			<Postcode>8204BQ</Postcode>
-			<Woonplaats>Amsterdam</Woonplaats>
-			<Geboortedatum>04-06-1975</Geboortedatum>
-			<Telefoonnummer>0602944814</Telefoonnummer>
-			<Email>brardp@patty.nl</Email>
-			<BetaalMethode>Incasso</BetaalMethode>
-			<ResterendEigenRisico>250.0</ResterendEigenRisico>
-			<Rekeningnummer>NL34ASNB02974027202</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="4VX8LD">
-				<VerzekeringType>Type 2</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>06-10-2014</startDatum>
-				<eindDatum>06-10-2015</eindDatum>
-			</VerzekeringPolis>
-		
-			<VerzekeringPolis PolisNummer="94FS36">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>06-10-2015</startDatum>
-				<eindDatum>06-10-2016</eindDatum>
-			</VerzekeringPolis></VerzekeringPolissen>
 	</Client>
 </Clienten>

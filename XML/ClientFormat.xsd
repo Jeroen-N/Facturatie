@@ -39,14 +39,14 @@
 	            </xs:complexType>
 	          </xs:element>
 			  
-              <xs:element name="facturen">
+              <xs:element name="Facturen">
               	<xs:complexType>
               		<xs:sequence>
-		              	<xs:element name="factuur" maxOccurs="unbounded" minOccurs="0">
+		              	<xs:element name="Factuur" maxOccurs="unbounded" minOccurs="0">
 		                	<xs:complexType>
 		                  		<xs:sequence>
-		                    	 <xs:element type="xs:string" name="factuurDatum"/>
-			                     <xs:element type="xs:string" name="vervalDatum"/>
+		                    	 <xs:element type="xs:string" name="FactuurDatum"/>
+			                     <xs:element type="xs:string" name="VervalDatum"/>
 								 <xs:element name="FactuurBehandelingen" maxOccurs="unbounded" minOccurs="0">
 									<xs:complexType>
 										<xs:sequence>
@@ -56,7 +56,7 @@
 								 </xs:element>
 			                     <xs:element type="xs:string" name="EigenRisico"/>
 			                  	</xs:sequence>
-			                <xs:attribute type="xs:string" name="factuurNummer"/>
+			                <xs:attribute type="xs:string" name="FactuurNummer"/>
 			                </xs:complexType>
 			            </xs:element>
 	              	</xs:sequence>
@@ -89,6 +89,7 @@
                                 <xs:element type="xs:string" name="Begintijd"/>
                                 <xs:element type="xs:string" name="Eindtijd"/>
                                 <xs:element type="xs:int" name="Praktijkruimte"/>
+								<xs:element type="xs:string" name="Gefactureerd"/>
                                 <xs:element type="xs:string" name="Opmerking"/>
                               </xs:sequence>
                               <xs:attribute type="xs:int" name="ID"/>
