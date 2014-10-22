@@ -267,11 +267,7 @@ public class MainGUI {
 		Klant_info = new JPanel();
 		PanelEast.add(Klant_info, BorderLayout.CENTER);
 		Klant_info.setLayout(new BorderLayout(0, 0));
-		
-		
-		
-		
-		
+
 		/*
 		 * Add function to see more information
 		 */

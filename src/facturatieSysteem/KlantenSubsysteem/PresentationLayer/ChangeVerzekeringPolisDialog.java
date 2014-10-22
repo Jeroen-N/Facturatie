@@ -5,17 +5,23 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
@@ -23,7 +29,8 @@ import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.main.DataTableModel;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.main.MainGUI;
 
 import javax.swing.JScrollPane;
@@ -43,6 +50,13 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	private JPanel changeVerzekeringPolis, changePolis_1, changePolis_2, buttonPane;
 	private JTable polistable;
 	private JScrollPane polisScrollPane;
+	private JTextField textFieldPolisNummer;
+	private JTextField textFieldStartDatum;
+	private JTextField textFieldEindDatum;
+	private JTextField textFieldEigenRisico;
+	private Integer row;
+	private JComboBox<String> comboBoxMaatschappij;
+	private JComboBox<String> comboBoxVerzekeringsType;
 	
 	// The datamodel to be displayed in the JTable.
 	private DataTableModelChangePolis dataTableModelChangePolis;
@@ -138,6 +152,15 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						polistable.getTableHeader().setReorderingAllowed(false);
 						polistable.getTableHeader().setResizingAllowed(false);
 						changePolis_1.add(polisScrollPane, BorderLayout.CENTER);
+						polistable.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								row = polistable.getSelectedRow();
+								fillField(row);
+								}
+						});
+						
+						
 						}
 					}
 				}
@@ -167,24 +190,271 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							panel.add(lblVerzekering, BorderLayout.NORTH);
 						}
 					}
+					{
+						JSplitPane splitPanePolisNummer = new JSplitPane();
+						splitPanePolisNummer.setMaximumSize(new Dimension(300,
+								30));
+						splitPanePolisNummer.setMinimumSize(new Dimension(300,
+								30));
+						splitPanePolisNummer.setPreferredSize(new Dimension(
+								300, 30));
+						splitPanePolisNummer.setDividerSize(0);
+						splitPanePolisNummer.setBorder(null);
+						changePolis_2.add(splitPanePolisNummer);
+						{
+							JLabel lblPolisnummer = new JLabel("Polisnummer: ");
+							lblPolisnummer.setPreferredSize(new Dimension(120,
+									16));
+							lblPolisnummer
+									.setMinimumSize(new Dimension(120, 16));
+							lblPolisnummer
+									.setMaximumSize(new Dimension(120, 16));
+							lblPolisnummer
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblPolisnummer
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPanePolisNummer
+									.setLeftComponent(lblPolisnummer);
+						}
+						{
+							textFieldPolisNummer = new JTextField();
+							textFieldPolisNummer.setColumns(15);
+							splitPanePolisNummer
+									.setRightComponent(textFieldPolisNummer);
+							
+							textFieldPolisNummer.setEditable(false);
+						}
+					}
+					{
+						JSplitPane splitPaneVerzekeringMaatschappij = new JSplitPane();
+						splitPaneVerzekeringMaatschappij
+								.setPreferredSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij
+								.setMinimumSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij
+								.setMaximumSize(new Dimension(300, 30));
+						splitPaneVerzekeringMaatschappij.setDividerSize(0);
+						splitPaneVerzekeringMaatschappij.setBorder(null);
+						changePolis_2.add(splitPaneVerzekeringMaatschappij);
+						{
+							JLabel lblVerzekeringsmaatschappij = new JLabel(
+									"Maatschappij: ");
+							lblVerzekeringsmaatschappij
+									.setPreferredSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setMinimumSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setMaximumSize(new Dimension(120, 16));
+							lblVerzekeringsmaatschappij
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblVerzekeringsmaatschappij
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneVerzekeringMaatschappij
+									.setLeftComponent(lblVerzekeringsmaatschappij);
+						}
+						{
+							comboBoxMaatschappij = new JComboBox<String>();
+							splitPaneVerzekeringMaatschappij.setRightComponent(comboBoxMaatschappij);
+							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+								comboBoxMaatschappij.addItem(maatschappij.getNaam());
+							}
+							comboBoxMaatschappij.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									comboBoxVerzekeringsType.removeAllItems();;
+									textFieldEigenRisico.setText("");
+									comboBoxVerzekeringsType.addItem("");
+									if(comboBoxMaatschappij.getSelectedItem() != ""){
+										System.out.println("types combobox vullen");
+										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+											comboBoxVerzekeringsType.addItem(type.getNaam());
+										}
+									}
+								}
+							});
+
+						}
+					}
+					{
+						JSplitPane splitPaneVerzekeringsType = new JSplitPane();
+						splitPaneVerzekeringsType.setMaximumSize(new Dimension(
+								300, 30));
+						splitPaneVerzekeringsType.setMinimumSize(new Dimension(
+								300, 30));
+						splitPaneVerzekeringsType
+								.setPreferredSize(new Dimension(300, 30));
+						splitPaneVerzekeringsType.setDividerSize(0);
+						splitPaneVerzekeringsType.setBorder(null);
+						changePolis_2.add(splitPaneVerzekeringsType);
+						{
+							JLabel lblVerzekeringstype = new JLabel(
+									"Verzekeringstype: ");
+							lblVerzekeringstype.setPreferredSize(new Dimension(
+									120, 16));
+							lblVerzekeringstype.setMinimumSize(new Dimension(
+									120, 16));
+							lblVerzekeringstype.setMaximumSize(new Dimension(
+									120, 16));
+							lblVerzekeringstype
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblVerzekeringstype
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneVerzekeringsType
+									.setLeftComponent(lblVerzekeringstype);
+						}
+						{
+							comboBoxVerzekeringsType = new JComboBox<String>();
+							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
+							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
+										textFieldEigenRisico.setText(
+												Integer.toString(
+														vermaatschappijManager.getVerzekeringstype(
+																vermaatschappijManager.getVerzekeringsmaatschappij(
+																		comboBoxMaatschappij.getSelectedItem().toString()),
+																		comboBoxVerzekeringsType.getSelectedItem().toString())
+																		.getEigenRisico()));
+			
+									}
+								}
+							});
+						}
+					}
+					
+					{
+						JSplitPane splitPaneEigenRisico = new JSplitPane();
+						splitPaneEigenRisico.setPreferredSize(new Dimension(
+								300, 30));
+						splitPaneEigenRisico.setMinimumSize(new Dimension(300,
+								30));
+						splitPaneEigenRisico.setMaximumSize(new Dimension(300,
+								30));
+						splitPaneEigenRisico.setDividerSize(0);
+						splitPaneEigenRisico.setBorder(null);
+						changePolis_2.add(splitPaneEigenRisico);
+						{
+							JLabel lblEigenRisico = new JLabel("Eigen Risico: ");
+							lblEigenRisico.setPreferredSize(new Dimension(120,
+									16));
+							lblEigenRisico
+									.setMinimumSize(new Dimension(120, 16));
+							lblEigenRisico
+									.setMaximumSize(new Dimension(120, 16));
+							lblEigenRisico
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblEigenRisico
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneEigenRisico
+									.setLeftComponent(lblEigenRisico);
+						}
+						{
+							textFieldEigenRisico = new JTextField();
+							textFieldEigenRisico.setColumns(15);
+							splitPaneEigenRisico
+									.setRightComponent(textFieldEigenRisico);
+							textFieldEigenRisico.setEditable(false);
+						}
+					}
+					{
+						JSplitPane splitPaneStartDatum = new JSplitPane();
+						splitPaneStartDatum.setPreferredSize(new Dimension(300,
+								30));
+						splitPaneStartDatum.setMinimumSize(new Dimension(300,
+								30));
+						splitPaneStartDatum.setMaximumSize(new Dimension(300,
+								30));
+						splitPaneStartDatum.setDividerSize(0);
+						splitPaneStartDatum.setBorder(null);
+						changePolis_2.add(splitPaneStartDatum);
+						{
+							JLabel lblStartDatum = new JLabel("Start datum: ");
+							lblStartDatum.setPreferredSize(new Dimension(120,
+									16));
+							lblStartDatum
+									.setMinimumSize(new Dimension(120, 16));
+							lblStartDatum
+									.setMaximumSize(new Dimension(120, 16));
+							lblStartDatum
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblStartDatum
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneStartDatum.setLeftComponent(lblStartDatum);
+						}
+						{
+							textFieldStartDatum = new JTextField();
+							textFieldStartDatum.setColumns(15);
+							splitPaneStartDatum
+									.setRightComponent(textFieldStartDatum);
+						}
+					}
+					{
+						JSplitPane splitPaneEindDatum = new JSplitPane();
+						splitPaneEindDatum.setPreferredSize(new Dimension(300,
+								30));
+						splitPaneEindDatum
+								.setMinimumSize(new Dimension(300, 30));
+						splitPaneEindDatum
+								.setMaximumSize(new Dimension(300, 30));
+						splitPaneEindDatum.setDividerSize(0);
+						splitPaneEindDatum.setBorder(null);
+						changePolis_2.add(splitPaneEindDatum);
+						{
+							JLabel lblEindDatum = new JLabel("Eind datum: ");
+							lblEindDatum
+									.setPreferredSize(new Dimension(120, 16));
+							lblEindDatum.setMinimumSize(new Dimension(120, 16));
+							lblEindDatum.setMaximumSize(new Dimension(120, 16));
+							lblEindDatum
+									.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblEindDatum
+									.setHorizontalAlignment(SwingConstants.RIGHT);
+							splitPaneEindDatum.setLeftComponent(lblEindDatum);
+						}
+						{
+							textFieldEindDatum = new JTextField();
+							textFieldEindDatum.setColumns(15);
+							splitPaneEindDatum.setRightComponent(textFieldEindDatum);
+						}
+					}
 				}
-				
-				
 			}
-		
 		{
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			changeVerzekeringPolis.add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Polis Toevoegen");
+				JButton okButton = new JButton("Polis Wijzigen");
 				okButton.setActionCommand("Polis Toevoegen");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
+						if (!comboBoxMaatschappij.getSelectedItem().equals("")){
+							String errorMessage =	manager.checkPolis(
+									textFieldPolisNummer.getText(),
+									comboBoxVerzekeringsType.getSelectedItem().toString(), 
+									textFieldStartDatum.getText(), 
+									textFieldEindDatum.getText());
+							System.out.println(errorMessage);
+							if (!errorMessage.equals("")){
+								showConfirmationWindow(errorMessage);
+							}else{
+								if(!manager.updateVerzekeringPolisXML(
+										textFieldPolisNummer.getText(), 
+										comboBoxVerzekeringsType.getSelectedItem().toString(), 
+										Double.parseDouble(textFieldEigenRisico.getText()),
+										textFieldStartDatum.getText(), 
+										textFieldEindDatum.getText())){
+									showConfirmationWindow("Polis Teovoegen Mislukt");
+								}else{
+									dispose();
+								}
+							}
+						}
+						else{
+							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
+						}
 					}
 				});
 			}
@@ -199,5 +469,24 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 				});
 				buttonPane.add(cancelButton);
 			}
-		}}
+		}
+	}
+	public void fillField(int row){
+		comboBoxVerzekeringsType.removeAllItems();
+		String PolisNr = polistable.getModel().getValueAt(row, 0).toString();
+		String verType = polistable.getModel().getValueAt(row, 1).toString();
+		String eigenRisico = polistable.getModel().getValueAt(row, 2).toString();
+		String StartDatum = polistable.getModel().getValueAt(row, 3).toString();
+		String EindDatum = polistable.getModel().getValueAt(row, 4).toString();
+		textFieldPolisNummer.setText(PolisNr);
+		comboBoxVerzekeringsType.addItem(verType);
+		textFieldEigenRisico.setText(eigenRisico);
+		textFieldStartDatum.setText(StartDatum);
+		textFieldEindDatum.setText(EindDatum);		
+	}
+	public void showConfirmationWindow(String message) {
+		 Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
+
+	}
 }

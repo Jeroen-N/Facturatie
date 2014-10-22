@@ -558,7 +558,7 @@ public class AddVerzekeringPolisDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									if(comboBoxVerzekeringsType.getSelectedItem() != ""){
+									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""){
 										textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstype(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()),comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
 									}
 								}

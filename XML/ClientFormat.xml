@@ -278,7 +278,7 @@
 				<VerzekeringType>Type 2</VerzekeringType>
 				<EigenRisico>250.0</EigenRisico>
 				<startDatum>01-01-0001</startDatum>
-				<eindDatum>01-01-0002</eindDatum>
+				<eindDatum>01-01-0003</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
 	</Client>
 </Clienten>
