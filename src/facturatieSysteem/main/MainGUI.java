@@ -8,8 +8,13 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
+
+import org.apache.log4j.Logger;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
@@ -28,14 +33,18 @@ public class MainGUI {
 	private Integer row, selected;
 	private JFrame frame;
 	private JTable Klant_Table;
-	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel, VerzekeringsMaatschappijPanel, knoppen, Klant_info, links, rechts, VerzekeringPanel, Header_Button;
+	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel,
+			VerzekeringsMaatschappijPanel, knoppen, Klant_info, links, rechts,
+			VerzekeringPanel, Header_Button;
 	private JScrollPane KlantenTablePanel;
 	private KlantManager KlantManager;
 	private JLabel lblCreatedByInfosys, lblFacturatiesysteem;
 	private String[][] data;
 	private ArrayList<Klant> klanten;
 	private JTextArea Uitgebreide_Info;
-	private JButton btnAddKlant, btnChangeKlant, btnFacturatie, btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer, btnAddPolis;
+	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
+			btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer,
+			btnAddPolis;
 	@SuppressWarnings("unused")
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
@@ -43,10 +52,20 @@ public class MainGUI {
 	private JSeparator separator;
 	private JPanel Info_Polis;
 	private JScrollPane scroll;
-	
-	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
+
+	// The datamodel to be displayed in the JTable.
+	private DataTableModel dataTableModel;
+	private ArrayList<Klant> memberList = null;
+
+	// Get a logger instance for the current class
+	static Logger logger = Logger.getLogger(MainGUI.class);
+
+	public MainGUI(KlantManager klantManager,
+			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
+		logger.debug("Constructor");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
+		dataTableModel = new DataTableModel();
 		makeFrame();
 	}
 
@@ -67,7 +86,7 @@ public class MainGUI {
 		Header = new JPanel();
 		frame.getContentPane().add(Header, BorderLayout.NORTH);
 		Header.setBackground(Color.ORANGE);
-		
+
 		/*
 		 * Add JLabel in header + add to header
 		 */
@@ -77,7 +96,7 @@ public class MainGUI {
 				| Font.ITALIC, 26));
 		Header.setLayout(new BorderLayout(5, 5));
 		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
-		
+
 		/*
 		 * Create the Panel in the header for the buttons + add to header
 		 */
@@ -85,9 +104,10 @@ public class MainGUI {
 		Header_Button.setBackground(Color.ORANGE);
 		Header.add(Header_Button, BorderLayout.EAST);
 		Header_Button.setLayout(new BorderLayout(0, 50));
-		
+
 		/*
-		 * Create the verzekeringsmaatschappij button + add the button to header_button
+		 * Create the verzekeringsmaatschappij button + add the button to
+		 * header_button
 		 */
 		btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
 		Header_Button.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
@@ -133,57 +153,56 @@ public class MainGUI {
 			}
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
-		
+
 		/*
 		 * Create the Main Panel
 		 */
 		MainPanel = new JPanel();
 		frame.getContentPane().add(MainPanel);
 		MainPanel.setLayout(new CardLayout(0, 0));
-		
+
 		/*
 		 * Create panel + add to main panel
 		 */
 		KlantenPanel = new JPanel();
 		MainPanel.add(KlantenPanel, "name_11236108644850");
 		KlantenPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		/*
 		 * fill the table
 		 */
-		klanten = KlantManager.getKlanten();
-
-		data = new String[klanten.size()][4];
-
-		int i = 0;
-
-		for (Klant klant : klanten) {
-			data[i][0] = klant.getNaam();
-			data[i][1] = klant.getBSN();
-			data[i][2] = klant.getGeboortedatum();
-			data[i][3] = klant.getAdres();
-			i++;
-		}
-
-		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
-		
-		Klant_Table = new JTable(data, columnNames){
-			public boolean isCellEditable(int rowIndex, int mColIndex){
+		Klant_Table = new JTable(dataTableModel) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
 			}
 		};
+		String[] headers = new String[] { "Naam", "BSN", "Geboortedatum",
+				"Adres" };
+		dataTableModel.setTableHeader(headers);
+		String[][] initialValues = new String[][] { { "", "", "", "" } };
+
+		TableColumn column = Klant_Table.getColumnModel().getColumn(0);
+		column.setPreferredWidth(6);
+
+		// Handle row selection, only one row can be selected
+		Klant_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		fillTable();
 		
 		KlantenTablePanel = new JScrollPane(Klant_Table);
 		Klant_Table.setFillsViewportHeight(true);
+		KlantenTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
+				0, 0, 0)), "Clientenlijst", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
-		
+
 		/*
 		 * Create panel for more information about klant
 		 */
 		Klant_info = new JPanel();
 		KlantenPanel.add(Klant_info, BorderLayout.EAST);
 		Klant_info.setLayout(new BorderLayout(0, 0));
-		
+
 		/*
 		 * Add function to see more information
 		 */
@@ -196,67 +215,50 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				row = Klant_Table.getSelectedRow();
-				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
-				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
-				PolisInfo.setText("");
-				for(String s : KlantManager.toonPolis(b_s_n)){
-					PolisInfo.append(s + System.getProperty("line.separator"));
+				fillField(row);
 				}
-			}
 		});
-		
 		Klant_Table.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {
-					@Override
 					public void valueChanged(ListSelectionEvent e) {
-						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
+						boolean rowsAreSelected = Klant_Table
+								.getSelectedRowCount() > 0;
 						btnChangeKlant.setEnabled(rowsAreSelected);
 						btnAddPolis.setEnabled(rowsAreSelected);
 					}
 				});
-		
+
 		/*
-		 * 
+		 * Polis informatie panel wordt aangemaakt en gevuld
 		 */
 		Info_Polis = new JPanel();
 		Klant_info.add(Info_Polis, BorderLayout.CENTER);
 		Info_Polis.setLayout(new BorderLayout(0, 0));
-		
-		/*
-		 * 
-		 */
 		PolisInfo = new JTextArea();
 		PolisInfo.setEditable(false);
-
-		/*
-		 * 
-		 */
 		scroll = new JScrollPane(PolisInfo);
 		Info_Polis.add(scroll);
-		
-		/*
-		 * 
-		 */
 		separator = new JSeparator();
 		Info_Polis.add(separator, BorderLayout.NORTH);
-		
+
 		/*
 		 * add panel for buttons underneath more information panel
-		 */		
+		 */
 		knoppen = new JPanel();
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 		knoppen.setLayout(new BorderLayout(0, 0));
-		
+
 		/*
-		 * In the buttons panel, make 2 sides, left and right to create 2 rows of buttons
+		 * In the buttons panel, make 2 sides, left and right to create 2 rows
+		 * of buttons
 		 */
 		links = new JPanel();
 		knoppen.add(links, BorderLayout.WEST);
-		
+
 		rechts = new JPanel();
 		knoppen.add(rechts, BorderLayout.EAST);
 		rechts.setLayout(new BorderLayout(0, 0));
-		
+
 		/*
 		 * Create addKlant button + add to left panel
 		 */
@@ -268,16 +270,17 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				AddKlantDialog addKlantDialog = new AddKlantDialog(
 						KlantManager, maatschappijManager);
-				addKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				addKlantDialog
+						.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addKlantDialog.setModal(true);
 				addKlantDialog.setVisible(true);
 				addKlantDialog.addWindowListener(new WindowAdapter() {
 					public void windowClosed(WindowEvent e) {
-				    	//System.out.println("window is closed");
-						KlantenPanel.removeAll();
-						Klant_info.removeAll();
-						insertTable();
-				    	
+						Klant_Table.removeAll();
+						fillTable();
+						Klant_Table.setRowSelectionInterval(row, row);
+						Uitgebreide_Info.setText("");
+						fillField(row);
 					}
 				});
 			}
@@ -288,7 +291,7 @@ public class MainGUI {
 		btnAddKlant.setIcon(new ImageIcon(
 				"Pictures/add-contact-icon-xsmall.png"));
 		links.add(btnAddKlant, BorderLayout.WEST);
-		
+
 		/*
 		 * Create changeKlant button + add to left panel
 		 */
@@ -301,17 +304,25 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangeKlant.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
-					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
+							KlantManager,
+							maatschappijManager,
+							Klant_Table
+									.getModel()
+									.getValueAt(Klant_Table.getSelectedRow(), 1)
+									.toString());
+					changeKlantDialog
+							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
-					    	//System.out.println("window is closed");
-							KlantenPanel.removeAll();
-							Klant_info.removeAll();
-							insertTable();
-					    	
+							// System.out.println("window is closed");
+							Klant_Table.removeAll();
+							fillTable();
+							Klant_Table.setRowSelectionInterval(row, row);
+							Uitgebreide_Info.setText("");
+							fillField(row);
 						}
 					});
 				} else {
@@ -321,7 +332,7 @@ public class MainGUI {
 		});
 		btnChangeKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnChangeKlant.setMinimumSize(new Dimension(0, 0));
-		
+
 		btnAddPolis = new JButton("Toevoegen Polis");
 		links.add(btnAddPolis, BorderLayout.EAST);
 		btnAddPolis.setEnabled(false);
@@ -331,20 +342,29 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (btnChangeKlant.isEnabled()) {
-					AddVerzekeringPolisDialog addVerzekeringPolisDialog =  new AddVerzekeringPolisDialog(KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					addVerzekeringPolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					AddVerzekeringPolisDialog addVerzekeringPolisDialog = new AddVerzekeringPolisDialog(
+							KlantManager,
+							maatschappijManager,
+							Klant_Table
+									.getModel()
+									.getValueAt(Klant_Table.getSelectedRow(), 1)
+									.toString());
+					addVerzekeringPolisDialog
+							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					addVerzekeringPolisDialog.setModal(true);
 					addVerzekeringPolisDialog.setVisible(true);
-					addVerzekeringPolisDialog.addWindowListener(new WindowAdapter() {
-						public void windowClosed(WindowEvent e) {
-					    	//System.out.println("window is closed");
-							KlantenPanel.removeAll();
-							Klant_info.removeAll();
-							insertTable();
-						}
-					});
+					addVerzekeringPolisDialog
+							.addWindowListener(new WindowAdapter() {
+								public void windowClosed(WindowEvent e) {
+									Klant_Table.removeAll();
+									fillTable();
+									Klant_Table.setRowSelectionInterval(row, row);
+									Uitgebreide_Info.setText("");
+									fillField(row);									
+								}
+							});
 				}
-				
+
 			}
 		});
 		/*
@@ -360,7 +380,7 @@ public class MainGUI {
 				FacturatiePanel.setVisible(true);
 			}
 		});
-		
+
 		/*
 		 * Create the footer
 		 */
@@ -368,14 +388,15 @@ public class MainGUI {
 		frame.getContentPane().add(Footer, BorderLayout.SOUTH);
 		Footer.setBackground(Color.ORANGE);
 		FlowLayout fl_Footer = (FlowLayout) Footer.getLayout();
-		
+
 		/*
 		 * Set text in the footer
 		 */
 		lblCreatedByInfosys = new JLabel("Created by InfoSys");
-		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
+		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD
+				| Font.ITALIC, 12));
 		Footer.add(lblCreatedByInfosys);
-		
+
 		/*
 		 * Create facturatiePanel + add to mainpanel
 		 */
@@ -404,116 +425,29 @@ public class MainGUI {
 		VerzekeringsMaatschappijPanel.setVisible(false);
 		KlantenPanel.setVisible(true);
 		FacturatiePanel.setVisible(false);
-		
+
 		/*
 		 * Set visibility of the frame
 		 */
 		frame.setVisible(true);
 	}
 	
-	@SuppressWarnings({ "serial"})
-	public void insertTable(){
-		klanten = KlantManager.getKlanten();
-
-		data = new String[klanten.size()][4];
-
-		int i = 0;
-
-		for (Klant klant : klanten) {
-			data[i][0] = klant.getNaam();
-			data[i][1] = klant.getBSN();
-			data[i][2] = klant.getGeboortedatum();
-			data[i][3] = klant.getAdres();
-			i++;
+	public void fillTable(){
+		memberList = KlantManager.getKlanten();
+		int count = (memberList == null) ? 0 : memberList.size();
+		
+		if(count > 0){
+		dataTableModel.setValues(memberList);
 		}
-
-		String[] columnNames = { "Naam", "BSN", "Geboortedatum", "Adres" };
-		
-		Klant_Table = new JTable(data, columnNames){
-			public boolean isCellEditable(int rowIndex, int mColIndex){
-				return false;
-			}
-		};
-		KlantenTablePanel = new JScrollPane(Klant_Table);
-		Klant_Table.setFillsViewportHeight(true);
-		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
-
-		/*
-		 * Create panel for more information about klant
-		 */
-		Klant_info = new JPanel();
-		KlantenPanel.add(Klant_info, BorderLayout.EAST);
-		Klant_info.setLayout(new BorderLayout(0, 0));
-		
-		/*
-		 * Add function to see more information
-		 */
-		Uitgebreide_Info = new JTextArea();
-		Uitgebreide_Info.setColumns(40);
-		Uitgebreide_Info.setEditable(false);
-		Klant_info.add(Uitgebreide_Info);
-		Klant_Table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				row = Klant_Table.getSelectedRow();
-				String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
-				Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
-				PolisInfo.setText("");
-				for(String s : KlantManager.toonPolis(b_s_n)){
-					PolisInfo.append(s + System.getProperty("line.separator"));
-				}
-				
-			}
-		});
-		
-		/*
-		 * add panel for buttons underneath more information panel
-		 */
-		Klant_info.add(knoppen, BorderLayout.SOUTH);
-		
-		btnAddPolis.setEnabled(false);
-		btnChangeKlant.setEnabled(false);
-		
-		Klant_Table.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					@Override
-					public void valueChanged(ListSelectionEvent e) {
-						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
-						btnAddPolis.setEnabled(rowsAreSelected);
-						btnChangeKlant.setEnabled(rowsAreSelected);
-					}
-				});
-		
-		/*
-		 * 
-		 */
-		Info_Polis = new JPanel();
-		Klant_info.add(Info_Polis, BorderLayout.CENTER);
-		Info_Polis.setLayout(new BorderLayout(0, 0));
-		
-		/*
-		 * 
-		 */
-		PolisInfo = new JTextArea();
-		PolisInfo.setEditable(false);
-		scroll = new JScrollPane(PolisInfo);
-		Info_Polis.add(scroll);
-		
-		/*
-		 * 
-		 */
-		separator = new JSeparator();
-		Info_Polis.add(separator, BorderLayout.NORTH);
-		
-		Klant_Table.setRowSelectionInterval(row, row);
-		Uitgebreide_Info.setText(KlantManager.toonKlant(Klant_Table.getModel().getValueAt(row, 1).toString()));
-		KlantenPanel.revalidate();
-		KlantenPanel.repaint();
-
-		//System.out.println(row);
-		
-		//KlantenPanel.setVisible(false);
-		//KlantenPanel.setVisible(true);
 	}
 	
+	public void fillField(int row){
+		String b_s_n = Klant_Table.getModel().getValueAt(row, 1)
+				.toString();
+		Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
+		PolisInfo.setText("");
+		for (String s : KlantManager.toonPolis(b_s_n)) {
+			PolisInfo.append(s + System.getProperty("line.separator"));
+		}
+	}
 }
