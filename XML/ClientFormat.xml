@@ -234,4 +234,27 @@
 			</Diagnose>
 		</Diagnoses>
 	</Client>
+
+	<Client BSN="918273645">
+		<ClientGegevens>
+			<Naam>Xander Gerreman</Naam>
+			<Adres>Marialaan 9a</Adres>
+			<Postcode>4562AJ</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>10-06-1994</Geboortedatum>
+			<Telefoonnummer>0683144715</Telefoonnummer>
+			<Email>xander@gerreman.nl</Email>
+			<BetaalMethode>Incasso</BetaalMethode>
+			<ResterendEigenRisico>250.0</ResterendEigenRisico>
+			<Rekeningnummer>NL06SNSB0927329482</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="3SW02I">
+				<VerzekeringType>Type 2</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>10-10-2014</startDatum>
+				<eindDatum>10-10-2015</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+	</Client>
 </Clienten>
