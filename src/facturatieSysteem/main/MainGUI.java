@@ -32,22 +32,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MainGUI {
-	private Integer row, selected;
+	private Integer row;
 	private JFrame frame;
 	private JTable Klant_Table;
 	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel,
 			VerzekeringsMaatschappijPanel, knoppen, Klant_info,
-			VerzekeringPanel, Header_Button;
+			VerzekeringPanel, Header_Button, PanelEast, Klant_zoeken;
 	private JScrollPane KlantenTablePanel;
 	private KlantManager KlantManager;
 	private JLabel lblCreatedByInfosys, lblFacturatiesysteem;
-	private String[][] data;
-	private ArrayList<Klant> klanten;
 	private JTextArea Uitgebreide_Info;
+	private JTextField textFieldZoeken;
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
 			btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer,
-			btnAddPolis;
-	@SuppressWarnings("unused")
+			btnAddPolis, btnZoekKlant;
 	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private JTextArea PolisInfo;
@@ -200,13 +198,67 @@ public class MainGUI {
 		Klant_Table.getTableHeader().setResizingAllowed(false);
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
 
+		PanelEast = new JPanel();
+		KlantenPanel.add(PanelEast, BorderLayout.EAST);
+		PanelEast.setLayout(new BorderLayout(0, 0));
+		
+		Klant_zoeken = new JPanel();
+		PanelEast.add(Klant_zoeken, BorderLayout.NORTH);
+		Klant_zoeken.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JSplitPane splitPaneZoeken = new JSplitPane();
+		splitPaneZoeken .setPreferredSize(new Dimension(300,30));
+		splitPaneZoeken .setMinimumSize(new Dimension(300,30));
+		splitPaneZoeken .setMaximumSize(new Dimension(300,30));
+		splitPaneZoeken .setDividerSize(0);
+		splitPaneZoeken .setBorder(null);
+		Klant_zoeken.add(splitPaneZoeken,BorderLayout.WEST );
+		
+		textFieldZoeken = new JTextField();
+		textFieldZoeken.setColumns(15);
+		textFieldZoeken.setText("Geboorte Datum");
+		textFieldZoeken.addMouseListener(new MouseAdapter() {
+			  @Override
+			  public void mouseClicked(MouseEvent e) {
+				  textFieldZoeken.setText("");
+			  }
+			});
+		splitPaneZoeken.setRightComponent(textFieldZoeken);
+		
+		JLabel lblZoeken = new JLabel("Klant zoeken: ");
+		lblZoeken.setPreferredSize(new Dimension(120,16));
+		lblZoeken.setMinimumSize(new Dimension(120, 16));
+		lblZoeken.setMaximumSize(new Dimension(120, 16));
+		lblZoeken.setHorizontalTextPosition(SwingConstants.RIGHT);
+		lblZoeken.setHorizontalAlignment(SwingConstants.RIGHT);
+		splitPaneZoeken.setLeftComponent(lblZoeken);
+		
+		btnZoekKlant = new JButton("Zoeken");
+		btnZoekKlant.setIconTextGap(0);
+		btnZoekKlant.setAlignmentY(Component.TOP_ALIGNMENT);
+		btnZoekKlant.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (textFieldZoeken.getText().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
+					fillTableZoekresultaat(textFieldZoeken.getText());		
+				}else{
+					showConfirmationWindow("Geen geldige zoekwaarde");
+				}
+			}
+		});
+		Klant_zoeken.add(btnZoekKlant,BorderLayout.EAST );
+
 		/*
 		 * Create panel for more information about klant
 		 */
 		Klant_info = new JPanel();
-		KlantenPanel.add(Klant_info, BorderLayout.EAST);
+		PanelEast.add(Klant_info, BorderLayout.CENTER);
 		Klant_info.setLayout(new BorderLayout(0, 0));
-
+		
+		
+		
+		
+		
 		/*
 		 * Add function to see more information
 		 */
@@ -403,7 +455,7 @@ public class MainGUI {
 		Footer = new JPanel();
 		frame.getContentPane().add(Footer, BorderLayout.SOUTH);
 		Footer.setBackground(Color.ORANGE);
-		FlowLayout fl_Footer = (FlowLayout) Footer.getLayout();
+		Footer.getLayout();
 
 		/*
 		 * Set text in the footer
@@ -459,6 +511,21 @@ public class MainGUI {
 		}
 	}
 	
+	public void fillTableZoekresultaat(String gebDatum){
+		memberList = KlantManager.findKlant(gebDatum);
+		
+		int count = (memberList == null) ? 0 : memberList.size();
+			
+		if(count > 0){
+			Klant_Table.removeAll();
+			Uitgebreide_Info.setText("");
+			PolisInfo.setText("");
+			dataTableModel.setValues(memberList);
+		}else{
+			showConfirmationWindow("Geen klanten gevonden");
+		}
+	}
+	
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
@@ -470,5 +537,10 @@ public class MainGUI {
 		for (String s : KlantManager.toonPolis(b_s_n)) {
 			PolisInfo.append(s + System.getProperty("line.separator"));
 		}
+	}
+	public void showConfirmationWindow(String message) {
+		 Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
+
 	}
 }

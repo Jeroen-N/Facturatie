@@ -137,7 +137,13 @@
 				<startDatum>21-07-2013</startDatum>
 				<eindDatum>21-07-2014</eindDatum>
 			</VerzekeringPolis>
-		</VerzekeringPolissen>
+		
+			<VerzekeringPolis PolisNummer="SAFJCA">
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
+				<startDatum>01-01-2001</startDatum>
+				<eindDatum>01-01-3012</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
 		<Facturen>
 			<Factuur FactuurNummer="267510">
 				<FactuurDatum>09-06-2014</FactuurDatum>

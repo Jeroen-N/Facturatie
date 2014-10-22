@@ -43,11 +43,11 @@ public class VerzekeringPolis {
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         String ExtraEigenRisic = getallenOpmaker.format(ExtraEigenRisico);
 		
-		return "Polisnummer: \t\t" 				+ 	PolisNummer 			+ "\n\n" +
-				"Verzekeringstype: \t" 		+ 	VerzekeringsType 			+ "\n\n" +
-				"Totaal eigen risico: \t"		+	"€"+ExtraEigenRisic	+ "\n\n" +
-				"Start datum: \t\t"				+ 	StartDatum				+ "\n\n" +
-				"Eind datum: \t\t"				+	EindDatum				+ "\n\n" ;
+		return "Polisnummer: \t\t" 				+ 	PolisNummer 			+ "\n" +
+				"Verzekeringstype: \t" 		+ 	VerzekeringsType 			+ "\n" +
+				"Totaal eigen risico: \t"		+	"\u20ac"+ExtraEigenRisic	+ "\n" +
+				"Start datum: \t\t"				+ 	StartDatum				+ "\n" +
+				"Eind datum: \t\t"				+	EindDatum				+ "\n" ;
 	}
 
 }

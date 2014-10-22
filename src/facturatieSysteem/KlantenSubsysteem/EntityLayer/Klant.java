@@ -1,5 +1,7 @@
 package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Klant {
@@ -116,15 +118,18 @@ public class Klant {
 	}
 
 	public String toString(){
-		return "BSN: \t\t" 						+ 	BSN 			+ "\n\n" +
-				"Naam: \t\t" 					+ 	Naam 			+ "\n\n" +
-				"GeboorteDatum: \t"				+	Geboortedatum	+ "\n\n" +
-				"Adres: \t\t"					+ 	Adres			+ "\n\n" +
-				"Postcode en woonplaats: \t" 	+ 	Postcode + " "	+ Woonplaats		+ "\n\n" +
-				"Telefoonnummer: \t"	 		+ 	TelefoonNr		+ "\n\n" +
-				"Email: \t\t" 					+ 	Email			+ "\n\n" +
-				"Betaalwijze: \t\t"				+	Betaalwijze		+ "\n\n" +
-				"Resterend eigen risico: \t"	+ "\u20ac" +	ResterendEigenRisico + "\n\n" +
-				"Rekeningnummer: \t"			+	RekeningNr		+ "\n\n" ;
+		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
+        String RestRisico = getallenOpmaker.format(ResterendEigenRisico);
+		
+		return "BSN: \t\t" 						+ 	BSN 			+ "\n" +
+				"Naam: \t\t" 					+ 	Naam 			+ "\n" +
+				"GeboorteDatum: \t"				+	Geboortedatum	+ "\n" +
+				"Adres: \t\t"					+ 	Adres			+ "\n" +
+				"Postcode en woonplaats: \t" 	+ 	Postcode + " "	+ Woonplaats		+ "\n" +
+				"Telefoonnummer: \t"	 		+ 	TelefoonNr		+ "\n" +
+				"Email: \t\t" 					+ 	Email			+ "\n" +
+				"Betaalwijze: \t\t"				+	Betaalwijze		+ "\n" +
+				"Resterend eigen risico: \t"	+ "\u20ac" +	RestRisico+ "\n" +
+				"Rekeningnummer: \t"			+	RekeningNr		+ "\n" ;
 	}
 }
