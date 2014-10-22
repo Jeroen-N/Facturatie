@@ -3,8 +3,13 @@ package facturatieSysteem.VerzekeringSubsysteem.PresentationLayer;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.TableColumn;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -18,18 +23,39 @@ import java.awt.BorderLayout;
 
 import javax.swing.JScrollPane;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.util.ArrayList;
 
 import javax.swing.JList;
 
+import org.apache.log4j.Logger;
+
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
 
 public class VerzekeringsmaatschappijGUI extends JFrame {
 
 	private JPanel VerzekeringPanel;
 	private JTextField zoekVeld;
+	private JTable Verzekering_Table;
+	private JScrollPane totaalLijst;
+	
+
+	// The datamodel to be displayed in the JTable.
+	private DataTableModel dataTableModel;
+	private ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
+
+	// Get a logger instance for the current class
+	static Logger logger = Logger.getLogger(MainGUI.class);
+	private JTable totaalTable;
+	
+	private DataTableModelVerzekeringen dataTableModelVerzekeringen;
 
 	/**
 	 * Create the frame.
@@ -125,6 +151,45 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 
 		JList list = new JList();
 		infopaneel.add(list, BorderLayout.CENTER);
+		
+		/// TABEL VULLEN
+		Verzekering_Table = new JTable(dataTableModel) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+		
+		String[] headers = new String[] { "Naam", "Adres", "Postcode",
+		"Plaats", "KVK", "RekeningNr"};
+		dataTableModel.setTableHeader(headers);
+		String[][] initialValues = new String[][] { { "", "", "", "" } };
+		
+		TableColumn column = Verzekering_Table.getColumnModel().getColumn(0);
+		column.setPreferredWidth(6);
+		
+		// Handle row selection, only one row can be selected
+		Verzekering_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
+		fillTable();
+				
+		totaalLijst = new JScrollPane(totaalTable);
+		
+		totaalTable = new JTable();
+		totaalLijst.setViewportView(totaalTable);
+		Verzekering_Table.setFillsViewportHeight(true);
+		tabelpaneel.setBorder(new TitledBorder(new LineBorder(new Color(
+						0, 0, 0)), "Verzekeringenlijst", TitledBorder.LEADING,
+						TitledBorder.TOP, null, null));
+		VerzekeringPanel.add(tabelpaneel, BorderLayout.CENTER);
 
+	}
+
+	public void fillTable(){
+		verzekeringList = VerzekeringsmaatschappijManager.getVerzekeringsmaatschappijen();
+		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
+		
+		if(count > 0){
+		dataTableModelVerzekeringen.setValues(verzekeringList);
+		}
 	}
 }

@@ -12,7 +12,7 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschap
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
-	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
+	private static ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
 	private VerzekeringsmaatschappijDAOImpl VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 	
 	@Override
@@ -40,8 +40,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 	
-	@Override
-	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
+	public static ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
 	}
 

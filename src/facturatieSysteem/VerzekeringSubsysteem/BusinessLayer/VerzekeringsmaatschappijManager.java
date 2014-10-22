@@ -18,7 +18,10 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public boolean deleteVerzekeringsmaatschappij(String naam);
 	
-	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen();
+	public static ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
 	
