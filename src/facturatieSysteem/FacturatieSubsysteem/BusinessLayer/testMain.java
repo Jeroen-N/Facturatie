@@ -3,6 +3,7 @@ package facturatieSysteem.FacturatieSubsysteem.BusinessLayer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
@@ -32,9 +33,7 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		}
 		System.out.println(n2  + 1);
 	}
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = new Date();
-		System.out.println(dateFormat.format(date));
+	
 	}
 	
 }
