@@ -27,13 +27,23 @@
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 		<facturen>
-			<factuur factuurNummer="159432">
-				<factuurDatum>21-08-2014</factuurDatum>
-				<vervalDatum>21-09-2014</vervalDatum>
+			<factuur factuurNummer="262510">
+				<factuurDatum>09-06-2014</factuurDatum>
+				<vervalDatum>09-07-2014</vervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>59</BehandelingID>
+					<BehandelingID>96</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico></EigenRisico>
 			</factuur>
-			<factuur factuurNummer="169423">
-				<factuurDatum>03-09-2014</factuurDatum>
-				<vervalDatum>03-10-2014</vervalDatum>
+			<factuur factuurNummer="265410">
+				<factuurDatum>09-06-2014</factuurDatum>
+				<vervalDatum>09-07-2014</vervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>59</BehandelingID>
+					<BehandelingID>96</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico></EigenRisico>
 			</factuur>
 		</facturen>
 		<Behandelingen>
@@ -52,6 +62,7 @@
 					<Begintijd>13:00</Begintijd>
 					<Eindtijd>14:00</Eindtijd>
 					<Praktijkruimte>002</Praktijkruimte>
+					
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="126549">
@@ -125,13 +136,23 @@
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 		<facturen>
-			<factuur factuurNummer="262641">
-				<factuurDatum>26-03-2014</factuurDatum>
-				<vervalDatum>26-04-2014</vervalDatum>
+			<factuur factuurNummer="262510">
+				<factuurDatum>09-06-2014</factuurDatum>
+				<vervalDatum>09-07-2014</vervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>59</BehandelingID>
+					<BehandelingID>96</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico></EigenRisico>
 			</factuur>
 			<factuur factuurNummer="265410">
 				<factuurDatum>09-06-2014</factuurDatum>
 				<vervalDatum>09-07-2014</vervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>59</BehandelingID>
+					<BehandelingID>96</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico></EigenRisico>
 			</factuur>
 		</facturen>
 		<Behandelingen>

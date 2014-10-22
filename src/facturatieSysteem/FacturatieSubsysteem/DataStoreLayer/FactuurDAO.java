@@ -55,7 +55,9 @@ public class FactuurDAO implements FactuurDAOinf {
 						String vervalDatum = factuurElement
 								.getElementsByTagName("vervalDatum").item(0)
 								.getTextContent();
-
+						double eigenRisico = Double.parseDouble(factuurElement
+								.getElementsByTagName("EigenRisico").item(0)
+								.getTextContent());
 						/*
 						 * System.out.println("factuur: " + (i+1));
 						 * System.out.println(factuurNummer);
@@ -66,7 +68,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						 */
 
 						factuur = new Factuur(factuurNummer, factuurDatum,
-								vervalDatum, invoerBSN);
+								vervalDatum, invoerBSN, eigenRisico);
 						facturen.add(factuur);
 
 					}
@@ -80,9 +82,8 @@ public class FactuurDAO implements FactuurDAOinf {
 
 	}
 
-	public boolean maakFactuur(Klant klant, ArrayList<Behandeling> behandelingen) {
+	public boolean maakFactuur(Klant klant, Factuur factuur) {
 		document = daoFactory.getDocument();
-		boolean b = false;
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -92,27 +93,10 @@ public class FactuurDAO implements FactuurDAOinf {
 				String BSN = clientElement.getAttribute("BSN");
 				if (BSN.equals(klant.getBSN())) {
 
-					Node factuur = document.getElementsByTagName("Facturen")
-							.item(0);
-					factuur.appendChild(document.createTextNode("\n\t"));
-
-					// Create all Elements
-					Element factuurtje = document.createElement("Factuur");
-					Element factuurDatum = document
-							.createElement("factuurDatum");
-					Element vervalDatum = document.createElement("vervalDatum");
-
-					// Ordering Elements
-					factuur.appendChild(factuurtje);
-					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
-					factuurtje.appendChild(factuurDatum);
-					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
-					factuurtje.appendChild(vervalDatum);
-
-					// create Attribuur BSN
-					Attr factuurNummer = document
-							.createAttribute("factuurDatum");
-
+					Element facturenElement = (Element) clientElement.getElementsByTagName("Facturen").item(0);
+					Element factuurElement	= document.createElement("factuur");
+					facturenElement.appendChild(factuurElement);
+					
 					// Maak een tijdelijke lijst aan van alle facturen die er
 					// zijn en bepaal hier het hoogste factuurnummer
 					ArrayList<Factuur> alleFacturen = haalAlleFacturen();
@@ -127,8 +111,42 @@ public class FactuurDAO implements FactuurDAOinf {
 					}
 
 					// Maak het factuurnummer het hoogste nummer.
-					factuurNummer.setValue("" + n2 + 1);
-					factuurtje.setAttributeNode(factuurNummer);
+					//factuurNummer.setValue("" + n2 + 1);
+					//factuurtje.setAttributeNode(factuurNummer);
+					
+					
+					// create Attribuut factuurummer
+					Attr factuurNummer = document.createAttribute("factuurDatum");
+					factuurNummer.setValue("" + factuur.getFactuurNummer());
+					factuurElement.setAttributeNode(factuurNummer);
+					
+					//factuurDatum
+					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date date = new Date();
+					String vandaag = dateFormat.format(date);
+					Element factuurDatum = document.createElement("factuurDatum");
+					factuurDatum.appendChild(document.createTextNode(vandaag));
+					factuurElement.appendChild(factuurDatum);
+					
+					
+					
+					Element vervalDatum = document.createElement("vervalDatum");
+					//TODO date + 14 dagen zodat vervalDatum klopt
+					String verval = dateFormat.format(date);
+					factuurDatum.appendChild(document.createTextNode(verval));
+					factuurElement.appendChild(factuurDatum);
+					
+/*
+					// Ordering Elements
+					factuur.appendChild(factuurtje);
+					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <ClientGegevens>
+					factuurtje.appendChild(factuurDatum);
+					factuurtje.appendChild(document.createTextNode("\n\t\t")); // <VerzekeringPolissen>
+					factuurtje.appendChild(vervalDatum);
+
+					
+
+					
 
 					// Vul factuurDatum door huidige datum op te halen en als tekst weg te zetten
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -151,17 +169,13 @@ public class FactuurDAO implements FactuurDAOinf {
 					// Sluit het document af
 					factuurtje.appendChild(document.createTextNode("\n\t"));// <Factuurtje/>
 					factuur.appendChild(document.createTextNode("\n"));// <Facturen/>
-
-					if (daoFactory.writeDocument()) {
-						b = true;
-
-					}
+*/
 				}
 			}
-		} catch (DOMException e) {
-			b = false;
+			return daoFactory.writeDocument();
+		}catch(DOMException e){
+			return false;
 		}
-		return b;
 	}
 
 	public ArrayList<Factuur> haalAlleFacturen() {
@@ -186,7 +200,9 @@ public class FactuurDAO implements FactuurDAOinf {
 					String vervalDatum = factuurElement
 							.getElementsByTagName("vervalDatum").item(0)
 							.getTextContent();
-
+					double eigenRisico = Double.parseDouble(factuurElement
+							.getElementsByTagName("EigenRisico").item(0)
+							.getTextContent());
 					/*
 					 * System.out.println("factuur: " + (i+1));
 					 * System.out.println(factuurNummer);
@@ -197,7 +213,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					 */
 
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN);
+							vervalDatum, BSN, eigenRisico);
 					facturen.add(factuur);
 
 				}

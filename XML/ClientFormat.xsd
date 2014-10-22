@@ -38,21 +38,31 @@
 	              	</xs:sequence>
 	            </xs:complexType>
 	          </xs:element>
+			  
               <xs:element name="facturen">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="factuur" maxOccurs="unbounded" minOccurs="0">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element type="xs:string" name="factuurDatum"/>
-                          <xs:element type="xs:string" name="vervalDatum"/>
-                        </xs:sequence>
-                        <xs:attribute type="xs:int" name="factuurNummer"/>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
+              	<xs:complexType>
+              		<xs:sequence>
+		              	<xs:element name="factuur" maxOccurs="unbounded" minOccurs="0">
+		                	<xs:complexType>
+		                  		<xs:sequence>
+		                    	 <xs:element type="xs:string" name="factuurDatum"/>
+			                     <xs:element type="xs:string" name="vervalDatum"/>
+								 <xs:element name="FactuurBehandelingen" maxOccurs="unbounded" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element type="xs:string" name="BehandelingID" maxOccurs="unbounded" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								 </xs:element>
+			                     <xs:element type="xs:string" name="EigenRisico"/>
+			                  	</xs:sequence>
+			                <xs:attribute type="xs:string" name="factuurNummer"/>
+			                </xs:complexType>
+			            </xs:element>
+	              	</xs:sequence>
+	            </xs:complexType>
+	          </xs:element>
+			  
               <xs:element name="Behandelingen">
                 <xs:complexType>
                   <xs:sequence>
