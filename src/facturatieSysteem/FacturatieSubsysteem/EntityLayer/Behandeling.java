@@ -3,12 +3,12 @@ package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 public class Behandeling implements ImmutableBehandeling {
 
 	private int fysioPraktijkNummer;
-	private int behandelCode;
+	private String behandelCode;
 	private long behandelStartDatum;
 	private long behandelEindDatum;
 	private String BSN;
 
-	public Behandeling(int fysioPraktijkNummer, int behandelCode,
+	public Behandeling(int fysioPraktijkNummer, String behandelCode,
 			long behandelStartDatum, long behandelEindDatum, String BSN) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 		this.behandelCode = behandelCode;
@@ -32,11 +32,11 @@ public class Behandeling implements ImmutableBehandeling {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 	}
 
-	public int getBehandelCode() {
+	public String getBehandelCode() {
 		return behandelCode;
 	}
 
-	public void setBehandelCode(int behandelCode) {
+	public void setBehandelCode(String behandelCode) {
 		this.behandelCode = behandelCode;
 	}
 

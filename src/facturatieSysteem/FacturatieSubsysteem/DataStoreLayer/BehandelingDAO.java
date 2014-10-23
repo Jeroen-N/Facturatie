@@ -1,76 +1,58 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
-import java.util.ArrayList;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class BehandelingDAO implements BehandelDAOinf {
 
-	private ArrayList<Behandeling> behandelingen;
-
 	private Document document = null;
+	private DAOFactoryFactuur daoFactoryBehandelcode;
+	private DAOFactoryFactuur daoFactoryClient;
+	private DAOFactoryFactuur daoFactoryFacturatie;
 
-	public BehandelingDAO() {
-
+	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode,
+			DAOFactoryFactuur daoFactoryClient,
+			DAOFactoryFactuur daoFactoryFacturatie) {
+		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
+		this.daoFactoryClient = daoFactoryClient;
+		this.daoFactoryFacturatie = daoFactoryFacturatie;
 	}
 
-	@Override
-	public ArrayList<Behandeling> haalBehandelingen(Klant klant) {
-		
-		if (document != null) {
-			// Get all <member> elements from the document
-			NodeList list = document.getElementsByTagName("behandeling");
+	public double getPrijs(String invoerbehandelCode) {
+		document = daoFactoryBehandelcode.getDocument();
+		System.out.println(invoerbehandelCode);
+		double tarief = 0;
+		try {
+			Element codesElement = (Element) document.getElementsByTagName(
+					"behandelcodes").item(0);
+			NodeList codes = codesElement.getElementsByTagName("behandeling");
+			for (int i = 0; i < codes.getLength(); i++) {
+				Element behandelingElement = (Element) codes.item(i);
+				String behandelcode = behandelingElement
+						.getAttribute("behandelcode");
+				if (behandelcode.equals(invoerbehandelCode)) {
 
-			for (int i = 0; i < list.getLength(); i++) {
-				Node node = list.item(i);
-				if (node instanceof Element) {
-					Element child = (Element) node;
-
-					String fysioPraktijkNummer = child
-							.getElementsByTagName("FysioPraktijkNummer")
-							.item(0).getTextContent();
-					String behandelCode = child
-							.getElementsByTagName("BehandelCodes").item(0)
+					String stringtarief = behandelingElement
+							.getElementsByTagName("tariefbehandeling").item(0)
 							.getTextContent();
-					String behandelStartDatum = child
-							.getElementsByTagName("BehandelStartDatum").item(0)
-							.getTextContent();
-					String behandelEindDatum = child
-							.getElementsByTagName("BehandelEindDatum").item(0)
-							.getTextContent();
-					String BSN = child.getElementsByTagName("BSN").item(0).getTextContent();
+					stringtarief = stringtarief.replaceAll(",", ".");
+					tarief = Double.parseDouble(stringtarief);
+					/*
+					 * System.out.println("tarief");
+					 * 
+					 * 
+					 * System.out.println();
+					 */
 
-					System.out.println("Adding " + fysioPraktijkNummer + " "
-							+ behandelCode + " " + behandelStartDatum + " "
-							+ behandelEindDatum + " " + BSN + " to result");
-					behandelingen.add(new Behandeling(Integer
-							.parseInt(fysioPraktijkNummer), Integer
-							.parseInt(behandelCode), Long
-							.parseLong(behandelStartDatum), Long
-							.parseLong(behandelEindDatum), BSN));
-
-					for (Behandeling behandeling : behandelingen) {
-						if (behandeling.getBSN() != klant.getBSN()) {
-							behandelingen.remove(behandeling);
-
-						}
-
-					}
 				}
 			}
-		} else {
-			System.out.println("XML document is null!");
+		} catch (DOMException e) {
+			e.printStackTrace();
 		}
+		return tarief;
 
-		System.out.println("returning result: " + behandelingen.size() + " items");
-		return behandelingen;
 	}
-
-	
 
 }

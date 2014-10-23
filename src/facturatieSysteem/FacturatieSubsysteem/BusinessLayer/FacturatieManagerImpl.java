@@ -6,20 +6,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.DAOFactoryFactuur;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
+import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
-import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class FacturatieManagerImpl implements FacturatieManager {
-
+	private DAOFactoryFactuur daoFactoryBehandelcodes = new DAOFactoryFactuur("XML/behandelcodes.xml", "XML/behandelcodes.xsd");
+	private DAOFactoryFactuur daoFactoryClient = new DAOFactoryFactuur("XML/ClientFormat.xml", "XML/ClientFormat.xsd");
+	private DAOFactoryFactuur daoFactoryFacturatie = new DAOFactoryFactuur("XML/facturatieSysteem.xml", "XML/facturatieSysteem.xsd");
 	private FactuurDAO factuurDAO;
+	private BehandelingDAO behandelingDAO;
 	private ArrayList<Factuur> facturen;
 
 	public FacturatieManagerImpl() {
-		this.factuurDAO = new FactuurDAO();
-
+		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes, daoFactoryClient, daoFactoryFacturatie);
+		this.behandelingDAO = new BehandelingDAO(daoFactoryBehandelcodes, daoFactoryClient, daoFactoryFacturatie);
+		daoFactoryBehandelcodes.validateXML();
+		daoFactoryClient.validateXML();
+		daoFactoryFacturatie.validateXML();
 		facturen = new ArrayList<>();
 	
 	}
@@ -51,14 +58,25 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		c.add(Calendar.DATE, 14); // Adding 14 days
 		String vDatum = sdf.format(c.getTime());
 		
+		//BSN aanmaken en hier de waarde van de meegegeven klant aan toekennen
 		String BSN = klant.getBSN();
+		
+		double oudRisico = klant.getResterendEigenRisico();
+		double totalePrijs = 00;
+		
+		for(Behandeling behandeling : behandelingen){
+			
+			double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode());
+			totalePrijs += tijdelijkRisico;
+		
+		}
 		return true;
 	}
 
 	@Override
 	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

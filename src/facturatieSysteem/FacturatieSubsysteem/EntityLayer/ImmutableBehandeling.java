@@ -8,9 +8,9 @@ public interface ImmutableBehandeling {
 
 	public void setFysioPraktijkNummer(int fysioPraktijkNummer);
 
-	public int getBehandelCode();
+	public String getBehandelCode();
 
-	public void setBehandelCode(int behandelCode);
+	public void setBehandelCode(String behandelCode);
 
 	public long getBehandelStartDatum();
 

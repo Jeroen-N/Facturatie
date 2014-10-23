@@ -20,9 +20,12 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 public class FactuurDAO implements FactuurDAOinf {
 
 	private ArrayList<Factuur> facturen = new ArrayList<Factuur>();
-	private Document document;
-	private DAOFactoryFactuur daoFactory = new DAOFactoryFactuur();
+	private Document document = null;
+
 	private Factuur factuur;
+	private DAOFactoryFactuur daoFactoryBehandelcode;
+	private DAOFactoryFactuur daoFactoryClient;
+	private DAOFactoryFactuur daoFactoryFacturatie;
 
 	/**
 	 * Haalt alle facturen op van de klant waarvan deze geladen moeten worden.
@@ -33,11 +36,16 @@ public class FactuurDAO implements FactuurDAOinf {
 	 * @return ArrayList van facturen van de desbetreffende klant
 	 */
 
-	public FactuurDAO() {
+	public FactuurDAO(DAOFactoryFactuur daoFactoryBehandelcode,
+			DAOFactoryFactuur daoFactoryClient,
+			DAOFactoryFactuur daoFactoryFacturatie) {
+		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
+		this.daoFactoryClient = daoFactoryClient;
+		this.daoFactoryFacturatie = daoFactoryFacturatie;
 	}
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		document = daoFactory.getDocument();
+		document = daoFactoryFacturatie.getDocument();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -87,7 +95,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	public boolean maakFactuur(Klant klant, Factuur factuur) {
-		document = daoFactory.getDocument();
+		document = daoFactoryFacturatie.getDocument();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -104,7 +112,6 @@ public class FactuurDAO implements FactuurDAOinf {
 
 					// Maak een tijdelijke lijst aan van alle facturen die er
 					// zijn en bepaal hier het hoogste factuurnummer
-				
 
 					// Maak het factuurnummer het hoogste nummer.
 					// factuurNummer.setValue("" + n2 + 1);
@@ -171,14 +178,14 @@ public class FactuurDAO implements FactuurDAOinf {
 					 */
 				}
 			}
-			return daoFactory.writeDocument();
+			return daoFactoryFacturatie.writeDocument();
 		} catch (DOMException e) {
 			return false;
 		}
 	}
 
 	public ArrayList<Factuur> haalAlleFacturen() {
-		document = daoFactory.getDocument();
+		document = daoFactoryFacturatie.getDocument();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -186,9 +193,10 @@ public class FactuurDAO implements FactuurDAOinf {
 			for (int i = 0; i < clienten.getLength(); i++) {
 				Element clientElement = (Element) clienten.item(i);
 				String BSN = clientElement.getAttribute("BSN");
-				
-				Element facturenElement = (Element)clientElement.getElementsByTagName("Facturen").item(0);
-				
+
+				Element facturenElement = (Element) clientElement
+						.getElementsByTagName("Facturen").item(0);
+
 				NodeList factuurnode = facturenElement
 						.getElementsByTagName("Factuur");
 				for (int j = 0; j < factuurnode.getLength(); j++) {
@@ -201,13 +209,13 @@ public class FactuurDAO implements FactuurDAOinf {
 					String vervalDatum = factuurElement
 							.getElementsByTagName("VervalDatum").item(0)
 							.getTextContent();
-					
-					//TODO in xml zetten zodat deze een waarde heeft
-					//double eigenRisico = Double.parseDouble(factuurElement
-							//.getElementsByTagName("EigenRisico").item(0)
-							//.getTextContent());
-					
-					//TODO status meegeven! 
+
+					// TODO in xml zetten zodat deze een waarde heeft
+					// double eigenRisico = Double.parseDouble(factuurElement
+					// .getElementsByTagName("EigenRisico").item(0)
+					// .getTextContent());
+
+					// TODO status meegeven!
 					/*
 					 * System.out.println("factuur: " + (i+1));
 					 * System.out.println(factuurNummer);

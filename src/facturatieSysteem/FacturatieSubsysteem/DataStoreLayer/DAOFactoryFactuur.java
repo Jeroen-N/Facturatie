@@ -23,21 +23,16 @@ import org.xml.sax.SAXException;
 
 public class DAOFactoryFactuur {
 	
-	private String xmlPath = "XML/ClientFormat.xml";
-	private String xsdPath = "XML/ClientFormat.xsd";
+	private String xmlPath ;
+	private String xsdPath;
 	private Document document;
 	
-	public DAOFactoryFactuur(){
+	public DAOFactoryFactuur(String xml, String xsd){
+		this.xmlPath = xml;
+		this.xsdPath = xsd;
 		
-		
-	}
-	public FactuurDAO getFactuurDAO() {
-		return new FactuurDAO();
 	}
 
-	public BehandelingDAO getBehandelingDAO() {
-		return new BehandelingDAO();
-	}
 	
 	public Document validateXML(){
 		try{
