@@ -299,4 +299,53 @@
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 	</Client>
+
+	<Client BSN="023974020">
+		<ClientGegevens>
+			<Naam>Sjaakie Kaas</Naam>
+			<Adres>Apenstraat 9a</Adres>
+			<Postcode>8342GV</Postcode>
+			<Woonplaats>Terheijden</Woonplaats>
+			<Geboortedatum>01-04-2000</Geboortedatum>
+			<Telefoonnummer>0684722563</Telefoonnummer>
+			<Email>kaas@sjaakie.nl</Email>
+			<BetaalMethode>Acceptgiro</BetaalMethode>
+			<ResterendEigenRisico>200.0</ResterendEigenRisico>
+			<Rekeningnummer>NL05RABO08393825208</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="YXU6DB">
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
+				<startDatum>10-06-2014</startDatum>
+				<eindDatum>10-06-2015</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen><Facturen/><Behandelingen/><Diagnoses/>
+	</Client>
+
+	<Client BSN="123456789">
+		<ClientGegevens>
+			<Naam>ricardo jobse</Naam>
+			<Adres>sterrenkroos 192</Adres>
+			<Postcode>4823ME</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>17-10-1994</Geboortedatum>
+			<Telefoonnummer>0646193003</Telefoonnummer>
+			<Email>jobse.ricardo@gmail.com</Email>
+			<BetaalMethode>Incasso</BetaalMethode>
+			<ResterendEigenRisico>80.0</ResterendEigenRisico>
+			<Rekeningnummer>34567</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="ZGYN99">
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
+				<startDatum>12-12-1212</startDatum>
+				<eindDatum>12-12-1213</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+		<Facturen/>
+		<Behandelingen/>
+		<Diagnoses/>
+	</Client>
 </Clienten>

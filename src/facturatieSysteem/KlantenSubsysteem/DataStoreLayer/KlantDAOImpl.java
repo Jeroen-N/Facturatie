@@ -34,6 +34,9 @@ public class KlantDAOImpl implements KlantDAO {
 		Element clientGegevens = document.createElement("ClientGegevens");
 		Element verzekeringPolissen = document.createElement("VerzekeringPolissen");
 		Element verzekeringPolis = document.createElement("VerzekeringPolis");
+		Element Facturen = document.createElement("Facturen");
+		Element Behandelingen = document.createElement("Behandelingen");
+		Element Diagnoses = document.createElement("Diagnoses");
 		
 		//Ordering Elements
 		clienten.appendChild(client);
@@ -43,8 +46,14 @@ public class KlantDAOImpl implements KlantDAO {
 			client.appendChild(verzekeringPolissen);
 				verzekeringPolissen.appendChild(document.createTextNode("\n\t\t\t")); // <VerzekeringPolis>
 				verzekeringPolissen.appendChild(verzekeringPolis);
+			client.appendChild(document.createTextNode("\n\t\t"));
+			client.appendChild(Facturen);
+			client.appendChild(document.createTextNode("\n\t\t"));
+			client.appendChild(Behandelingen);
+			client.appendChild(document.createTextNode("\n\t\t"));
+			client.appendChild(Diagnoses);
 		
-		//create Attribuur BSN
+		//create Attribuut BSN
 		Attr BSN = document.createAttribute("BSN");
 		BSN.setValue("" + klant.getBSN());
 		client.setAttributeNode(BSN);
