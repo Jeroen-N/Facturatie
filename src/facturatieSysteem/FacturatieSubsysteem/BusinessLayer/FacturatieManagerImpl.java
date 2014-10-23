@@ -28,6 +28,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private BehandelingDAO behandelingDAO;
 	private ArrayList<Factuur> facturen;
 	private Verzekeringstype verzekering;
+	private ArrayList<Behandeling> Behandelingen;
 
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
@@ -75,6 +76,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		double oudRisico = klant.getResterendEigenRisico();
 		double totalePrijs = 00;
 		String type = "";
+		double teVergoedenPrijs = 00;
 		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 			type = polis.getVerzekeringsType();
 
@@ -85,35 +87,44 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					type);
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
-		for (Behandeling behandeling : behandelingen) {
+		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
+		for (Behandeling behandeling : behandelingenlijst) {
 
-			// double tijdelijkRisico = behandelingDAO.getPrijs(behandeling
-			// .getBehandelCode());
-			// totalePrijs += tijdelijkRisico;
 			for (String code : verzekering.getBehandelcodes()) {
 
 				if (behandeling.getBehandelCode().equals(code)) {
 					// Behandeling wordt vergoed
-					
+
 				} else {
 					// Behandeling wordt niet vergoed
-
+					double tijdelijkRisico = behandelingDAO
+							.getPrijs(behandeling.getBehandelCode())
+							* behandeling.getSessies();
+					totalePrijs += tijdelijkRisico;
 				}
 			}
-			behandelingenlijst.add(behandeling);
+			if (klant.getResterendEigenRisico() != 0) {
+				if (klant.getResterendEigenRisico() >= totalePrijs) {
+					klant.setTotaalEigenRisico(klant.getResterendEigenRisico() - totalePrijs);
+					teVergoedenPrijs = 0;
+				}
+				else{
+					teVergoedenPrijs = totalePrijs-klant.getResterendEigenRisico();
+					klant.setTotaalEigenRisico(0);
+				}
+			}
+			else{
+				teVergoedenPrijs = totalePrijs;
+				
+			}
+			behandeling.setTotaalprijs(totalePrijs);
+			totalePrijs = 00;
 		}
 		return true;
 	}
 
 	@Override
-	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		// TODO Auto-generated method stub
 		return factuurDAO.haalFacturen(invoerBSN);
 	}
 

@@ -15,7 +15,7 @@ public class testMain {
 private static ArrayList<Factuur> facturen = new ArrayList<>();
 	public static void main(String[] args) {
 		// TODO Fix deze test?
-
+    int result = 1 - 10;
 	}
 	
 	}

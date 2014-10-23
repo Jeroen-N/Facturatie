@@ -11,8 +11,6 @@ public interface FacturatieManager {
 
 	public boolean factureer(Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager);
 
-	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen);
-
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
 	public String toonFactuur(String factuur_nummer);

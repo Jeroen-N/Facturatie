@@ -4,21 +4,21 @@ public interface ImmutableBehandeling {
 
 	public Behandeling getBehandelingen();
 
-	public int getFysioPraktijkNummer();
+	public String getFysioPraktijkNummer();
 
-	public void setFysioPraktijkNummer(int fysioPraktijkNummer);
+	public void setFysioPraktijkNummer(String fysioPraktijkNummer);
 
 	public String getBehandelCode();
 
 	public void setBehandelCode(String behandelCode);
 
-	public long getBehandelStartDatum();
+	public String getBehandelStartDatum();
 
-	public void setBehandelStartDatum(long behandelStartDatum);
+	public void setBehandelStartDatum(String behandelStartDatum);
 
-	public long getBehandelEindDatum();
+	public String getBehandelEindDatum();
 
-	public void setBehandelEindDatum(long behandelEindDatum);
+	public void setBehandelEindDatum(String behandelEindDatum);
 
 	public String getBSN();
 

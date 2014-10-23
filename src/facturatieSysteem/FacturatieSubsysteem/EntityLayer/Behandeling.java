@@ -2,16 +2,16 @@ package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
 public class Behandeling implements ImmutableBehandeling {
 
-	private int fysioPraktijkNummer;
+	private String fysioPraktijkNummer;
 	private String behandelCode;
-	private long behandelStartDatum;
-	private long behandelEindDatum;
+	private String behandelStartDatum;
+	private String behandelEindDatum;
 	private String BSN;
 	private double totaalprijs;
 	private int sessies;
 
-	public Behandeling(int fysioPraktijkNummer, String behandelCode,
-			long behandelStartDatum, long behandelEindDatum, String BSN, double totaalprijs, int sessies) {
+	public Behandeling(String fysioPraktijkNummer, String behandelCode,
+			String behandelStartDatum, String behandelEindDatum, String BSN, double totaalprijs, int sessies) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 		this.behandelCode = behandelCode;
 		this.behandelStartDatum = behandelStartDatum;
@@ -22,17 +22,33 @@ public class Behandeling implements ImmutableBehandeling {
 
 	}
 
+	public double getTotaalprijs() {
+		return totaalprijs;
+	}
+
+	public void setTotaalprijs(double totaalprijs) {
+		this.totaalprijs = totaalprijs;
+	}
+
+	public int getSessies() {
+		return sessies;
+	}
+
+	public void setSessies(int sessies) {
+		this.sessies = sessies;
+	}
+
 	@Override
 	public Behandeling getBehandelingen() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int getFysioPraktijkNummer() {
+	public String getFysioPraktijkNummer() {
 		return fysioPraktijkNummer;
 	}
 
-	public void setFysioPraktijkNummer(int fysioPraktijkNummer) {
+	public void setFysioPraktijkNummer(String fysioPraktijkNummer) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 	}
 
@@ -44,19 +60,19 @@ public class Behandeling implements ImmutableBehandeling {
 		this.behandelCode = behandelCode;
 	}
 
-	public long getBehandelStartDatum() {
+	public String getBehandelStartDatum() {
 		return behandelStartDatum;
 	}
 
-	public void setBehandelStartDatum(long behandelStartDatum) {
+	public void setBehandelStartDatum(String behandelStartDatum) {
 		this.behandelStartDatum = behandelStartDatum;
 	}
 
-	public long getBehandelEindDatum() {
+	public String getBehandelEindDatum() {
 		return behandelEindDatum;
 	}
 
-	public void setBehandelEindDatum(long behandelEindDatum) {
+	public void setBehandelEindDatum(String behandelEindDatum) {
 		this.behandelEindDatum = behandelEindDatum;
 	}
 
