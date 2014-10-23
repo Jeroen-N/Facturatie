@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 
 public interface FacturatieManager {
 
-	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen);
+	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen, VerzekeringsmaatschappijManager verzekeringsmanager);
 
 	public void controleerBehandelingen(ArrayList<Behandeling> behandelingen);
 
