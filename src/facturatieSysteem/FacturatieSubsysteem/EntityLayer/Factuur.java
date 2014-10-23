@@ -1,5 +1,7 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Factuur implements ImmutableFactuur {
@@ -11,6 +13,7 @@ public class Factuur implements ImmutableFactuur {
 	private ArrayList<Behandeling> behandelingen;
 	private double eigenRisico;
 	private String status;
+	private String s;
 
 	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double eigenRisico, String status) {
 		this.factuurNummer = factuurNummer;
@@ -105,4 +108,29 @@ public class Factuur implements ImmutableFactuur {
 		BSN = bSN;
 	}
 
+	public String toString(Factuur factuur){
+		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
+        String risk = getallenOpmaker.format(eigenRisico);
+        
+		System.out.println(behandelingen.size());
+		return "Factuurnummer: \t" 			+ 	factuurNummer 					+ "\n" +
+				"Factuurdatum: \t\t" 			+ 	factuurDatum 				+ "\n" +
+				"Vervaldatum: \t\t"				+	vervalDatum					+ "\n" +
+				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
+				"Status: \t\t"					+ 	status						+ "\n" +
+				"Behandelingen: \t"	 			+ 	loopBehandelingen(factuur)				+ "\n" ;			
+	}
+	
+	public String loopBehandelingen(Factuur factuur){
+		
+		behandelingen = factuur.getBehandelingen();
+		
+		for(Behandeling b : behandelingen){
+			String s = b.getBehandelingNaam(b);
+		}
+		return s;
+		
+        
+		
+	}
 }

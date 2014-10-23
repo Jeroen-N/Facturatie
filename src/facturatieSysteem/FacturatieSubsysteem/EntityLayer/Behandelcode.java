@@ -3,7 +3,7 @@ package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 public class Behandelcode {
 
 	private int behandelCode;
-	private String behandelingNaam;
+	private static String behandelingNaam;
 	private int aantalSessies;
 	private double sessieDuur;
 	private double tariefBehandeling;
@@ -11,7 +11,7 @@ public class Behandelcode {
 	public Behandelcode(int behandelCode, String behandelingNaam,
 			int aantalSessies, double sessieDuur, double tariefBehandeling) {
 		this.behandelCode = behandelCode;
-		this.behandelingNaam = behandelingNaam;
+		Behandelcode.behandelingNaam = behandelingNaam;
 		this.aantalSessies = aantalSessies;
 		this.sessieDuur = sessieDuur;
 		this.tariefBehandeling = tariefBehandeling;
@@ -25,12 +25,12 @@ public class Behandelcode {
 		this.behandelCode = behandelCode;
 	}
 
-	public String getBehandelingNaam() {
+	public static String getBehandelingNaam() {
 		return behandelingNaam;
 	}
 
 	public void setBehandelingNaam(String behandelingNaam) {
-		this.behandelingNaam = behandelingNaam;
+		Behandelcode.behandelingNaam = behandelingNaam;
 	}
 
 	public int getAantalSessies() {

@@ -84,4 +84,7 @@ public class Behandeling implements ImmutableBehandeling {
 		BSN = bSN;
 	}
 
+	public String getBehandelingNaam(Behandeling behandeling){
+		return Behandelcode.getBehandelingNaam();
+	}
 }

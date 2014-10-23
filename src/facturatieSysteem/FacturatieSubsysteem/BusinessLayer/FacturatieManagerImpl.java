@@ -135,7 +135,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		facturen = haalFacturen(klant.getBSN());
 		for (Factuur factuur : facturen) {
 			if (factuur.getFactuurNummer().equals(factuur_nummer)) {
-				return factuur.toString();
+				return factuur.toString(factuur);
 			}
 		}
 		return "niks gevonden";
