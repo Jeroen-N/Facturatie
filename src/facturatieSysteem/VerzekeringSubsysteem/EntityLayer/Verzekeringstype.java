@@ -58,4 +58,12 @@ public class Verzekeringstype {
 	public void setNaam(String Naam){
 		this.Naam = Naam;
 	}
+	
+	/*
+	 * @return de behandelcode
+	 */
+	public ArrayList<String> getBehandelcodes(){
+		return behandelcodes;
+	}
+	
 }
