@@ -1,9 +1,13 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class BehandelingDAO implements BehandelDAOinf {
 
@@ -52,7 +56,74 @@ public class BehandelingDAO implements BehandelDAOinf {
 			e.printStackTrace();
 		}
 		return tarief;
-
 	}
 
+	public ArrayList<String> getBehandelingen(Klant klant) {
+		//Initialiseer een lijst voor behandelingen.
+		//Initialiseer een document van de daofactory en maak een string behandelcode aan zonder inhoud.
+		ArrayList<String> behandelingen = new ArrayList<>();
+		document = daoFactoryClient.getDocument();
+		String behandelcode = "";
+		
+		//Start proces om behandelingen op te halen.
+		try {
+			//Loop door alle klanten heen
+			Element clientenElement = (Element) document.getElementsByTagName(
+					"Clienten").item(0);
+			NodeList clienten = clientenElement.getElementsByTagName("Client");
+			for (int i = 0; i < clienten.getLength(); i++) {
+				Element clientElement = (Element) clienten.item(i);
+				String BSN = clientElement.getAttribute("BSN");
+				//Als de BSN van een klant overeenkomt met de BSN van de meegegeven klant, blijf in het element van deze klant.
+				if (BSN.equals(klant.getBSN())) {
+					Element behandelingenElement = (Element) clientElement
+							.getElementsByTagName("Behandelingen").item(0);
+					//Zoek in deze klant alle behandelingen op.
+					NodeList behandelingnode = behandelingenElement
+							.getElementsByTagName("Behandeling");
+					//Haal in elke behandeling de behandelcode op.
+					for (int j = 0; j < behandelingnode.getLength(); j++) {
+						Element behandelElement = (Element) behandelingnode
+								.item(j);
+						behandelcode = behandelElement
+								.getAttribute("Behandelcode");
+						//Zoek nu bij alle behandelingen de afspraken op.
+						NodeList afspraaknode = behandelElement
+								.getElementsByTagName("behandelafspraak");
+						int l = 0;
+						//Loop door de lijst afspraken heen.
+						for (int k = 0; k < afspraaknode.getLength(); k++) {
+							Element afspraakElement = (Element) afspraaknode
+									.item(k);
+							//Als de afspraak niet gefactureerd is en deze wel voltooid is, wordt l opgehoogd met 1. 
+							if (!afspraakElement
+									.getElementsByTagName("Gefactureerd")
+									.item(0).getTextContent().equals("Ja")
+									&& afspraakElement
+											.getElementsByTagName("Status")
+											.item(0).equals("Voltooid")) {
+								l++;
+							}
+						}
+						//Maak een string aan waarin de behandelcode wordt gekoppeld
+						//aan het aantal behandelingen dat niet gefactureerd is en wel voltooid is.
+						String m = Integer.toString(l);
+						behandelcode = behandelcode + m;
+						//Reset de tellers en de string die toegevoegd wordt aan de behandelcode.
+						m = "";
+						l = 0;
+					}
+					//Voeg de gegenereerde string aan de lijst toe.
+					behandelingen.add(behandelcode);
+					behandelcode = "";
+				}
+			}
+			//Vang fouten af.
+		} catch (DOMException e) {
+			e.printStackTrace();
+		}
+		//Stuur de lijst met codes en het aantal behandelingen terug
+		return behandelingen;
+
+	}
 }

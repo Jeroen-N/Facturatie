@@ -7,14 +7,18 @@ public class Behandeling implements ImmutableBehandeling {
 	private long behandelStartDatum;
 	private long behandelEindDatum;
 	private String BSN;
+	private double totaalprijs;
+	private int sessies;
 
 	public Behandeling(int fysioPraktijkNummer, String behandelCode,
-			long behandelStartDatum, long behandelEindDatum, String BSN) {
+			long behandelStartDatum, long behandelEindDatum, String BSN, double totaalprijs, int sessies) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 		this.behandelCode = behandelCode;
 		this.behandelStartDatum = behandelStartDatum;
 		this.behandelEindDatum = behandelEindDatum;
 		this.BSN = BSN;
+		this.totaalprijs = totaalprijs;
+		this.sessies = sessies;
 
 	}
 
