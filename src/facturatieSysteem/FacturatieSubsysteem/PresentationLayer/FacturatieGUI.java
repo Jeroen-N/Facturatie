@@ -20,12 +20,9 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 public class FacturatieGUI {
 
-	private static JFrame frame = new JFrame("Facturatiesysteem");
 	private static FacturatieManagerImpl facturatieManagerImpl;
 	private static Integer row;
 	private static JPanel buttonPanel;
-	private static JPanel headPanel;
-	private static JPanel detailPanel;
 	private static JPanel overzichtPanel;
 	private static JTextField zoekbalk;
 	private static JButton zoekKnop;
@@ -34,17 +31,18 @@ public class FacturatieGUI {
 	private static JButton openFactuurKnop;
 	private static JButton printFactuurKnop;
 	private static JTable overzicht;
-	private static JTextArea details;
+	private static JTextArea factuur;
 	private static JLabel paginaNaam;
-	private static Container contentpane;
-	private static Color GRAY;
 	private static JScrollPane factuurTablePanel;
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JPanel mainPanel = new JPanel();
 	private static Klant klant;
 	private static ArrayList<Factuur> facturen;
 	private static DataTableModelFactuur dataTableModel;
-	//private static FacturatieManager facturatieManager;
+	private static JPanel eastPanel;
+	private static JPanel factuurPanel;
+	private static JScrollPane scrollFactuur;
+	private static Border border;
 
 	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
@@ -58,32 +56,27 @@ public class FacturatieGUI {
 	}
 
 	public static JPanel initComponents(FacturatieManagerImpl factManagerImpl) {
-		contentpane = frame.getContentPane();
-		contentpane.setLayout(new BorderLayout());
-
 		// panels aanmaken
 
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout(0, 0));
+		eastPanel = new JPanel();
+		eastPanel.setLayout(new BorderLayout(0, 0));
 		buttonPanel = new JPanel();
-		overzichtPanel = new JPanel();
-		headPanel = new JPanel();
-		detailPanel = new JPanel();
-
-		// Tekst initialiseren van de knoppen en labels.
-		details = new JTextArea();
-		details.setBackground(Color.LIGHT_GRAY);
-		details.setPreferredSize(new Dimension(250, 400));
-		details.setRows(25);
-		details.setColumns(40);
-		details.setEditable(false);
+		factuurPanel = new JPanel();
 		
+
+		// Tekst initialiseren van de knoppen, tekstvelden en textarea's.
+		factuur = new JTextArea();
+		factuur.setEditable(false);
+		scrollFactuur = new JScrollPane(factuur);
+		factuur.setRows(43);
+		factuur.setColumns(40);
+		factuur.setBorder(new TitledBorder(new LineBorder(new Color(
+				0, 0, 0)), "Factuur", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+	
 		
-		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		details.setBorder(BorderFactory.createCompoundBorder(border,
-				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
-		paginaNaam = new JLabel();
-		paginaNaam.setText("Overzicht facturen");
-
 		zoekKnop = new JButton();
 		zoekKnop.setText("Zoek");
 
@@ -102,7 +95,7 @@ public class FacturatieGUI {
 		zoekbalk = new JTextField();
 		zoekbalk.setText("Vul factuurcode in");
 
-		// Tabel onderverdelen in kolommen en vastzetten.
+		//overzicht tabel aanmaken en vullen.
 		overzicht = new JTable(dataTableModel){
 
 			private static final long serialVersionUID = 1L;
@@ -130,7 +123,7 @@ public class FacturatieGUI {
 	factuurTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
 			0, 0, 0)), "Facturenlijst", TitledBorder.LEADING,
 			TitledBorder.TOP, null, null));
-	overzichtPanel.add(factuurTablePanel, BorderLayout.CENTER);
+	mainPanel.add(factuurTablePanel, BorderLayout.CENTER);
 
 	overzicht.addMouseListener(new MouseAdapter() {
 		@Override
@@ -144,22 +137,15 @@ public class FacturatieGUI {
 		buttonPanel.add(factureerKnop);
 		buttonPanel.add(openFactuurKnop);
 		buttonPanel.add(printFactuurKnop);
-
-		//overzichtPanel.add(overzicht);
-
-		headPanel.add(paginaNaam);
-		headPanel.add(zoekKnop);
-		headPanel.add(terugKnop);
-		headPanel.add(zoekbalk);
-
-		detailPanel.add(details);
-
-		contentpane.add(buttonPanel, BorderLayout.SOUTH);
-		contentpane.add(overzichtPanel, BorderLayout.CENTER);
-		contentpane.add(headPanel, BorderLayout.NORTH);
-		contentpane.add(detailPanel, BorderLayout.EAST);
-
-		mainPanel.add(contentpane);
+		
+		factuurPanel.add(factuur);
+		scrollFactuur.add(factuurPanel);
+		
+		eastPanel.add(factuurPanel, BorderLayout.CENTER);
+		eastPanel.add(buttonPanel, BorderLayout.SOUTH);
+		
+		mainPanel.add(eastPanel, BorderLayout.EAST);
+		
 		return mainPanel;
 
 	}
@@ -197,7 +183,7 @@ public class FacturatieGUI {
 	public static void fillField(int row, FacturatieManagerImpl factManagerImpl, Klant klant){
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
 		System.out.println(factuur_nummer);
-		details.setText(factManagerImpl.toonFactuur(factuur_nummer, klant));
+		factuur.setText(factManagerImpl.toonFactuur(factuur_nummer, klant));
 		}
 	
 	public void showConfirmationWindow(String message) {
