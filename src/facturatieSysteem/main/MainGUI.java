@@ -293,6 +293,7 @@ public class MainGUI {
 						btnChangeKlant.setEnabled(rowsAreSelected);
 						btnAddPolis.setEnabled(rowsAreSelected);
 						btnChangePolis.setEnabled(rowsAreSelected);
+						btnFacturatie.setEnabled(rowsAreSelected);
 					}
 				});
 
@@ -350,15 +351,18 @@ public class MainGUI {
 		});
 		
 		btnFacturatie = new JButton("");
+		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
 		btnFacturatie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				KlantenPanel.setVisible(false);
-				Klant fact = KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-				FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact));
-				FacturatiePanel.setVisible(true);
+				if (btnChangeKlant.isEnabled()) {
+					KlantenPanel.setVisible(false);
+					Klant fact = KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact));
+					FacturatiePanel.setVisible(true);
+				}
 			}
 		});		
 		
