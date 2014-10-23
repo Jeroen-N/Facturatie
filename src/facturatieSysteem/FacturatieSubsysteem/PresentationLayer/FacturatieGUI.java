@@ -11,6 +11,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
@@ -19,6 +20,7 @@ public class FacturatieGUI {
 
 	private static JFrame frame = new JFrame("Facturatiesysteem");
 	private static FacturatieManagerImpl facturatieManagerImpl;
+	private static Integer row;
 	private static JPanel buttonPanel;
 	private static JPanel headPanel;
 	private static JPanel detailPanel;
@@ -40,6 +42,7 @@ public class FacturatieGUI {
 	private static Klant klant;
 	private static ArrayList<Factuur> facturen;
 	private static DataTableModelFactuur dataTableModel;
+	private static FacturatieManager facturatieManager;
 
 	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
@@ -67,7 +70,16 @@ public class FacturatieGUI {
 		details = new JTextArea();
 		details.setBackground(Color.LIGHT_GRAY);
 		details.setPreferredSize(new Dimension(250, 400));
-		details.setText("test");
+		details.setRows(25);
+		details.setColumns(40);
+		details.setEditable(false);
+		details.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				row = overzicht.getSelectedRow();
+				fillField(row);
+				}
+		});
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		details.setBorder(BorderFactory.createCompoundBorder(border,
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -95,9 +107,7 @@ public class FacturatieGUI {
 
 		// Tabel onderverdelen in kolommen en vastzetten.
 		overzicht = new JTable(dataTableModel){
-		/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -117,6 +127,9 @@ public class FacturatieGUI {
 	
 	factuurTablePanel = new JScrollPane(overzicht);
 	overzicht.setFillsViewportHeight(true);
+	overzicht.getTableHeader().setReorderingAllowed(false);
+	overzicht.getTableHeader().setResizingAllowed(false);
+	
 	factuurTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
 			0, 0, 0)), "Facturenlijst", TitledBorder.LEADING,
 			TitledBorder.TOP, null, null));
@@ -163,11 +176,28 @@ public class FacturatieGUI {
 	}
 	
 	public static void fillTable(Klant klant){
+		
 		facturen = facturatieManagerImpl.haalFacturen(klant.getBSN());
 		int count = (facturen == null) ? 0 : facturen.size();
+				
 		
 		if(count > 0){
 		dataTableModel.setValues(facturen);
 		}
+	}
+	
+	/*
+	 * Methode om het informatie veld te kunnen vullen en updaten
+	 */
+	public static void fillField(int row){
+		String factuur_nummer = overzicht.getModel().getValueAt(row, 1)
+				.toString();
+		details.setText(facturatieManager.toonFactuur(factuur_nummer));
+		}
+	
+	public void showConfirmationWindow(String message) {
+		 Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
+
 	}
 }

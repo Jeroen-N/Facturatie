@@ -71,7 +71,7 @@ public class MainGUI {
 		makeFrame();
 	}
 
-	@SuppressWarnings({ "unused", "serial" })
+	@SuppressWarnings({"serial" })
 	public void makeFrame() {
 
 		/*

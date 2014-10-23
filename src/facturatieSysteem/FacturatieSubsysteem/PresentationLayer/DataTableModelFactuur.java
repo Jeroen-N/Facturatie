@@ -73,7 +73,7 @@ public class DataTableModelFactuur extends AbstractTableModel {
 	 */
 	public void setValues(ArrayList<Factuur> facturen) {
 		
-		logger.debug("");
+		logger.debug("setValues facturen");
 		int colcount = getColumnCount();
 		int rowcount = facturen.size();
 		String[][] values = new String[rowcount][colcount];

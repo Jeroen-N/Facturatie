@@ -85,4 +85,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return factuurDAO.haalFacturen(invoerBSN);
 	}
 
+	@Override
+	public String toonFactuur(String factuur_nummer) {
+		for (Factuur factuur : factuurDAO.haalAlleFacturen()) {
+			if (factuur.getFactuurNummer().equals(factuur_nummer)) {
+				return factuur.toString();
+			}
+		}
+		return "niks gevonden";
+	}
+	
+	
+
+
 }

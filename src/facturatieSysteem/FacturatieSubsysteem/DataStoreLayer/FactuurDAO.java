@@ -1,6 +1,7 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,37 +48,28 @@ public class FactuurDAO implements FactuurDAOinf {
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
 		document = daoFactoryFacturatie.getDocument();
 		try {
-			Element clientenElement = (Element) document.getElementsByTagName(
-					"Clienten").item(0);
+			Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
 			NodeList clienten = clientenElement.getElementsByTagName("Client");
 			for (int i = 0; i < clienten.getLength(); i++) {
 				Element clientElement = (Element) clienten.item(i);
 				String BSN = clientElement.getAttribute("BSN");
 				if (BSN.equals(invoerBSN)) {
-
-					NodeList factuurnode = clientElement
-							.getElementsByTagName("factuur");
-					for (int j = 0; j < factuurnode.getLength(); j++) {
-						Element factuurElement = (Element) factuurnode.item(j);
+					
+					Element facturenElement = (Element) clientElement.getElementsByTagName("Facturen").item(0);
+					NodeList facturenNode = facturenElement.getElementsByTagName("Factuur");
+					for (int j = 0; j < facturenNode.getLength(); j++) {
+						Element factuurElement = (Element) facturenNode.item(j);
 						String factuurNummer = factuurElement
-								.getAttribute("factuurNummer");
+								.getAttribute("FactuurNummer");
 						String factuurDatum = factuurElement
-								.getElementsByTagName("factuurDatum").item(0)
+								.getElementsByTagName("FactuurDatum").item(0)
 								.getTextContent();
 						String vervalDatum = factuurElement
-								.getElementsByTagName("vervalDatum").item(0)
+								.getElementsByTagName("VervalDatum").item(0)
 								.getTextContent();
-						double eigenRisico = Double.parseDouble(factuurElement
-								.getElementsByTagName("EigenRisico").item(0)
-								.getTextContent());
-						/*
-						 * System.out.println("factuur: " + (i+1));
-						 * System.out.println(factuurNummer);
-						 * System.out.println(factuurDatum);
-						 * System.out.println(vervalDatum);
-						 * 
-						 * System.out.println();
-						 */
+						//double eigenRisico = Double.parseDouble(factuurElement
+						//		.getElementsByTagName("EigenRisico").item(0)
+						//		.getTextContent());
 
 						factuur = new Factuur(factuurNummer, factuurDatum,
 								vervalDatum, invoerBSN, 00, null);
