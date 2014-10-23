@@ -9,6 +9,7 @@ public class testMain {
 
 		KlantManager manager = new KlantManagerImpl();
 		String polisNummer = manager.createPolisnummer();
+		polisNummer = "123456";
 		String BSN = "125651201";
 		VerzekeringPolissen = new ArrayList<>();
 		VerzekeringPolis polis = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"); 
@@ -20,6 +21,7 @@ public class testMain {
 			}else{
 				System.out.println("klant toevoegen mislukt");
 			}
+			/*
 		polisNummer = manager.createPolisnummer();
 		//Polis aan klant toevoegen
 			if(manager.addVerzekeringPolisXML(BSN, polisNummer, "007", 1125.48, "01-01-1910", "31-12-1911")){
