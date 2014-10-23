@@ -136,7 +136,7 @@ public class FacturatieGUI {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			row = overzicht.getSelectedRow();
-			fillField(row, factManagerImpl);
+			fillField(row, factManagerImpl, klant);
 			}
 	});
 	
@@ -194,10 +194,10 @@ public class FacturatieGUI {
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public static void fillField(int row, FacturatieManagerImpl factManagerImpl){
+	public static void fillField(int row, FacturatieManagerImpl factManagerImpl, Klant klant){
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
 		System.out.println(factuur_nummer);
-		details.setText(factManagerImpl.toonFactuur(factuur_nummer));
+		details.setText(factManagerImpl.toonFactuur(factuur_nummer, klant));
 		}
 	
 	public void showConfirmationWindow(String message) {
