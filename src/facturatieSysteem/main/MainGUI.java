@@ -21,6 +21,7 @@ import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImp
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
@@ -118,6 +119,7 @@ public class MainGUI {
 			public void actionPerformed(ActionEvent e) {
 				KlantenPanel.setVisible(false);
 				VerzekeringPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.add(VerzekeringsmaatschappijGUI.VerzekeringsGUI(maatschappijManager));
 				VerzekeringsMaatschappijPanel.setVisible(true);
 				FacturatiePanel.setVisible(false);
 			}
