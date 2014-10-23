@@ -9,7 +9,7 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 
 public interface FacturatieManager {
 
-	public boolean factureer(Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager);
+	public Factuur factureer(Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager);
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 

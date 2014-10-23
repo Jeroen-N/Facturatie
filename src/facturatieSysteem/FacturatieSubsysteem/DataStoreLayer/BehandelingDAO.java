@@ -94,7 +94,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 						Element behandelElement = (Element) behandelingnode
 								.item(j);
 						behandelcode = behandelElement
-								.getAttribute("Behandelcode");
+								.getElementsByTagName("Behandelcode").item(0).getTextContent();
 						praktijkNummer = behandelElement
 								.getElementsByTagName("fysioPraktijkNummer")
 								.item(0).getTextContent();
@@ -109,6 +109,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 								.getElementsByTagName("behandelafspraak");
 						int l = 0;
 						// Loop door de lijst afspraken heen.
+						System.out.println(afspraaknode.getLength());
 						for (int k = 0; k < afspraaknode.getLength(); k++) {
 							Element afspraakElement = (Element) afspraaknode
 									.item(k);
@@ -119,16 +120,17 @@ public class BehandelingDAO implements BehandelDAOinf {
 									.item(0).getTextContent().equals("Ja")
 									&& afspraakElement
 											.getElementsByTagName("Status")
-											.item(0).equals("Voltooid")) {
+											.item(0).getTextContent().equals("Voltooid")) {
 								l++;
 							}
 						}
 				
 						// Reset de tellers en de string die toegevoegd wordt
 						// aan de behandelcode.
-						l = 0;
+					
 						Behandeling behandeling = new Behandeling(praktijkNummer, behandelcode, behandelStartDatum, behandelEindDatum, BSN, totaalprijs, l);
 						behandelingen.add(behandeling);
+						l = 0;
 					}
 				}
 			}

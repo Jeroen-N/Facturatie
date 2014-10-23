@@ -275,6 +275,7 @@
 				<startDatum>01-01-0001</startDatum>
 				<eindDatum>01-01-0003</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
+			<Facturen/><Behandelingen/><Diagnoses/>
 	</Client>
 
 	<Client BSN="220822712">
@@ -298,6 +299,7 @@
 				<eindDatum>23-10-2016</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
+		<Facturen/><Behandelingen/><Diagnoses/>
 	</Client>
 
 	<Client BSN="023974020">
@@ -370,8 +372,86 @@
 				<eindDatum>31-12-2011</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
-		<Facturen/>
-		<Behandelingen/>
+		<Facturen>
+			<Factuur FactuurNummer="262510">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>59</BehandelingID>
+					<BehandelingID>96</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico/>
+			</Factuur>
+			<Factuur FactuurNummer="256410">
+				<FactuurDatum>09-06-2014</FactuurDatum>
+				<VervalDatum>09-07-2014</VervalDatum>
+				<FactuurBehandelingen>
+					<BehandelingID>01</BehandelingID>
+					<BehandelingID>9606</BehandelingID>
+				</FactuurBehandelingen>
+				<EigenRisico/>
+			</Factuur>
+		</Facturen>
+		<Behandelingen>
+			<Behandeling id="12">
+				<behandelgegevens>
+					<Fysiotherapeut>029384</Fysiotherapeut>
+					<Behandelcode>003</Behandelcode>
+					<fysioPraktijkNummer>159846327</fysioPraktijkNummer>
+					<BehandelStartDatum>06-02-2014</BehandelStartDatum>
+					<BehandelEindDatum>06-05-2014</BehandelEindDatum>
+				</behandelgegevens>
+				<behandelafspraak ID="126548">
+					<Sessie>1</Sessie>
+					<Status>Voltooid</Status>
+					<Datum>06-10-2014</Datum>
+					<Begintijd>13:00</Begintijd>
+					<Eindtijd>14:00</Eindtijd>
+					<Praktijkruimte>002</Praktijkruimte>
+					<Gefactureerd>Ja</Gefactureerd>
+					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
+				</behandelafspraak>
+				<behandelafspraak ID="126549">
+					<Sessie>2</Sessie>
+					<Status>Voltooid</Status>
+					<Datum>08-10-2014</Datum>
+					<Begintijd>12:00</Begintijd>
+					<Eindtijd>12:30</Eindtijd>
+					<Praktijkruimte>003</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
+					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
+				</behandelafspraak>
+			</Behandeling>
+			<Behandeling id="56">
+				<behandelgegevens>
+					<Fysiotherapeut>126584</Fysiotherapeut>
+					<Behandelcode>005</Behandelcode>
+					<fysioPraktijkNummer>159846327</fysioPraktijkNummer>
+					<BehandelStartDatum>23-05-2014</BehandelStartDatum>
+					<BehandelEindDatum>23-06-2014</BehandelEindDatum>
+				</behandelgegevens>
+				<behandelafspraak ID="265481">
+					<Sessie>1</Sessie>
+					<Status>Voltooid</Status>
+					<Datum>19-09-2014</Datum>
+					<Begintijd>16:00</Begintijd>
+					<Eindtijd>17:00</Eindtijd>
+					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Ja</Gefactureerd>
+					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
+				</behandelafspraak>
+				<behandelafspraak ID="365412">
+					<Sessie>2</Sessie>
+					<Status>Voltooid</Status>
+					<Datum>23-09-2014</Datum>
+					<Begintijd>09:00</Begintijd>
+					<Eindtijd>10:00</Eindtijd>
+					<Praktijkruimte>001</Praktijkruimte>
+					<Gefactureerd>Nee</Gefactureerd>
+					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
+				</behandelafspraak>
+			</Behandeling>
+		</Behandelingen>
 		<Diagnoses/>
 	</Client>
 </Clienten>

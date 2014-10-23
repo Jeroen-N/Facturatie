@@ -43,10 +43,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	@Override
-	public boolean factureer(Klant klant,
+	public Factuur factureer(Klant klant,
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
 		// Nieuw factuurnummer aanmaken
-		facturen = factuurDAO.haalFacturen(klant.getBSN());
+		facturen = factuurDAO.haalAlleFacturen();
 		int n1 = 0;
 		int n2 = 0;
 		for (Factuur lijstFactuur : facturen) {
@@ -56,10 +56,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				n2 = n1;
 			}
 		}
-		String factuurNummer = Integer.toString(n2);
+		String factuurNummer = Integer.toString(n2 + 1);
 
 		// De factuurdatum aanmaken
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		String vandaag = dateFormat.format(cal.getTime());
 
@@ -81,11 +81,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			type = polis.getVerzekeringsType();
 
 		}
-		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
-				.getVerzekeringsmaatschappijen()) {
-			verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij,
-					type);
-		}
+		//Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("maatschappij 1", "adres", "postcode", "plaats", 999, 486);
+		//for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
+			//	.getVerzekeringsmaatschappijen()) {
+			//verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij,
+				//	type);
+			ArrayList<String> behandelcodes;
+			behandelcodes = new ArrayList<>();
+			behandelcodes.add("001");
+			verzekering = new Verzekeringstype(666, 500, "Verzekering 1", behandelcodes);
+			System.out.println(verzekering.getBehandelcodes());
+		//}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
@@ -108,21 +114,24 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			if (klant.getResterendEigenRisico() != 0) {
 				if (klant.getResterendEigenRisico() >= totalePrijs) {
 					klant.setTotaalEigenRisico(klant.getResterendEigenRisico() - totalePrijs);
-					teVergoedenPrijs = 0;
+					System.out.println(teVergoedenPrijs);
 				}
 				else{
-					teVergoedenPrijs = totalePrijs-klant.getResterendEigenRisico();
+					teVergoedenPrijs += totalePrijs-klant.getResterendEigenRisico();
 					klant.setTotaalEigenRisico(0);
+					
 				}
 			}
 			else{
-				teVergoedenPrijs = totalePrijs;
-				
+				teVergoedenPrijs += totalePrijs;
+				System.out.println("Vergoede prijs: " + teVergoedenPrijs);
 			}
 			behandeling.setTotaalprijs(totalePrijs);
+			System.out.println("Totaalprijs behandelingen: " + behandeling.getTotaalprijs());
 			totalePrijs = 00;
 		}
-		return true;
+		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN, teVergoedenPrijs, behandelingenlijst, "Niet betaald");
+		return f;
 	}
 
 	@Override

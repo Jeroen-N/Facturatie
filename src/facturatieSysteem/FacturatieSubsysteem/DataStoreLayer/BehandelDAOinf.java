@@ -8,4 +8,8 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 public interface BehandelDAOinf {
 	
 	public double getPrijs(String behandelCode);
+	
+	public ArrayList<Behandeling> getBehandelingen(Klant klant);
+	
+	
 }

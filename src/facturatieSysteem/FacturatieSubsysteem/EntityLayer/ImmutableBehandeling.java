@@ -2,6 +2,14 @@ package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
 public interface ImmutableBehandeling {
 
+	public double getTotaalprijs();
+
+	public void setTotaalprijs(double totaalprijs);
+
+	public int getSessies();
+
+	public void setSessies(int sessies);
+
 	public Behandeling getBehandelingen();
 
 	public String getFysioPraktijkNummer();
@@ -22,6 +30,7 @@ public interface ImmutableBehandeling {
 
 	public String getBSN();
 
-	public void setBSN(String BSN);
+	public void setBSN(String bSN);
 
+	public String getBehandelingNaam();
 }

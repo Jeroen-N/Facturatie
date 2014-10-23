@@ -70,12 +70,60 @@ public class FactuurDAO implements FactuurDAOinf {
 						String vervalDatum = factuurElement
 								.getElementsByTagName("VervalDatum").item(0)
 								.getTextContent();
-						//double eigenRisico = Double.parseDouble(factuurElement
-						//		.getElementsByTagName("EigenRisico").item(0)
-						//		.getTextContent());
-
+						double vergoedeBedrag = Double.parseDouble(factuurElement
+								.getElementsByTagName("EigenRisico").item(0)
+								.getTextContent());
+						
+						NodeList behandelingenNode = factuurElement
+								.getElementsByTagName("FactuurBehandelingen");
+						ArrayList<Behandeling> behandelingen = new ArrayList<>();
+						for(int k = 0; k < behandelingenNode.getLength(); k++){
+							Element behandelingElement = (Element) behandelingenNode.item(k);
+							String behandelingid = behandelingElement.getElementsByTagName("BehandelingID").item(0).getTextContent();
+							
+							Element behandelingenElement = (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
+							NodeList behandelingenNode2 = behandelingenElement.getElementsByTagName("Behandeling");
+							for (int l = 0; l < behandelingenNode2.getLength(); l++) {
+								Element behandelingElement2 = (Element) behandelingenNode2.item(l);
+								String behandelingid2 = behandelingElement2.getAttribute("id");
+								if(behandelingid.equals(behandelingid2)){
+									String fysioPraktijkNummer = behandelingElement2.getElementsByTagName("fysioPraktijkNummer").item(0).getTextContent();
+									String behandelCode = behandelingElement2.getElementsByTagName("Behandelcode").item(0).getTextContent();
+									String behandelStartDatum = behandelingElement2.getElementsByTagName("BehandelStartDatum").item(0).getTextContent();
+									String behandelEindDatum = behandelingElement2.getElementsByTagName("BehandelEindDatum").item(0).getTextContent();
+									
+									// Zoek nu bij alle behandelingen de afspraken op.
+									NodeList afspraaknode = behandelingElement2
+											.getElementsByTagName("behandelafspraak");
+									int m = 0;
+									// Loop door de lijst afspraken heen.
+									System.out.println(afspraaknode.getLength());
+									for (int n = 0; n < afspraaknode.getLength(); n++) {
+										Element afspraakElement = (Element) afspraaknode
+												.item(n);
+										// Als de afspraak niet gefactureerd is en deze wel
+										// voltooid is, wordt l opgehoogd met 1.
+										if (!afspraakElement
+												.getElementsByTagName("Gefactureerd")
+												.item(0).getTextContent().equals("Ja")
+												&& afspraakElement
+														.getElementsByTagName("Status")
+														.item(0).getTextContent().equals("Voltooid")) {
+											m++;
+										}
+									}
+							
+									// Reset de tellers en de string die toegevoegd wordt
+									// aan de behandelcode.
+								
+									Behandeling behandeling = new Behandeling(fysioPraktijkNummer, behandelCode, behandelStartDatum, behandelEindDatum, BSN, 00, m);
+									behandelingen.add(behandeling);
+									m = 0;
+								}
+							}
+						}
 						factuur = new Factuur(factuurNummer, factuurDatum,
-								vervalDatum, invoerBSN, 00, null);
+								vervalDatum, invoerBSN, vergoedeBedrag, behandelingen, "Niet betaald");
 						facturen.add(factuur);
 
 					}
@@ -132,6 +180,8 @@ public class FactuurDAO implements FactuurDAOinf {
 					String verval = dateFormat.format(date);
 					factuurDatum.appendChild(document.createTextNode(verval));
 					factuurElement.appendChild(factuurDatum);
+					
+					
 
 					/*
 					 * // Ordering Elements factuur.appendChild(factuurtje);
@@ -205,24 +255,62 @@ public class FactuurDAO implements FactuurDAOinf {
 							.getElementsByTagName("VervalDatum").item(0)
 							.getTextContent();
 
-					// TODO in xml zetten zodat deze een waarde heeft
-					// double eigenRisico = Double.parseDouble(factuurElement
-					// .getElementsByTagName("EigenRisico").item(0)
-					// .getTextContent());
-
-					// TODO status meegeven!
-					/*
-					 * System.out.println("factuur: " + (i+1));
-					 * System.out.println(factuurNummer);
-					 * System.out.println(factuurDatum);
-					 * System.out.println(vervalDatum);
-					 * 
-					 * System.out.println();
-					 */
-
+					double vergoedeBedrag = Double.parseDouble(factuurElement
+							.getElementsByTagName("EigenRisico").item(0)
+							.getTextContent());
+					
+					NodeList behandelingenNode = factuurElement
+							.getElementsByTagName("FactuurBehandelingen");
+					ArrayList<Behandeling> behandelingen = new ArrayList<>();
+					for(int k = 0; k < behandelingenNode.getLength(); k++){
+						Element behandelingElement = (Element) behandelingenNode.item(k);
+						String behandelingid = behandelingElement.getElementsByTagName("BehandelingID").item(0).getTextContent();
+						
+						Element behandelingenElement = (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
+						NodeList behandelingenNode2 = behandelingenElement.getElementsByTagName("Behandeling");
+						for (int l = 0; l < behandelingenNode2.getLength(); l++) {
+							Element behandelingElement2 = (Element) behandelingenNode2.item(l);
+							String behandelingid2 = behandelingElement2.getAttribute("id");
+							if(behandelingid.equals(behandelingid2)){
+								String fysioPraktijkNummer = behandelingElement2.getElementsByTagName("fysioPraktijkNummer").item(0).getTextContent();
+								String behandelCode = behandelingElement2.getElementsByTagName("Behandelcode").item(0).getTextContent();
+								String behandelStartDatum = behandelingElement2.getElementsByTagName("BehandelStartDatum").item(0).getTextContent();
+								String behandelEindDatum = behandelingElement2.getElementsByTagName("BehandelEindDatum").item(0).getTextContent();
+								
+								// Zoek nu bij alle behandelingen de afspraken op.
+								NodeList afspraaknode = behandelingElement2
+										.getElementsByTagName("behandelafspraak");
+								int m = 0;
+								// Loop door de lijst afspraken heen.
+								System.out.println(afspraaknode.getLength());
+								for (int n = 0; n < afspraaknode.getLength(); n++) {
+									Element afspraakElement = (Element) afspraaknode
+											.item(n);
+									// Als de afspraak niet gefactureerd is en deze wel
+									// voltooid is, wordt l opgehoogd met 1.
+									if (!afspraakElement
+											.getElementsByTagName("Gefactureerd")
+											.item(0).getTextContent().equals("Ja")
+											&& afspraakElement
+													.getElementsByTagName("Status")
+													.item(0).getTextContent().equals("Voltooid")) {
+										m++;
+									}
+								}
+						
+								// Reset de tellers en de string die toegevoegd wordt
+								// aan de behandelcode.
+							
+								Behandeling behandeling = new Behandeling(fysioPraktijkNummer, behandelCode, behandelStartDatum, behandelEindDatum, BSN, 00, m);
+								behandelingen.add(behandeling);
+								m = 0;
+							}
+						}
+					}
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN, 00, null);
+							vervalDatum, BSN, vergoedeBedrag, behandelingen, "Niet betaald");
 					facturen.add(factuur);
+	
 
 				}
 

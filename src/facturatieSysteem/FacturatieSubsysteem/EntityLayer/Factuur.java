@@ -10,18 +10,18 @@ public class Factuur implements ImmutableFactuur {
 	private String factuurDatum;
 	private String vervalDatum;
 	private String BSN;
-	private ArrayList<Behandeling> behandelingen;
-	private double eigenRisico;
+	private ArrayList<Behandeling> behandelingen = new ArrayList<>();;
+	private double vergoedeBedrag;
 	private String status;
 	private String s;
 
-	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double eigenRisico, String status) {
+	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double vergoedeBedrag, ArrayList<Behandeling> behandelingen, String status) {
 		this.factuurNummer = factuurNummer;
 		this.factuurDatum = factuurDatum;
 		this.vervalDatum = vervalDatum;
 		this.BSN = BSN;
-		this.eigenRisico = eigenRisico;
-		behandelingen = new ArrayList<>();
+		this.vergoedeBedrag = vergoedeBedrag;
+		this.behandelingen = behandelingen;
 		this.status = status;
 	}
 
@@ -46,13 +46,13 @@ public class Factuur implements ImmutableFactuur {
 	}
 
 
-	public double getEigenRisico() {
-		return eigenRisico;
+	public double getVergoedeBedrag() {
+		return vergoedeBedrag;
 	}
 
 
-	public void setEigenRisico(double eigenRisico) {
-		this.eigenRisico = eigenRisico;
+	public void setVergoedeBedrag(double vergoedeBedrag) {
+		this.vergoedeBedrag = vergoedeBedrag;
 	}
 
 
@@ -110,7 +110,7 @@ public class Factuur implements ImmutableFactuur {
 
 	public String toString(Factuur factuur){
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
-        String risk = getallenOpmaker.format(eigenRisico);
+        String risk = getallenOpmaker.format(vergoedeBedrag);
         
 		return "Factuurnummer: \t" 				+ 	factuurNummer 				+ "\n" +
 				"Factuurdatum: \t\t" 			+ 	factuurDatum 				+ "\n" +
