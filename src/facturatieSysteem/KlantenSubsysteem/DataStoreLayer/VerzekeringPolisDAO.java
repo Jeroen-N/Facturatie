@@ -8,6 +8,6 @@ public interface VerzekeringPolisDAO {
 
 	public boolean updateVerzekeringPolisXML(VerzekeringPolis polis);
 
-	boolean verwijderPolisXML(String Polisnummer);
+	boolean verwijderPolisXML(String Polisnummer, String BSN);
 	
 }

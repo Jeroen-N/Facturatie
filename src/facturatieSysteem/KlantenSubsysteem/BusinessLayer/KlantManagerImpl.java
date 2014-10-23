@@ -258,8 +258,8 @@ public class KlantManagerImpl implements KlantManager {
 		return polisDAO.updateVerzekeringPolisXML(polis);
 	}
 	
-	public boolean deleteVerzekeringPolisXML(String PolisNummer){
-		return polisDAO.verwijderPolisXML(PolisNummer);
+	public boolean deleteVerzekeringPolisXML(String PolisNummer, String BSN){
+		return polisDAO.verwijderPolisXML(PolisNummer, BSN);
 	}
 	
 	public String createPolisnummer() {

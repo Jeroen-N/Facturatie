@@ -106,20 +106,28 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 	}
 
 	@Override
-	public boolean verwijderPolisXML(String Polisnummer) {
+	public boolean verwijderPolisXML(String Polisnummer, String BSN) {
 		document = daoFactory.getDocument();
 		try{
-		Element verzekeringsPolissenElement = (Element) document.getElementsByTagName("VerzekeringPolissen").item(0);
-		NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("VerzekeringPolis");
+		Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
+		NodeList clienten = clientenElement.getElementsByTagName("Client");
 		//loop through all clients
-		for(int i = 0; i < polissen.getLength();i++){
-			Element PolisElement = (Element) polissen.item(i);
-			String polisNummer = PolisElement.getAttribute("PolisNummer");
+		for(int i = 0; i < clienten.getLength();i++){
+			Element clientElement = (Element) clienten.item(i);
+			String bsn = clientElement.getAttribute("BSN");	
 			
-			if(polisNummer.equals(Polisnummer)){
-				//delete client
-				PolisElement.getParentNode().removeChild(PolisElement);
-				break;
+			Element verzekeringsPolissenElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
+			NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("VerzekeringPolis");
+			//loop through all clients
+			for(int j = 0; j < polissen.getLength(); j++){
+				Element PolisElement = (Element) polissen.item(j);
+				String polisNummer = PolisElement.getAttribute("PolisNummer");
+			
+				if(polisNummer.equals(Polisnummer)){
+					//delete client
+					PolisElement.getParentNode().removeChild(PolisElement);
+					break;
+				}
 			}
 		}
 		

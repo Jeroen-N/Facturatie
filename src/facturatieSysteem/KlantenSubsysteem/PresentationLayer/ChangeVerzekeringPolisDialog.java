@@ -486,7 +486,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 								    "Weet u het zeker?",
 								    JOptionPane.YES_NO_OPTION);
 							if(n == 0){
-								manager.deleteVerzekeringPolisXML(textFieldPolisNummer.getText());
+								manager.deleteVerzekeringPolisXML(textFieldPolisNummer.getText(), BSN);
 								dispose();
 							}
 							

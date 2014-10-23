@@ -262,12 +262,7 @@
 				<eindDatum>10-10-2015</eindDatum>
 			</VerzekeringPolis>
 		
-			<VerzekeringPolis PolisNummer="S004W0">
-				<VerzekeringType>All-risk</VerzekeringType>
-				<EigenRisico>80.0</EigenRisico>
-				<startDatum>10-10-2015</startDatum>
-				<eindDatum>10-10-2016</eindDatum>
-			</VerzekeringPolis>
+			
 			<VerzekeringPolis PolisNummer="S004W0">
 				<VerzekeringType>Type 1</VerzekeringType>
 				<EigenRisico>250.0</EigenRisico>

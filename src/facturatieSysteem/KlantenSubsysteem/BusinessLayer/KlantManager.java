@@ -41,7 +41,7 @@ public interface KlantManager {
 	
 	public boolean updateVerzekeringPolisXML(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum);
 	
-	public boolean deleteVerzekeringPolisXML(String PolisNummer);
+	public boolean deleteVerzekeringPolisXML(String PolisNummer, String BSN);
 	
 	public String createPolisnummer();
 	
