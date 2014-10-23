@@ -14,7 +14,7 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
 	
-	public  ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappij(String naam);
+	public  Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam);
 	
 	public boolean deleteVerzekeringsmaatschappij(String naam);
 	

@@ -23,8 +23,13 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 
 	@Override
-	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappij(String naam) {
-		return verzekeringsmaatschappijDAO.getMaatschappijenXML();
+	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam) {
+		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
+			if(maatschappij.getNaam().equals(naam)){
+				return maatschappij;
+			}
+		}
+		return null;
 	}
 
 	@Override
