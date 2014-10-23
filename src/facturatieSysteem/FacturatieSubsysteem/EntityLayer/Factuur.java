@@ -112,23 +112,21 @@ public class Factuur implements ImmutableFactuur {
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         String risk = getallenOpmaker.format(eigenRisico);
         
-		System.out.println(behandelingen.size());
-		return "Factuurnummer: \t" 			+ 	factuurNummer 					+ "\n" +
+		return "Factuurnummer: \t" 				+ 	factuurNummer 				+ "\n" +
 				"Factuurdatum: \t\t" 			+ 	factuurDatum 				+ "\n" +
 				"Vervaldatum: \t\t"				+	vervalDatum					+ "\n" +
 				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
 				"Status: \t\t"					+ 	status						+ "\n" +
-				"Behandelingen: \t"	 			+ 	loopBehandelingen(factuur)				+ "\n" ;			
+				loopBehandelingen(factuur);			
 	}
 	
 	public String loopBehandelingen(Factuur factuur){
-		
+		System.out.println(factuur.getBehandelingen().size());
 		behandelingen = factuur.getBehandelingen();
-		
 		for(Behandeling b : behandelingen){
-			String s = b.getBehandelingNaam(b);
+			 s = b.getBehandelingNaam();
 		}
-		return s;
+		return "Behandelingen: \t"	 			+ 	s	+ "\n" ;
 		
         
 		
