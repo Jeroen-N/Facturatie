@@ -13,5 +13,5 @@ public interface FacturatieManager {
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
-	public String toonFactuur(String factuur_nummer);
+	public String toonFactuur(String factuur_nummer, Klant klant);
 }

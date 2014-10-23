@@ -87,7 +87,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					type);
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
+
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
+
 		for (Behandeling behandeling : behandelingenlijst) {
 
 			for (String code : verzekering.getBehandelcodes()) {
@@ -129,8 +131,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	@Override
-	public String toonFactuur(String factuur_nummer) {
-		for (Factuur factuur : factuurDAO.haalAlleFacturen()) {
+	public String toonFactuur(String factuur_nummer, Klant klant) {
+		facturen = haalFacturen(klant.getBSN());
+		for (Factuur factuur : facturen) {
 			if (factuur.getFactuurNummer().equals(factuur_nummer)) {
 				return factuur.toString();
 			}
