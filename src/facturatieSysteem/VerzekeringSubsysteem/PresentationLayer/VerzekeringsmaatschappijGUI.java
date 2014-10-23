@@ -1,103 +1,96 @@
 package facturatieSysteem.VerzekeringSubsysteem.PresentationLayer;
 
-import javax.swing.JDialog;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
-
 import javax.swing.JScrollPane;
-
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
+import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
-
-import javax.swing.JList;
-
 import org.apache.log4j.Logger;
-
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
-import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
 
 public class VerzekeringsmaatschappijGUI extends JFrame {
+	public VerzekeringsmaatschappijGUI() {
+	}
 
-	private JPanel VerzekeringPanel;
-	private JTextField zoekVeld;
-	private JTable Verzekering_Table;
-	private JScrollPane totaalLijst;
-	
+	private static JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
+			infopaneel, knoppenPaneel, linkerpaneel, rechterpaneel;
+	private static JTextField zoekVeld;
+	private static JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
+			btnToevoegen;
+	private static JTable Verzekering_Table;
+
 
 	// The datamodel to be displayed in the JTable.
-	private DataTableModel dataTableModel;
-	private ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
+	private static DataTableModelVerzekeringen dataTableModelVerzekeringen;
+	private static ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
 
 	// Get a logger instance for the current class
-	static Logger logger = Logger.getLogger(MainGUI.class);
-	private JTable totaalTable;
-	
-	private DataTableModelVerzekeringen dataTableModelVerzekeringen;
+	Logger logger = Logger.getLogger(MainGUI.class);
 
-	/**
-	 * Create the frame.
-	 */
-	public VerzekeringsmaatschappijGUI() {
-
-		setExtendedState(Frame.MAXIMIZED_BOTH);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+	@SuppressWarnings({ "serial", "unused" })
+	public static JPanel VerzekeringsGUI(VerzekeringsmaatschappijManager manager) {
+		tabelpaneel = new JPanel();
+		knoppenPaneel = new JPanel();
+		zoekpaneel = new JPanel();
+		infopaneel = new JPanel();
+		linkerpaneel = new JPanel();
+		rechterpaneel = new JPanel();
+		dataTableModelVerzekeringen = new DataTableModelVerzekeringen();
+		btnWijzigen = new JButton("");
+		btnVerwijderen = new JButton("");
+		btnToevoegen = new JButton("");
 		VerzekeringPanel = new JPanel();
 		VerzekeringPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
+		infopaneel.setLayout(new BorderLayout(5, 5));
+		zoekpaneel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		// / Header paneel
-		JPanel headerpaneel = new JPanel();
-		VerzekeringPanel.add(headerpaneel, BorderLayout.NORTH);
-		headerpaneel.setLayout(new BorderLayout(0, 0));
-
-		JButton btnTerug = new JButton("Terug");
-		btnTerug.setPreferredSize(new Dimension(90, 50));
-		btnTerug.setAlignmentX(RIGHT_ALIGNMENT);
-		btnTerug.setAlignmentY(CENTER_ALIGNMENT);
-		headerpaneel.add(btnTerug, BorderLayout.EAST);
-
-		// /Terugknop action
-		btnTerug.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				VerzekeringPanel.setVisible(false);
-			/*	KlantenPanel.setVisible(true);*/
-
-			}
-		});
-
-		// / Zoekveld
+		// / Zoekveld en knoppen
+		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
+		infopaneel.add(zoekpaneel, BorderLayout.NORTH);
+		zoekpaneel.setLayout(new BorderLayout(0, 0));
+		zoekpaneel.add(linkerpaneel, BorderLayout.WEST);
+		zoekpaneel.add(rechterpaneel, BorderLayout.EAST);
+		JLabel zoekLabel = new JLabel("Verzekering zoeken: ");
+		zoekLabel.setPreferredSize(new Dimension(120, 16));
+		zoekLabel.setMinimumSize(new Dimension(120, 16));
+		zoekLabel.setMaximumSize(new Dimension(120, 16));
+		zoekLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
+		zoekLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		zoekLabel.setVerticalAlignment(SwingConstants.CENTER);
+		zoekKnop = new JButton("Zoeken");
+		resetKnop = new JButton("Reset");
 		zoekVeld = new JTextField();
 		zoekVeld.setSize(new Dimension(6, 20));
 		zoekVeld.setMaximumSize(new Dimension(6, 20));
-		headerpaneel.add(zoekVeld, BorderLayout.WEST);
-		zoekVeld.setColumns(10);
+		zoekKnop.setAlignmentY(TOP_ALIGNMENT);
+		zoekVeld.setColumns(15);
+		
+		linkerpaneel.add(zoekLabel, BorderLayout.WEST);
+		linkerpaneel.add(zoekVeld, BorderLayout.EAST);
+		rechterpaneel.add(zoekKnop, BorderLayout.WEST);
+		rechterpaneel.add(resetKnop, BorderLayout.EAST);
+		
 
 		// / Tabel Paneel
-		JPanel tabelpaneel = new JPanel();
 		VerzekeringPanel.add(tabelpaneel, BorderLayout.CENTER);
 		tabelpaneel.setLayout(new BorderLayout(0, 0));
 
@@ -107,89 +100,66 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		totaalLijst.setAlignmentX(CENTER_ALIGNMENT);
 		tabelpaneel.add(totaalLijst);
 
-		// / Info Paneel (Rechterkant)
-		JPanel infopaneel = new JPanel();
-		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
-		infopaneel.setLayout(new BorderLayout(5, 5));
-
-		JPanel knoppenPaneel = new JPanel();
-		knoppenPaneel.setPreferredSize(new Dimension(250, 40));
+		knoppenPaneel.setPreferredSize(new Dimension(250, 70));
 		knoppenPaneel.setMaximumSize(new Dimension(250, 250));
 		infopaneel.add(knoppenPaneel, BorderLayout.SOUTH);
+		btnToevoegen.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
+		btnWijzigen.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
+		btnVerwijderen.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
+		btnToevoegen.setMargin(new Insets(0, 0, 0, 0));
+		btnWijzigen.setMargin(new Insets(0, 0, 0, 0));
+		btnVerwijderen.setMargin(new Insets(0, 0, 0, 0));
+		knoppenPaneel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		knoppenPaneel.add(btnToevoegen);
+		knoppenPaneel.add(btnWijzigen);
+		knoppenPaneel.add(btnVerwijderen);
 
-		// / Info/knoppen Paneel + de Knoppen en Lijst
-		final JButton btnToevoegen = new JButton("Toevoegen");
-		btnToevoegen.addMouseListener(new MouseAdapter() {
-			/*@Override
-			public void mouseClicked(MouseEvent e) {
-				if (btnWijzigen.isEnabled()) {
-					AddVerzekeringDialog addVerzekeringDialog =  new AddVerzekeringDialog(VerzekeringsmaatschappijManager, maatschappijManager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 1).toString());
-					addVerzekeringDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					addVerzekeringDialog.setModal(true);
-					addVerzekeringDialog.setVisible(true);
-					addVerzekeringDialog.addWindowListener(new WindowAdapter() {
-						public void windowClosed(WindowEvent e) {
-					    	System.out.println("window is closed");
-							VerzekeringPanel.removeAll();
-							//Verzekering_info.removeAll();
-							//insertTable();
-						} 
-					});
-				}
-				
-			} */
-			
-		});
-		knoppenPaneel.setLayout(new BorderLayout(0, 0));
-		knoppenPaneel.add(btnToevoegen, BorderLayout.WEST);
-		
-		JButton btnWijzigen = new JButton("Wijzigen");
-		knoppenPaneel.add(btnWijzigen, BorderLayout.CENTER);
-		
-		JButton btnVerwijderen = new JButton("Verwijderen");
-		knoppenPaneel.add(btnVerwijderen, BorderLayout.EAST);
-
-		JList list = new JList();
+		JTextArea list = new JTextArea();
+		list.setColumns(40);
+		list.setEditable(false);
 		infopaneel.add(list, BorderLayout.CENTER);
-		
-		/// TABEL VULLEN
-		Verzekering_Table = new JTable(dataTableModel) {
+
+		// / TABEL VULLEN
+		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
 			}
 		};
-		
+
 		String[] headers = new String[] { "Naam", "Adres", "Postcode",
-		"Plaats", "KVK", "RekeningNr"};
-		dataTableModel.setTableHeader(headers);
+				"Plaats", "KVK", "RekeningNr" };
+		dataTableModelVerzekeringen.setTableHeader(headers);
 		String[][] initialValues = new String[][] { { "", "", "", "" } };
-		
+
 		TableColumn column = Verzekering_Table.getColumnModel().getColumn(0);
 		column.setPreferredWidth(6);
-		
+
 		// Handle row selection, only one row can be selected
 		Verzekering_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				
-		fillTable();
-				
-		totaalLijst = new JScrollPane(totaalTable);
-		
-		totaalTable = new JTable();
-		totaalLijst.setViewportView(totaalTable);
-		Verzekering_Table.setFillsViewportHeight(true);
-		tabelpaneel.setBorder(new TitledBorder(new LineBorder(new Color(
-						0, 0, 0)), "Verzekeringenlijst", TitledBorder.LEADING,
-						TitledBorder.TOP, null, null));
-		VerzekeringPanel.add(tabelpaneel, BorderLayout.CENTER);
+		Verzekering_Table.getTableHeader().setReorderingAllowed(false);
+		Verzekering_Table.getTableHeader().setResizingAllowed(false);
 
+		fillTable(manager);
+
+		totaalLijst = new JScrollPane(Verzekering_Table);
+
+		totaalLijst.setViewportView(Verzekering_Table);
+		Verzekering_Table.setFillsViewportHeight(true);
+		totaalLijst.setBorder(new TitledBorder(new LineBorder(
+				new Color(0, 0, 0)), "Verzekeringenlijst",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		VerzekeringPanel.add(totaalLijst, BorderLayout.CENTER);
+
+		return VerzekeringPanel;
 	}
 
-	public void fillTable(){
-		verzekeringList = VerzekeringsmaatschappijManager.getVerzekeringsmaatschappijen();
+	public static void fillTable(VerzekeringsmaatschappijManager manager) {
+		verzekeringList = manager.getVerzekeringsmaatschappijen();
+		// System.out.println(verzekeringList.toString());
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
-		
-		if(count > 0){
-		dataTableModelVerzekeringen.setValues(verzekeringList);
+
+		if (count > 0) {
+			dataTableModelVerzekeringen.setValues(verzekeringList);
 		}
 	}
 }

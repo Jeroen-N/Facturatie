@@ -14,11 +14,9 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
 	
-	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam);
+	public  ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappij(String naam);
 	
 	public boolean deleteVerzekeringsmaatschappij(String naam);
-	
-	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen();
 	
 	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
 	
@@ -29,4 +27,6 @@ public interface VerzekeringsmaatschappijManager {
 	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
 
 	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
+
+	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen();
 }

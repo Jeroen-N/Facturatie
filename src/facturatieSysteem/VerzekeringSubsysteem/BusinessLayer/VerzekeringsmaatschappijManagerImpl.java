@@ -7,13 +7,15 @@ package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
 
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
-	private static ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
+	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
 	private VerzekeringsmaatschappijDAOImpl VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
+	private VerzekeringsmaatschappijDAO verzekeringsmaatschappijDAO;
 	
 	@Override
 	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
@@ -21,13 +23,8 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 
 	@Override
-	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam) {
-		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
-			if(maatschappij.getNaam().equals(naam)){
-				return maatschappij;
-			}
-		}
-		return null;
+	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappij(String naam) {
+		return verzekeringsmaatschappijDAO.getMaatschappijenXML();
 	}
 
 	@Override
