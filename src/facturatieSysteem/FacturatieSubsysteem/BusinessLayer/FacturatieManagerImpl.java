@@ -13,6 +13,9 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class FacturatieManagerImpl implements FacturatieManager {
 	private DAOFactoryFactuur daoFactoryBehandelcodes = new DAOFactoryFactuur("XML/behandelcodes.xml", "XML/behandelcodes.xsd");
@@ -21,6 +24,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private FactuurDAO factuurDAO;
 	private BehandelingDAO behandelingDAO;
 	private ArrayList<Factuur> facturen;
+	private Verzekeringstype verzekering;
 
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes, daoFactoryClient, daoFactoryFacturatie);
@@ -31,9 +35,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		facturen = new ArrayList<>();
 	
 	}
-
+	
 	@Override
-	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen) {
+	public boolean factureer(Klant klant, ArrayList<Behandeling> behandelingen, VerzekeringsmaatschappijManager verzekeringsmanager) {
 		//Nieuw factuurnummer aanmaken
 		facturen = factuurDAO.haalFacturen(klant.getBSN());
 		int n1 = 0;
@@ -69,6 +73,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			type = polis.getVerzekeringsType();
 			
 		}
+		for(Verzekeringsmaatschappij maatschappij : verzekeringsmanager.getVerzekeringsmaatschappijen()){
+			 verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij, type);
+		}
+		
 		for(Behandeling behandeling : behandelingen){
 			
 			double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode());

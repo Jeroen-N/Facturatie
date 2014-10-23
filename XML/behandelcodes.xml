@@ -5,60 +5,60 @@
 		<behandelingnaam>Hamstring</behandelingnaam>
 		<aantalsessies>2</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>79,50</tariefbehandeling>
+		<tariefbehandeling>79.50</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="002">
 		<behandelingnaam>Tennis arm</behandelingnaam>
 		<aantalsessies>5</aantalsessies>
 		<sessieduur>0,5</sessieduur>
-		<tariefbehandeling>150,00</tariefbehandeling>
+		<tariefbehandeling>150.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="003">
 		<behandelingnaam>Enkelband</behandelingnaam>
 		<aantalsessies>1</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>29,50</tariefbehandeling>
+		<tariefbehandeling>29.50</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="004">
 		<behandelingnaam>Onderrug</behandelingnaam>
 		<aantalsessies>3</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>45,00</tariefbehandeling>
+		<tariefbehandeling>45.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="005">
 		<behandelingnaam>Schouder</behandelingnaam>
 		<aantalsessies>3</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>45,00</tariefbehandeling>
+		<tariefbehandeling>45.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="006">
 		<behandelingnaam>Schockwave therapie</behandelingnaam>
 		<aantalsessies>1</aantalsessies>
 		<sessieduur>0,2</sessieduur>
-		<tariefbehandeling>17,50</tariefbehandeling>
+		<tariefbehandeling>17.50</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="007">
 		<behandelingnaam>Oefentherapie in de zaal</behandelingnaam>
 		<aantalsessies>1</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>35,00</tariefbehandeling>
+		<tariefbehandeling>35.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="008">
 		<behandelingnaam>Oefentherapie in het water</behandelingnaam>
 		<aantalsessies>1</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>55,00</tariefbehandeling>
+		<tariefbehandeling>55.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="009">
 		<behandelingnaam>Nek</behandelingnaam>
 		<aantalsessies>2</aantalsessies>
 		<sessieduur>0,5</sessieduur>
-		<tariefbehandeling>65,00</tariefbehandeling>
+		<tariefbehandeling>65.00</tariefbehandeling>
 	</behandeling>
 	<behandeling behandelcode="010">
 		<behandelingnaam>Pols</behandelingnaam>
 		<aantalsessies>1</aantalsessies>
 		<sessieduur>1</sessieduur>
-		<tariefbehandeling>29,00</tariefbehandeling>
+		<tariefbehandeling>29.00</tariefbehandeling>
 	</behandeling>
 </behandelcodes>
