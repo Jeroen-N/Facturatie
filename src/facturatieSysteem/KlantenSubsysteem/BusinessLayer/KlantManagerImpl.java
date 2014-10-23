@@ -1,9 +1,12 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
 import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Random;
 
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.DAOFactoryKlant;
@@ -200,7 +203,6 @@ public class KlantManagerImpl implements KlantManager {
 		}
 		
 		// StartDatum
-		// zet het jaar op het actuele jaar.
 		if (!StartDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 			if (StartDatum.length() < 1) {
 				errorMessage = errorMessage + "\nStart datum niet ingevuld";
@@ -211,7 +213,6 @@ public class KlantManagerImpl implements KlantManager {
 		}
 		
 		// EindDatum
-		// zorgen dat einddatum niet eerder is dan startdatum
 		if (!EindDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 			if (EindDatum.length() < 1) {
 				errorMessage = errorMessage + "\nEind datum niet ingevuld";
@@ -220,6 +221,25 @@ public class KlantManagerImpl implements KlantManager {
 				errorMessage = errorMessage + "\nEind datum niet correct ";
 			}	
 		}
+		
+		if(!EindDatum.contains("") && !StartDatum.contains("")){
+		String beginDatum = StartDatum;
+		String eindDatum = EindDatum;
+		Date startDate;
+		Date endDate;
+		try {
+				startDate = new SimpleDateFormat("dd-MM-yyyy").parse(beginDatum);
+				endDate = new SimpleDateFormat("dd-MM-yyyy").parse(eindDatum);
+				System.out.println(startDate);
+				System.out.println(endDate);
+				if(startDate.after(endDate)){
+					errorMessage = errorMessage + "\nDe einddatum is eerder dan de startdatum";
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return errorMessage;
 	}
 	
@@ -236,6 +256,10 @@ public class KlantManagerImpl implements KlantManager {
 	public boolean updateVerzekeringPolisXML(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
 		return polisDAO.updateVerzekeringPolisXML(polis);
+	}
+	
+	public boolean deleteVerzekeringPolisXML(String PolisNummer){
+		return polisDAO.verwijderPolisXML(PolisNummer);
 	}
 	
 	public String createPolisnummer() {

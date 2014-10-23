@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class ChangeKlantDialog extends JDialog {
@@ -782,6 +784,10 @@ public class ChangeKlantDialog extends JDialog {
 			}
 			{
 				JButton vervijderButton = new JButton("Verwijderen");
+				vervijderButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				vervijderButton.setActionCommand("Verwijderen");
 				vervijderButton.addMouseListener(new MouseAdapter() {
 					@Override

@@ -105,4 +105,28 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		}
 	}
 
+	@Override
+	public boolean verwijderPolisXML(String Polisnummer) {
+		document = daoFactory.getDocument();
+		try{
+		Element verzekeringsPolissenElement = (Element) document.getElementsByTagName("VerzekeringPolissen").item(0);
+		NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("VerzekeringPolis");
+		//loop through all clients
+		for(int i = 0; i < polissen.getLength();i++){
+			Element PolisElement = (Element) polissen.item(i);
+			String polisNummer = PolisElement.getAttribute("PolisNummer");
+			
+			if(polisNummer.equals(Polisnummer)){
+				//delete client
+				PolisElement.getParentNode().removeChild(PolisElement);
+				break;
+			}
+		}
+		
+		return daoFactory.writeDocument();
+		}catch(DOMException e){
+			return false;
+		}
+		
+	}
 }

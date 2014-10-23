@@ -279,9 +279,11 @@ public class MainGUI {
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(Klant_Table.getSelectedRow() >= 0){
 				row = Klant_Table.getSelectedRow();
 				fillField(row);
 				}
+			}
 		});
 		Klant_Table.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {

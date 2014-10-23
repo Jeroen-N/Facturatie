@@ -139,10 +139,10 @@
 			</VerzekeringPolis>
 		
 			<VerzekeringPolis PolisNummer="SAFJCA">
-				<VerzekeringType>All-risk</VerzekeringType>
-				<EigenRisico>80.0</EigenRisico>
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-01-2001</startDatum>
-				<eindDatum>01-01-3012</eindDatum>
+				<eindDatum>01-01-2002</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
 		<Facturen>
 			<Factuur FactuurNummer="267510">
@@ -263,8 +263,8 @@
 			</VerzekeringPolis>
 		
 			<VerzekeringPolis PolisNummer="S004W0">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>10-10-2015</startDatum>
 				<eindDatum>10-10-2016</eindDatum>
 			</VerzekeringPolis>
@@ -280,5 +280,28 @@
 				<startDatum>01-01-0001</startDatum>
 				<eindDatum>01-01-0003</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
+	</Client>
+
+	<Client BSN="220822712">
+		<ClientGegevens>
+			<Naam>Richard de Jongh</Naam>
+			<Adres>Bunschotenstraat 37</Adres>
+			<Postcode>5043BB</Postcode>
+			<Woonplaats>Tilburg</Woonplaats>
+			<Geboortedatum>23-06-1995</Geboortedatum>
+			<Telefoonnummer>0642440362</Telefoonnummer>
+			<Email>richarddejongh@home.nl</Email>
+			<BetaalMethode>Incasso</BetaalMethode>
+			<ResterendEigenRisico>200.0</ResterendEigenRisico>
+			<Rekeningnummer>415716365</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="6KM5IZ">
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
+				<startDatum>23-10-2014</startDatum>
+				<eindDatum>23-10-2016</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
 	</Client>
 </Clienten>

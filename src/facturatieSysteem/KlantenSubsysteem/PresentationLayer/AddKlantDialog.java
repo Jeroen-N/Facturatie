@@ -704,8 +704,9 @@ public class AddKlantDialog extends JDialog {
 										comboBoxBetaalwijze.getSelectedItem().toString())){
 									showConfirmationWindow("Toevoegen klant mislukt");
 								}
+								dispose();
 							}
-							dispose();
+							
 						}
 						else{
 							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");

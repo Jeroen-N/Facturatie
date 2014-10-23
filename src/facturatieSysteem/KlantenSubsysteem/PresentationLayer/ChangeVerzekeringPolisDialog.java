@@ -70,6 +70,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	 */
 	@SuppressWarnings("serial")
 	public ChangeVerzekeringPolisDialog(final KlantManager manager, final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
+		setBackground(Color.RED);
 		setTitle("Klant en verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 795, 509);
@@ -255,6 +256,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						{
 							comboBoxMaatschappij = new JComboBox<String>();
 							splitPaneVerzekeringMaatschappij.setRightComponent(comboBoxMaatschappij);
+							comboBoxMaatschappij.addItem("");
 							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
 								comboBoxMaatschappij.addItem(maatschappij.getNaam());
 							}
@@ -306,7 +308,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
+									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxMaatschappij.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
 										textFieldEigenRisico.setText(
 												Integer.toString(
 														vermaatschappijManager.getVerzekeringstype(
@@ -318,6 +320,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 									}
 								}
 							});
+							
 						}
 					}
 					
@@ -350,8 +353,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						{
 							textFieldEigenRisico = new JTextField();
 							textFieldEigenRisico.setColumns(15);
-							splitPaneEigenRisico
-									.setRightComponent(textFieldEigenRisico);
+							splitPaneEigenRisico.setRightComponent(textFieldEigenRisico);
 							textFieldEigenRisico.setEditable(false);
 						}
 					}
@@ -423,7 +425,11 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			changeVerzekeringPolis.add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Polis Wijzigen");
+				JButton okButton = new JButton("Wijzig");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				okButton.setActionCommand("Polis Toevoegen");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -467,12 +473,37 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						dispose();
 					}
 				});
+				{
+					JButton btnPolisVerwijderen = new JButton("Verwijder");
+					btnPolisVerwijderen.setActionCommand("Verwijderen");
+					btnPolisVerwijderen.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							 Component frame = null;
+							int n = JOptionPane.showConfirmDialog(
+								    frame,
+								    "Weet uw zeker dat u de polis met nummer "+textFieldPolisNummer.getText()+" wilt verwijderen",
+								    "Weet u het zeker?",
+								    JOptionPane.YES_NO_OPTION);
+							if(n == 0){
+								manager.deleteVerzekeringPolisXML(textFieldPolisNummer.getText());
+								dispose();
+							}
+							
+						}
+					});
+					buttonPane.add(btnPolisVerwijderen);
+				}
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 	public void fillField(int row){
+		if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("")){
+		comboBoxMaatschappij.removeAllItems();
 		comboBoxVerzekeringsType.removeAllItems();
+		textFieldEigenRisico.removeAll();
+		}
 		String PolisNr = polistable.getModel().getValueAt(row, 0).toString();
 		String verType = polistable.getModel().getValueAt(row, 1).toString();
 		String eigenRisico = polistable.getModel().getValueAt(row, 2).toString();
