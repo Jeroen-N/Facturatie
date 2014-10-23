@@ -25,9 +25,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes, daoFactoryClient, daoFactoryFacturatie);
 		this.behandelingDAO = new BehandelingDAO(daoFactoryBehandelcodes, daoFactoryClient, daoFactoryFacturatie);
-		daoFactoryBehandelcodes.validateXML();
-		daoFactoryClient.validateXML();
-		daoFactoryFacturatie.validateXML();
+		//daoFactoryBehandelcodes.validateXML();
+	//	daoFactoryClient.validateXML();
+		//daoFactoryFacturatie.validateXML();
 		facturen = new ArrayList<>();
 	
 	}

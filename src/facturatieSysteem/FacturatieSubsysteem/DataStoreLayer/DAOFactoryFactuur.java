@@ -124,7 +124,7 @@ public class DAOFactoryFactuur {
 		try{
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
-			document = dBuilder.parse(getXMLFile());
+			document = dBuilder.parse(xmlPath);
 		} catch (ParserConfigurationException e){
 			e.printStackTrace();
 		} catch (SAXException e){

@@ -46,10 +46,12 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		document = daoFactoryFacturatie.getDocument();
+		document = daoFactoryClient.getDocument();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName("Clienten").item(0);
-			NodeList clienten = clientenElement.getElementsByTagName("Client");
+			NodeList clienten = 
+					clientenElement.
+					getElementsByTagName("Client");
 			for (int i = 0; i < clienten.getLength(); i++) {
 				Element clientElement = (Element) clienten.item(i);
 				String BSN = clientElement.getAttribute("BSN");
