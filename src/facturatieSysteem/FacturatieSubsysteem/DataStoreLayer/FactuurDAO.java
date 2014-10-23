@@ -58,7 +58,8 @@ public class FactuurDAO implements FactuurDAOinf {
 				if (BSN.equals(invoerBSN)) {
 					
 					Element facturenElement = (Element) clientElement.getElementsByTagName("Facturen").item(0);
-					NodeList facturenNode = facturenElement.getElementsByTagName("Factuur");
+					NodeList facturenNode = facturenElement.
+							getElementsByTagName("Factuur");
 					for (int j = 0; j < facturenNode.getLength(); j++) {
 						Element factuurElement = (Element) facturenNode.item(j);
 						String factuurNummer = factuurElement
@@ -179,7 +180,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	public ArrayList<Factuur> haalAlleFacturen() {
-		document = daoFactoryFacturatie.getDocument();
+		document = daoFactoryClient.getDocument();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);

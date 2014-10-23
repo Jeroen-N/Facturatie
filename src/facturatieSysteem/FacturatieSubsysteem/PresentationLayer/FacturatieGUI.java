@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -42,7 +44,7 @@ public class FacturatieGUI {
 	private static Klant klant;
 	private static ArrayList<Factuur> facturen;
 	private static DataTableModelFactuur dataTableModel;
-	private static FacturatieManager facturatieManager;
+	//private static FacturatieManager facturatieManager;
 
 	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
@@ -52,10 +54,10 @@ public class FacturatieGUI {
 		klant = klnt;
 		facturen = new ArrayList<>();
 		dataTableModel = new DataTableModelFactuur();
-		return initComponents();
+		return initComponents(factManagerImpl);
 	}
 
-	public static JPanel initComponents() {
+	public static JPanel initComponents(FacturatieManagerImpl factManagerImpl) {
 		contentpane = frame.getContentPane();
 		contentpane.setLayout(new BorderLayout());
 
@@ -73,13 +75,8 @@ public class FacturatieGUI {
 		details.setRows(25);
 		details.setColumns(40);
 		details.setEditable(false);
-		details.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				row = overzicht.getSelectedRow();
-				fillField(row);
-				}
-		});
+		
+		
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		details.setBorder(BorderFactory.createCompoundBorder(border,
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -135,6 +132,14 @@ public class FacturatieGUI {
 			TitledBorder.TOP, null, null));
 	overzichtPanel.add(factuurTablePanel, BorderLayout.CENTER);
 
+	overzicht.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			row = overzicht.getSelectedRow();
+			fillField(row, factManagerImpl);
+			}
+	});
+	
 		// panels vullen
 		buttonPanel.add(factureerKnop);
 		buttonPanel.add(openFactuurKnop);
@@ -189,10 +194,10 @@ public class FacturatieGUI {
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public static void fillField(int row){
-		String factuur_nummer = overzicht.getModel().getValueAt(row, 1)
-				.toString();
-		details.setText(facturatieManager.toonFactuur(factuur_nummer));
+	public static void fillField(int row, FacturatieManagerImpl factManagerImpl){
+		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
+		System.out.println(factuur_nummer);
+		details.setText(factManagerImpl.toonFactuur(factuur_nummer));
 		}
 	
 	public void showConfirmationWindow(String message) {
