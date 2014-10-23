@@ -12,6 +12,7 @@ import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
 public class FacturatieManagerImpl implements FacturatieManager {
 	private DAOFactoryFactuur daoFactoryBehandelcodes = new DAOFactoryFactuur("XML/behandelcodes.xml", "XML/behandelcodes.xsd");
@@ -63,7 +64,11 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		
 		double oudRisico = klant.getResterendEigenRisico();
 		double totalePrijs = 00;
-		
+		String type = "";
+		for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
+			type = polis.getVerzekeringsType();
+			
+		}
 		for(Behandeling behandeling : behandelingen){
 			
 			double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode());
