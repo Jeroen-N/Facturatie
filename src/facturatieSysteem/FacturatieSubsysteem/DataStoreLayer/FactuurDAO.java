@@ -74,15 +74,21 @@ public class FactuurDAO implements FactuurDAOinf {
 								.getElementsByTagName("EigenRisico").item(0)
 								.getTextContent());								//factuur
 						
+						////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						//TODO behandelingennode heeft maar 1 behandeling terwijl er 2 aanwezig zijn. Node2 echter heeft er wel gewoon 2 terwijl dit er ook 2 moeten zijn.//
+						////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						
 						NodeList behandelingenNode = factuurElement
 								.getElementsByTagName("FactuurBehandelingen");
-						ArrayList<Behandeling> behandelingen = new ArrayList<>();
+												ArrayList<Behandeling> behandelingen = new ArrayList<>();
 						for(int k = 0; k < behandelingenNode.getLength(); k++){
 							Element behandelingElement = (Element) behandelingenNode.item(k);
 							String behandelingid = behandelingElement.getElementsByTagName("BehandelingID").item(0).getTextContent(); //behandelingid van factuur
 							
 							Element behandelingenElement = (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
 							NodeList behandelingenNode2 = behandelingenElement.getElementsByTagName("Behandeling");
+							System.out.println("Behandelingen lengte: " + behandelingenNode2.getLength());
+
 							for (int l = 0; l < behandelingenNode2.getLength(); l++) {
 								Element behandelingElement2 = (Element) behandelingenNode2.item(l);
 								String behandelingid2 = behandelingElement2.getAttribute("id");
@@ -101,6 +107,7 @@ public class FactuurDAO implements FactuurDAOinf {
 									for (int n = 0; n < afspraaknode.getLength(); n++) {
 										Element afspraakElement = (Element) afspraaknode
 												.item(n);
+										System.out.println("Lengte: " + afspraaknode.getLength());
 										// Als de afspraak niet gefactureerd is en deze wel
 										// voltooid is, wordt l opgehoogd met 1.
 										if (!afspraakElement
@@ -109,7 +116,9 @@ public class FactuurDAO implements FactuurDAOinf {
 												&& afspraakElement
 														.getElementsByTagName("Status")
 														.item(0).getTextContent().equals("Voltooid")) {
+										//	System.out.println("Test2");
 											m++;
+											
 										}
 									}
 							
@@ -179,7 +188,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					factuurElement.appendChild(factuurDatum);
 
 					Element vervalDatum = document.createElement("vervalDatum");
-					// TODO date + 14 dagen zodat vervalDatum klopt
+				
 					String verval = dateFormat.format(date);
 					factuurDatum.appendChild(document.createTextNode(verval));
 					factuurElement.appendChild(factuurDatum);

@@ -123,6 +123,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 									&& afspraakElement
 											.getElementsByTagName("Status")
 											.item(0).getTextContent().equals("Voltooid")) {
+								System.out.println("Test");
 								l++;
 							}
 						}
