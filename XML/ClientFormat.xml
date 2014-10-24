@@ -34,7 +34,7 @@
 					<BehandelingID>59</BehandelingID>
 					<BehandelingID>96</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico/>
+				<EigenRisico>300</EigenRisico>
 			</Factuur>
 			<Factuur FactuurNummer="256410">
 				<FactuurDatum>09-06-2014</FactuurDatum>
@@ -43,7 +43,7 @@
 					<BehandelingID>01</BehandelingID>
 					<BehandelingID>9606</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico/>
+				<EigenRisico>200</EigenRisico>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>

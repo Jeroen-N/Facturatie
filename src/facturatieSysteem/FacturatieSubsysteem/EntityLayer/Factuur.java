@@ -10,7 +10,7 @@ public class Factuur implements ImmutableFactuur {
 	private String factuurDatum;
 	private String vervalDatum;
 	private String BSN;
-	private ArrayList<Behandeling> behandelingen = new ArrayList<>();;
+	private ArrayList<Behandeling> behandelingen;
 	private double vergoedeBedrag;
 	private String status;
 	private String s;
@@ -111,13 +111,12 @@ public class Factuur implements ImmutableFactuur {
 	public String toString(Factuur factuur){
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         String risk = getallenOpmaker.format(vergoedeBedrag);
-        
 		return "Factuurnummer: \t" 				+ 	factuurNummer 				+ "\n" +
 				"Factuurdatum: \t\t" 			+ 	factuurDatum 				+ "\n" +
 				"Vervaldatum: \t\t"				+	vervalDatum					+ "\n" +
 				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
 				"Status: \t\t"					+ 	status						+ "\n" +
-				loopBehandelingen(factuur);			
+				loopBehandelingen(factuur);
 	}
 	
 	public String loopBehandelingen(Factuur factuur){
