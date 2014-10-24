@@ -373,16 +373,16 @@
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 		<Facturen>
-			<Factuur FactuurNummer="262510">
-				<FactuurDatum>09-06-2014</FactuurDatum>
-				<VervalDatum>09-07-2014</VervalDatum>
+			<Factuur FactuurNummer="262001">
+				<FactuurDatum>09-06-2013</FactuurDatum>
+				<VervalDatum>09-07-2013</VervalDatum>
 				<FactuurBehandelingen>
-					<BehandelingID>59</BehandelingID>
-					<BehandelingID>96</BehandelingID>
+					<BehandelingID>12</BehandelingID>
+					<BehandelingID>56</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico>60</EigenRisico>
+				<EigenRisico>40</EigenRisico>
 			</Factuur>
-			<Factuur FactuurNummer="256410">
+			<Factuur FactuurNummer="256002">
 				<FactuurDatum>09-06-2014</FactuurDatum>
 				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
@@ -418,7 +418,7 @@
 					<Begintijd>12:00</Begintijd>
 					<Eindtijd>12:30</Eindtijd>
 					<Praktijkruimte>003</Praktijkruimte>
-					<Gefactureerd>Nee</Gefactureerd>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>

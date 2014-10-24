@@ -158,16 +158,16 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		Behandelingen = factuur.getBehandelingen();
 		for(Behandeling behandeling : Behandelingen){
 			String code = behandeling.getBehandelCode();
-				for(int i = 0; i < Behandelingen.size(); i++){
+				//for(int i = 0; i < Behandelingen.size(); i++){
 			
-			naam += behandelingDAO.getNaam(code) + "\n";
-		}
-		}
+			naam += "Behandelingen: \t"	 +behandelingDAO.getNaam(code) + "\n";
+		//}
+		
 		
 	
-		return "Behandelingen: \t"	 			+ 	naam;
 		
+		}
         
-		
+		return  	naam;
 	}
 }
