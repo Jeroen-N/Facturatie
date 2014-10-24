@@ -14,14 +14,14 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="126647">
-				<VerzekeringType>009</VerzekeringType>
-				<EigenRisico>626.35</EigenRisico>
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
 				<startDatum>03-06-2012</startDatum>
 				<eindDatum>03-06-2013</eindDatum>
 			</VerzekeringPolis>
 			<VerzekeringPolis PolisNummer="029837">
-				<VerzekeringType>037</VerzekeringType>
-				<EigenRisico>800.00</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>03-06-2013</startDatum>
 				<eindDatum>03-06-2014</eindDatum>
 			</VerzekeringPolis>
@@ -132,8 +132,8 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="265148">
-				<VerzekeringType>001</VerzekeringType>
-				<EigenRisico>105.26</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>21-07-2013</startDatum>
 				<eindDatum>21-07-2014</eindDatum>
 			</VerzekeringPolis>
@@ -256,22 +256,22 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="3SW02I">
-				<VerzekeringType>Type 2</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>10-10-2014</startDatum>
 				<eindDatum>10-10-2015</eindDatum>
 			</VerzekeringPolis>
 		
 			
 			<VerzekeringPolis PolisNummer="S004W0">
-				<VerzekeringType>Type 1</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
 				<startDatum>10-10-2015</startDatum>
 				<eindDatum>10-10-2016</eindDatum>
 			</VerzekeringPolis>
 			<VerzekeringPolis PolisNummer="7UE6WC">
-				<VerzekeringType>Type 2</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>01-01-0001</startDatum>
 				<eindDatum>01-01-0003</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
@@ -366,8 +366,8 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="123456">
-				<VerzekeringType>007</VerzekeringType>
-				<EigenRisico>1125.48</EigenRisico>
+				<VerzekeringType>All-risk</VerzekeringType>
+				<EigenRisico>80.0</EigenRisico>
 				<startDatum>01-01-2010</startDatum>
 				<eindDatum>31-12-2011</eindDatum>
 			</VerzekeringPolis>

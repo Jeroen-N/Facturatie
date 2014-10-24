@@ -259,6 +259,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							comboBoxMaatschappij.addItem("");
 							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
 								comboBoxMaatschappij.addItem(maatschappij.getNaam());
+								
 							}
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
@@ -267,7 +268,9 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
 										System.out.println("types combobox vullen");
-										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+										for (Verzekeringstype type : vermaatschappijManager.getTypes(
+												vermaatschappijManager.getVerzekeringsmaatschappij(														
+														comboBoxMaatschappij.getSelectedItem().toString()))) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
 									}
@@ -499,8 +502,9 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		}
 	}
 	public void fillField(int row){
-		if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("")){
-		comboBoxMaatschappij.removeAllItems();
+		if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("") || 
+				comboBoxMaatschappij.getItemCount() > 0){
+		comboBoxMaatschappij.setSelectedIndex(0);
 		comboBoxVerzekeringsType.removeAllItems();
 		textFieldEigenRisico.removeAll();
 		}
