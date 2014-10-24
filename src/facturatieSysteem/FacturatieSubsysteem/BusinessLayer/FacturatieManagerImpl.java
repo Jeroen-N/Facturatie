@@ -39,6 +39,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		// daoFactoryClient.validateXML();
 		// daoFactoryFacturatie.validateXML();
 		facturen = new ArrayList<>();
+		Behandelingen = new ArrayList<>();
 
 	}
 
@@ -144,10 +145,29 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		facturen = haalFacturen(klant.getBSN());
 		for (Factuur factuur : facturen) {
 			if (factuur.getFactuurNummer().equals(factuur_nummer)) {
-				return factuur.toString(factuur);
+				return factuur.toString(factuur, loopBehandelingen(factuur));
 			}
 		}
+		System.out.println("leeg");
 		return "niks gevonden";
 	}
-
+	
+	
+	public String loopBehandelingen(Factuur factuur){
+		String naam = "";
+		Behandelingen = factuur.getBehandelingen();
+		for(Behandeling behandeling : Behandelingen){
+			String code = behandeling.getBehandelCode();
+				for(int i = 0; i < Behandelingen.size(); i++){
+			
+			naam += behandelingDAO.getNaam(code) + "\n";
+		}
+		}
+		
+	
+		return "Behandelingen: \t"	 			+ 	naam;
+		
+        
+		
+	}
 }

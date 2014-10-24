@@ -32,5 +32,4 @@ public interface ImmutableBehandeling {
 
 	public void setBSN(String bSN);
 
-	public String getBehandelingNaam();
 }

@@ -44,6 +44,8 @@ public class BehandelingDAO implements BehandelDAOinf {
 							.getTextContent();
 					stringtarief = stringtarief.replaceAll(",", ".");
 					tarief = Double.parseDouble(stringtarief);
+					
+					
 					/*
 					 * System.out.println("tarief");
 					 * 
@@ -141,5 +143,41 @@ public class BehandelingDAO implements BehandelDAOinf {
 		// Stuur de lijst met codes en het aantal behandelingen terug
 		return behandelingen;
 
+	}
+	
+	
+	public String getNaam(String invoerbehandelCode) {
+		document = daoFactoryBehandelcode.getDocument();
+		System.out.println(invoerbehandelCode);
+		String behandelingNaam = "";
+		try {
+			Element codesElement = (Element) document.getElementsByTagName(
+					"behandelcodes").item(0);
+			NodeList codes = codesElement.getElementsByTagName("behandeling");
+			for (int i = 0; i < codes.getLength(); i++) {
+				Element behandelingElement = (Element) codes.item(i);
+				String behandelcode = behandelingElement
+						.getAttribute("behandelcode");
+				if (behandelcode.equals(invoerbehandelCode)) {
+
+					behandelingNaam = behandelingElement
+							.getElementsByTagName("behandelingnaam").item(0)
+							.getTextContent();
+					
+					
+					
+					/*
+					 * System.out.println("behandelignNaam");
+					 * 
+					 * 
+					 * System.out.println();
+					 */
+
+				}
+			}
+		} catch (DOMException e) {
+			e.printStackTrace();
+		}
+		return behandelingNaam;
 	}
 }

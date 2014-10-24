@@ -31,8 +31,8 @@
 				<FactuurDatum>09-06-2014</FactuurDatum>
 				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
-					<BehandelingID>59</BehandelingID>
-					<BehandelingID>96</BehandelingID>
+					<BehandelingID>12</BehandelingID>
+					<BehandelingID>56</BehandelingID>
 				</FactuurBehandelingen>
 				<EigenRisico>300</EigenRisico>
 			</Factuur>
@@ -360,7 +360,7 @@
 			<Geboortedatum>31-12-1995</Geboortedatum>
 			<Telefoonnummer>0625235100</Telefoonnummer>
 			<Email>sjmblijl@avans.nl</Email>
-			<BetaalMethode>incoasso</BetaalMethode>
+			<BetaalMethode>incasso</BetaalMethode>
 			<ResterendEigenRisico>25.25</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052185</Rekeningnummer>
 		</ClientGegevens>
@@ -380,7 +380,7 @@
 					<BehandelingID>59</BehandelingID>
 					<BehandelingID>96</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico/>
+				<EigenRisico>60</EigenRisico>
 			</Factuur>
 			<Factuur FactuurNummer="256410">
 				<FactuurDatum>09-06-2014</FactuurDatum>
@@ -389,7 +389,7 @@
 					<BehandelingID>01</BehandelingID>
 					<BehandelingID>9606</BehandelingID>
 				</FactuurBehandelingen>
-				<EigenRisico/>
+				<EigenRisico>50</EigenRisico>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>

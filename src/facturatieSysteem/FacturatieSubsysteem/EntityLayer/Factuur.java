@@ -108,7 +108,7 @@ public class Factuur implements ImmutableFactuur {
 		BSN = bSN;
 	}
 
-	public String toString(Factuur factuur){
+	public String toString(Factuur factuur, String behandelingen){
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         String risk = getallenOpmaker.format(vergoedeBedrag);
 		return "Factuurnummer: \t" 				+ 	factuurNummer 				+ "\n" +
@@ -116,18 +116,8 @@ public class Factuur implements ImmutableFactuur {
 				"Vervaldatum: \t\t"				+	vervalDatum					+ "\n" +
 				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
 				"Status: \t\t"					+ 	status						+ "\n" +
-				loopBehandelingen(factuur);
+				behandelingen;
 	}
 	
-	public String loopBehandelingen(Factuur factuur){
-		System.out.println(factuur.getBehandelingen().size());
-		behandelingen = factuur.getBehandelingen();
-		for(Behandeling b : behandelingen){
-			 s = b.getBehandelingNaam();
-		}
-		return "Behandelingen: \t"	 			+ 	s	+ "\n" ;
-		
-        
-		
-	}
+	
 }
