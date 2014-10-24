@@ -276,8 +276,13 @@ public class AddVerzekeringDialog extends JDialog {
 					
 					public void mouseClicked(MouseEvent e){
 						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
+						System.out.println("paga");
+						manager.addVerzekeringsmaatschappij(maatschappij);
+						dispose();
 					}
-						///dispose();
+						
+					
+						
 				});
 				
 				
