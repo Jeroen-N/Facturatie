@@ -1,6 +1,7 @@
 package facturatieSysteem.VerzekeringSubsysteem.PresentationLayer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,17 +12,30 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JScrollPane;
+
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
+
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
@@ -105,7 +119,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		infopaneel.add(knoppenPaneel, BorderLayout.SOUTH);
 		btnToevoegen.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
 		btnWijzigen.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
-		btnVerwijderen.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
+		btnVerwijderen.setIcon(new ImageIcon("Pictures/delete-polis-xsmall.png"));
 		btnToevoegen.setMargin(new Insets(0, 0, 0, 0));
 		btnWijzigen.setMargin(new Insets(0, 0, 0, 0));
 		btnVerwijderen.setMargin(new Insets(0, 0, 0, 0));
@@ -117,7 +131,31 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		JTextArea list = new JTextArea();
 		list.setColumns(40);
 		list.setEditable(false);
+		btnWijzigen.setEnabled(false);
+		btnVerwijderen.setEnabled(false);
 		infopaneel.add(list, BorderLayout.CENTER);
+		
+		// / CRUD Toevoegen
+
+		btnToevoegen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddVerzekeringDialog AddVerzekeringDialog = new AddVerzekeringDialog(
+						manager);
+				AddVerzekeringDialog
+						.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				AddVerzekeringDialog.setModal(true);
+				AddVerzekeringDialog.setVisible(true);
+				AddVerzekeringDialog.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+						Verzekering_Table.removeAll();
+						fillTable(manager);
+						///Uitgebreide_Info.setText("");
+						
+					}
+				});
+			}
+		});
 
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
@@ -161,5 +199,18 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		if (count > 0) {
 			dataTableModelVerzekeringen.setValues(verzekeringList);
 		}
+	
+	
+	
+	Verzekering_Table.getSelectionModel().addListSelectionListener(
+			new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					boolean rowsAreSelected = Verzekering_Table
+							.getSelectedRowCount() > 0;
+					btnWijzigen.setEnabled(rowsAreSelected);
+					btnVerwijderen.setEnabled(rowsAreSelected);
+
+				}
+			});
 	}
 }
