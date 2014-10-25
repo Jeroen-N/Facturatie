@@ -12,7 +12,9 @@ import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class FacturatieManagerImpl implements FacturatieManager {
@@ -73,18 +75,13 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		String BSN = klant.getBSN();
 		double totalePrijs = 00;
 		double teVergoedenPrijs = 00;
-		
-		//Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("maatschappij 1", "adres", "postcode", "plaats", 999, 486);
-		//for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
-			//	.getVerzekeringsmaatschappijen()) {
-			//verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij,
-				//	type);
-			ArrayList<String> behandelcodes;
-			behandelcodes = new ArrayList<>();
-			behandelcodes.add("001");
-			verzekering = new Verzekeringstype(666, 500, "Verzekering 1", behandelcodes);
-			System.out.println(verzekering.getBehandelcodes());
-		//}
+		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
+				.getVerzekeringsmaatschappijen()) {
+		for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
+			String polisNaam = polis.getVerzekeringsType();
+			verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij, polisNaam);
+		}
+		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
@@ -95,7 +92,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 				if (behandeling.getBehandelCode().equals(code)) {
 					// Behandeling wordt vergoed
-
+					teVergoedenPrijs += behandelingDAO
+					.getPrijs(behandeling.getBehandelCode())
+					* behandeling.getSessies();
 				} else {
 					// Behandeling wordt niet vergoed
 					double tijdelijkRisico = behandelingDAO

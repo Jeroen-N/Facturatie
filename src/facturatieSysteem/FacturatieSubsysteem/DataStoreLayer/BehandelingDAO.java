@@ -44,8 +44,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 							.getTextContent();
 					stringtarief = stringtarief.replaceAll(",", ".");
 					tarief = Double.parseDouble(stringtarief);
-					
-					
+
 					/*
 					 * System.out.println("tarief");
 					 * 
@@ -66,13 +65,13 @@ public class BehandelingDAO implements BehandelDAOinf {
 		// Initialiseer een document van de daofactory en maak een string
 		// behandelcode aan zonder inhoud.
 		ArrayList<Behandeling> behandelingen = new ArrayList<>();
+		ArrayList<String> afspraakIDs = new ArrayList<>();
 		document = daoFactoryClient.getDocument();
 		String behandelcode = "";
 		String praktijkNummer = "";
 		String behandelStartDatum = "";
 		String behandelEindDatum = "";
 		double totaalprijs = 00;
-		
 
 		// Start proces om behandelingen op te halen.
 		try {
@@ -96,7 +95,8 @@ public class BehandelingDAO implements BehandelDAOinf {
 						Element behandelElement = (Element) behandelingnode
 								.item(j);
 						behandelcode = behandelElement
-								.getElementsByTagName("Behandelcode").item(0).getTextContent();
+								.getElementsByTagName("Behandelcode").item(0)
+								.getTextContent();
 						praktijkNummer = behandelElement
 								.getElementsByTagName("fysioPraktijkNummer")
 								.item(0).getTextContent();
@@ -122,18 +122,25 @@ public class BehandelingDAO implements BehandelDAOinf {
 									.item(0).getTextContent().equals("Ja")
 									&& afspraakElement
 											.getElementsByTagName("Status")
-											.item(0).getTextContent().equals("Voltooid")) {
+											.item(0).getTextContent()
+											.equals("Voltooid")) {
 								System.out.println("Test");
 								l++;
+								afspraakIDs.add(afspraakElement
+										.getAttribute("ID"));
 							}
 						}
-				
+
 						// Reset de tellers en de string die toegevoegd wordt
 						// aan de behandelcode.
-					
-						Behandeling behandeling = new Behandeling(praktijkNummer, behandelcode, behandelStartDatum, behandelEindDatum, BSN,null, totaalprijs, l);
+
+						Behandeling behandeling = new Behandeling(
+								praktijkNummer, behandelcode,
+								behandelStartDatum, behandelEindDatum, BSN,
+								afspraakIDs, totaalprijs, l);
 						behandelingen.add(behandeling);
 						l = 0;
+						afspraakIDs.clear();
 					}
 				}
 			}
@@ -145,8 +152,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 		return behandelingen;
 
 	}
-	
-	
+
 	public String getNaam(String invoerbehandelCode) {
 		document = daoFactoryBehandelcode.getDocument();
 		System.out.println(invoerbehandelCode);
@@ -164,9 +170,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 					behandelingNaam = behandelingElement
 							.getElementsByTagName("behandelingnaam").item(0)
 							.getTextContent();
-					
-					
-					
+
 					/*
 					 * System.out.println("behandelignNaam");
 					 * 
