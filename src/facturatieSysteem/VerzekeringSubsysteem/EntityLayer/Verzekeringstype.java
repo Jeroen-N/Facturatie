@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 public class Verzekeringstype {
 	private int VerzekeringsTypeID;
-	private int EigenRisico;
+	private
+	int EigenRisico;
 	private String Naam;
 	private ArrayList<String> behandelcodes = new ArrayList<>();
 	

@@ -15,8 +15,8 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="87JH9G">
-				<VerzekeringType>All-risk</VerzekeringType>
-				<EigenRisico>80.0</EigenRisico>
+				<VerzekeringType>Basic</VerzekeringType>
+				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-01-2013</startDatum>
 				<eindDatum>31-12-2014</eindDatum>
 			</VerzekeringPolis>
@@ -154,7 +154,7 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Gefactureerd>Ja</Gefactureerd>
+					<Gefactureerd>Nee</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="361004">

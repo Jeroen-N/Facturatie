@@ -138,7 +138,11 @@ public class BehandelingDAO implements BehandelDAOinf {
 								praktijkNummer, behandelcode,
 								behandelStartDatum, behandelEindDatum, BSN,
 								afspraakIDs, totaalprijs, l);
-						behandelingen.add(behandeling);
+						if(l > 0){
+							behandelingen.add(behandeling);
+						}
+						
+						
 						l = 0;
 						afspraakIDs.clear();
 					}
