@@ -132,4 +132,11 @@ public class Klant {
 				"Resterend eigen risico: \t"	+ "\u20ac" +	RestRisico+ "\n" +
 				"Rekeningnummer: \t"			+	RekeningNr		+ "\n" ;
 	}
+	
+	public String toStringFactuur(Klant klant){
+		
+		return "Naam: \t\t" 					+ 	klant.getNaam() 			+ "\n" +
+				"Adres: \t\t"					+ 	klant.getAdres()			+ "\n" +
+				"Postcode en woonplaats: \t" 	+ 	klant.getPostcode() + " "	+ klant.getWoonplaats()		+ "\n";
+	}
 }
