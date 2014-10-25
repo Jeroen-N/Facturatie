@@ -7,12 +7,15 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.log4j.Logger;
 
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.main.DataTableModel;
 
 public class DataTableModelChangePolis extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Vector<String[]> cache; // will hold String[] objects . . .
 	private int colCount;
 	private String[] headers;

@@ -5,15 +5,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
@@ -23,7 +18,6 @@ public class FacturatieGUI {
 	private static FacturatieManagerImpl facturatieManagerImpl;
 	private static Integer row;
 	private static JPanel buttonPanel;
-	private static JPanel overzichtPanel;
 	private static JTextField zoekbalk;
 	private static JButton zoekKnop;
 	private static JButton terugKnop;
@@ -32,7 +26,6 @@ public class FacturatieGUI {
 	private static JButton printFactuurKnop;
 	private static JTable overzicht;
 	private static JTextArea factuur;
-	private static JLabel paginaNaam;
 	private static JScrollPane factuurTablePanel;
 	private static JScrollPane scrollPane = new JScrollPane();
 	private static JPanel mainPanel = new JPanel();
@@ -42,8 +35,6 @@ public class FacturatieGUI {
 	private static JPanel eastPanel;
 	private static JPanel factuurPanel;
 	private static JScrollPane scrollFactuur;
-	private static Border border;
-
 	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");

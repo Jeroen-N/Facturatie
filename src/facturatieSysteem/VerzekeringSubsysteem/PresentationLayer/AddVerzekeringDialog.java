@@ -9,10 +9,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -38,7 +36,6 @@ public class AddVerzekeringDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AddVerzekeringDialog(final VerzekeringsmaatschappijManager manager) {
 
 		setTitle("Verzekeringen beheer");

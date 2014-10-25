@@ -12,9 +12,7 @@ import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class FacturatieManagerImpl implements FacturatieManager {
@@ -73,15 +71,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 		// BSN aanmaken en hier de waarde van de meegegeven klant aan toekennen
 		String BSN = klant.getBSN();
-
-		double oudRisico = klant.getResterendEigenRisico();
 		double totalePrijs = 00;
-		String type = "";
 		double teVergoedenPrijs = 00;
-		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
-			type = polis.getVerzekeringsType();
-
-		}
+		
 		//Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("maatschappij 1", "adres", "postcode", "plaats", 999, 486);
 		//for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
 			//	.getVerzekeringsmaatschappijen()) {

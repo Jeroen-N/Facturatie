@@ -114,8 +114,6 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		//loop through all clients
 		for(int i = 0; i < clienten.getLength();i++){
 			Element clientElement = (Element) clienten.item(i);
-			String bsn = clientElement.getAttribute("BSN");	
-			
 			Element verzekeringsPolissenElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
 			NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("VerzekeringPolis");
 			//loop through all clients

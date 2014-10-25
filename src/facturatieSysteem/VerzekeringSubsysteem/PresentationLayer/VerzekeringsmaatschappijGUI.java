@@ -23,7 +23,6 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -35,12 +34,16 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
 
 public class VerzekeringsmaatschappijGUI extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public VerzekeringsmaatschappijGUI() {
 	}
 

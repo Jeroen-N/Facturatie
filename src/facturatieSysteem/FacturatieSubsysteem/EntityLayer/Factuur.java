@@ -13,7 +13,6 @@ public class Factuur implements ImmutableFactuur {
 	private ArrayList<Behandeling> behandelingen;
 	private double vergoedeBedrag;
 	private String status;
-	private String s;
 
 	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double vergoedeBedrag, ArrayList<Behandeling> behandelingen, String status) {
 		this.factuurNummer = factuurNummer;

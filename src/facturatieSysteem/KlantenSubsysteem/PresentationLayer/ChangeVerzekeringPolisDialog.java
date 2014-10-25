@@ -133,7 +133,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						String[] headers = new String[] { "Polisnummer", "Type", "Eigen risico", "Start datum", "Eind datum" };
 						dataTableModelChangePolis.setTableHeader(headers);
 						
-						TableColumn column = column = polistable.getColumnModel().getColumn(0);
+						TableColumn column = polistable.getColumnModel().getColumn(0);
 						column.setPreferredWidth(6);
 						
 						polistable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

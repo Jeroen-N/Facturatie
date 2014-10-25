@@ -47,7 +47,7 @@ public class MainGUI {
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
 			btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer,
 			btnAddPolis, btnZoekKlant;
-	private FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
+	private FacturatieManagerImpl facturatieManager;
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private JTextArea PolisInfo;
 	private JSeparator separator;
@@ -64,10 +64,11 @@ public class MainGUI {
 	private JButton btnReset;
 
 	public MainGUI(KlantManager klantManager,
-			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager) {
+			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManagerImpl facturatieManager) {
 		logger.debug("Constructor");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
+		this.facturatieManager = facturatieManager;
 		dataTableModel = new DataTableModel();
 		makeFrame();
 	}

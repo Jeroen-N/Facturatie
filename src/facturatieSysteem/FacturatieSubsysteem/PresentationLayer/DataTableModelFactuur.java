@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.log4j.Logger;
 
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 /**
  * This class provides a data model for the JTable component in the UI. Using this data model
