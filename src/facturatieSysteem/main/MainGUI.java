@@ -17,6 +17,7 @@ import javax.swing.text.DefaultCaret;
 
 import org.apache.log4j.Logger;
 
+import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
@@ -47,7 +48,7 @@ public class MainGUI {
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
 			btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer,
 			btnAddPolis, btnZoekKlant;
-	private FacturatieManagerImpl facturatieManager;
+	private FacturatieManager facturatieManager;
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private JTextArea PolisInfo;
 	private JSeparator separator;
@@ -64,7 +65,7 @@ public class MainGUI {
 	private JButton btnReset;
 
 	public MainGUI(KlantManager klantManager,
-			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManagerImpl facturatieManager) {
+			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManager facturatieManager) {
 		logger.debug("Constructor");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
@@ -363,7 +364,7 @@ public class MainGUI {
 				if (btnChangeKlant.isEnabled()) {
 					KlantenPanel.setVisible(false);
 					Klant fact = KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact));
+					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact, maatschappijManager));
 					FacturatiePanel.setVisible(true);
 				}
 			}

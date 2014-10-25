@@ -14,6 +14,7 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
@@ -75,12 +76,18 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		String BSN = klant.getBSN();
 		double totalePrijs = 00;
 		double teVergoedenPrijs = 00;
+		String polisNaam = "";
+		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
+			polisNaam = polis.getVerzekeringsType();
+		}
 		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
 				.getVerzekeringsmaatschappijen()) {
-		for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
-			String polisNaam = polis.getVerzekeringsType();
-			verzekering = verzekeringsmanager.getVerzekeringstype(maatschappij, polisNaam);
-		}
+			for (Verzekeringstype type : maatschappij.getTypes()) {
+				if (polisNaam.equals(Integer.toString(type.getID()))) {
+					verzekering = verzekeringsmanager.getVerzekeringstype(
+							maatschappij, polisNaam);
+				}
+			}
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 
@@ -92,9 +99,8 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 				if (behandeling.getBehandelCode().equals(code)) {
 					// Behandeling wordt vergoed
-					teVergoedenPrijs += behandelingDAO
-					.getPrijs(behandeling.getBehandelCode())
-					* behandeling.getSessies();
+					teVergoedenPrijs += behandelingDAO.getPrijs(behandeling
+							.getBehandelCode()) * behandeling.getSessies();
 				} else {
 					// Behandeling wordt niet vergoed
 					double tijdelijkRisico = behandelingDAO
@@ -105,24 +111,27 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			}
 			if (klant.getResterendEigenRisico() != 0) {
 				if (klant.getResterendEigenRisico() >= totalePrijs) {
-					klant.setTotaalEigenRisico(klant.getResterendEigenRisico() - totalePrijs);
+					klant.setTotaalEigenRisico(klant.getResterendEigenRisico()
+							- totalePrijs);
 					System.out.println(teVergoedenPrijs);
-				}
-				else{
-					teVergoedenPrijs += totalePrijs-klant.getResterendEigenRisico();
+				} else {
+					teVergoedenPrijs += totalePrijs
+							- klant.getResterendEigenRisico();
 					klant.setTotaalEigenRisico(0);
-					
+
 				}
-			}
-			else{
+			} else {
 				teVergoedenPrijs += totalePrijs;
 				System.out.println("Vergoede prijs: " + teVergoedenPrijs);
 			}
 			behandeling.setTotaalprijs(totalePrijs);
-			System.out.println("Totaalprijs behandelingen: " + behandeling.getTotaalprijs());
+			System.out.println("Totaalprijs behandelingen: "
+					+ behandeling.getTotaalprijs());
 			totalePrijs = 00;
 		}
-		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN, teVergoedenPrijs, behandelingenlijst, "Niet betaald");
+		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
+				teVergoedenPrijs, behandelingenlijst, "Niet betaald");
+		//factuurDAO.maakFactuur(klant, f);
 		return f;
 	}
 
@@ -142,23 +151,19 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		System.out.println("leeg");
 		return "niks gevonden";
 	}
-	
-	
-	public String loopBehandelingen(Factuur factuur){
+
+	public String loopBehandelingen(Factuur factuur) {
 		String naam = "";
 		Behandelingen = factuur.getBehandelingen();
-		for(Behandeling behandeling : Behandelingen){
+		for (Behandeling behandeling : Behandelingen) {
 			String code = behandeling.getBehandelCode();
-				//for(int i = 0; i < Behandelingen.size(); i++){
-			
-			naam += "Behandelingen: \t"	 +behandelingDAO.getNaam(code) + "\n";
-		//}
-		
-		
-	
-		
+			// for(int i = 0; i < Behandelingen.size(); i++){
+
+			naam += "Behandelingen: \t" + behandelingDAO.getNaam(code) + "\n";
+			// }
+
 		}
-        
-		return  	naam;
+
+		return naam;
 	}
 }

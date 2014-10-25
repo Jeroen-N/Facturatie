@@ -9,13 +9,17 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
 
+import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 
 public class FacturatieGUI {
 
-	private static FacturatieManagerImpl facturatieManagerImpl;
+	private static FacturatieManager facturatieManagerImpl;
 	private static Integer row;
 	private static JPanel buttonPanel;
 	private static JTextField zoekbalk;
@@ -35,11 +39,13 @@ public class FacturatieGUI {
 	private static JPanel eastPanel;
 	private static JPanel factuurPanel;
 	private static JScrollPane scrollFactuur;
+	private static VerzekeringsmaatschappijManager m1;
 	
-	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
+	public static JPanel FacturatieGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");
 		paneel.add(scrollPane, BorderLayout.CENTER);
+		m1 = m2;
 		facturatieManagerImpl = factManagerImpl;
 		klant = klnt;
 		facturen = new ArrayList<>();
@@ -47,7 +53,7 @@ public class FacturatieGUI {
 		return initComponents(factManagerImpl);
 	}
 
-	public static JPanel initComponents(FacturatieManagerImpl factManagerImpl) {
+	public static JPanel initComponents(FacturatieManager factManagerImpl) {
 		// panels aanmaken
 
 		mainPanel = new JPanel();
@@ -77,6 +83,13 @@ public class FacturatieGUI {
 
 		factureerKnop = new JButton();
 		factureerKnop.setText("Factureren");
+		
+		factureerKnop.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				facturatieManagerImpl.factureer(klant, m1);
+			}
+		});
 
 		openFactuurKnop = new JButton();
 		openFactuurKnop.setText("Open factuur");
@@ -172,7 +185,7 @@ public class FacturatieGUI {
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public static void fillField(int row, FacturatieManagerImpl factManagerImpl, Klant klant){
+	public static void fillField(int row, FacturatieManager factManagerImpl, Klant klant){
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
 		System.out.println(factuur_nummer);
 		factuur.setText(factManagerImpl.toonFactuur(factuur_nummer, klant));

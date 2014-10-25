@@ -135,7 +135,7 @@ public class Verzekeringsmaatschappij {
 	/*
 	 * @return Een Arraylist van de types behorend bij de maatschappij
 	 */
-	public static ArrayList<Verzekeringstype> getTypes(){
+	public ArrayList<Verzekeringstype> getTypes(){
 		return types;
 	}
 }
