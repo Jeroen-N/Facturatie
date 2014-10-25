@@ -14,5 +14,10 @@ public interface FacturatieManager {
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
 	public String toonFactuur(String factuur_nummer, Klant klant);
+	
 	public String loopBehandelingen(Factuur factuur);
+	
+	public double getTotaalPrijs(Factuur factuur);
+	
+	public double getTotaalinclBTW(Factuur factuur);
 }

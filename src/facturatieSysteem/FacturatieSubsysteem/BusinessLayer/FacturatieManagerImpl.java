@@ -173,4 +173,23 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 		return naam;
 	}
+	
+	public double getTotaalPrijs(Factuur factuur){
+		double totPrijs = 0.0;
+		for(Behandeling behandeling : factuur.getBehandelingen()){
+			totPrijs += behandeling.getTotaalprijs();
+		}
+		return totPrijs;
+	}
+	
+	public double getTotaalinclBTW(Factuur factuur){
+		double totPrijs = 0.0;
+		double totPrijsBTW = 0.0;
+		double btw = 1.21;
+		for(Behandeling behandeling : factuur.getBehandelingen()){
+			totPrijs += behandeling.getTotaalprijs();
+		}
+		totPrijsBTW = totPrijs * btw;
+		return totPrijsBTW;
+	}
 }
