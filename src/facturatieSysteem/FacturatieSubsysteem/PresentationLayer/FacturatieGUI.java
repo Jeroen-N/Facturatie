@@ -35,6 +35,7 @@ public class FacturatieGUI {
 	private static JPanel eastPanel;
 	private static JPanel factuurPanel;
 	private static JScrollPane scrollFactuur;
+	
 	public static JPanel FacturatieGUI(FacturatieManagerImpl factManagerImpl, Klant klnt) {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");

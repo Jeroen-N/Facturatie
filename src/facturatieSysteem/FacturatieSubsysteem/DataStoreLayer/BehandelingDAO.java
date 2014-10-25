@@ -15,11 +15,14 @@ public class BehandelingDAO implements BehandelDAOinf {
 	private Document document = null;
 	private DAOFactoryFactuur daoFactoryBehandelcode;
 	private DAOFactoryFactuur daoFactoryClient;
+	private DAOFactoryFactuur daoFactoryFacturatie;
+
 	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode,
 			DAOFactoryFactuur daoFactoryClient,
 			DAOFactoryFactuur daoFactoryFacturatie) {
 		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
 		this.daoFactoryClient = daoFactoryClient;
+		this.daoFactoryFacturatie = daoFactoryFacturatie;
 	}
 
 	public double getPrijs(String invoerbehandelCode) {
@@ -128,7 +131,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 						// Reset de tellers en de string die toegevoegd wordt
 						// aan de behandelcode.
 					
-						Behandeling behandeling = new Behandeling(praktijkNummer, behandelcode, behandelStartDatum, behandelEindDatum, BSN, totaalprijs, l);
+						Behandeling behandeling = new Behandeling(praktijkNummer, behandelcode, behandelStartDatum, behandelEindDatum, BSN,null, totaalprijs, l);
 						behandelingen.add(behandeling);
 						l = 0;
 					}

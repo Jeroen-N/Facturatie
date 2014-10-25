@@ -1,5 +1,7 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
+import java.util.ArrayList;
+
 public class Behandeling implements ImmutableBehandeling {
 
 	private String fysioPraktijkNummer;
@@ -7,19 +9,20 @@ public class Behandeling implements ImmutableBehandeling {
 	private String behandelStartDatum;
 	private String behandelEindDatum;
 	private String BSN;
+	private ArrayList<String> afspraakIDs;
 	private double totaalprijs;
 	private int sessies;
 
 	public Behandeling(String fysioPraktijkNummer, String behandelCode,
-			String behandelStartDatum, String behandelEindDatum, String BSN, double totaalprijs, int sessies) {
+			String behandelStartDatum, String behandelEindDatum, String BSN,  ArrayList<String> afspraakIDs, double totaalprijs, int sessies) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 		this.behandelCode = behandelCode;
 		this.behandelStartDatum = behandelStartDatum;
 		this.behandelEindDatum = behandelEindDatum;
 		this.BSN = BSN;
+		this.afspraakIDs = afspraakIDs;
 		this.totaalprijs = totaalprijs;
 		this.sessies = sessies;
-
 	}
 
 	public double getTotaalprijs() {
@@ -83,6 +86,8 @@ public class Behandeling implements ImmutableBehandeling {
 	public void setBSN(String bSN) {
 		BSN = bSN;
 	}
-
+	public ArrayList<String> getAfspraakIDs(){
+		return afspraakIDs;
+	}
 
 }

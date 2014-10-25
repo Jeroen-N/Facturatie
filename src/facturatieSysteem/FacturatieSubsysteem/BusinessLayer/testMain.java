@@ -1,13 +1,6 @@
 package facturatieSysteem.FacturatieSubsysteem.BusinessLayer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
-import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;

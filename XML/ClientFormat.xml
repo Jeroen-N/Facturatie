@@ -36,7 +36,7 @@
 				</FactuurBehandelingen>
 				<EigenRisico>300</EigenRisico>
 			</Factuur>
-			<Factuur FactuurNummer="256410">
+			<Factuur FactuurNummer="256411">
 				<FactuurDatum>09-06-2014</FactuurDatum>
 				<VervalDatum>09-07-2014</VervalDatum>
 				<FactuurBehandelingen>
