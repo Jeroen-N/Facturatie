@@ -7,15 +7,13 @@ package facturatieSysteem.VerzekeringSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
 
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO;
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.*;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
-	private VerzekeringsmaatschappijDAOImpl VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
-	private VerzekeringsmaatschappijDAO verzekeringsmaatschappijDAO;
+	private VerzekeringsmaatschappijDAO VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 	
 	@Override
 	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
@@ -42,13 +40,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 	
+	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
-	}
-
-	@Override
-	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij) {
-		return maatschappij.getTypes();
 	}
 	
 	@Override
@@ -58,7 +52,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	
 	@Override
 	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
-		for(Verzekeringstype type : this.getTypes(maatschappij)){
+		for(Verzekeringstype type : maatschappij.getTypes()){
 			if(type.getNaam().equals(Naam)){
 				return type;
 			}
@@ -68,7 +62,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	
 	@Override
 	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
-		for(Verzekeringstype type : this.getTypes(maatschappij)){
+		for(Verzekeringstype type : maatschappij.getTypes()){
 			if(type.getNaam().equals(Naam)){
 				return maatschappij.deleteType(type);
 			}
@@ -86,6 +80,5 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		//MBV DAO aanmaken gegevens
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
-		System.out.println("Dit is een konijn konijn konijn");
 	}
 }

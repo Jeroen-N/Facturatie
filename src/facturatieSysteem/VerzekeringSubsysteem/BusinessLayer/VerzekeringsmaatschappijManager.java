@@ -18,8 +18,6 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public boolean deleteVerzekeringsmaatschappij(String naam);
 	
-	public ArrayList<Verzekeringstype> getTypes(Verzekeringsmaatschappij maatschappij);
-	
 	public void fill();
 	
 	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
