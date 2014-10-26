@@ -7,7 +7,18 @@
       <KVKNummer>12345678</KVKNummer>
       <rekeningNummer>0123456789</rekeningNummer>
 	  <verzekeringsTypes>
-	      <verzekeringsType id="001">
+	  	  <verzekeringsType id="001">
+	         <naam>Basic</naam>
+	         <behandelCodes>
+	            <behandelcode>001</behandelcode>
+	            <behandelcode>004</behandelcode>
+	            <behandelcode>005</behandelcode>
+	            <behandelcode>007</behandelcode>
+	            <behandelcode>008</behandelcode>
+	         </behandelCodes>
+	         <verplichtEigenRisico>200</verplichtEigenRisico>
+	      </verzekeringsType>
+	      <verzekeringsType id="002">
 	         <naam>All-risk</naam>
 	         <behandelCodes>
 	            <behandelcode>001</behandelcode>
@@ -22,17 +33,6 @@
 	            <behandelcode>010</behandelcode>
 	         </behandelCodes>
 	         <verplichtEigenRisico>80</verplichtEigenRisico>
-	      </verzekeringsType>
-	      <verzekeringsType id="002">
-	         <naam>Basic</naam>
-	         <behandelCodes>
-	            <behandelcode>001</behandelcode>
-	            <behandelcode>004</behandelcode>
-	            <behandelcode>005</behandelcode>
-	            <behandelcode>007</behandelcode>
-	            <behandelcode>008</behandelcode>
-	         </behandelCodes>
-	         <verplichtEigenRisico>200</verplichtEigenRisico>
 	      </verzekeringsType>
 	   </verzekeringsTypes>    
    </verzekeringsmaatschappij>

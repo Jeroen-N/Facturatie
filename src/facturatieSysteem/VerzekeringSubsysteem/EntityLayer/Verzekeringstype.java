@@ -19,7 +19,7 @@ public class Verzekeringstype {
 	 * @param EigenRisico Het eigen risico van het type verzekering
 	 * @param behandelcodes de behandelcodes
 	 */
-	public Verzekeringstype(int VerzekeringsTypeID, int EigenRisico, String Naam, ArrayList<String> behandelcodes){
+	public Verzekeringstype(int VerzekeringsTypeID, int EigenRisico, String Naam){
 		this.VerzekeringsTypeID = VerzekeringsTypeID;
 		this.EigenRisico = EigenRisico;
 		this.Naam = Naam;
@@ -58,6 +58,10 @@ public class Verzekeringstype {
 	 */
 	public void setNaam(String Naam){
 		this.Naam = Naam;
+	}
+	
+	public void addCode(String code){
+		this.behandelcodes.add(code);
 	}
 	
 	/*

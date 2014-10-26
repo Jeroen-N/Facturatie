@@ -42,13 +42,13 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 					String typenaam = typeElement.getElementsByTagName("naam").item(0).getTextContent();
 					int eigenrisico = Integer.parseInt(typeElement.getElementsByTagName("verplichtEigenRisico").item(0).getTextContent());
 					//Vind de behandelcodes
-					Element codesElement = (Element) document.getElementsByTagName("behandelCodes").item(0);
+					Element codesElement = (Element) typeElement.getElementsByTagName("behandelCodes").item(0);
 					NodeList codes = codesElement.getElementsByTagName("behandelcode");
-					ArrayList<String> behandelcodes = new ArrayList<>();
+					
+					Verzekeringstype type = new Verzekeringstype(id, eigenrisico, typenaam);
 					for(int k = 0; k < codes.getLength(); k++){
-						behandelcodes.add(codes.item(k).getTextContent());
+						type.addCode(codes.item(k).getTextContent());
 					}
-					Verzekeringstype type = new Verzekeringstype(id, eigenrisico, typenaam, behandelcodes);
 					maatschappij.addType(type);
 				}
 				maatschappijlijst.add(maatschappij);
