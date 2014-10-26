@@ -2,6 +2,7 @@ package facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,6 +27,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 			NodeList maatschappijen = rootElement.getElementsByTagName("verzekeringsmaatschappij");
 			for(int i = 0; i < maatschappijen.getLength(); i++){
 				Element maatschappijElement = (Element) maatschappijen.item(i);
+				String maatschappijnr = maatschappijElement.getAttribute("maatschappijnr");
 				String naam = maatschappijElement.getElementsByTagName("naam").item(0).getTextContent();
 				String adres = maatschappijElement.getElementsByTagName("adres").item(0).getTextContent();
 				String postcode = maatschappijElement.getElementsByTagName("postcode").item(0).getTextContent();
@@ -33,19 +35,20 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 				int KVKnummer = Integer.parseInt(maatschappijElement.getElementsByTagName("KVKNummer").item(0).getTextContent());
 				int rekeningnummer = Integer.parseInt(maatschappijElement.getElementsByTagName("rekeningNummer").item(0).getTextContent());
 				//Maak een nieuwe maatschappij met de gevonden gegevens
-				Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(naam,adres,postcode,woonplaats,KVKnummer, rekeningnummer);
+				Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(maatschappijnr,naam,adres,postcode,woonplaats,KVKnummer, rekeningnummer);
 				//Vind de verzekeringstypes
 				Element typesElement = (Element) document.getElementsByTagName("verzekeringsTypes").item(0);
 				NodeList types = typesElement.getElementsByTagName("verzekeringsType");
 				for(int j = 0; j < types.getLength(); j++){
 					Element typeElement = (Element) types.item(j);
+					String typenr = typeElement.getAttribute("typenr");
 					String typenaam = typeElement.getElementsByTagName("naam").item(0).getTextContent();
 					int eigenrisico = Integer.parseInt(typeElement.getElementsByTagName("verplichtEigenRisico").item(0).getTextContent());
 					//Vind de behandelcodes
 					Element codesElement = (Element) typeElement.getElementsByTagName("behandelCodes").item(0);
 					NodeList codes = codesElement.getElementsByTagName("behandelcode");
 					
-					Verzekeringstype type = new Verzekeringstype(eigenrisico, typenaam);
+					Verzekeringstype type = new Verzekeringstype(typenr, eigenrisico, typenaam);
 					for(int k = 0; k < codes.getLength(); k++){
 						type.addCode(codes.item(k).getTextContent());
 					}
@@ -64,7 +67,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		document = daoFactory.getDocument();
 		try{
 		
-		Node facturatieSysteem = document.getElementsByTagName("facturatieSysteem").item(0);
+		Element facturatieSysteem = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
 		facturatieSysteem.appendChild(document.createTextNode("\t"));
 		
 		//Create all Elements
@@ -76,6 +79,10 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		
 		//Ordering Elements
 		facturatieSysteem.appendChild(verzekeringsmaatschappij);
+		
+		Attr maatschappijnr = document.createAttribute("maatschappijnr");
+		maatschappijnr.setValue("" + maatschappij.getNr());
+		verzekeringsmaatschappij.setAttributeNode(maatschappijnr);
 
 		//fill Verzekeringsmaatschappij
 			verzekeringsmaatschappij.appendChild(document.createTextNode("\n\t\t"));//opmaak XML
@@ -112,13 +119,18 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 			//Verwerk de types
 			verzekeringsmaatschappij.appendChild(document.createTextNode("\n\t\t"));
 			verzekeringsmaatschappij.appendChild(verzekeringsTypes);
-			verzekeringsTypes.appendChild(document.createTextNode("\n\t\t\t")); // <VerzekeringPolissen>
+			verzekeringsTypes.appendChild(document.createTextNode("\n\t\t\t"));
 			verzekeringsTypes.appendChild(verzekeringsType);
-			verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t")); // <VerzekeringPolis>
+			verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
 				
 			ArrayList<Verzekeringstype> VerzekeringTypes = maatschappij.getTypes();
 			
+			Attr typenr = document.createAttribute("typenr");
+			
 			for(Verzekeringstype polis : VerzekeringTypes){
+				typenr.setValue("" + polis.getNr());
+				verzekeringsType.setAttributeNode(typenr);
+				
 				Element typenaam = document.createElement("naam");
 				typenaam.appendChild(document.createTextNode(polis.getNaam()));
 				verzekeringsType.appendChild(typenaam);
@@ -187,7 +199,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 	}
 
 	@Override
-	public boolean deleteMaatschappijXML(String naam) {
+	public boolean deleteMaatschappijXML(String nr) {
 		document = daoFactory.getDocument();
 		try{
 		Element clientenElement = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
@@ -195,9 +207,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		// loop through all clients
 		for(int i = 0; i < maatschappijen.getLength();i++){
 			Element maatschappijElement = (Element) maatschappijen.item(i);
-			String name = maatschappijElement.getElementsByTagName("naam").item(0).getTextContent();
+			String maatschappijnr = maatschappijElement.getAttribute("maatschappijnr");
 			
-			if(name.equals(naam)){
+			if(maatschappijnr.equals(nr)){
 				// delete client
 				maatschappijElement.getParentNode().removeChild(maatschappijElement);
 				break;

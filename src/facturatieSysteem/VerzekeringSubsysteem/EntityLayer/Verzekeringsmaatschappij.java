@@ -8,6 +8,7 @@ package facturatieSysteem.VerzekeringSubsysteem.EntityLayer;
 import java.util.ArrayList;
 
 public class Verzekeringsmaatschappij {
+	private String maatschappijnr;
 	private String Naam;
 	private String Adres;
 	private String Postcode;
@@ -24,13 +25,18 @@ public class Verzekeringsmaatschappij {
 	 * @param KVK Het kamer van koophandel van de verzekeringsmaatschappij
 	 * @param RekeningNR Het rekening nummer van de verzekeringsmaatschappij
 	 */
-	public Verzekeringsmaatschappij(String Naam, String Adres, String Postcode, String Plaats, int KVK, int RekeningNR){
+	public Verzekeringsmaatschappij(String maatschappijnr, String Naam, String Adres, String Postcode, String Plaats, int KVK, int RekeningNR){
+		this.maatschappijnr = maatschappijnr;
 		this.setNaam(Naam);
 		this.setAdres(Adres);
 		this.setPostcode(Postcode);
 		this.setPlaats(Plaats);
 		this.KVK = KVK;
 		this.setRekeningNR(RekeningNR);
+	}
+	
+	public String getNr(){
+		return maatschappijnr;
 	}
 
 	/*

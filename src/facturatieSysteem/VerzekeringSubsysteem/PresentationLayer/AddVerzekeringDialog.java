@@ -271,6 +271,7 @@ public class AddVerzekeringDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter(){
 					
 					public void mouseClicked(MouseEvent e){
+						//TODO extra attribuut maatschappijnr
 						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
 						manager.addVerzekeringsmaatschappij(maatschappij);
 						dispose();

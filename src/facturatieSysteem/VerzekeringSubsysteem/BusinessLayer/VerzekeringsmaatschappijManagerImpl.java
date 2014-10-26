@@ -14,16 +14,24 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
 	private VerzekeringsmaatschappijDAO VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
+	private VerzekeringstypeDAO VerzekeringtypeDAO = new VerzekeringsDAOImpl();
 	
 	@Override
-	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
-		verzekeringsMaatschappijen.add(maatschappij);
+	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
+		for(Verzekeringsmaatschappij verzekering : verzekeringsMaatschappijen){
+			if(!verzekering.getNr().equals(maatschappij.getNr())){
+				break;
+			}
+		}
+
+		return verzekeringsMaatschappijen.add(maatschappij) &&
+				VerzekeringDAO.addMaatschappijXML(maatschappij);
 	}
 
 	@Override
-	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam) {
+	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
 		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
-			if(maatschappij.getNaam().equals(naam)){
+			if(maatschappij.getNr().equals(nr)){
 				return maatschappij;
 			}
 		}
@@ -31,10 +39,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 
 	@Override
-	public boolean deleteVerzekeringsmaatschappij(String naam) {
+	public boolean deleteVerzekeringsmaatschappij(String nr) {
 		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
-			if(maatschappij.getNaam().equals(naam)){
-				return verzekeringsMaatschappijen.remove(maatschappij);
+			if(maatschappij.getNr().equals(nr)){
+				return verzekeringsMaatschappijen.remove(maatschappij) &&
+					   VerzekeringDAO.deleteMaatschappijXML(nr); //Als beide true zijn is het succesvol uitgevoerd
 			}
 		}
 		return false;
@@ -47,13 +56,19 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	
 	@Override
 	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+		for(Verzekeringstype vtype : maatschappij.getTypes()){
+			if(vtype.getNr().equals(type.getNr())){
+				break;
+			}
+		}
 		maatschappij.addType(type);
+		VerzekeringtypeDAO.addVerzekeringstypeXML(maatschappij.getNr(), type);
 	}
 	
 	@Override
-	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
+	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String nr) {
 		for(Verzekeringstype type : maatschappij.getTypes()){
-			if(type.getNaam().equals(Naam)){
+			if(type.getNr().equals(nr)){
 				return type;
 			}
 		}
@@ -61,9 +76,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 	
 	@Override
-	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam) {
+	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String nr) {
 		for(Verzekeringstype type : maatschappij.getTypes()){
-			if(type.getNaam().equals(Naam)){
+			if(type.getNr().equals(nr)){
 				return maatschappij.deleteType(type);
 			}
 		}
@@ -81,15 +96,12 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
 		
-		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("Naam", "adres", "dd", "da", 123,123);
-		Verzekeringstype t1 = new Verzekeringstype(124,"test");
+		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("002","Naam", "adres", "dd", "da", 123,123);
+		Verzekeringstype t1 = new Verzekeringstype("005",124,"test");
 		t1.addCode("001");
 		m1.addType(t1);
 		
 		//Testcode toevoegen en verwijderen
-		
-		//VerzekeringDAO.addMaatschappijXML(m1);
-		VerzekeringDAO.deleteMaatschappijXML("Naam");
-		System.out.println("blah");
+		//this.addVerzekeringstype(m1, t1);
 	}
 }

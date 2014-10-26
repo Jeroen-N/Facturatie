@@ -12,7 +12,7 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public interface VerzekeringsmaatschappijManager {
 	
-	public void addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
+	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
 	
 	public  Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam);
 	

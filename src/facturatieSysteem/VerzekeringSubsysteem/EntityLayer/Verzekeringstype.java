@@ -8,7 +8,7 @@ package facturatieSysteem.VerzekeringSubsysteem.EntityLayer;
 import java.util.ArrayList;
 
 public class Verzekeringstype {
-	private int VerzekeringsTypeID;
+	private String typenr;
 	private int EigenRisico;
 	private String Naam;
 	private ArrayList<String> behandelcodes = new ArrayList<>();
@@ -18,16 +18,17 @@ public class Verzekeringstype {
 	 * @param EigenRisico Het eigen risico van het type verzekering
 	 * @param behandelcodes de behandelcodes
 	 */
-	public Verzekeringstype(int EigenRisico, String Naam){
+	public Verzekeringstype(String typenr, int EigenRisico, String Naam){
 		this.EigenRisico = EigenRisico;
 		this.Naam = Naam;
+		this.typenr = typenr;
 	}
 	
 	/*
-	 * @return Het ID van het verzekeringstype
+	 * @return Het nummer van het verzekeringstype
 	 */
-	public int getID(){
-		return VerzekeringsTypeID;
+	public String getNr(){
+		return typenr;
 	}
 	/*
 	 * @return Het eigen risico van het verzekeringstype
