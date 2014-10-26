@@ -67,7 +67,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		document = daoFactory.getDocument();
 		try{
 		
-		Element facturatieSysteem = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
+		Node facturatieSysteem = document.getElementsByTagName("facturatieSysteem").item(0);
 		facturatieSysteem.appendChild(document.createTextNode("\t"));
 		
 		//Create all Elements
@@ -115,15 +115,18 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 			rekeningNummer.appendChild(document.createTextNode(Integer.toString(maatschappij.getRekeningNR())));
 			verzekeringsmaatschappij.appendChild(rekeningNummer);
 			
+			ArrayList<Verzekeringstype> VerzekeringTypes = maatschappij.getTypes();
 			
-			//Verwerk de types
 			verzekeringsmaatschappij.appendChild(document.createTextNode("\n\t\t"));
 			verzekeringsmaatschappij.appendChild(verzekeringsTypes);
-			verzekeringsTypes.appendChild(document.createTextNode("\n\t\t\t"));
-			verzekeringsTypes.appendChild(verzekeringsType);
-			verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
-				
-			ArrayList<Verzekeringstype> VerzekeringTypes = maatschappij.getTypes();
+			
+			//Verwerk de types
+			if(VerzekeringTypes.size() > 0){
+				verzekeringsTypes.appendChild(document.createTextNode("\n\t\t\t"));
+				verzekeringsTypes.appendChild(verzekeringsType);
+				verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
+				System.out.println("x");
+			}
 			
 			Attr typenr = document.createAttribute("typenr");
 			

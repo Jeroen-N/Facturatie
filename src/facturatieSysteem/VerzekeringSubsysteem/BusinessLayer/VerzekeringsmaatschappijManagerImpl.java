@@ -16,18 +16,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	private VerzekeringsmaatschappijDAO VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 	private VerzekeringstypeDAO VerzekeringtypeDAO = new VerzekeringsDAOImpl();
 	
-	@Override
-	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
-		for(Verzekeringsmaatschappij verzekering : verzekeringsMaatschappijen){
-			if(!verzekering.getNr().equals(maatschappij.getNr())){
-				break;
-			}
-		}
-
-		return verzekeringsMaatschappijen.add(maatschappij) &&
-				VerzekeringDAO.addMaatschappijXML(maatschappij);
+	public VerzekeringsmaatschappijManagerImpl(){
+		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
+		this.importData(lijst);
 	}
-
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
 		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
@@ -37,14 +29,33 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		return null;
 	}
+	
+	@Override
+	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
+		if(getVerzekeringsmaatschappij(maatschappij.getNr()) == null){
+			verzekeringsMaatschappijen.add(maatschappij);
+			VerzekeringDAO.addMaatschappijXML(maatschappij);
+			return true;
+		}
+		return false;
+	}
 
 	@Override
-	public boolean deleteVerzekeringsmaatschappij(String nr) {
-		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
-			if(maatschappij.getNr().equals(nr)){
-				return verzekeringsMaatschappijen.remove(maatschappij) &&
-					   VerzekeringDAO.deleteMaatschappijXML(nr); //Als beide true zijn is het succesvol uitgevoerd
-			}
+	public boolean updateVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
+		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
+			verzekeringsMaatschappijen.remove(getVerzekeringsmaatschappij(maatschappij.getNr()));
+			verzekeringsMaatschappijen.add(maatschappij);
+			VerzekeringDAO.addMaatschappijXML(maatschappij);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
+		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
+			verzekeringsMaatschappijen.remove(maatschappij);
+			VerzekeringDAO.deleteMaatschappijXML(maatschappij.getNr());
 		}
 		return false;
 	}
@@ -52,17 +63,6 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
-	}
-	
-	@Override
-	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
-		for(Verzekeringstype vtype : maatschappij.getTypes()){
-			if(vtype.getNr().equals(type.getNr())){
-				break;
-			}
-		}
-		maatschappij.addType(type);
-		VerzekeringtypeDAO.addVerzekeringstypeXML(maatschappij.getNr(), type);
 	}
 	
 	@Override
@@ -76,32 +76,33 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 	
 	@Override
-	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, String nr) {
-		for(Verzekeringstype type : maatschappij.getTypes()){
-			if(type.getNr().equals(nr)){
-				return maatschappij.deleteType(type);
-			}
+	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+		if(getVerzekeringstype(maatschappij, type.getNr()) == null){
+			maatschappij.addType(type);
+			VerzekeringtypeDAO.addVerzekeringstypeXML(maatschappij.getNr(), type);
+		}
+	}
+	
+	@Override
+	public void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
+			maatschappij.deleteType(getVerzekeringstype(maatschappij, type.getNr()));
+			maatschappij.addType(type);
+			VerzekeringtypeDAO.updateVerzekeringstypeXML(maatschappij.getNr(), type);
+		}
+	}
+	
+	@Override
+	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
+			return VerzekeringtypeDAO.deleteVerzekeringstypeXML(maatschappij.getNr(), type);
 		}
 		return false;
 	}
 	
 	public void importData(ArrayList<Verzekeringsmaatschappij> lijst){
 		for(Verzekeringsmaatschappij maatschappij : lijst){
-			this.addVerzekeringsmaatschappij(maatschappij);
+			verzekeringsMaatschappijen.add(maatschappij);
 		}
-	}
-	
-	public void fill(){
-		//MBV DAO aanmaken gegevens
-		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
-		this.importData(lijst);
-		
-		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("002","Naam", "adres", "dd", "da", 123,123);
-		Verzekeringstype t1 = new Verzekeringstype("005",124,"test");
-		t1.addCode("001");
-		m1.addType(t1);
-		
-		//Testcode toevoegen en verwijderen
-		//this.addVerzekeringstype(m1, t1);
 	}
 }

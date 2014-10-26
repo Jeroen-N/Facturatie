@@ -11,15 +11,12 @@ public class main {
 		//FacturatieManagerImpl m1 = new FacturatieManagerImpl();
 		//System.out.println(m1.haalFacturen("136521598"));
 		
-		//TODO: instantieer alle managers hier
+		//Instantieer alle managers hier
 		KlantManager KlantManager = new KlantManagerImpl();
 		VerzekeringsmaatschappijManager MaatschappijManager = new VerzekeringsmaatschappijManagerImpl();
 		FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 		
-		// VerzekeringsManager tijdelijke hardcoded data aanmaken
-		MaatschappijManager.fill();
-		
-		//TODO: Geef alle managers hier mee, ipv in de MainGUI aan te maken
+		//Geeft alle managers hier mee
 		new MainGUI(KlantManager, MaatschappijManager, facturatieManager);
 	}
 }
