@@ -144,7 +144,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		}
 		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
 				teVergoedenPrijs, behandelingenlijst, "Niet betaald");
-		//factuurDAO.maakFactuur(klant, f);
+		factuurDAO.maakFactuur(klant, f);
 		return f;
 	}
 
