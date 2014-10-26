@@ -199,6 +199,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					//Loopen door de behandelingen en factuurbehandelingen vullen.
 					//TODO behandelingID zit niet in een behandeling en is wel benodigd in XML
 					//TODO totaalprijs moet nog toegevoegd worden.
+					//TODO status moet gewijzigd worden
 					
 					for(Behandeling behandeling : behandelingen){
 						Element behandelAfspraakID = document.createElement("BehandelafspraakID");

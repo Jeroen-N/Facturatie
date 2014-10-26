@@ -201,10 +201,47 @@ public class Bon {
         cell.setBorder(Rectangle.TOP);
         table.addCell(cell);
         facInfo.add(table);
-		
-        //TODO wat vergoed verzekering
         
 		return facInfo;
+	}
+	
+	private Paragraph vergoed(){
+		//TODO wat vergoed verzekering
+		Paragraph vergoed = new Paragraph();
+		
+		PdfPTable table = new PdfPTable(4);
+        table.setWidthPercentage(100);
+        table.getDefaultCell().setBorder(0);
+        PdfPCell cell;
+        
+        Font fontbold = FontFactory.getFont("Times-Roman", 10, Font.BOLD);
+        Font normal = FontFactory.getFont("Times-Roman", 10);
+        
+        BehandelingDAO bDAO = factManager.getBDAO();
+        
+        //TODO verzekeringspolis weergeven
+        cell = new PdfPCell(new Phrase());
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(0);
+        table.addCell(cell);
+        
+        NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
+        
+        //TODO behandelingen weergeven, met vergoeding
+        //TODO of weergeven vergoeding en zelf betalen beide mogelijk
+        for (Behandeling behandeling : factuur.getBehandelingen()) {
+            table.addCell(new Phrase());
+            table.addCell(new Phrase());
+            
+            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            cell.setPaddingBottom(5);
+            table.addCell(cell);
+    }
+		
+		return vergoed;
 	}
 	
 }
