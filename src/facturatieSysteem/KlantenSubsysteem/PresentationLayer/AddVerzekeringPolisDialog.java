@@ -517,7 +517,8 @@ public class AddVerzekeringPolisDialog extends JDialog {
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
 										System.out.println("types combobox vullen");
-										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+										Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
+										for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
 									}
