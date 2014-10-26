@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+
 public class Factuur implements ImmutableFactuur {
 
 	private String factuurNummer;
@@ -116,6 +118,16 @@ public class Factuur implements ImmutableFactuur {
 				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
 				"Status: \t\t"					+ 	status						+ "\n" +
 				behandelingen;
+	}
+	
+	public String toStringBon(Klant klant){
+		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
+        String risk = getallenOpmaker.format(vergoedeBedrag);
+		return "Klantnummer: \t\t" 				+ klant.getBSN() 			+ "\n" +
+				"Factuurnummer: \t\t"			+ factuurNummer 			+ "\n" +
+				"Factuurdatum: \t\t"			+ factuurDatum				+ "\n" +
+				"Vervaldatum: \t\t"				+ vervalDatum				+ "\n" +
+				"Resterend eigen risico: \t"	+ "\u20ac" + risk;
 	}
 	
 	

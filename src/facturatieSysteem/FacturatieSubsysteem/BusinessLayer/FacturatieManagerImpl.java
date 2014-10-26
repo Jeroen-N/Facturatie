@@ -44,6 +44,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 	}
 
+	public BehandelingDAO getBDAO(){
+		return behandelingDAO;
+	}
+	
 	@Override
 	public Factuur factureer(Klant klant,
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
@@ -112,10 +116,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			}
 			if (z == 0){
 				
-				//TODO Dit blok nog controleren of het helemaal werkt met de juist prijzen
-				// ik kon dit niet doen aangezien de verzekering op regel 92 altijd een "all risk" was
-				// hierdoor werd altijd alles standaard vergoed.
-				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// Behandeling wordt niet standaard vergoed
 				System.out.println("prijs voor behandeling"+behandelingDAO.getPrijs(behandeling.getBehandelCode()));
 				double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
@@ -134,7 +134,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					teVergoedenPrijs += totalePrijs;
 					System.out.println("Vergoede prijs: " + teVergoedenPrijs);
 				}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			}else{
 				z= 0;
 			}
@@ -166,6 +165,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return "niks gevonden";
 	}
 
+	public Factuur getFactuur(String factuur_nummer, Klant klant) {
+		facturen = haalFacturen(klant.getBSN());
+		for (Factuur factuur : facturen) {
+			if (factuur.getFactuurNummer().equals(factuur_nummer)) {
+				return factuur;
+			}
+		}
+		System.out.println("leeg");
+		return null;
+	}
+	
 	public String loopBehandelingen(Factuur factuur) {
 		String naam = "";
 		Behandelingen = factuur.getBehandelingen();
@@ -184,7 +194,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	public double getTotaalPrijs(Factuur factuur){
 		double totPrijs = 0.0;
 		for(Behandeling behandeling : factuur.getBehandelingen()){
-			totPrijs += behandeling.getTotaalprijs();
+			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
 		}
 		return totPrijs;
 	}
@@ -194,7 +204,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		double totPrijsBTW = 0.0;
 		double btw = 1.21;
 		for(Behandeling behandeling : factuur.getBehandelingen()){
-			totPrijs += behandeling.getTotaalprijs();
+			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
 		}
 		totPrijsBTW = totPrijs * btw;
 		return totPrijsBTW;

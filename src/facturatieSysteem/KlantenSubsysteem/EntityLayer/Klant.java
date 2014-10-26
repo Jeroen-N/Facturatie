@@ -135,8 +135,8 @@ public class Klant {
 	
 	public String toStringFactuur(){
 		
-		return "Naam: \t\t" 					+ 	Naam 			+ "\n" +
-				"Adres: \t\t"					+ 	Adres			+ "\n" +
-				"Postcode en woonplaats: \t" 	+ 	Postcode + " "	+ Woonplaats		+ "\n";
+		return Naam 			+ "\n" +
+				Adres			+ "\n" +
+				Postcode + " "	+ Woonplaats		+ "\n";
 	}
 }

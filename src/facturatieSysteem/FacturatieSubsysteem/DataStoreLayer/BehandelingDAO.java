@@ -17,9 +17,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 	private DAOFactoryFactuur daoFactoryClient;
 	private DAOFactoryFactuur daoFactoryFacturatie;
 
-	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode,
-			DAOFactoryFactuur daoFactoryClient,
-			DAOFactoryFactuur daoFactoryFacturatie) {
+	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode, DAOFactoryFactuur daoFactoryClient, DAOFactoryFactuur daoFactoryFacturatie) {
 		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
 		this.daoFactoryClient = daoFactoryClient;
 		this.daoFactoryFacturatie = daoFactoryFacturatie;

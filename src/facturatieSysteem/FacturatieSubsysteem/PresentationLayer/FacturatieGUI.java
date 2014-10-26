@@ -11,10 +11,12 @@ import javax.swing.table.TableColumn;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
+import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Bon;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 
 public class FacturatieGUI {
@@ -40,6 +42,7 @@ public class FacturatieGUI {
 	private static JPanel factuurPanel;
 	private static JScrollPane scrollFactuur;
 	private static VerzekeringsmaatschappijManager m1;
+	private static Verzekeringsmaatschappij maatschappij;
 	
 	public static JPanel FacturatieGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
 		JPanel paneel = new JPanel();
@@ -93,7 +96,7 @@ public class FacturatieGUI {
 
 		openFactuurKnop = new JButton();
 		openFactuurKnop.setText("Open factuur");
-
+		
 		printFactuurKnop = new JButton();
 		printFactuurKnop.setText("Print factuur");
 
@@ -134,9 +137,21 @@ public class FacturatieGUI {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			row = overzicht.getSelectedRow();
-			fillField(row, factManagerImpl, klant);
+			fillField(row);
+			openFactuurKnop.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int row2 = overzicht.getSelectedRow();
+					Factuur factuur = vindFactuur(row2);
+					maatschappij = m1.getVerzekeringsmaatschappij("Kaas Verzekeringen");
+					Bon bon = new Bon(facturatieManagerImpl, factuur, maatschappij, klant);
+				}
+			});
 			}
 	});
+	
+	
+
 	
 		// panels vullen
 		buttonPanel.add(factureerKnop);
@@ -185,11 +200,17 @@ public class FacturatieGUI {
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public static void fillField(int row, FacturatieManager factManagerImpl, Klant klant){
+	public static void fillField(int row){
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
 		System.out.println(factuur_nummer);
-		factuur.setText(factManagerImpl.toonFactuur(factuur_nummer, klant));
-		}
+		factuur.setText(facturatieManagerImpl.toonFactuur(factuur_nummer, klant));
+	}
+	
+	public static Factuur vindFactuur(int row2){
+		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0).toString();
+		System.out.println(factuur_nummer2);
+		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
+	}
 	
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;

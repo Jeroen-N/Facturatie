@@ -499,8 +499,8 @@ public class AddKlantDialog extends JDialog {
 									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										
-										for (Verzekeringstype type : vermaatschappijManager.getTypes(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()))) {
+										Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
+										for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
 									}
