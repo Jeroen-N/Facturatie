@@ -133,10 +133,10 @@ public class Klant {
 				"Rekeningnummer: \t"			+	RekeningNr		+ "\n" ;
 	}
 	
-	public String toStringFactuur(Klant klant){
+	public String toStringFactuur(){
 		
-		return "Naam: \t\t" 					+ 	klant.getNaam() 			+ "\n" +
-				"Adres: \t\t"					+ 	klant.getAdres()			+ "\n" +
-				"Postcode en woonplaats: \t" 	+ 	klant.getPostcode() + " "	+ klant.getWoonplaats()		+ "\n";
+		return "Naam: \t\t" 					+ 	Naam 			+ "\n" +
+				"Adres: \t\t"					+ 	Adres			+ "\n" +
+				"Postcode en woonplaats: \t" 	+ 	Postcode + " "	+ Woonplaats		+ "\n";
 	}
 }

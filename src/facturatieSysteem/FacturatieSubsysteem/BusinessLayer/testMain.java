@@ -1,6 +1,8 @@
 package facturatieSysteem.FacturatieSubsysteem.BusinessLayer;
 
 import java.util.ArrayList;
+
+import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Bon;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
@@ -19,13 +21,15 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		Klant klant = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso");
 		VerzekeringsmaatschappijManagerImpl v1 = new VerzekeringsmaatschappijManagerImpl(); 
 		Factuur factuur = m1.factureer(klant, v1);
-		System.out.println(factuur.getFactuurNummer());
-		System.out.println(factuur.getFactuurDatum());
-		System.out.println(factuur.getVervalDatum());
-		System.out.println(factuur.getBSN());
-		System.out.println(factuur.getVergoedeBedrag());
-		System.out.println(factuur.getStatus());
-		System.out.println();
+		//System.out.println(factuur.getFactuurNummer());
+		//System.out.println(factuur.getFactuurDatum());
+		//System.out.println(factuur.getVervalDatum());
+		//System.out.println(factuur.getBSN());
+		//System.out.println(factuur.getVergoedeBedrag());
+		//System.out.println(factuur.getStatus());
+		//System.out.println();
+		
+		Bon bon = new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant);
 	}
 	
 	}
