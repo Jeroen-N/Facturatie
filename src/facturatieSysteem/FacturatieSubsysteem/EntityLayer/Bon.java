@@ -1,58 +1,98 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
-import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelDAOinf;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
-import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
 public class Bon {
 
 	private String file;
 	private FacturatieManager factManager;
-	private KlantManager klantManager;
-	private VerzekeringsmaatschappijManager verzekeringManager;
 	private BehandelingDAO behandelDAO;
+	private Factuur factuur;
+	private Verzekeringsmaatschappij maatschappij;
+	private Klant klant;
 	
-	public Bon(FacturatieManager factManager, KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringManager){
+	public Bon(FacturatieManager factManager, Factuur factuur, Verzekeringsmaatschappij maatschappij, Klant klant){
 		this.factManager = factManager;
-		this.klantManager = klantManager;
-		this.verzekeringManager = verzekeringManager;
+		this.factuur = factuur;
+		this.maatschappij = maatschappij;
+		this.klant = klant;
+		
+		file = "/xandergerreman/Documents/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf";
 		
 		create();
 	}
 	
 	private void create(){
-		
+		try {
+
+            Document document = new Document(PageSize.A4);
+
+            PdfWriter.getInstance(document, new FileOutputStream(file));
+
+            document.open();
+
+            document.add(Header());
+
+            document.add(Chunk.NEWLINE);
+
+            document.add(Client());
+            
+            document.add(Chunk.NEWLINE);
+            
+            document.add(facturatieInformatie());
+
+            document.setMargins(0, 0, 0, 100);
+
+            document.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 	}
 	
 	private Paragraph Header(){
-		Paragraph header = new Paragraph("Factuur", FontFactory.getFont("Times-Roman", 20, Font.BOLD));
-
-        header.setAlignment(Element.ALIGN_CENTER);
+		Chunk maatschappijChunk = new Chunk(maatschappij.toString());
+		
+		Paragraph header = new Paragraph("Bedrijfsgegevens: \n", FontFactory.getFont("Times-Roman", 20, Font.BOLD));
+		
+		header.add(maatschappijChunk);
+		
+        header.setAlignment(Element.ALIGN_RIGHT);
 
         return header;
 	}
 	
-	private Paragraph Client(Klant klant){
-		Paragraph client = new Paragraph();
+	private Paragraph Client(){
+		Chunk client = new Chunk(klant.toStringFactuur());
 		
+		Paragraph clientParagraph = new Paragraph("Klantgegevens: \n", FontFactory.getFont("Times-Roman", 20, Font.BOLD));
 		
+		clientParagraph.add(client);
 		
-		return client;
+		clientParagraph.setAlignment(Element.ALIGN_LEFT);
+		
+		return clientParagraph;
 	}
 	
-	private Paragraph facturatieInformatie(Factuur factuur){
+	private Paragraph facturatieInformatie(){
 		Paragraph facInfo = new Paragraph();
 		
 		PdfPTable table = new PdfPTable(5);
@@ -61,13 +101,13 @@ public class Bon {
         PdfPCell cell;
 
         Font fontbold = FontFactory.getFont("Times-Roman", 13, Font.BOLD);
-        Font normal = FontFactory.getFont("Times-Roman", 13);
+        FontFactory.getFont("Times-Roman", 13);
 
-        table.addCell(new Phrase("Aantal:", fontbold));
-        table.addCell(new Phrase("Behandeling:", fontbold));
-        table.addCell(new Phrase("Prijs:", fontbold));
-        table.addCell(new Phrase("Totaalprijs:", fontbold));
-        table.addCell(new Phrase("BTW:", fontbold));
+        table.addCell(new Phrase("Aantal", fontbold));
+        table.addCell(new Phrase("Behandeling", fontbold));
+        table.addCell(new Phrase("Prijs", fontbold));
+        table.addCell(new Phrase("Totaalprijs", fontbold));
+        table.addCell(new Phrase("BTW", fontbold));
 
         for (Behandeling behandeling : factuur.getBehandelingen()) {
 	        	table.addCell(new Phrase(behandeling.getSessies()));
@@ -88,7 +128,6 @@ public class Bon {
         cell.setBorder(Rectangle.TOP);
         table.addCell(cell);
 
-        //TODO totaalprijs methode in de manager aanmaken
         cell = new PdfPCell(new Phrase(Double.toString(factManager.getTotaalPrijs(factuur)), fontbold));
         cell.setColspan(3);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -100,7 +139,6 @@ public class Bon {
         cell.setPaddingBottom(5);
         table.addCell(cell);
 
-        //TODO methode aanmaken om 21% te berekenen van de totaalprijs
         cell = new PdfPCell(new Phrase(Double.toString((factManager.getTotaalPrijs(factuur)*0.21)), fontbold));
         cell.setColspan(4);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -111,7 +149,6 @@ public class Bon {
         cell.setBorder(Rectangle.TOP);
         table.addCell(cell);
 
-        //TODO methode om de BTW + de totaalprijs te doen
         cell = new PdfPCell(new Phrase(Double.toString(factManager.getTotaalinclBTW(factuur)), fontbold));
         cell.setColspan(3);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -119,6 +156,8 @@ public class Bon {
         table.addCell(cell);
         facInfo.add(table);
 		
+        //TODO wat vergoed verzekering
+        
 		return facInfo;
 	}
 	

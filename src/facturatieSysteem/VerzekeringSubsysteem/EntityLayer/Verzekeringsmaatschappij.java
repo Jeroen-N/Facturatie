@@ -138,4 +138,12 @@ public class Verzekeringsmaatschappij {
 	public ArrayList<Verzekeringstype> getTypes(){
 		return types;
 	}
+	
+	public String toString(){
+		return 	Naam 									+ "\n" +
+				Adres									+ "\n" +
+				Postcode + " "			+ Plaats		+ "\n" +
+				"KVK nummer: \t"		+ KVK 			+ "\n" +
+				"Rekeningnummer: "		+ RekeningNR;
+	}
 }

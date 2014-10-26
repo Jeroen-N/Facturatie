@@ -91,7 +91,8 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				if (polisNaam.equals(type.getNaam())) {
 					verzekering = verzekeringsmanager.getVerzekeringstype(
 							maatschappij, polisNaam);
-					System.out.println("verzekerde behandelCodes: "+verzekering.getBehandelcodes());
+					System.out.println(verzekering.getNaam());
+					System.out.println("verzekerde behandelCodes: " + verzekering.getBehandelcodes());
 				}
 			}
 		}
@@ -111,10 +112,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			}
 			if (z == 0){
 				
-//TODO Dit blok nog controleren of het helemaal werkt met de juist prijzen
-// ik kon dit niet doen aangezien de verzekering op regel 92 altijd een "all risk" was
-// hierdoor werd altijd alles standaard vergoed.
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				//TODO Dit blok nog controleren of het helemaal werkt met de juist prijzen
+				// ik kon dit niet doen aangezien de verzekering op regel 92 altijd een "all risk" was
+				// hierdoor werd altijd alles standaard vergoed.
+				///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// Behandeling wordt niet standaard vergoed
 				System.out.println("prijs voor behandeling"+behandelingDAO.getPrijs(behandeling.getBehandelCode()));
 				double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
