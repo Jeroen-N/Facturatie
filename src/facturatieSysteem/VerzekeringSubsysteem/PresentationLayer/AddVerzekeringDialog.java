@@ -73,7 +73,9 @@ public class AddVerzekeringDialog extends JDialog {
 					 * vullen.
 					 */
 					JPanel addVerzekering_1 = new JPanel();
+					JPanel addVerzekering_2 = new JPanel();
 					addVerzekering.add(addVerzekering_1, BorderLayout.WEST);
+					addVerzekering.add(addVerzekering_2, BorderLayout.EAST);
 					addVerzekering_1.setLayout(new BoxLayout(addVerzekering_1,
 							BoxLayout.Y_AXIS));
 					{
@@ -87,12 +89,9 @@ public class AddVerzekeringDialog extends JDialog {
 						panel.setLayout(new BorderLayout(0, 0));
 						{
 							JLabel lblVerzekering = new JLabel("Verzekering");
-							lblVerzekering.setPreferredSize(new Dimension(32,
-									20));
-							lblVerzekering
-									.setMinimumSize(new Dimension(32, 20));
-							lblVerzekering
-									.setMaximumSize(new Dimension(32, 20));
+							lblVerzekering.setPreferredSize(new Dimension(100, 20));
+							lblVerzekering.setMinimumSize(new Dimension(100, 20));
+							lblVerzekering.setMaximumSize(new Dimension(100, 20));
 							panel.add(lblVerzekering, BorderLayout.WEST);
 						}
 					}
@@ -208,7 +207,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPaneKVK.setPreferredSize(new Dimension(300, 30));
 						addVerzekering_1.add(splitPaneKVK);
 						{
-							JLabel lblPostcode = new JLabel("Postcode: ");
+							JLabel lblPostcode = new JLabel("KVK Nummer: ");
 							lblPostcode
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblPostcode

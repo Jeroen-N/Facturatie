@@ -56,7 +56,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private static JTable Verzekering_Table;
 	private static Integer row;
 	private static String naam;
-	private static JTextArea uitgebreide_info;
+	private static JTextArea Uitgebreide_Info;
 	
 	
 
@@ -85,6 +85,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
 		infopaneel.setLayout(new BorderLayout(5, 5));
 		zoekpaneel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		btnWijzigen.setEnabled(false);
+		btnVerwijderen.setEnabled(false);
+		Uitgebreide_Info = new JTextArea();
+		
 		
 
 		// / Zoekveld en knoppen
@@ -138,13 +142,21 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnWijzigen);
 		knoppenPaneel.add(btnVerwijderen);
 
-		/*
-		uitgebreide_info.setColumns(40);
-		uitgebreide_info.setEditable(false);
-		btnWijzigen.setEnabled(false);
-		btnVerwijderen.setEnabled(false);
-		infopaneel.add(uitgebreide_info, BorderLayout.CENTER);
-		*/
+		infopaneel.add(Uitgebreide_Info, BorderLayout.CENTER);
+		Uitgebreide_Info.setColumns(40);
+		Uitgebreide_Info.setEditable(false);
+		
+		/*Verzekering_Table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Verzekering_Table.getSelectedRow() >= 0){
+				row = Verzekering_Table.getSelectedRow();
+				fillField(row);
+				}
+			}
+		}); */
+
+		
 		// / CRUD Toevoegen
 
 		btnToevoegen.addMouseListener(new MouseAdapter() {
@@ -160,7 +172,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 					public void windowClosed(WindowEvent e) {
 						Verzekering_Table.removeAll();
 						fillTable(manager);
-						///Uitgebreide_Info.setText("");
+						Uitgebreide_Info.setText("");
 						
 					}
 				});
@@ -210,7 +222,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				int n = JOptionPane.showConfirmDialog(
 					    frame,
 					    "Weet uw zeker dat u deze verzekering wilt verwijderen",
-					    "fuck jou",
+					    "Verwijderen",
 					    JOptionPane.YES_NO_OPTION);
 				if(n == 0){
 					manager.deleteVerzekeringsmaatschappij(naam);
@@ -279,13 +291,13 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				
 			});
 	
-	/*	public static void fillField(int row){
+	/*public static void fillField(){
 		String naam = Verzekering_Table.getModel().getValueAt(row, 1)
 				.toString();
-		uitgebreide_info.setText(naam);
+		Uitgebreide_Info.setText(manager.getTypes());
 
-		}
-		*/
+		}*/
+		
 		
 	}
 }

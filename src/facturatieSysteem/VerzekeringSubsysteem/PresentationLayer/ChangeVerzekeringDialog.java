@@ -88,7 +88,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 						changeVerzekering_1.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblKlant = new JLabel("Klant Gegevens");
+							JLabel lblKlant = new JLabel("Verzekeringen");
 							lblKlant.setPreferredSize(new Dimension(100, 20));
 							lblKlant.setMinimumSize(new Dimension(100, 20));
 							lblKlant.setMaximumSize(new Dimension(100, 20));
