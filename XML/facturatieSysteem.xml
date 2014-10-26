@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><facturatieSysteem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="facturatieSysteem.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><facturatieSysteem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="facturatieSysteem.xsd">
    <verzekeringsmaatschappij>
       <naam>Kaas Verzekeringen</naam>
       <adres>Kaaslaan 12</adres>
@@ -7,19 +7,20 @@
       <KVKNummer>12345678</KVKNummer>
       <rekeningNummer>0123456789</rekeningNummer>
 	  <verzekeringsTypes>
-	  	  <verzekeringsType id="001">
+	  	  <verzekeringsType>
 	         <naam>Basic</naam>
 	         <behandelCodes>
+	         <verplichtEigenRisico>200</verplichtEigenRisico>
 	            <behandelcode>001</behandelcode>
 	            <behandelcode>004</behandelcode>
 	            <behandelcode>005</behandelcode>
 	            <behandelcode>007</behandelcode>
 	            <behandelcode>008</behandelcode>
 	         </behandelCodes>
-	         <verplichtEigenRisico>200</verplichtEigenRisico>
 	      </verzekeringsType>
-	      <verzekeringsType id="002">
+	      <verzekeringsType>
 	         <naam>All-risk</naam>
+	         <verplichtEigenRisico>80</verplichtEigenRisico>
 	         <behandelCodes>
 	            <behandelcode>001</behandelcode>
 	            <behandelcode>002</behandelcode>
@@ -32,7 +33,6 @@
 	            <behandelcode>009</behandelcode>
 	            <behandelcode>010</behandelcode>
 	         </behandelCodes>
-	         <verplichtEigenRisico>80</verplichtEigenRisico>
 	      </verzekeringsType>
 	   </verzekeringsTypes>    
    </verzekeringsmaatschappij>

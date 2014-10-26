@@ -80,5 +80,16 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		//MBV DAO aanmaken gegevens
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
+		
+		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("Naam", "adres", "dd", "da", 123,123);
+		Verzekeringstype t1 = new Verzekeringstype(124,"test");
+		t1.addCode("001");
+		m1.addType(t1);
+		
+		//Testcode toevoegen en verwijderen
+		
+		//VerzekeringDAO.addMaatschappijXML(m1);
+		//VerzekeringDAO.deleteMaatschappijXML("Naam");
+		System.out.println("blah");
 	}
 }

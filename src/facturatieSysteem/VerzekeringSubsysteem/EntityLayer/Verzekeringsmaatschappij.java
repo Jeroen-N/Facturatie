@@ -14,7 +14,7 @@ public class Verzekeringsmaatschappij {
 	private String Plaats;
 	private int KVK;
 	private int RekeningNR;
-	private static ArrayList<Verzekeringstype> types = new ArrayList<>();
+	private ArrayList<Verzekeringstype> types = new ArrayList<>();
 	
 	/*
 	 * @param Naam De naam van de verzekeringsmaatschappij

@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class Verzekeringstype {
 	private int VerzekeringsTypeID;
-	private
-	int EigenRisico;
+	private int EigenRisico;
 	private String Naam;
 	private ArrayList<String> behandelcodes = new ArrayList<>();
 	
@@ -19,11 +18,9 @@ public class Verzekeringstype {
 	 * @param EigenRisico Het eigen risico van het type verzekering
 	 * @param behandelcodes de behandelcodes
 	 */
-	public Verzekeringstype(int VerzekeringsTypeID, int EigenRisico, String Naam){
-		this.VerzekeringsTypeID = VerzekeringsTypeID;
+	public Verzekeringstype(int EigenRisico, String Naam){
 		this.EigenRisico = EigenRisico;
 		this.Naam = Naam;
-		this.behandelcodes = behandelcodes;
 	}
 	
 	/*
