@@ -125,7 +125,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 				
 				verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
 				Element eigenrisico = document.createElement("verplichtEigenRisico");
-				eigenrisico.appendChild(document.createTextNode(polis.getNaam()));
+				eigenrisico.appendChild(document.createTextNode(Integer.toString(polis.getEigenRisico())));
 				verzekeringsType.appendChild(eigenrisico);
 				
 				verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
