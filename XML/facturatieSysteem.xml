@@ -36,38 +36,4 @@
 	      </verzekeringsType>
 	   </verzekeringsTypes>    
    </verzekeringsmaatschappij>
-	<verzekeringsmaatschappij>
-		<naam>Naam</naam>
-		<adres>adres</adres>
-		<postcode>dd</postcode>
-		<woonplaats>da</woonplaats>
-		<KVKNummer>123</KVKNummer>
-		<rekeningNummer>123</rekeningNummer>
-		<verzekeringsTypes>
-			<verzekeringsType>
-				<naam>test</naam>
-				<verplichtEigenRisico>145</verplichtEigenRisico>
-				<behandelCodes>
-					<behandelcode>001</behandelcode>
-				</behandelCodes>
-			</verzekeringsType>
-		</verzekeringsTypes>
-	</verzekeringsmaatschappij>
-	<verzekeringsmaatschappij>
-		<naam>Naam</naam>
-		<adres>adres</adres>
-		<postcode>dd</postcode>
-		<woonplaats>da</woonplaats>
-		<KVKNummer>123</KVKNummer>
-		<rekeningNummer>123</rekeningNummer>
-		<verzekeringsTypes>
-			<verzekeringsType>
-				<naam>test</naam>
-				<verplichtEigenRisico>124</verplichtEigenRisico>
-				<behandelCodes>
-					<behandelcode>001</behandelcode>
-				</behandelCodes>
-			</verzekeringsType>
-		</verzekeringsTypes>
-	</verzekeringsmaatschappij>
 </facturatieSysteem>

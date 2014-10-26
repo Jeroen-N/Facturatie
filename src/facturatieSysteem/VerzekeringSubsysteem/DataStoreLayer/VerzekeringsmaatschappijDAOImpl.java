@@ -192,13 +192,13 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		try{
 		Element clientenElement = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
 		NodeList maatschappijen = clientenElement.getElementsByTagName("verzekeringsmaatschappij");
-		//loop through all clients
+		// loop through all clients
 		for(int i = 0; i < maatschappijen.getLength();i++){
 			Element maatschappijElement = (Element) maatschappijen.item(i);
 			String name = maatschappijElement.getElementsByTagName("naam").item(0).getTextContent();
 			
 			if(name.equals(naam)){
-				//delete client
+				// delete client
 				maatschappijElement.getParentNode().removeChild(maatschappijElement);
 				break;
 			}

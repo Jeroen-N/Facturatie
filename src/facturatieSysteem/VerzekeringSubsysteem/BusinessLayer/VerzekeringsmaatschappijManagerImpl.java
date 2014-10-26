@@ -88,8 +88,8 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		
 		//Testcode toevoegen en verwijderen
 		
-		VerzekeringDAO.addMaatschappijXML(m1);
-		//VerzekeringDAO.deleteMaatschappijXML("Naam");
+		//VerzekeringDAO.addMaatschappijXML(m1);
+		VerzekeringDAO.deleteMaatschappijXML("Naam");
 		System.out.println("blah");
 	}
 }
