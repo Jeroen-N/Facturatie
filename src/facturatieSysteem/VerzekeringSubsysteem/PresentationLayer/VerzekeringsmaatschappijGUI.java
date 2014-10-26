@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -23,9 +24,12 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -34,6 +38,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
+import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
@@ -43,16 +48,17 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public VerzekeringsmaatschappijGUI() {
-	}
-
 	private static JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
 			infopaneel, knoppenPaneel, linkerpaneel, rechterpaneel;
 	private static JTextField zoekVeld;
 	private static JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
 			btnToevoegen;
 	private static JTable Verzekering_Table;
+	private static Integer row;
+	private static String naam;
+	private static JTextArea uitgebreide_info;
+	
+	
 
 
 	// The datamodel to be displayed in the JTable.
@@ -79,6 +85,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
 		infopaneel.setLayout(new BorderLayout(5, 5));
 		zoekpaneel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
 
 		// / Zoekveld en knoppen
 		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
@@ -131,13 +138,13 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnWijzigen);
 		knoppenPaneel.add(btnVerwijderen);
 
-		JTextArea list = new JTextArea();
-		list.setColumns(40);
-		list.setEditable(false);
+		/*
+		uitgebreide_info.setColumns(40);
+		uitgebreide_info.setEditable(false);
 		btnWijzigen.setEnabled(false);
 		btnVerwijderen.setEnabled(false);
-		infopaneel.add(list, BorderLayout.CENTER);
-		
+		infopaneel.add(uitgebreide_info, BorderLayout.CENTER);
+		*/
 		// / CRUD Toevoegen
 
 		btnToevoegen.addMouseListener(new MouseAdapter() {
@@ -159,6 +166,61 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				});
 			}
 		});
+		
+		
+		/// CRUD WIJZIGEN
+		btnWijzigen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent d) {
+				// "Wijzigen verzekering wordt geklikt"
+				if (btnWijzigen.isEnabled()) {
+					 System.out.println("verzekering geselecteerd!");
+					ChangeVerzekeringDialog changeVerzekeringDialog = new ChangeVerzekeringDialog(
+							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 1)
+									.toString());
+					changeVerzekeringDialog
+							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					changeVerzekeringDialog.setModal(true);
+					changeVerzekeringDialog.setVisible(true);
+					changeVerzekeringDialog.addWindowListener(new WindowAdapter() {
+						public void windowClosed(WindowEvent e) {
+							// System.out.println("window is closed");
+							Verzekering_Table.removeAll();
+							fillTable(manager);
+							Verzekering_Table.setRowSelectionInterval(row, row);
+							
+						}
+					});
+				} else {
+					System.out.println("geen verzekering geselecteerd");
+				}
+			}
+		});
+			///CRUD VERWIJDEREN
+		
+		btnVerwijderen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnVerwijderen.setActionCommand("Verwijderen");
+		btnVerwijderen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 Component frame = null;
+				int n = JOptionPane.showConfirmDialog(
+					    frame,
+					    "Weet uw zeker dat u deze verzekering wilt verwijderen",
+					    "fuck jou",
+					    JOptionPane.YES_NO_OPTION);
+				if(n == 0){
+					manager.deleteVerzekeringsmaatschappij(naam);
+					
+				}
+					
+			}
+				
+		});
+		
 
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
@@ -192,7 +254,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		VerzekeringPanel.add(totaalLijst, BorderLayout.CENTER);
 
 		return VerzekeringPanel;
-	}
+			}
 
 	public static void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();
@@ -212,8 +274,19 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 							.getSelectedRowCount() > 0;
 					btnWijzigen.setEnabled(rowsAreSelected);
 					btnVerwijderen.setEnabled(rowsAreSelected);
-
+					
 				}
+				
 			});
+	
+	/*	public static void fillField(int row){
+		String naam = Verzekering_Table.getModel().getValueAt(row, 1)
+				.toString();
+		uitgebreide_info.setText(naam);
+
+		}
+		*/
+		
 	}
 }
+

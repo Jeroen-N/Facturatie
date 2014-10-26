@@ -38,7 +38,7 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 	/**
 	 * Set the values of the data table model.
 	 * 
-	 * @param values String[][] containing the values to be set.
+	 * @param values String[][] containing the values to be set
 	 */
 	public void setValues(String[][] values) {
 		logger.debug("setValues String[][]");

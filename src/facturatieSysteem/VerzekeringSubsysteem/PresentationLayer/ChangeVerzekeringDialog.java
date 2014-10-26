@@ -21,60 +21,62 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
-public class AddVerzekeringDialog extends JDialog {
+
+public class ChangeVerzekeringDialog extends JDialog {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JPanel changeVerzekering, changeVerzekering_1;
 	private JTextField textFieldNaam;
 	private JTextField textFieldAdres;
 	private JTextField textFieldPostcode;
 	private JTextField textFieldPlaats;
 	private JTextField textFieldKVK;
 	private JTextField textFieldRekeningNr;
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public AddVerzekeringDialog(final VerzekeringsmaatschappijManager manager) {
-
-		setTitle("Verzekeringen beheer");
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ChangeVerzekeringDialog(VerzekeringsmaatschappijManager manager, final String naam) {
+		setTitle("Verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
-		{
+		/*
+		 * Klant wordt opgehaald
+		 */
+		final Verzekeringsmaatschappij verzekering = manager.getVerzekeringsmaatschappij(naam);
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
-			JTabbedPane VerzekeringsmaatschappijManager = new JTabbedPane(
-					JTabbedPane.TOP);
-			getContentPane().add(VerzekeringsmaatschappijManager,
-					BorderLayout.CENTER);
+			JTabbedPane verzekeringsManager = new JTabbedPane(JTabbedPane.TOP);
+			getContentPane().add(verzekeringsManager, BorderLayout.CENTER);
 			{
 				/*
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
-				JPanel addVerzekering = new JPanel();
-				VerzekeringsmaatschappijManager.addTab("Verzekering toevoegen",
-						null, addVerzekering, null);
-				addVerzekering.setLayout(new BorderLayout(0, 0));
+				changeVerzekering = new JPanel();
+				verzekeringsManager.addTab("Klant wijzigen", null, changeVerzekering, null);
+				changeVerzekering.setLayout(new BorderLayout(0, 0));
 				{
 					/*
-					 * Om de verzekering en de klant te kunnen scheiden is er
+					 * Om de oude en nieuwe klant gegevens te scheiden is er
 					 * gebruik gemaakt van een seperator
 					 */
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
-					addVerzekering.add(separator, BorderLayout.CENTER);
+					changeVerzekering.add(separator, BorderLayout.CENTER);
 				}
 				{
 					/*
-					 * Panel wordt aangemaakt om de klant gegevens in te kunnen
-					 * vullen.
+					 * Panel wordt aangemaakt om de oude klant gegevens weer te geven
 					 */
-					JPanel addVerzekering_1 = new JPanel();
-					addVerzekering.add(addVerzekering_1, BorderLayout.WEST);
-					addVerzekering_1.setLayout(new BoxLayout(addVerzekering_1,
+					changeVerzekering_1 = new JPanel();
+					changeVerzekering.add(changeVerzekering_1, BorderLayout.WEST);
+					changeVerzekering_1.setLayout(new BoxLayout(changeVerzekering_1,
 							BoxLayout.Y_AXIS));
 					{
 						JPanel panel = new JPanel();
@@ -83,17 +85,14 @@ public class AddVerzekeringDialog extends JDialog {
 						panel.setPreferredSize(new Dimension(300, 20));
 						panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 						panel.setAlignmentY(Component.TOP_ALIGNMENT);
-						addVerzekering_1.add(panel);
+						changeVerzekering_1.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblVerzekering = new JLabel("Verzekering");
-							lblVerzekering.setPreferredSize(new Dimension(32,
-									20));
-							lblVerzekering
-									.setMinimumSize(new Dimension(32, 20));
-							lblVerzekering
-									.setMaximumSize(new Dimension(32, 20));
-							panel.add(lblVerzekering, BorderLayout.WEST);
+							JLabel lblKlant = new JLabel("Klant Gegevens");
+							lblKlant.setPreferredSize(new Dimension(100, 20));
+							lblKlant.setMinimumSize(new Dimension(100, 20));
+							lblKlant.setMaximumSize(new Dimension(100, 20));
+							panel.add(lblKlant, BorderLayout.WEST);
 						}
 					}
 					{
@@ -103,7 +102,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPaneNaam.setBorder(null);
 						splitPaneNaam.setDividerSize(0);
 						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPaneNaam);
+						changeVerzekering_1.add(splitPaneNaam);
 						{
 							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -126,7 +125,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPaneAdres.setBorder(null);
 						splitPaneAdres.setDividerSize(0);
 						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPaneAdres);
+						changeVerzekering_1.add(splitPaneAdres);
 						{
 							JLabel lblAdres = new JLabel("Adres: ");
 							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -152,7 +151,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPanePostcode.setDividerSize(0);
 						splitPanePostcode.setPreferredSize(new Dimension(300,
 								30));
-						addVerzekering_1.add(splitPanePostcode);
+						changeVerzekering_1.add(splitPanePostcode);
 						{
 							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
@@ -181,7 +180,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPanePlaats.setDividerSize(0);
 						splitPanePlaats
 								.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPanePlaats);
+						changeVerzekering_1.add(splitPanePlaats);
 						{
 							JLabel lblPlaats = new JLabel("Plaats: ");
 							lblPlaats
@@ -206,7 +205,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPaneKVK.setBorder(null);
 						splitPaneKVK.setDividerSize(0);
 						splitPaneKVK.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPaneKVK);
+						changeVerzekering_1.add(splitPaneKVK);
 						{
 							JLabel lblPostcode = new JLabel("Postcode: ");
 							lblPostcode
@@ -235,7 +234,7 @@ public class AddVerzekeringDialog extends JDialog {
 						splitPaneRekeningNr.setDividerSize(0);
 						splitPaneRekeningNr.setPreferredSize(new Dimension(300,
 								30));
-						addVerzekering_1.add(splitPaneRekeningNr);
+						changeVerzekering_1.add(splitPaneRekeningNr);
 						{
 							JLabel lblRekeningNr = new JLabel("Rekening NR: ");
 							lblRekeningNr
@@ -258,42 +257,43 @@ public class AddVerzekeringDialog extends JDialog {
 						}						
 					}					
 				}
-				
-
-				JPanel buttonPane = new JPanel();
-				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-				getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			}
+			
+			{
+				JPanel buttonChangePane = new JPanel();
+				buttonChangePane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+				changeVerzekering.add(buttonChangePane, BorderLayout.SOUTH);
+				{
+					JButton wijzigButton = new JButton("Wijzigen");
+					wijzigButton.setActionCommand("Wijzigen");
+					buttonChangePane.add(wijzigButton);
+					getRootPane().setDefaultButton(wijzigButton);
 					
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-				
-				okButton.addMouseListener(new MouseAdapter(){
-					
-					public void mouseClicked(MouseEvent e){
-						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
-						manager.addVerzekeringsmaatschappij(maatschappij);
+					/*
+					wijzigButton.addMouseListener(new MouseAdapter(){
+						public void mouseClicked(MouseEvent e){
+						manager.updateVerzekering(textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
 						dispose();
 					}
-						
 					
-						
-				});
-				
-				
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						dispose();
-					}
-				});
-				buttonPane.add(cancelButton);
-
-			}			
-		}				
+					
+				});*/
+					JButton cancelButton = new JButton("Cancel");
+					cancelButton.setActionCommand("Cancel");
+					cancelButton.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							dispose();
+						}
+					});
+					buttonChangePane.add(cancelButton);
+					
+					
+					{
+	
+			}
+		}
+			}
 	}
-}
-		
+	}
+			
