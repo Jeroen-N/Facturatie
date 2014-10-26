@@ -16,7 +16,8 @@
 	            <behandelcode>005</behandelcode>
 	            <behandelcode>007</behandelcode>
 	            <behandelcode>008</behandelcode>
-	         </behandelCodes>
+				
+					<behandelcode>006</behandelcode></behandelCodes>
 	      </verzekeringsType>
 	      <verzekeringsType typenr="002">
 	         <naam>All-risk</naam>
@@ -49,6 +50,8 @@
 				<verplichtEigenRisico>124</verplichtEigenRisico>
 				<behandelCodes>
 					<behandelcode>001</behandelcode>
+					
+					<behandelcode>006</behandelcode>
 				</behandelCodes>
 			</verzekeringsType>
 		</verzekeringsTypes>

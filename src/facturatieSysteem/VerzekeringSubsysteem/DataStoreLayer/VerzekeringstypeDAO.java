@@ -11,7 +11,7 @@ public interface VerzekeringstypeDAO {
 	boolean updateVerzekeringstypeXML(String maatschappijnr,
 			Verzekeringstype type);
 
-	boolean addBehandelCode(String behandelcode);
+	boolean addBehandelCode(String maatschappijnr, String typenr, String behandelcode);
 
-	boolean removeBehandelCode(String behandelcode);
+	boolean removeBehandelCode(String maatschappijnr, String typenr, String behandelcode);
 }

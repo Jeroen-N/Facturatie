@@ -116,14 +116,12 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 					NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("verzekeringsType");
 					for (int j = 0; j < polissen.getLength();j++){
 						Element polisElement = (Element) polissen.item(j);
-						String polisnummer = polisElement.getAttribute("PolisNummer");
+						String polisnummer = polisElement.getAttribute("typenr");
 						if(polisnummer.equals(type.getNr())){
 						
-						//get Polis Elements
 						Element naam = (Element)  polisElement.getElementsByTagName("naam").item(0);
 						Element eigenRisico = (Element) polisElement.getElementsByTagName("verplichtEigenRisico").item(0);
 						
-						//fill elements with the information
 						naam.setTextContent(type.getNaam());
 						eigenRisico.setTextContent(Integer.toString(type.getEigenRisico()));
 						break;
@@ -141,13 +139,76 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 	}
 	
 	@Override
-	public boolean addBehandelCode(String behandelcode){
-		return false;
+	public boolean addBehandelCode(String maatschappijnr, String typenr, String behandelcode){
+		document = daoFactory.getDocument();
+		try {
+			Element facturatieSysteem = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
+			NodeList maatschappijen = facturatieSysteem.getElementsByTagName("verzekeringsmaatschappij");
+			
+			for(int i = 0; i < maatschappijen.getLength();i++){
+				Element maatschappijElement = (Element) maatschappijen.item(i);
+				String nr = maatschappijElement.getAttribute("maatschappijnr");
+				if(maatschappijnr.equals(nr)){
+					Element verzekeringsTypes = (Element) maatschappijElement.getElementsByTagName("verzekeringsTypes").item(0);
+					NodeList verzekeringType = verzekeringsTypes.getElementsByTagName("verzekeringsType");
+					//
+					for (int j = 0; j < verzekeringType.getLength();j++){
+						Element Type = (Element) verzekeringType.item(j);
+						String nrt = Type.getAttribute("typenr");
+						if(typenr.equals(nrt)){
+							Element behandelCodes = (Element) Type.getElementsByTagName("behandelCodes").item(0);
+							behandelCodes.appendChild(document.createTextNode("\t"));
+							Element behandelcodeElement = document.createElement("behandelcode");
+							behandelcodeElement.appendChild(document.createTextNode(behandelcode));
+							behandelCodes.appendChild(behandelcodeElement);
+							behandelCodes.appendChild(document.createTextNode("\n\t\t\t\t"));
+						}
+						break;
+					}
+				}
+			}
+			return daoFactory.writeDocument();
+		} catch(DOMException e){
+			return false;
+		}
 	}
 	
 	@Override
-	public boolean removeBehandelCode(String behandelcode){
-		return false;
+	public boolean removeBehandelCode(String maatschappijnr, String typenr, String behandelcode){
+		document = daoFactory.getDocument();
+		try {
+			Element facturatieSysteem = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
+			NodeList maatschappijen = facturatieSysteem.getElementsByTagName("verzekeringsmaatschappij");
+			
+			for(int i = 0; i < maatschappijen.getLength();i++){
+				Element maatschappijElement = (Element) maatschappijen.item(i);
+				String nr = maatschappijElement.getAttribute("maatschappijnr");
+				if(maatschappijnr.equals(nr)){
+					Element verzekeringsTypes = (Element) maatschappijElement.getElementsByTagName("verzekeringsTypes").item(0);
+					NodeList verzekeringType = verzekeringsTypes.getElementsByTagName("verzekeringsType");
+					//
+					for (int j = 0; j < verzekeringType.getLength();j++){
+						Element Type = (Element) verzekeringType.item(j);
+						String nrt = Type.getAttribute("typenr");
+						if(typenr.equals(nrt)){
+							Element behandelCodes = (Element) Type.getElementsByTagName("behandelCodes").item(0);
+							NodeList behandelcodeElement = behandelCodes.getElementsByTagName("behandelcode");
+							for(int k = 0; k < behandelcodeElement.getLength(); k++){
+								Element code = (Element) behandelcodeElement.item(k);
+								if(code.getTextContent().equals(behandelcode)){
+									code.getParentNode().removeChild(code);
+									break;
+								}
+							}
+						}
+						
+					}
+				}
+			}
+			return daoFactory.writeDocument();
+		} catch(DOMException e){
+			return false;
+		}
 	}
 
 }

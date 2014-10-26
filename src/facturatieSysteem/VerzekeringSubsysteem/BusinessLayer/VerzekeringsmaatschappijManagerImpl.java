@@ -19,6 +19,8 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
+		VerzekeringtypeDAO.removeBehandelCode("002", "001","006");
+		System.out.println("pass");
 	}
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
