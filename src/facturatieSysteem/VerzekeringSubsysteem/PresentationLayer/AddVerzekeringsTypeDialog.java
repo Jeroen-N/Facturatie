@@ -34,8 +34,8 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddVerzekeringsTypeDialog(final VerzekeringsmaatschappijManager manager, Verzekeringstype type, Verzekeringsmaatschappij maatschappij) {
-
+	public AddVerzekeringsTypeDialog(final VerzekeringsmaatschappijManager manager, Verzekeringsmaatschappij maatschappij) {
+		System.out.println(maatschappij.getNaam());
 		setTitle("Verzekeringstype beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -182,7 +182,6 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 					public void mouseClicked(MouseEvent e){
 						//TODO extra attribuut maatschappijnr
 						Verzekeringstype type = new Verzekeringstype(textFieldTypeNr.getText(), Integer.parseInt(textFieldEigenRisico.getText()), textFieldNaam.getText());
-						System.out.println(Integer.parseInt(textFieldEigenRisico.getText()));
 						manager.addVerzekeringstype(maatschappij, type);
 						dispose();
 					}

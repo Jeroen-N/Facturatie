@@ -423,24 +423,20 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		}
 	}
 	public  void fillField(int row){
-		if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("") || 
+		/*if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("") || 
 				comboBoxMaatschappij.getItemCount() > 0){
 		comboBoxMaatschappij.setSelectedIndex(0);
 		comboBoxVerzekeringsType.removeAllItems();
 		textFieldEigenRisico.removeAll();
-		}
-		String PolisNr = typetable.getModel().getValueAt(row, 0).toString();
-		String verType = typetable.getModel().getValueAt(row, 1).toString();
+		}*/
+		String TypeNr = typetable.getModel().getValueAt(row, 0).toString();
+		String naam = typetable.getModel().getValueAt(row, 1).toString();
 		String eigenRisico = typetable.getModel().getValueAt(row, 2).toString();
-		String StartDatum = typetable.getModel().getValueAt(row, 3).toString();
-		String EindDatum = typetable.getModel().getValueAt(row, 4).toString();
-		textFieldTypeNr.setText(PolisNr);
-		comboBoxVerzekeringsType.addItem(verType);
+		textFieldTypeNr.setText(TypeNr);
+		//comboBoxVerzekeringsType.addItem(verType);
 		textFieldEigenRisico.setText(eigenRisico);
-		textFieldNaam.setText(StartDatum);
-		System.out.println(verType);
-		System.out.println("loop door maatschappijen");
-		for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+		textFieldNaam.setText(naam);
+		/*for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
 			System.out.println("loop door maatschappijen");
 			for (Verzekeringstype type : maatschappij.getTypes()) {
 				System.out.println("loop door types" +type.getNaam());
@@ -453,8 +449,8 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 			
 			
 			
+		}*/
 			
-		}
 	}
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;

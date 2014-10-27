@@ -35,5 +35,10 @@
 	            <behandelcode>010</behandelcode>
 	         </behandelCodes>
 	      </verzekeringsType>
-	   </verzekeringsTypes>    
+	   
+			<verzekeringsType typenr="003">
+				<naam>Test</naam>
+				<verplichtEigenRisico>120</verplichtEigenRisico>
+				<behandelCodes/>
+			</verzekeringsType></verzekeringsTypes>    
    </verzekeringsmaatschappij></facturatieSysteem>

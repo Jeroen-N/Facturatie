@@ -61,7 +61,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private Verzekeringstype type;
 	private Verzekeringsmaatschappij maatschappij;
 
-
 	// The datamodel to be displayed in the JTable.
 	private  DataTableModelVerzekeringen dataTableModelVerzekeringen;
 	private  ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
@@ -338,7 +337,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	btnTypesToevoegen.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			AddVerzekeringsTypeDialog AddVerzekeringsTypeDialog = new AddVerzekeringsTypeDialog(manager, type, maatschappij);
+			String maatschappijnr = Verzekering_Table.getModel().getValueAt(row, 0)
+					.toString();
+			maatschappij = manager.getVerzekeringsmaatschappij(maatschappijnr);
+			AddVerzekeringsTypeDialog AddVerzekeringsTypeDialog = new AddVerzekeringsTypeDialog(manager, maatschappij);
 			AddVerzekeringsTypeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			AddVerzekeringsTypeDialog.setModal(true);
 			AddVerzekeringsTypeDialog.setVisible(true);

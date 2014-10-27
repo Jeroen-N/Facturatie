@@ -19,9 +19,6 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
-		
-		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("002", "Naam2", "d2","d2","d2",1235,1235);
-		this.updateVerzekeringsmaatschappij(m1);
 	}
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
