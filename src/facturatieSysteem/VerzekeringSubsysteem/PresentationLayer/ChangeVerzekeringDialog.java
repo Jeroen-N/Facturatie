@@ -526,7 +526,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 					
 					wijzigButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e){
-						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNr.getText(), textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
+						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNr2.getText(), textFieldNaam2.getText(), textFieldAdres2.getText(), textFieldPostcode2.getText(), textFieldPlaats2.getText(), Integer.parseInt(textFieldKVK2.getText()), Integer.parseInt(textFieldRekeningNr2.getText()));
 						manager.updateVerzekeringsmaatschappij(maatschappij);
 						dispose();
 					}
