@@ -91,6 +91,8 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		btnTypes = new JButton();
 		btnTypes.setEnabled(false);
 		
+		//nummer = maatschappij.getNr();
+		
 		
 		
 
@@ -114,13 +116,34 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		zoekVeld.setMaximumSize(new Dimension(6, 20));
 		zoekKnop.setAlignmentY(TOP_ALIGNMENT);
 		zoekVeld.setColumns(15);
+		zoekVeld.setText("Maatschappij nummer...");
 		
 		linkerpaneel.add(zoekLabel, BorderLayout.WEST);
 		linkerpaneel.add(zoekVeld, BorderLayout.EAST);
 		rechterpaneel.add(zoekKnop, BorderLayout.WEST);
 		rechterpaneel.add(resetKnop, BorderLayout.EAST);
 		
+		zoekVeld.addMouseListener(new MouseAdapter(){
+			public void mouseClicked (MouseEvent e){
+				zoekVeld.setText("");
+	
+			}
+		});
+		
+		zoekKnop.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				if (zoekVeld.getText().matches("([1-999])")){
+						fillTableZoekresultaat(zoekVeld.getText());		
+				}else{
+				showConfirmationWindow("Geen geldige zoekwaarde");
+			}
+			}
+		});
+		
 
+		
+		
+		
 		// / Tabel Paneel
 		VerzekeringPanel.add(tabelpaneel, BorderLayout.CENTER);
 		tabelpaneel.setLayout(new BorderLayout(0, 0));
@@ -333,6 +356,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				
 			});
 	
+
+	
+	
+	
 		/// Verzekeringstype toevoegen
 	btnTypesToevoegen.addMouseListener(new MouseAdapter() {
 		@Override
@@ -354,8 +381,24 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			});
 		}
 	});
+	
+}
+	
+	
+	public void fillTableZoekresultaat(String nummer){
+		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
+			
+		if(count > 0){
+			Verzekering_Table.removeAll();
+			dataTableModelVerzekeringen.setValues(verzekeringList);
+		}else{
+			showConfirmationWindow("Geen klanten gevonden");
+		}
+	} 
 
-		
+	private void showConfirmationWindow(String message) {
+		Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
 		
 	}
 }
