@@ -57,7 +57,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private static Integer row;
 	private static String naam;
 	private static JTextArea Uitgebreide_Info;
-	private static Verzekeringsmaatschappij maatschappijManager;
 	
 
 
@@ -142,12 +141,21 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnToevoegen);
 		knoppenPaneel.add(btnWijzigen);
 		knoppenPaneel.add(btnVerwijderen);
-
+		
 		infopaneel.add(Uitgebreide_Info, BorderLayout.CENTER);
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		
-	
+		//kijk of iets wordt geselecteerd
+		Verzekering_Table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Verzekering_Table.getSelectedRow() >= 0){
+				row = Verzekering_Table.getSelectedRow();
+				fillField(row);
+				}
+			}
+		});
 
 		
 		// / CRUD Toevoegen
@@ -274,6 +282,12 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		
 		return VerzekeringPanel;
 			}
+
+	protected static void fillField(Integer row) {
+		String maatschappijnr = Verzekering_Table.getModel().getValueAt(row, 0)
+				.toString();
+		Uitgebreide_Info.setText("TESTEN: " + maatschappijnr);
+	}
 
 	public static void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();
