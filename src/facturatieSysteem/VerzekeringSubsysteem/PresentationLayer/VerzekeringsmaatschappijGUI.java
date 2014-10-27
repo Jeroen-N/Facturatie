@@ -49,7 +49,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private  final long serialVersionUID = 1L;
 	private  JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
 			infopaneel, knoppenPaneel, linkerpaneel, rechterpaneel;
-<<<<<<< HEAD
+
 	private  JTextField zoekVeld;
 	private  JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
 			btnToevoegen, btnTypes;
@@ -57,14 +57,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private  Integer row;
 	private  String naam;
 	private  JTextArea Uitgebreide_Info;
-=======
-	private static JTextField zoekVeld;
-	private static JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
-			btnToevoegen;
-	private static JTable Verzekering_Table;
-	private static Integer row;
-	private static JTextArea Uitgebreide_Info;
->>>>>>> origin/master
+
 
 
 	// The datamodel to be displayed in the JTable.
