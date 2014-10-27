@@ -118,4 +118,8 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 			verzekeringsMaatschappijen.add(maatschappij);
 		}
 	}
+	@Override
+	public String maatschappijInfo(Verzekeringsmaatschappij maatschappij) {
+		return "Verzekeringsmaatschappij \n\nNaam: "+ maatschappij.getNaam() + "\nAdres: " + maatschappij.getAdres() + "\nPlaats: " + maatschappij.getPlaats() + "\nPostcode: " + maatschappij.getPostcode() + "\nKVKnummer: " + maatschappij.getKVK() + "\nRekeningnummer: " + maatschappij.getRekeningNR();
+	}
 }

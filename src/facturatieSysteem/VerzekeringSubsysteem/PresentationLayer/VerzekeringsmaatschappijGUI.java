@@ -57,7 +57,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private static Integer row;
 	private static String naam;
 	private static JTextArea Uitgebreide_Info;
-	
 
 
 	// The datamodel to be displayed in the JTable.
@@ -87,7 +86,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		btnWijzigen.setEnabled(false);
 		btnVerwijderen.setEnabled(false);
 		Uitgebreide_Info = new JTextArea();
-		
 		
 		
 
@@ -146,13 +144,23 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		
+		// / TABEL VULLEN
+		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+
 		//kijk of iets wordt geselecteerd
 		Verzekering_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(Verzekering_Table.getSelectedRow() >= 0){
 				row = Verzekering_Table.getSelectedRow();
-				fillField(row);
+				String maatschappijnr = Verzekering_Table.getModel().getValueAt(row, 0)
+						.toString();
+				Verzekeringsmaatschappij maatschappij = manager.getVerzekeringsmaatschappij(maatschappijnr);
+				Uitgebreide_Info.setText(manager.maatschappijInfo(maatschappij));
 				}
 			}
 		});
@@ -238,14 +246,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			}
 				
 		});
-		
-
-		// / TABEL VULLEN
-		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
-			}
-		};
 
 		String[] headers = new String[] { "Nummer", "Naam", "Adres", "Postcode",
 				"Plaats", "KVK", "RekeningNr" };
@@ -282,12 +282,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		
 		return VerzekeringPanel;
 			}
-
-	protected static void fillField(Integer row) {
-		String maatschappijnr = Verzekering_Table.getModel().getValueAt(row, 0)
-				.toString();
-		Uitgebreide_Info.setText("TESTEN: " + maatschappijnr);
-	}
 
 	public static void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();

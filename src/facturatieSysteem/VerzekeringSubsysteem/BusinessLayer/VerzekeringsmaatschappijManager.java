@@ -32,4 +32,6 @@ public interface VerzekeringsmaatschappijManager {
 			Verzekeringstype type);
 	
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
+
+	String maatschappijInfo(Verzekeringsmaatschappij maatschappij);
 }
