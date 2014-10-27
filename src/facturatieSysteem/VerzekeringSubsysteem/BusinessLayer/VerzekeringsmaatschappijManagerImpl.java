@@ -19,6 +19,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
+		
+		Verzekeringsmaatschappij m1 = new Verzekeringsmaatschappij("002", "Naam2", "d2","d2","d2",1235,1235);
+		this.updateVerzekeringsmaatschappij(m1);
 	}
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
@@ -45,6 +48,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
 			verzekeringsMaatschappijen.remove(getVerzekeringsmaatschappij(maatschappij.getNr()));
 			verzekeringsMaatschappijen.add(maatschappij);
+			System.out.println(maatschappij.getNaam());
 			VerzekeringDAO.updateMaatschappijXML(maatschappij);
 			return true;
 		}

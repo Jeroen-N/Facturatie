@@ -175,8 +175,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		//loop through all clients
 		for(int i = 0; i < verzekeringsmaatschappijen.getLength();i++){
 			Element verzekeringsmaatschappij = (Element) verzekeringsmaatschappijen.item(i);
-			String naam = verzekeringsmaatschappij.getElementsByTagName("naam").item(0).getTextContent();
-			if(maatschappij.getNaam().equals(naam)){
+			String maatschappijnr = verzekeringsmaatschappij.getAttribute("maatschappijnr");
+			
+			if(maatschappij.getNr().equals(maatschappijnr)){
 				//get all elements of Client
 				Element Naam = (Element) verzekeringsmaatschappij.getElementsByTagName("naam").item(0);
 				Element Adres = (Element) verzekeringsmaatschappij.getElementsByTagName("adres").item(0);
