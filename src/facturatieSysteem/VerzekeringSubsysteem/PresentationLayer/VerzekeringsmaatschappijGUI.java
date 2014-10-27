@@ -57,7 +57,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private static Integer row;
 	private static String naam;
 	private static JTextArea Uitgebreide_Info;
-	
+	private static Verzekeringsmaatschappij maatschappijManager;
 	
 
 
@@ -146,15 +146,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		
-		/*Verzekering_Table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(Verzekering_Table.getSelectedRow() >= 0){
-				row = Verzekering_Table.getSelectedRow();
-				fillField(row);
-				}
-			}
-		}); */
+	
 
 		
 		// / CRUD Toevoegen
@@ -188,7 +180,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				if (btnWijzigen.isEnabled()) {
 					 System.out.println("verzekering geselecteerd!");
 					ChangeVerzekeringDialog changeVerzekeringDialog = new ChangeVerzekeringDialog(
-							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 1)
+							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 0)
 									.toString());
 					changeVerzekeringDialog
 							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -200,7 +192,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 							Verzekering_Table.removeAll();
 							fillTable(manager);
 							Verzekering_Table.setRowSelectionInterval(row, row);
-							
+							//fillField(row);
 						}
 					});
 				} else {
@@ -225,7 +217,8 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 					    "Verwijderen",
 					    JOptionPane.YES_NO_OPTION);
 				if(n == 0){
-					manager.deleteVerzekeringsmaatschappij(naam);
+					manager.deleteVerzekeringsmaatschappij(maatschappijManager);
+					//dispose();
 					
 				}
 					
@@ -241,7 +234,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			}
 		};
 
-		String[] headers = new String[] { "Naam", "Adres", "Postcode",
+		String[] headers = new String[] { "Nummer", "Naam", "Adres", "Postcode",
 				"Plaats", "KVK", "RekeningNr" };
 		dataTableModelVerzekeringen.setTableHeader(headers);
 		String[][] initialValues = new String[][] { { "", "", "", "" } };
@@ -264,13 +257,22 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				new Color(0, 0, 0)), "Verzekeringenlijst",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		VerzekeringPanel.add(totaalLijst, BorderLayout.CENTER);
-
+		
+		Verzekering_Table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Verzekering_Table.getSelectedRow() >= 0){
+				row = Verzekering_Table.getSelectedRow();
+				}
+			}
+		}); 
+		
 		return VerzekeringPanel;
 			}
 
 	public static void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();
-		// System.out.println(verzekeringList.toString());
+		System.out.println(verzekeringList.size());
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
 
 		if (count > 0) {
@@ -291,12 +293,8 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				
 			});
 	
-	/*public static void fillField(){
-		String naam = Verzekering_Table.getModel().getValueAt(row, 1)
-				.toString();
-		Uitgebreide_Info.setText(manager.getTypes());
+	
 
-		}*/
 		
 		
 	}

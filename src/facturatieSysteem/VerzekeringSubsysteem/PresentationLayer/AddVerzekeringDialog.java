@@ -32,6 +32,7 @@ public class AddVerzekeringDialog extends JDialog {
 	private JTextField textFieldPlaats;
 	private JTextField textFieldKVK;
 	private JTextField textFieldRekeningNr;
+	private JTextField textFieldNr;
 
 	/**
 	 * Create the dialog.
@@ -96,13 +97,40 @@ public class AddVerzekeringDialog extends JDialog {
 						}
 					}
 					{
-						JSplitPane splitPaneNaam = new JSplitPane();
-						splitPaneNaam.setMinimumSize(new Dimension(300, 30));
-						splitPaneNaam.setMaximumSize(new Dimension(300, 30));
-						splitPaneNaam.setBorder(null);
-						splitPaneNaam.setDividerSize(0);
-						splitPaneNaam.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPaneNaam);
+						JSplitPane splitPaneNr = new JSplitPane();
+						splitPaneNr.setMinimumSize(new Dimension(300, 30));
+						splitPaneNr.setMaximumSize(new Dimension(300, 30));
+						splitPaneNr.setBorder(null);
+						splitPaneNr.setDividerSize(0);
+						splitPaneNr.setPreferredSize(new Dimension(300, 30));
+						addVerzekering_1.add(splitPaneNr);
+						{
+							JLabel lblNr = new JLabel("Nr: ");
+							lblNr.setHorizontalAlignment(SwingConstants.RIGHT);
+							lblNr.setHorizontalTextPosition(SwingConstants.RIGHT);
+							lblNr.setPreferredSize(new Dimension(120, 16));
+							lblNr.setMinimumSize(new Dimension(120, 16));
+							lblNr.setMaximumSize(new Dimension(120, 16));
+							splitPaneNr.setLeftComponent(lblNr);
+						}
+						{
+							textFieldNr = new JTextField();
+							splitPaneNr.setRightComponent(textFieldNr);
+							textFieldNr.setColumns(15);
+						}
+						
+						{
+							JSplitPane splitPaneNaam = new JSplitPane();
+							splitPaneNaam.setMinimumSize(new Dimension(300, 30));
+							splitPaneNaam.setMaximumSize(new Dimension(300, 30));
+							splitPaneNaam.setBorder(null);
+							splitPaneNaam.setDividerSize(0);
+							splitPaneNaam.setPreferredSize(new Dimension(300, 30));
+							addVerzekering_1.add(splitPaneNaam);
+							{
+						
+						
+						
 						{
 							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -272,7 +300,7 @@ public class AddVerzekeringDialog extends JDialog {
 					
 					public void mouseClicked(MouseEvent e){
 						//TODO extra attribuut maatschappijnr
-						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
+						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNr.getText(), textFieldNaam.getText(), textFieldAdres.getText(), textFieldPostcode.getText(), textFieldPlaats.getText(), Integer.parseInt(textFieldKVK.getText()), Integer.parseInt(textFieldRekeningNr.getText()));
 						manager.addVerzekeringsmaatschappij(maatschappij);
 						dispose();
 					}
@@ -294,6 +322,8 @@ public class AddVerzekeringDialog extends JDialog {
 
 			}			
 		}				
+	}
+}
 	}
 }
 		

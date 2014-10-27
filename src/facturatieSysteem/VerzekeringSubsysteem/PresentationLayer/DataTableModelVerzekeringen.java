@@ -30,7 +30,7 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 		logger.debug("Constructor");
 
 		// colcount is hardcoded here; change if you want to display more columns.
-		colCount = 6;
+		colCount = 7;
 		headers = new String[colCount];
 		cache = new Vector<String[]>();
 	}
@@ -78,6 +78,7 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 		{
 			Verzekeringsmaatschappij verzekering = verzekeringen.get(i);
 			
+			String nummer = verzekering.getNr();
 			String naam = verzekering.getNaam();
 			String adres = verzekering.getAdres();
 			String postcode = verzekering.getPostcode();
@@ -87,7 +88,7 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 			
 			
 			
-			String[] value = { naam, adres, postcode, plaats, KVK, RekeningNr};
+			String[] value = { nummer, naam, adres, postcode, plaats, KVK, RekeningNr};
 	
 			values[i] = value;
 		}
