@@ -19,8 +19,6 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
-		//VerzekeringtypeDAO.removeBehandelCode("002", "001","006");
-		//System.out.println("pass");
 	}
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
@@ -47,7 +45,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
 			verzekeringsMaatschappijen.remove(getVerzekeringsmaatschappij(maatschappij.getNr()));
 			verzekeringsMaatschappijen.add(maatschappij);
-			VerzekeringDAO.addMaatschappijXML(maatschappij);
+			VerzekeringDAO.updateMaatschappijXML(maatschappij);
 			return true;
 		}
 		return false;

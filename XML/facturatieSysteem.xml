@@ -39,11 +39,11 @@
    </verzekeringsmaatschappij>
 	<verzekeringsmaatschappij maatschappijnr="002">
 		<naam>Naam</naam>
-		<adres>adres</adres>
-		<postcode>dd</postcode>
-		<woonplaats>da</woonplaats>
+		<adres>Adres</adres>
+		<postcode>postcode</postcode>
+		<woonplaats>dd</woonplaats>
 		<KVKNummer>123</KVKNummer>
-		<rekeningNummer>123</rekeningNummer>
+		<rekeningNummer>213</rekeningNummer>
 		<verzekeringsTypes>
 			<verzekeringsType typenr="001">
 				<naam>test</naam>
