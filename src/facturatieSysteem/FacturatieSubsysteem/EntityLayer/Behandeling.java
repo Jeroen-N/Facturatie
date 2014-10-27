@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Behandeling implements ImmutableBehandeling {
 
 	private String fysioPraktijkNummer;
+	private String behandelingId;
 	private String behandelCode;
 	private String behandelStartDatum;
 	private String behandelEindDatum;
@@ -13,7 +14,7 @@ public class Behandeling implements ImmutableBehandeling {
 	private double totaalprijs;
 	private int sessies;
 
-	public Behandeling(String fysioPraktijkNummer, String behandelCode,
+	public Behandeling(String fysioPraktijkNummer, String behandelingId, String behandelCode,
 			String behandelStartDatum, String behandelEindDatum, String BSN,  ArrayList<String> afspraakIDs, double totaalprijs, int sessies) {
 		this.fysioPraktijkNummer = fysioPraktijkNummer;
 		this.behandelCode = behandelCode;
@@ -88,6 +89,9 @@ public class Behandeling implements ImmutableBehandeling {
 	}
 	public ArrayList<String> getAfspraakIDs(){
 		return afspraakIDs;
+	}
+	public String getbehandelingId(){
+		return behandelingId;
 	}
 
 }

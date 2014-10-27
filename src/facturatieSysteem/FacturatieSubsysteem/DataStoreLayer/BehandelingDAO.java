@@ -65,6 +65,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 		ArrayList<Behandeling> behandelingen = new ArrayList<>();
 		ArrayList<String> afspraakIDs = new ArrayList<>();
 		document = daoFactoryClient.getDocument();
+		String behandelingId = "";
 		String behandelcode = "";
 		String praktijkNummer = "";
 		String behandelStartDatum = "";
@@ -92,6 +93,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 					for (int j = 0; j < behandelingnode.getLength(); j++) {
 						Element behandelElement = (Element) behandelingnode
 								.item(j);
+						behandelingId = behandelElement.getAttribute("id");
 						behandelcode = behandelElement
 								.getElementsByTagName("Behandelcode").item(0)
 								.getTextContent();
@@ -133,7 +135,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 						// aan de behandelcode.
 
 						Behandeling behandeling = new Behandeling(
-								praktijkNummer, behandelcode,
+								praktijkNummer, behandelingId, behandelcode,
 								behandelStartDatum, behandelEindDatum, BSN,
 								afspraakIDs, totaalprijs, l);
 						if(l > 0){
