@@ -79,6 +79,15 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 	
+	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam) {
+		for(Verzekeringstype type : maatschappij.getTypes()){
+			if(type.getNaam().equals(naam)){
+				return type;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) == null){
