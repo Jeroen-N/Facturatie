@@ -1,6 +1,7 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
 import java.util.ArrayList;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -259,37 +260,55 @@ public class FactuurDAO implements FactuurDAOinf {
 
 					// Loopen door de behandelingen en factuurbehandelingen
 					// vullen.
+					
+					Element BehandelingenElement= (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
+					NodeList Behandelingen = BehandelingenElement.getElementsByTagName("Behandeling");
+					
 					for (Behandeling behandeling : behandelingen) {
-						Element factuurBehandeling = document
-								.createElement("FactuurBehandeling");
+						Element factuurBehandeling = document.createElement("FactuurBehandeling");
 						factuurBehandelingen.appendChild(factuurBehandeling);
-						Element behandelAfspraakID = document
-								.createElement("BehandelafspraakID");
-						System.out.println("aantal afspraken: "+behandeling.getAfspraakIDs().size());
-						for (String id : behandeling.getAfspraakIDs()) {
-							behandelAfspraakID.appendChild(document
-									.createTextNode(id));
-							factuurBehandeling.appendChild(behandelAfspraakID);
-
-							Attr BehandelingId = document
-									.createAttribute("BehandelingID");
-							BehandelingId.setValue(behandeling
-									.getbehandelingId());
-							behandelAfspraakID.setAttributeNode(BehandelingId);
+						
+						//TODO Status updaten naar gefactuureerd!!!
+						
+						for (int j = 0; j < Behandelingen.getLength(); j++) {
+							Element factuurBehandelingElement = (Element) Behandelingen.item(j);
+							String behandelingID = factuurBehandelingElement.getAttribute("BehandelingID");
 							
+							if (behandelingID.equals(behandeling.getbehandelingId())){
+								Element Status = (Element) clientElement.getElementsByTagName("Gefactureerd").item(0);
+								break;
+							}
 						}
+						
+						for (String id : behandeling.getAfspraakIDs()) {
+							Element behandelAfspraakID = document.createElement("BehandelafspraakID");
+							behandelAfspraakID.appendChild(document.createTextNode(id));
+							
+							factuurBehandeling.appendChild(behandelAfspraakID);
+							Attr BehandelingId = document.createAttribute("BehandelingID");
+							BehandelingId.setValue(behandeling.getbehandelingId());
+							factuurBehandeling.setAttributeNode(BehandelingId);
+						}
+						
+						
 					}
 					
 					
 					Element eigenRisico = document.createElement("TevergoedenBedrag");
 					eigenRisico.appendChild(document.createTextNode(Double.toString(factuur.getVergoedeBedrag())));
-
+					factuurElement.appendChild(eigenRisico);
+					
 					Element status = document.createElement("Status");
-					status.appendChild(document.createTextNode(factuur
-							.getStatus()));
+					status.appendChild(document.createTextNode(factuur.getStatus()));
+					factuurElement.appendChild(status);
 					
 					Element totaalPrijs = document.createElement("Totaalprijs");
 					totaalPrijs.appendChild(document.createTextNode(Double.toString(factuur.getTotaalPrijs())));
+					factuurElement.appendChild(totaalPrijs);
+					
+					//ResterendEigenRisico bijwerken
+					Element ResterendEigenRisico = (Element) clientElement.getElementsByTagName("ResterendEigenRisico").item(0);
+					ResterendEigenRisico.setTextContent(Double.toString(klant.getResterendEigenRisico()));
 				}
 			}
 			return daoFactoryClient.writeDocument();

@@ -10,7 +10,7 @@
 			<Telefoonnummer>0625235100</Telefoonnummer>
 			<Email>sjmblijl@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>25.25</ResterendEigenRisico>
+			<ResterendEigenRisico>80</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052185</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
@@ -53,8 +53,7 @@
 				<TevergoedenBedrag>200</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
-			</Factuur>
-		</Facturen>
+			</Factuur></Facturen>
 		<Behandelingen>
 			<Behandeling id="12">
 				<behandelgegevens>

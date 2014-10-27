@@ -15,6 +15,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 	private Document document = null;
 	private DAOFactoryFactuur daoFactoryBehandelcode;
 	private DAOFactoryFactuur daoFactoryClient;
+	private String behandelingId;
 
 	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode, DAOFactoryFactuur daoFactoryClient) {
 		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
@@ -62,9 +63,8 @@ public class BehandelingDAO implements BehandelDAOinf {
 		// Initialiseer een document van de daofactory en maak een string
 		// behandelcode aan zonder inhoud.
 		ArrayList<Behandeling> behandelingen = new ArrayList<>();
-		ArrayList<String> afspraakIDs = new ArrayList<>();
+		ArrayList<String> afspraakIDs;
 		document = daoFactoryClient.getDocument();
-		String behandelingId = "";
 		String behandelcode = "";
 		String praktijkNummer = "";
 		String behandelStartDatum = "";
@@ -90,9 +90,10 @@ public class BehandelingDAO implements BehandelDAOinf {
 							.getElementsByTagName("Behandeling");
 					// Haal in elke behandeling de behandelcode op.
 					for (int j = 0; j < behandelingnode.getLength(); j++) {
-						Element behandelElement = (Element) behandelingnode
-								.item(j);
+						Element behandelElement = (Element) behandelingnode.item(j);
+						
 						behandelingId = behandelElement.getAttribute("id");
+						
 						behandelcode = behandelElement
 								.getElementsByTagName("Behandelcode").item(0)
 								.getTextContent();
@@ -110,20 +111,16 @@ public class BehandelingDAO implements BehandelDAOinf {
 								.getElementsByTagName("behandelafspraak");
 						int l = 0;
 						// Loop door de lijst afspraken heen.
-						System.out.println(afspraaknode.getLength());
+						System.out.println("aantal afspraken "+afspraaknode.getLength());
+						afspraakIDs = new ArrayList<>();
 						for (int k = 0; k < afspraaknode.getLength(); k++) {
 							Element afspraakElement = (Element) afspraaknode
 									.item(k);
 							// Als de afspraak niet gefactureerd is en deze wel
 							// voltooid is, wordt l opgehoogd met 1.
-							if (!afspraakElement
-									.getElementsByTagName("Gefactureerd")
-									.item(0).getTextContent().equals("Ja")
-									&& afspraakElement
-											.getElementsByTagName("Status")
-											.item(0).getTextContent()
-											.equals("Voltooid")) {
-								System.out.println("Test");
+							if (!afspraakElement.getElementsByTagName("Gefactureerd").item(0).getTextContent().equals("Ja")
+								&& afspraakElement.getElementsByTagName("Status").item(0).getTextContent().equals("Voltooid")) {
+								System.out.println("Behandeling nog niet gefactureerd");
 								l++;
 								afspraakIDs.add(afspraakElement
 										.getAttribute("ID"));
@@ -132,7 +129,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 
 						// Reset de tellers en de string die toegevoegd wordt
 						// aan de behandelcode.
-
+						System.out.println(behandelingId);
 						Behandeling behandeling = new Behandeling(
 								praktijkNummer, behandelingId, behandelcode,
 								behandelStartDatum, behandelEindDatum, BSN,
@@ -143,7 +140,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 						
 						
 						l = 0;
-						afspraakIDs.clear();
+						//afspraakIDs.clear();
 					}
 				}
 			}

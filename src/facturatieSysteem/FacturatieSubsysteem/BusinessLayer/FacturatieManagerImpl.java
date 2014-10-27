@@ -83,33 +83,43 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 			polisNaam = polis.getVerzekeringsType();
 		}
-		System.out.println("polisNaam: "+polisNaam);
-		System.out.println("aantal maatschappijen: " + verzekeringsmanager.getVerzekeringsmaatschappijen().size());
-		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
-				.getVerzekeringsmaatschappijen()) {
-			
+		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager.getVerzekeringsmaatschappijen()) {
 			for (Verzekeringstype type : maatschappij.getTypes()) {
-				System.out.println("type naam: "+type.getNaam());
-				
 				if (polisNaam.equals(type.getNaam())) {
-					verzekering = verzekeringsmanager.getVerzekeringstypeByName(
-							maatschappij, polisNaam);
-					System.out.println(verzekering.getNaam());
-					System.out.println("verzekerde behandelCodes: " + verzekering.getBehandelcodes());
+					verzekering = verzekeringsmanager.getVerzekeringstypeByName(maatschappij, polisNaam);
+					
 				}
 			}
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
+		double totaalPrijsFactuur = 0;
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
 		for (Behandeling behandeling : behandelingenlijst) {	
-			totalePrijs = 00;		
+			totalePrijs = 00;	
 			for (String code : verzekering.getBehandelcodes()) {
 				z = 0;
 				if (behandeling.getBehandelCode().equals(code)) {	
 					// Behandeling wordt standaard vergoed
-					teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
-									
+					double p = behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
+					//teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies() - klant.getResterendEigenRisico();
+					if (klant.getResterendEigenRisico() != 0) {
+						if (klant.getResterendEigenRisico() >= (p)) {
+							klant.setTotaalEigenRisico(klant.getResterendEigenRisico()- (p));
+							totalePrijs += p;
+						}else{
+							teVergoedenPrijs += p - klant.getResterendEigenRisico();
+							totalePrijs = klant.getResterendEigenRisico();
+							klant.setTotaalEigenRisico(0);
+						}
+					}else{
+						//Eigenrisico = 0
+						teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
+					}
+					
+					
+					
+					
 					z=1;
 					break;
 				}
@@ -122,28 +132,28 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				totalePrijs += tijdelijkRisico;
 				
 				if (klant.getResterendEigenRisico() != 0) {
+					
 					if (klant.getResterendEigenRisico() >= totalePrijs) {
-						klant.setTotaalEigenRisico(klant.getResterendEigenRisico()- totalePrijs);
-						System.out.println(teVergoedenPrijs);
+						
+
 					} else {
 						teVergoedenPrijs += totalePrijs- klant.getResterendEigenRisico();
-						klant.setTotaalEigenRisico(0);
-
+						klant.setTotaalEigenRisico(0);	
 					}
-				} else {
-					teVergoedenPrijs += totalePrijs;
-					System.out.println("Vergoede prijs: " + teVergoedenPrijs);
+				}else{
+					
 				}
 			}else{
 				z= 0;
 			}
 			
 			behandeling.setTotaalprijs(totalePrijs);
+			totaalPrijsFactuur += totalePrijs;
 			System.out.println("Totaalprijs behandelingen: "+ behandeling.getTotaalprijs());
 				
 		}
 		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
-				teVergoedenPrijs, behandelingenlijst, "Niet betaald", totalePrijs);
+				teVergoedenPrijs, behandelingenlijst, "Niet betaald", totaalPrijsFactuur);
 		factuurDAO.maakFactuur(klant, f);
 		return f;
 	}
