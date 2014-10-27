@@ -796,7 +796,7 @@ public class ChangeKlantDialog extends JDialog {
 						int n = JOptionPane.showConfirmDialog(
 							    frame,
 							    "Weet uw zeker dat u "+textFieldNaam.getText()+" wilt verwijderen",
-							    "fuck jou",
+							    "Klant verwijderen",
 							    JOptionPane.YES_NO_OPTION);
 						if(n == 0){
 							manager.verwijderKlantXML(BSN);
