@@ -34,7 +34,7 @@
 						<BehandelafspraakID>265481</BehandelafspraakID>
 					</FactuurBehandeling>
 				</FactuurBehandelingen>
-				<EigenRisico>300</EigenRisico>
+				<TevergoedenBedrag>300</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
@@ -50,7 +50,7 @@
 						<BehandelafspraakID>261003</BehandelafspraakID>	
 					</FactuurBehandeling>
 				</FactuurBehandelingen>
-				<EigenRisico>200</EigenRisico>
+				<TevergoedenBedrag>200</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
@@ -208,7 +208,7 @@
 						<BehandelafspraakID>927393</BehandelafspraakID>
 					</FactuurBehandeling>
 				</FactuurBehandelingen>
-				<EigenRisico>200</EigenRisico>
+				<TevergoedenBedrag>200</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
