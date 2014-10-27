@@ -57,6 +57,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	private Integer row;
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
+	private VerzekeringsmaatschappijManager vermaatschappijManager;
 	
 	// The datamodel to be displayed in the JTable.
 	private DataTableModelChangePolis dataTableModelChangePolis;
@@ -76,7 +77,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		setBounds(100, 100, 795, 509);
 		getContentPane().setLayout(new BorderLayout());
 		dataTableModelChangePolis = new DataTableModelChangePolis();
-		final Klant klant = manager.getKlant(BSN);
+		Klant klant = manager.getKlant(BSN);
+		this.vermaatschappijManager = vermaatschappijManager;
 		{
 			/*
 			 * JTabbedPane wordt aangemaakt
@@ -256,10 +258,9 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						{
 							comboBoxMaatschappij = new JComboBox<String>();
 							splitPaneVerzekeringMaatschappij.setRightComponent(comboBoxMaatschappij);
-							comboBoxMaatschappij.addItem("");
-							for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+							comboBoxMaatschappij.setEnabled(false);							
+							/*for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
 								comboBoxMaatschappij.addItem(maatschappij.getNaam());
-								
 							}
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
@@ -267,14 +268,13 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										System.out.println("types combobox vullen");
 										Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
 										for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
 											comboBoxVerzekeringsType.addItem(type.getNaam());
 										}
 									}
 								}
-							});
+							});*/
 
 						}
 					}
@@ -308,6 +308,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						{
 							comboBoxVerzekeringsType = new JComboBox<String>();
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
+							comboBoxVerzekeringsType.setEnabled(false);
+							/*
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxMaatschappij.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
@@ -321,9 +323,9 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 			
 									}
 								}
-							});
-							
+							});*/
 						}
+							
 					}
 					
 					{
@@ -516,7 +518,19 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		comboBoxVerzekeringsType.addItem(verType);
 		textFieldEigenRisico.setText(eigenRisico);
 		textFieldStartDatum.setText(StartDatum);
-		textFieldEindDatum.setText(EindDatum);		
+		textFieldEindDatum.setText(EindDatum);
+		System.out.println(verType);
+		System.out.println("loop door maatschappijen");
+		for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+			System.out.println("loop door maatschappijen");
+			for (Verzekeringstype type : maatschappij.getTypes()) {
+				System.out.println("loop door types" +type.getNaam());
+				if(type.getNaam().equals(verType)){
+					comboBoxMaatschappij.addItem( maatschappij.getNaam());
+					break;
+				}
+			}
+		}
 	}
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
