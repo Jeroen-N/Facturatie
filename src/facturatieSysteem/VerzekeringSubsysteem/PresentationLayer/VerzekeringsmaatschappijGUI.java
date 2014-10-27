@@ -223,7 +223,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 					Verzekeringsmaatschappij m1 = manager.getVerzekeringsmaatschappij(nummer);
 					
 					manager.deleteVerzekeringsmaatschappij(m1);
-					
+					fillTable(manager);
 					
 				}
 					
