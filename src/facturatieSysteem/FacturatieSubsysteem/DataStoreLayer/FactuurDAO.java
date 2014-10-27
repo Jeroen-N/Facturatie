@@ -267,4 +267,44 @@ public class FactuurDAO implements FactuurDAOinf {
 		return facturen;
 
 	}
+	
+	public String getBehandelingID(){
+		document = daoFactoryClient.getDocument();
+		String behandelingID = "";
+		try {
+			Element clientenElement = (Element) document.getElementsByTagName(
+					"Clienten").item(0);
+			NodeList clienten = clientenElement.getElementsByTagName("Client");
+			for (int i = 0; i < clienten.getLength(); i++) {
+				Element clientElement = (Element) clienten.item(i);
+
+				Element facturenElement = (Element) clientElement
+						.getElementsByTagName("Facturen").item(0);
+
+				NodeList factuurnode = facturenElement
+						.getElementsByTagName("Factuur");
+			
+				for (int j = 0; j < factuurnode.getLength(); j++) {
+					Element factuurElement = (Element) factuurnode.item(j);
+					
+					NodeList factuurBehandelingNode = factuurElement.getElementsByTagName("FactuurBehandeling");
+					
+					for(int k = 0; k < factuurBehandelingNode.getLength(); k++){
+						Element factuurBehandelingElement = (Element) factuurBehandelingNode.item(k);
+						
+						behandelingID = factuurBehandelingElement.getAttribute("BehandelingID");
+						
+					}
+					
+					
+				}
+
+			}
+
+		} catch (DOMException e) {
+			e.printStackTrace();
+		}
+		return behandelingID;
+		
+	}
 }
