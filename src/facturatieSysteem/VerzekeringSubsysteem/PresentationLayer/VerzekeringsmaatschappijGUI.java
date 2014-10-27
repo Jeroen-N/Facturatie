@@ -90,6 +90,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info = new JTextArea();
 		
 		
+		
 
 		// / Zoekveld en knoppen
 		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
@@ -211,14 +212,18 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				 Component frame = null;
-				int n = JOptionPane.showConfirmDialog(
+				 int n = JOptionPane.showConfirmDialog(
 					    frame,
 					    "Weet uw zeker dat u deze verzekering wilt verwijderen",
 					    "Verwijderen",
 					    JOptionPane.YES_NO_OPTION);
 				if(n == 0){
-					manager.deleteVerzekeringsmaatschappij(maatschappijManager);
-					//dispose();
+					String nummer = Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 0)
+					.toString();
+					Verzekeringsmaatschappij m1 = manager.getVerzekeringsmaatschappij(nummer);
+					
+					manager.deleteVerzekeringsmaatschappij(m1);
+					
 					
 				}
 					
