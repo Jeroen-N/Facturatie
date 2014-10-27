@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.MaskFormatter;
 
 import org.apache.log4j.Logger;
 
@@ -33,9 +35,13 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
+
 public class MainGUI {
 	private Integer row;
-	private JFrame frame;
+	private JFrame frmFacturatiesysteem;
 	private JTable Klant_Table;
 	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel,
 			VerzekeringsMaatschappijPanel, knoppen, Klant_info,
@@ -44,14 +50,13 @@ public class MainGUI {
 	private KlantManager KlantManager;
 	private JLabel lblCreatedByInfosys, lblFacturatiesysteem;
 	private JTextArea Uitgebreide_Info;
-	private JTextField textFieldZoeken;
+	private JFormattedTextField textFieldZoeken;
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
-			btnVerzekeringmaatschapij, btnVerzekeringbeheer, btnKlantenbeheer,
+			btnVerzekeringmaatschapij, btnKlantenbeheer,
 			btnAddPolis, btnZoekKlant;
 	private FacturatieManager facturatieManager;
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private JTextArea PolisInfo;
-	private JSeparator separator;
 	private JPanel Info_Polis;
 	private JScrollPane scroll;
 
@@ -80,22 +85,30 @@ public class MainGUI {
 		/*
 		 * Create the frame
 		 */
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(MAXIMIZED_BOTH);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmFacturatiesysteem = new JFrame();
+		frmFacturatiesysteem.setBackground(new Color(255, 255, 255));
+		frmFacturatiesysteem.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		frmFacturatiesysteem.setIconImage(Toolkit.getDefaultToolkit().getImage("Pictures/verzekering-xsmall.png"));
+		frmFacturatiesysteem.setTitle("Facturatiesysteem");
+		frmFacturatiesysteem.setName("Facturatiesysteem");
+		frmFacturatiesysteem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmFacturatiesysteem.setExtendedState(MAXIMIZED_BOTH);
+		frmFacturatiesysteem.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		/*
 		 * Create the Header
 		 */
 		Header = new JPanel();
-		frame.getContentPane().add(Header, BorderLayout.NORTH);
-		Header.setBackground(Color.ORANGE);
+		Header.setPreferredSize(new Dimension(10, 75));
+		Header.setMinimumSize(new Dimension(10, 15));
+		frmFacturatiesysteem.getContentPane().add(Header, BorderLayout.NORTH);
+		Header.setBackground(new Color(30, 144, 255));
 
 		/*
 		 * Add JLabel in header + add to header
 		 */
 		lblFacturatiesysteem = new JLabel("FacturatieSysteem");
+		lblFacturatiesysteem.setForeground(new Color(255, 255, 255));
 		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
 		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
 				| Font.ITALIC, 26));
@@ -106,17 +119,38 @@ public class MainGUI {
 		 * Create the Panel in the header for the buttons + add to header
 		 */
 		Header_Button = new JPanel();
-		Header_Button.setBackground(Color.ORANGE);
+		Header_Button.setPreferredSize(new Dimension(500, 50));
+		Header_Button.setBackground(new Color(30, 144, 255));
+		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		Header.add(Header_Button, BorderLayout.EAST);
-		Header_Button.setLayout(new BorderLayout(0, 50));
 
-		/*
-		 * Create the verzekeringsmaatschappij button + add the button to
-		 * header_button
-		 */
-		btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
-		Header_Button.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
+		Header_Button.setLayout(new BorderLayout(0, 50));
 		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
+		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		btnKlantenbeheer = new JButton("");
+		btnKlantenbeheer.setToolTipText("Deze knop brengt u naar het klantenbeheer");
+		btnKlantenbeheer.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnKlantenbeheer.setMargin(new Insets(0, 0, 0, 0));
+		btnKlantenbeheer.setIcon(new ImageIcon("Pictures/contact-administration-xsmall.png"));
+		btnKlantenbeheer.setPreferredSize(new Dimension(50, 50));
+		Header_Button.add(btnKlantenbeheer);
+		btnKlantenbeheer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VerzekeringPanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(false);
+				KlantenPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
+			}
+		});
+		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
+		btnVerzekeringmaatschapij = new JButton("");
+		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
+		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVerzekeringmaatschapij.setMargin(new Insets(0, 0, 0, 0));
+		btnVerzekeringmaatschapij.setIcon(new ImageIcon("Pictures/verzekering-xsmall.png"));
+		btnVerzekeringmaatschapij.setPreferredSize(new Dimension(50, 50));
+		Header_Button.add(btnVerzekeringmaatschapij);
 		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,42 +164,14 @@ public class MainGUI {
 		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
 
 		/*
-		 * Create the verzekeringbeheer button + add button to header_button
-		 */
-		btnVerzekeringbeheer = new JButton("VerzekeringBeheer");
-		Header_Button.add(btnVerzekeringbeheer, BorderLayout.WEST);
-		btnVerzekeringbeheer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				KlantenPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.setVisible(false);
-				VerzekeringPanel.setVisible(true);
-				FacturatiePanel.setVisible(false);
-			}
-		});
-		btnVerzekeringbeheer.setBackground(SystemColor.inactiveCaption);
-
-		/*
 		 * Create the Klantenbeheer button + add button to header_button
 		 */
-		btnKlantenbeheer = new JButton("KlantenBeheer");
-		Header_Button.add(btnKlantenbeheer, BorderLayout.CENTER);
-		btnKlantenbeheer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VerzekeringPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.setVisible(false);
-				KlantenPanel.setVisible(true);
-				FacturatiePanel.setVisible(false);
-			}
-		});
-		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 
 		/*
 		 * Create the Main Panel
 		 */
 		MainPanel = new JPanel();
-		frame.getContentPane().add(MainPanel);
+		frmFacturatiesysteem.getContentPane().add(MainPanel);
 		MainPanel.setLayout(new CardLayout(0, 0));
 
 		/*
@@ -205,14 +211,18 @@ public class MainGUI {
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
 
 		PanelEast = new JPanel();
+		PanelEast.setPreferredSize(new Dimension(500, 10));
 		KlantenPanel.add(PanelEast, BorderLayout.EAST);
 		PanelEast.setLayout(new BorderLayout(0, 0));
 		
 		Klant_zoeken = new JPanel();
+		Klant_zoeken.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(30, 144, 255)));
+		Klant_zoeken.setBackground(new Color(255, 255, 255));
 		PanelEast.add(Klant_zoeken, BorderLayout.NORTH);
 		Klant_zoeken.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JSplitPane splitPaneZoeken = new JSplitPane();
+		splitPaneZoeken.setBackground(new Color(255, 255, 255));
 		splitPaneZoeken .setPreferredSize(new Dimension(300,30));
 		splitPaneZoeken .setMinimumSize(new Dimension(300,30));
 		splitPaneZoeken .setMaximumSize(new Dimension(300,30));
@@ -220,9 +230,17 @@ public class MainGUI {
 		splitPaneZoeken .setBorder(null);
 		Klant_zoeken.add(splitPaneZoeken,BorderLayout.WEST );
 		
-		textFieldZoeken = new JTextField();
+		MaskFormatter formatter = null;
+		try {
+			formatter = new MaskFormatter("##-##-####");
+			formatter.setPlaceholder("dd-mm-yyyy");
+		} catch (ParseException e1) {
+			showConfirmationWindow("Zorg ervoor dat u het volgens het goede format invult: dag - maand - jaar");
+		}
+		
+		textFieldZoeken = new JFormattedTextField(formatter);
 		textFieldZoeken.setColumns(15);
-		textFieldZoeken.setText("Geboorte Datum");
+		textFieldZoeken.setText("dd-mm-yyyy");
 		textFieldZoeken.addMouseListener(new MouseAdapter() {
 			  @Override
 			  public void mouseClicked(MouseEvent e) {
@@ -232,6 +250,7 @@ public class MainGUI {
 		splitPaneZoeken.setRightComponent(textFieldZoeken);
 		
 		JLabel lblZoeken = new JLabel("Klant zoeken: ");
+		lblZoeken.setBackground(new Color(255, 255, 255));
 		lblZoeken.setPreferredSize(new Dimension(120,16));
 		lblZoeken.setMinimumSize(new Dimension(120, 16));
 		lblZoeken.setMaximumSize(new Dimension(120, 16));
@@ -240,6 +259,7 @@ public class MainGUI {
 		splitPaneZoeken.setLeftComponent(lblZoeken);
 		
 		btnZoekKlant = new JButton("Zoeken");
+		btnZoekKlant.setToolTipText("Zoek naar de ingevulde geboortedatum");
 		btnZoekKlant.setIconTextGap(0);
 		btnZoekKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnZoekKlant.addMouseListener(new MouseAdapter() {
@@ -255,6 +275,7 @@ public class MainGUI {
 		Klant_zoeken.add(btnZoekKlant,BorderLayout.EAST );
 		
 		btnReset = new JButton("Reset");
+		btnReset.setToolTipText("Reset de tabel.");
 		btnReset.setIconTextGap(0);
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -262,6 +283,7 @@ public class MainGUI {
 				fillTable();
 				Uitgebreide_Info.setText("");
 				PolisInfo.setText("");
+				textFieldZoeken.setText("dd-mm-yyyy");
 			}
 		});
 		Klant_zoeken.add(btnReset);
@@ -270,6 +292,7 @@ public class MainGUI {
 		 * Create panel for more information about klant
 		 */
 		Klant_info = new JPanel();
+		Klant_info.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(30, 144, 255)));
 		PanelEast.add(Klant_info, BorderLayout.CENTER);
 		Klant_info.setLayout(new BorderLayout(0, 0));
 
@@ -278,7 +301,7 @@ public class MainGUI {
 		 */
 		Uitgebreide_Info = new JTextArea();
 		Uitgebreide_Info.setRows(25);
-		Uitgebreide_Info.setColumns(40);
+		Uitgebreide_Info.setColumns(30);
 		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info, BorderLayout.NORTH);
 		Klant_Table.addMouseListener(new MouseAdapter() {
@@ -306,26 +329,31 @@ public class MainGUI {
 		 * Polis informatie panel wordt aangemaakt en gevuld
 		 */
 		Info_Polis = new JPanel();
+		Info_Polis.setMinimumSize(new Dimension(10, 50));
+		Info_Polis.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(30, 144, 255)));
 		Klant_info.add(Info_Polis, BorderLayout.CENTER);
 		Info_Polis.setLayout(new BorderLayout(0, 0));
 		PolisInfo = new JTextArea();
+		PolisInfo.setColumns(40);
+		PolisInfo.setPreferredSize(new Dimension(0, 50));
 		PolisInfo.setEditable(false);
 		scroll = new JScrollPane(PolisInfo);
+		scroll.setPreferredSize(new Dimension(4, 50));
 		Info_Polis.add(scroll);
 		DefaultCaret caret = (DefaultCaret) PolisInfo.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-		separator = new JSeparator();
-		Info_Polis.add(separator, BorderLayout.NORTH);
 
 		/*
 		 * add panel for buttons underneath more information panel
 		 */
 		knoppen = new JPanel();
+		knoppen.setBackground(new Color(255, 255, 255));
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 
 		knoppen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		btnChangePolis = new JButton("");
+		btnChangePolis.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
 		btnChangePolis.setMargin(new Insets(0, 0, 0, 0));
 		btnChangePolis.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
 		btnChangePolis.setEnabled(false);
@@ -356,6 +384,7 @@ public class MainGUI {
 		});
 		
 		btnFacturatie = new JButton("");
+		btnFacturatie.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
 		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
@@ -372,6 +401,7 @@ public class MainGUI {
 		});		
 		
 		btnAddKlant = new JButton("");
+		btnAddKlant.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
 		btnAddKlant.setMargin(new Insets(0, 0, 0, 0));
 		btnAddKlant.setIconTextGap(0);
 		btnAddKlant.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -398,6 +428,7 @@ public class MainGUI {
 		});
 		
 		btnChangeKlant = new JButton("");
+		btnChangeKlant.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
 		btnChangeKlant.setMargin(new Insets(0, 0, 0, 0));
 		btnChangeKlant.setIcon(new ImageIcon("Pictures/change-contact-icon-xsmal.png"));
 		btnChangeKlant.setEnabled(false);
@@ -437,6 +468,7 @@ public class MainGUI {
 		});
 		
 		btnAddPolis = new JButton("");
+		btnAddPolis.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
 		btnAddPolis.setMargin(new Insets(0, 0, 0, 0));
 		btnAddPolis.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
 		btnAddPolis.setEnabled(false);
@@ -473,14 +505,19 @@ public class MainGUI {
 		 * Create the footer
 		 */
 		Footer = new JPanel();
-		frame.getContentPane().add(Footer, BorderLayout.SOUTH);
-		Footer.setBackground(Color.ORANGE);
+		Footer.setMinimumSize(new Dimension(10, 50));
+		Footer.setPreferredSize(new Dimension(10, 30));
+		frmFacturatiesysteem.getContentPane().add(Footer, BorderLayout.SOUTH);
+		Footer.setBackground(new Color(30, 144, 255));
 		Footer.getLayout();
 
 		/*
 		 * Set text in the footer
 		 */
 		lblCreatedByInfosys = new JLabel("Created by InfoSys");
+		lblCreatedByInfosys.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblCreatedByInfosys.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreatedByInfosys.setForeground(new Color(255, 255, 255));
 		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD
 				| Font.ITALIC, 12));
 		Footer.add(lblCreatedByInfosys);
@@ -517,7 +554,7 @@ public class MainGUI {
 		/*
 		 * Set visibility of the frame
 		 */
-		frame.setVisible(true);
+		frmFacturatiesysteem.setVisible(true);
 	}
 	/*
 	 * Methode om de table te kunnen vullen en updaten
