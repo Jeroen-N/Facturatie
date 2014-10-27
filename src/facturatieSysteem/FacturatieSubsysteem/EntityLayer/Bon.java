@@ -3,6 +3,7 @@ package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -20,7 +21,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
+import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class Bon {
 
@@ -30,12 +34,15 @@ public class Bon {
 	private Factuur factuur;
 	private Verzekeringsmaatschappij maatschappij;
 	private Klant klant;
+	private VerzekeringsmaatschappijManager verzekeringsmanager;
+	private Verzekeringstype verzekering;
 	
-	public Bon(FacturatieManager factManager, Factuur factuur, Verzekeringsmaatschappij maatschappij, Klant klant){
+	public Bon(FacturatieManager factManager, Factuur factuur, Verzekeringsmaatschappij maatschappij, Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager){
 		this.factManager = factManager;
 		this.factuur = factuur;
 		this.maatschappij = maatschappij;
 		this.klant = klant;
+		this.verzekeringsmanager = verzekeringsmanager;
 		
 		file = factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf";
 		
@@ -60,6 +67,10 @@ public class Bon {
             document.add(Chunk.NEWLINE);
             
             document.add(facturatieInformatie());
+            
+            document.add(Chunk.NEWLINE);
+            
+            document.add(vergoed());            
 
             document.setMargins(0, 0, 0, 100);
 
@@ -206,7 +217,6 @@ public class Bon {
 	}
 	
 	private Paragraph vergoed(){
-		//TODO wat vergoed verzekering
 		Paragraph vergoed = new Paragraph();
 		
 		PdfPTable table = new PdfPTable(4);
@@ -214,33 +224,80 @@ public class Bon {
         table.getDefaultCell().setBorder(0);
         PdfPCell cell;
         
+        //fonts aanmaken
         Font fontbold = FontFactory.getFont("Times-Roman", 10, Font.BOLD);
         Font normal = FontFactory.getFont("Times-Roman", 10);
         
         BehandelingDAO bDAO = factManager.getBDAO();
         
-        //TODO verzekeringspolis weergeven
-        cell = new PdfPCell(new Phrase());
+        //Laatste verzekeringspolis ophalen
+        String polisNaam = "";
+		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
+			polisNaam = polis.getVerzekeringsType();
+		}
+        
+        // Verzekeringspolis weergeven
+        cell = new PdfPCell(new Phrase("De polis: " + polisNaam));
         cell.setColspan(4);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(0);
         table.addCell(cell);
         
+        // Extra informatie text
+        cell = new PdfPCell(new Phrase("De polis de vergoede behandelingen binnen uw polis zijn:"));
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setBorder(0);
+        table.addCell(cell);
+        
+        // Format voor de bedragen
         NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         
-        //TODO behandelingen weergeven, met vergoeding
-        //TODO of weergeven vergoeding en zelf betalen beide mogelijk
-        for (Behandeling behandeling : factuur.getBehandelingen()) {
-            table.addCell(new Phrase());
-            table.addCell(new Phrase());
-            
-            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
-            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            cell.setBorder(0);
-            cell.setPaddingBottom(5);
-            table.addCell(cell);
-    }
+        // Headers
+        table.addCell(new Phrase("Behandeling", fontbold));
+        table.addCell(new Phrase("Prijs", fontbold));
+        table.addCell(new Phrase("Aantal", fontbold));
+        
+        cell = new PdfPCell(new Phrase("Totaalprijs", fontbold));
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(0);
+        cell.setPaddingBottom(5);
+        table.addCell(cell);
+        
+        // loopen door de manager om de maatschappij op te halen
+        for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
+				.getVerzekeringsmaatschappijen()) {
+			
+        	//Loopen door de typeArray om het te op te halen van de maatschappij
+			for (Verzekeringstype type : maatschappij.getTypes()) {
+				
+				//Polisnaam vergelijken met de naam van de types om de verzekering op te halen
+				if (polisNaam.equals(type.getNaam())) {
+					verzekering = verzekeringsmanager.getVerzekeringstypeByName(
+							maatschappij, polisNaam);
+					
+					for (Behandeling behandeling : factuur.getBehandelingen()) {
+						
+			        	for (String code : verzekering.getBehandelcodes()) {
+			        		table.addCell(new Phrase(bDAO.getNaam(behandeling.getBehandelCode()), normal));
+				            table.addCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode()))), normal));
+				            table.addCell(new Phrase(String.valueOf(behandeling.getSessies()), normal));
+				            
+				            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
+				            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				            cell.setBorder(0);
+				            cell.setPaddingBottom(5);
+				            table.addCell(cell);
+			        	}
+			        }
+				}
+			}
+		}
+
+        
 		
+        vergoed.add(table);
+        
 		return vergoed;
 	}
 	

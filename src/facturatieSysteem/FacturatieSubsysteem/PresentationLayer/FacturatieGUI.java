@@ -14,9 +14,11 @@ import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImp
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Bon;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
+import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 
 public class FacturatieGUI {
@@ -42,7 +44,7 @@ public class FacturatieGUI {
 	private static JPanel factuurPanel;
 	private static JScrollPane scrollFactuur;
 	private static VerzekeringsmaatschappijManager m1;
-	private static Verzekeringsmaatschappij maatschappij;
+	private static Verzekeringsmaatschappij maatschappijEind;
 	
 	public static JPanel FacturatieGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
 		JPanel paneel = new JPanel();
@@ -139,12 +141,31 @@ public class FacturatieGUI {
 			row = overzicht.getSelectedRow();
 			fillField(row);
 			openFactuurKnop.addActionListener(new ActionListener() {
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int row2 = overzicht.getSelectedRow();
 					Factuur factuur = vindFactuur(row2);
-					maatschappij = m1.getVerzekeringsmaatschappij("Kaas Verzekeringen");
-					Bon bon = new Bon(facturatieManagerImpl, factuur, maatschappij, klant);
+					maatschappijEind = null;
+					for (Verzekeringsmaatschappij maatschappij : m1
+							.getVerzekeringsmaatschappijen()) {
+						
+			        	//Loopen door de typeArray om het te op te halen van de maatschappij
+						for (Verzekeringstype type : maatschappij.getTypes()) {
+							
+							//loopen voor het type
+							String polisNaam = "";
+							for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
+								polisNaam = polis.getVerzekeringsType();
+							}
+								//de maatschappij ophalen aan de hand van de klant zijn type
+								if (polisNaam.equals(type.getNaam())) {
+									maatschappijEind = maatschappij;
+									break;
+								}
+						}
+					}
+					Bon bon = new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
 				}
 			});
 			}

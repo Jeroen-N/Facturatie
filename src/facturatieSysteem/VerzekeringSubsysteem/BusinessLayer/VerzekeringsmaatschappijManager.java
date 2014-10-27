@@ -30,4 +30,6 @@ public interface VerzekeringsmaatschappijManager {
 
 	void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij,
 			Verzekeringstype type);
+	
+	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
 }

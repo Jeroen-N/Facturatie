@@ -36,24 +36,4 @@
 	         </behandelCodes>
 	      </verzekeringsType>
 	   </verzekeringsTypes>    
-   </verzekeringsmaatschappij>
-	<verzekeringsmaatschappij maatschappijnr="002">
-		<naam>Naam2</naam>
-		<adres>d2</adres>
-		<postcode>d2</postcode>
-		<woonplaats>d2</woonplaats>
-		<KVKNummer>1235</KVKNummer>
-		<rekeningNummer>1235</rekeningNummer>
-		<verzekeringsTypes>
-			<verzekeringsType typenr="001">
-				<naam>test</naam>
-				<verplichtEigenRisico>124</verplichtEigenRisico>
-				<behandelCodes>
-					<behandelcode>001</behandelcode>
-					
-					<behandelcode>006</behandelcode>
-				</behandelCodes>
-			</verzekeringsType>
-		</verzekeringsTypes>
-	</verzekeringsmaatschappij>
-</facturatieSysteem>
+   </verzekeringsmaatschappij></facturatieSysteem>
