@@ -282,6 +282,8 @@ public class FactuurDAO implements FactuurDAOinf {
 						}
 					}
 					// TODO totaalprijs moet nog toegevoegd worden.
+					
+					
 					Element eigenRisico = document.createElement("EigenRisco");
 					eigenRisico.appendChild(document.createTextNode(Double
 							.toString(factuur.getVergoedeBedrag())));

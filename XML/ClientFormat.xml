@@ -36,6 +36,7 @@
 				</FactuurBehandelingen>
 				<EigenRisico>300</EigenRisico>
 				<Status>Niet betaald</Status>
+				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
 			<Factuur FactuurNummer="256411">
 				<FactuurDatum>09-06-2014</FactuurDatum>
@@ -51,6 +52,7 @@
 				</FactuurBehandelingen>
 				<EigenRisico>200</EigenRisico>
 				<Status>Niet betaald</Status>
+				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>
@@ -208,6 +210,7 @@
 				</FactuurBehandelingen>
 				<EigenRisico>200</EigenRisico>
 				<Status>Niet betaald</Status>
+				<Totaalprijs>300</Totaalprijs>
 			</Factuur>
 		</Facturen>
 		<Behandelingen>
