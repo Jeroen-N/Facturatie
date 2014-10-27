@@ -275,25 +275,25 @@ public class Bon {
 				if (polisNaam.equals(type.getNaam())) {
 					verzekering = verzekeringsmanager.getVerzekeringstypeByName(
 							maatschappij, polisNaam);
-					
-					for (Behandeling behandeling : factuur.getBehandelingen()) {
-						
-			        	for (String code : verzekering.getBehandelcodes()) {
-			        		table.addCell(new Phrase(bDAO.getNaam(behandeling.getBehandelCode()), normal));
-				            table.addCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode()))), normal));
-				            table.addCell(new Phrase(String.valueOf(behandeling.getSessies()), normal));
-				            
-				            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
-				            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				            cell.setBorder(0);
-				            cell.setPaddingBottom(5);
-				            table.addCell(cell);
-			        	}
-			        }
 				}
 			}
 		}
-
+        
+        for (Behandeling behandeling : factuur.getBehandelingen()) {
+        	for (String code : verzekering.getBehandelcodes()) {
+        		if((behandeling.getBehandelCode().equals(code))){
+	        		table.addCell(new Phrase(bDAO.getNaam(behandeling.getBehandelCode()), normal));
+		            table.addCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode()))), normal));
+		            table.addCell(new Phrase(String.valueOf(behandeling.getSessies()), normal));
+		            
+		            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
+		            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		            cell.setBorder(0);
+		            cell.setPaddingBottom(5);
+		            table.addCell(cell);
+        		}
+        	}
+        }
         
 		
         vergoed.add(table);
