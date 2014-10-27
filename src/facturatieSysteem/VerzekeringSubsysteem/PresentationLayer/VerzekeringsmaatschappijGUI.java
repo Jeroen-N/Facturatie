@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
+import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
 
@@ -52,12 +53,13 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 
 	private  JTextField zoekVeld;
 	private  JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
-			btnToevoegen, btnTypes;
+			btnToevoegen, btnTypes, btnTypesToevoegen;
 	private  JTable Verzekering_Table;
 	private  Integer row;
 	private  String naam;
 	private  JTextArea Uitgebreide_Info;
-
+	private Verzekeringstype type;
+	private Verzekeringsmaatschappij maatschappij;
 
 
 	// The datamodel to be displayed in the JTable.
@@ -89,6 +91,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info = new JTextArea();
 		btnTypes = new JButton();
 		btnTypes.setEnabled(false);
+		
 		
 		
 
@@ -145,10 +148,13 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnTypes);
 		btnTypes.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
 		btnTypes.setMargin(new Insets(0, 0, 0, 0));
-		
+		btnTypesToevoegen = new JButton();
+		btnTypesToevoegen.setIcon(new ImageIcon("Pictures/verzekering-xsmall.png"));
+		btnTypesToevoegen.setMargin(new Insets(0, 0, 0, 0));
 		infopaneel.add(Uitgebreide_Info, BorderLayout.CENTER);
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
+		knoppenPaneel.add(btnTypesToevoegen);
 		
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
@@ -328,7 +334,24 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				
 			});
 	
-	
+		/// Verzekeringstype toevoegen
+	btnTypesToevoegen.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			AddVerzekeringsTypeDialog AddVerzekeringsTypeDialog = new AddVerzekeringsTypeDialog(manager, type, maatschappij);
+			AddVerzekeringsTypeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			AddVerzekeringsTypeDialog.setModal(true);
+			AddVerzekeringsTypeDialog.setVisible(true);
+			AddVerzekeringsTypeDialog.addWindowListener(new WindowAdapter() {
+				public void windowClosed(WindowEvent e) {
+					Verzekering_Table.removeAll();
+					
+					
+					
+				}
+			});
+		}
+	});
 
 		
 		
