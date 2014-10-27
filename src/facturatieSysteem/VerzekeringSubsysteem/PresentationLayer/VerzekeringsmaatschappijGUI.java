@@ -47,27 +47,27 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private static JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
+	private  final long serialVersionUID = 1L;
+	private  JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
 			infopaneel, knoppenPaneel, linkerpaneel, rechterpaneel;
-	private static JTextField zoekVeld;
-	private static JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
-			btnToevoegen;
-	private static JTable Verzekering_Table;
-	private static Integer row;
-	private static String naam;
-	private static JTextArea Uitgebreide_Info;
+	private  JTextField zoekVeld;
+	private  JButton zoekKnop, resetKnop, btnWijzigen, btnVerwijderen,
+			btnToevoegen, btnTypes;
+	private  JTable Verzekering_Table;
+	private  Integer row;
+	private  String naam;
+	private  JTextArea Uitgebreide_Info;
 
 
 	// The datamodel to be displayed in the JTable.
-	private static DataTableModelVerzekeringen dataTableModelVerzekeringen;
-	private static ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
+	private  DataTableModelVerzekeringen dataTableModelVerzekeringen;
+	private  ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
 
 	// Get a logger instance for the current class
 	Logger logger = Logger.getLogger(MainGUI.class);
 
 	@SuppressWarnings({ "serial", "unused" })
-	public static JPanel VerzekeringsGUI(VerzekeringsmaatschappijManager manager) {
+	public  JPanel VerzekeringsGUI(VerzekeringsmaatschappijManager manager) {
 		tabelpaneel = new JPanel();
 		knoppenPaneel = new JPanel();
 		zoekpaneel = new JPanel();
@@ -86,6 +86,8 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		btnWijzigen.setEnabled(false);
 		btnVerwijderen.setEnabled(false);
 		Uitgebreide_Info = new JTextArea();
+		btnTypes = new JButton();
+		btnTypes.setEnabled(false);
 		
 		
 
@@ -139,6 +141,9 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnToevoegen);
 		knoppenPaneel.add(btnWijzigen);
 		knoppenPaneel.add(btnVerwijderen);
+		knoppenPaneel.add(btnTypes);
+		btnTypes.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
+		btnTypes.setMargin(new Insets(0, 0, 0, 0));
 		
 		infopaneel.add(Uitgebreide_Info, BorderLayout.CENTER);
 		Uitgebreide_Info.setColumns(40);
@@ -165,6 +170,21 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			}
 		});
 
+		// / TYPE paneel
+		btnTypes.addMouseListener(new MouseAdapter(){
+			
+			public void mouseClicked(MouseEvent e){
+				if (btnTypes.isEnabled()) {
+					 System.out.println("verzekering geselecteerd!");
+					ChangeVerzekeringsTypeDialog changeVerzekeringsTypeDialog = new ChangeVerzekeringsTypeDialog(
+							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 0).toString());
+							changeVerzekeringsTypeDialog.setVisible(true);
+			}
+		}
+	});
+		
+		
+		
 		
 		// / CRUD Toevoegen
 
@@ -283,7 +303,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		return VerzekeringPanel;
 			}
 
-	public static void fillTable(VerzekeringsmaatschappijManager manager) {
+	public void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();
 		System.out.println(verzekeringList.size());
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
@@ -301,6 +321,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 							.getSelectedRowCount() > 0;
 					btnWijzigen.setEnabled(rowsAreSelected);
 					btnVerwijderen.setEnabled(rowsAreSelected);
+					btnTypes.setEnabled(rowsAreSelected);
 					
 				}
 				

@@ -116,12 +116,13 @@ public class MainGUI {
 		 */
 		btnVerzekeringmaatschapij = new JButton("Verzekeringmaatschapij");
 		Header_Button.add(btnVerzekeringmaatschapij, BorderLayout.EAST);
+		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
 		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				KlantenPanel.setVisible(false);
 				VerzekeringPanel.setVisible(false);
-				VerzekeringsMaatschappijPanel.add(VerzekeringsmaatschappijGUI.VerzekeringsGUI(maatschappijManager));
+				VerzekeringsMaatschappijPanel.add(gui);
 				VerzekeringsMaatschappijPanel.setVisible(true);
 				FacturatiePanel.setVisible(false);
 			}
