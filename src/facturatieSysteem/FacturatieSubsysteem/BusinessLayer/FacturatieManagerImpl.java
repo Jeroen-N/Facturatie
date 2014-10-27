@@ -92,7 +92,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				System.out.println("type naam: "+type.getNaam());
 				
 				if (polisNaam.equals(type.getNaam())) {
-					verzekering = verzekeringsmanager.getVerzekeringstype(
+					verzekering = verzekeringsmanager.getVerzekeringstypeByName(
 							maatschappij, polisNaam);
 					System.out.println(verzekering.getNaam());
 					System.out.println("verzekerde behandelCodes: " + verzekering.getBehandelcodes());

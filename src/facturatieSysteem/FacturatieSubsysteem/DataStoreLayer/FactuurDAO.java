@@ -71,7 +71,7 @@ public class FactuurDAO implements FactuurDAOinf {
 								.getTextContent();
 						double vergoedeBedrag = Double
 								.parseDouble(factuurElement
-										.getElementsByTagName("EigenRisico")
+										.getElementsByTagName("TevergoedenBedrag")
 										.item(0).getTextContent());
 						String status = factuurElement
 								.getElementsByTagName("Status").item(0)
@@ -211,7 +211,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	public boolean maakFactuur(Klant klant, Factuur factuur) {
-		document = daoFactoryFacturatie.getDocument();
+		document = daoFactoryClient.getDocument();
 
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
@@ -250,8 +250,10 @@ public class FactuurDAO implements FactuurDAOinf {
 					// Element factuurbehandelingen maken.
 					Element factuurBehandelingen = document
 							.createElement("FactuurBehandelingen");
-					facturenElement.appendChild(factuurBehandelingen);
-
+					factuurElement.appendChild(factuurBehandelingen);
+					
+					System.out.println("aantal behandelingen: "+factuur.getBehandelingen().size());
+					
 					// ArrayList met behandelingen vullen.
 					behandelingen = factuur.getBehandelingen();
 
@@ -263,6 +265,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						factuurBehandelingen.appendChild(factuurBehandeling);
 						Element behandelAfspraakID = document
 								.createElement("BehandelafspraakID");
+						System.out.println("aantal afspraken: "+behandeling.getAfspraakIDs().size());
 						for (String id : behandeling.getAfspraakIDs()) {
 							behandelAfspraakID.appendChild(document
 									.createTextNode(id));
@@ -278,9 +281,8 @@ public class FactuurDAO implements FactuurDAOinf {
 					}
 					
 					
-					Element eigenRisico = document.createElement("EigenRisco");
-					eigenRisico.appendChild(document.createTextNode(Double
-							.toString(factuur.getVergoedeBedrag())));
+					Element eigenRisico = document.createElement("TevergoedenBedrag");
+					eigenRisico.appendChild(document.createTextNode(Double.toString(factuur.getVergoedeBedrag())));
 
 					Element status = document.createElement("Status");
 					status.appendChild(document.createTextNode(factuur
@@ -290,7 +292,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					totaalPrijs.appendChild(document.createTextNode(Double.toString(factuur.getTotaalPrijs())));
 				}
 			}
-			return daoFactoryFacturatie.writeDocument();
+			return daoFactoryClient.writeDocument();
 		} catch (DOMException e) {
 			return false;
 		}
@@ -323,7 +325,7 @@ public class FactuurDAO implements FactuurDAOinf {
 							.getTextContent();
 
 					double vergoedeBedrag = Double.parseDouble(factuurElement
-							.getElementsByTagName("EigenRisico").item(0)
+							.getElementsByTagName("TevergoedenBedrag").item(0)
 							.getTextContent());
 					String status = factuurElement
 							.getElementsByTagName("Status").item(0)
