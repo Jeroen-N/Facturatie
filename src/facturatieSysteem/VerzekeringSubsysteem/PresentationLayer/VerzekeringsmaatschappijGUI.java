@@ -38,7 +38,6 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
@@ -55,7 +54,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			btnToevoegen;
 	private static JTable Verzekering_Table;
 	private static Integer row;
-	private static String naam;
 	private static JTextArea Uitgebreide_Info;
 
 

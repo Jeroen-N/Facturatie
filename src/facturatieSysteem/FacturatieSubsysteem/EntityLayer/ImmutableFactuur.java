@@ -37,6 +37,10 @@ public interface ImmutableFactuur {
 	public void setBSN(String bSN);
 
 	public String toString(Factuur factuur, String behandelingen);
+	
+	public double getTotaalPrijs();
 
+
+	public void setTotaalPrijs(double totaalPrijs);
 
 }

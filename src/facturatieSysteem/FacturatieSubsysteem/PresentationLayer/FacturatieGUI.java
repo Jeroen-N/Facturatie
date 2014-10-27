@@ -10,16 +10,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
-import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Bon;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
-import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
 
 public class FacturatieGUI {
 
