@@ -50,11 +50,20 @@
 								 <xs:element name="FactuurBehandelingen" maxOccurs="unbounded" minOccurs="0">
 									<xs:complexType>
 										<xs:sequence>
-											<xs:element type="xs:string" name="BehandelingID" maxOccurs="unbounded" minOccurs="0"/>
+											<xs:element name="FactuurBehandeling" maxOccurs="unbounded" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element type="xs:string" name="BehandelafspraakID" maxOccurs="unbounded" minOccurs="0"/>
+													</xs:sequence>
+												<xs:attribute type="xs:string" name="BehandelingID"/>
+												</xs:complexType>
+											</xs:element>
 										</xs:sequence>
 									</xs:complexType>
 								 </xs:element>
-			                     <xs:element type="xs:float" name="EigenRisico"/>
+			                    <xs:element type="xs:float" name="TevergoedenBedrag"/>
+								<xs:element type="xs:string" name="Status"/>
+								<xs:element type="xs:float" name="Totaalprijs"/>
 			                  	</xs:sequence>
 			                <xs:attribute type="xs:string" name="FactuurNummer"/>
 			                </xs:complexType>

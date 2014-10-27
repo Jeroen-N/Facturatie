@@ -14,7 +14,6 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
@@ -35,7 +34,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
 		this.behandelingDAO = new BehandelingDAO(daoFactoryBehandelcodes,
-				daoFactoryClient, daoFactoryFacturatie);
+				daoFactoryClient);
 		// daoFactoryBehandelcodes.validateXML();
 		// daoFactoryClient.validateXML();
 		// daoFactoryFacturatie.validateXML();
@@ -104,6 +103,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		int z = 0;
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
 		for (Behandeling behandeling : behandelingenlijst) {	
+			totalePrijs = 00;		
 			for (String code : verzekering.getBehandelcodes()) {
 				z = 0;
 				if (behandeling.getBehandelCode().equals(code)) {	
@@ -140,10 +140,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			
 			behandeling.setTotaalprijs(totalePrijs);
 			System.out.println("Totaalprijs behandelingen: "+ behandeling.getTotaalprijs());
-			totalePrijs = 00;			
+				
 		}
 		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
-				teVergoedenPrijs, behandelingenlijst, "Niet betaald");
+				teVergoedenPrijs, behandelingenlijst, "Niet betaald", totalePrijs);
 		factuurDAO.maakFactuur(klant, f);
 		return f;
 	}

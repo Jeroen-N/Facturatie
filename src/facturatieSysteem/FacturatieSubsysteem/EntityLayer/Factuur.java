@@ -15,8 +15,9 @@ public class Factuur implements ImmutableFactuur {
 	private ArrayList<Behandeling> behandelingen;
 	private double vergoedeBedrag;
 	private String status;
+	private double totaalPrijs;
 
-	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double vergoedeBedrag, ArrayList<Behandeling> behandelingen, String status) {
+	public Factuur(String factuurNummer, String factuurDatum, String vervalDatum, String BSN, double vergoedeBedrag, ArrayList<Behandeling> behandelingen, String status, double totaalPrijs) {
 		this.factuurNummer = factuurNummer;
 		this.factuurDatum = factuurDatum;
 		this.vervalDatum = vervalDatum;
@@ -24,6 +25,17 @@ public class Factuur implements ImmutableFactuur {
 		this.vergoedeBedrag = vergoedeBedrag;
 		this.behandelingen = behandelingen;
 		this.status = status;
+		this.totaalPrijs = totaalPrijs;
+	}
+
+
+	public double getTotaalPrijs() {
+		return totaalPrijs;
+	}
+
+
+	public void setTotaalPrijs(double totaalPrijs) {
+		this.totaalPrijs = totaalPrijs;
 	}
 
 

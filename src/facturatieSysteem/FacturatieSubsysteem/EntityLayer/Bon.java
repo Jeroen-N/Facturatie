@@ -54,10 +54,12 @@ public class Bon {
 
             Document document = new Document(PageSize.A4);
 
-            PdfWriter.getInstance(document, new FileOutputStream(file));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
+            
+            writer.setPageEvent(new HeaderAndFooter(factuur));
 
             document.open();
-
+            
             document.add(Header());
 
             document.add(Chunk.NEWLINE);
@@ -66,11 +68,7 @@ public class Bon {
             
             document.add(Chunk.NEWLINE);
             
-            document.add(facturatieInformatie());
-            
-            document.add(Chunk.NEWLINE);
-            
-            document.add(vergoed());            
+            document.add(facturatieInformatie());           
 
             document.setMargins(0, 0, 0, 100);
 
@@ -84,7 +82,7 @@ public class Bon {
 	private Paragraph Header(){
 		Chunk maatschappijChunk = new Chunk(maatschappij.toString());
 		
-		Paragraph header = new Paragraph("Bedrijfsgegevens: \n", FontFactory.getFont("Times-Roman", 10, Font.BOLD));
+		Paragraph header = new Paragraph("Bedrijfsgegevens: \n", FontFactory.getFont("Times-Roman", 10, Font.ITALIC));
 		
 		header.add(maatschappijChunk);
 		
@@ -96,7 +94,7 @@ public class Bon {
 	private Paragraph Client(){
 		Chunk client = new Chunk(klant.toStringFactuur());
 		
-		Paragraph clientParagraph = new Paragraph("Klantgegevens: \n", FontFactory.getFont("Times-Roman", 10, Font.BOLD));
+		Paragraph clientParagraph = new Paragraph("Klantgegevens: \n", FontFactory.getFont("Times-Roman", 10, Font.ITALIC));
 		
 		clientParagraph.add(client);
 		
@@ -108,7 +106,7 @@ public class Bon {
 	private Paragraph FactuurInfo(){
 		Chunk info = new Chunk(factuur.toStringBon(klant));
 		
-		Paragraph factuurInfo = new Paragraph("Factuur informatie: \n", FontFactory.getFont("Times-Roman", 10, Font.BOLD));
+		Paragraph factuurInfo = new Paragraph("Factuur informatie: \n", FontFactory.getFont("Times-Roman", 10, Font.NORMAL));
 		
 		factuurInfo.add(info);
 		
@@ -144,84 +142,14 @@ public class Bon {
 	}
 	
 	private Paragraph facturatieInformatie(){
-		Paragraph facInfo = new Paragraph();
-		
-		PdfPTable table = new PdfPTable(4);
-        table.setWidthPercentage(100);
-        table.getDefaultCell().setBorder(0);
-        PdfPCell cell;
-
-        Font fontbold = FontFactory.getFont("Times-Roman", 10, Font.BOLD);
-        Font normal = FontFactory.getFont("Times-Roman", 10);
-
-        table.addCell(new Phrase("Behandeling", fontbold));
-        table.addCell(new Phrase("Prijs", fontbold));
-        table.addCell(new Phrase("Aantal", fontbold));
-        
-        cell = new PdfPCell(new Phrase("Totaalprijs", fontbold));
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setBorder(0);
-        cell.setPaddingBottom(5);
-        table.addCell(cell);
-
-        BehandelingDAO bDAO = factManager.getBDAO();
-        
-        NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
-        
-        for (Behandeling behandeling : factuur.getBehandelingen()) {
-	            table.addCell(new Phrase(bDAO.getNaam(behandeling.getBehandelCode()), normal));
-	            table.addCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode()))), normal));
-	            table.addCell(new Phrase(String.valueOf(behandeling.getSessies()), normal));
-	            
-	            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
-	            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-	            cell.setBorder(0);
-	            cell.setPaddingBottom(5);
-	            table.addCell(cell);
-        }
-       
-
-        cell = new PdfPCell(new Phrase("Excl. BTW", fontbold));
-        cell.setBorder(Rectangle.TOP);
-        table.addCell(cell);
-
-        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(factManager.getTotaalPrijs(factuur)))), fontbold));
-        cell.setColspan(3);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setBorder(Rectangle.TOP);
-        table.addCell(cell);
-
-        cell = new PdfPCell(new Phrase("BTW 21%", fontbold));
-        cell.setBorder(0);
-        cell.setPaddingBottom(5);
-        table.addCell(cell);
-
-        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(((getallenOpmaker.format(factManager.getTotaalPrijs(factuur)*0.21)))), fontbold));
-        cell.setColspan(4);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setBorder(0);
-        table.addCell(cell);
-
-        cell = new PdfPCell(new Phrase("Incl. BTW", fontbold));
-        cell.setBorder(Rectangle.TOP);
-        table.addCell(cell);
-
-        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(factManager.getTotaalinclBTW(factuur)))), fontbold));
-        cell.setColspan(3);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        cell.setBorder(Rectangle.TOP);
-        table.addCell(cell);
-        facInfo.add(table);
-        
-		return facInfo;
-	}
-	
-	private Paragraph vergoed(){
 		Paragraph vergoed = new Paragraph();
 		
 		PdfPTable table = new PdfPTable(4);
+		PdfPTable table2 = new PdfPTable(4);
         table.setWidthPercentage(100);
         table.getDefaultCell().setBorder(0);
+        table2.setWidthPercentage(100);
+        table2.getDefaultCell().setBorder(0);
         PdfPCell cell;
         
         //fonts aanmaken
@@ -237,23 +165,20 @@ public class Bon {
 		}
         
         // Verzekeringspolis weergeven
-        cell = new PdfPCell(new Phrase("De polis: " + polisNaam));
+        cell = new PdfPCell(new Phrase("De polis: " + polisNaam, normal));
         cell.setColspan(4);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(0);
         table.addCell(cell);
         
-        // Extra informatie text
-        cell = new PdfPCell(new Phrase("De polis de vergoede behandelingen binnen uw polis zijn:"));
+        // Extra informatie text table 1
+        cell = new PdfPCell(new Phrase("De polis de vergoede behandelingen binnen uw polis zijn:", normal));
         cell.setColspan(4);
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.setBorder(0);
         table.addCell(cell);
         
-        // Format voor de bedragen
-        NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
-        
-        // Headers
+        // Headers van table 1
         table.addCell(new Phrase("Behandeling", fontbold));
         table.addCell(new Phrase("Prijs", fontbold));
         table.addCell(new Phrase("Aantal", fontbold));
@@ -263,6 +188,33 @@ public class Bon {
         cell.setBorder(0);
         cell.setPaddingBottom(5);
         table.addCell(cell);
+        
+     // Extra informatie text table2
+        cell = new PdfPCell(new Phrase("  ", normal));
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setBorder(0);
+        table2.addCell(cell);
+        
+        cell = new PdfPCell(new Phrase("De behandelingen die niet binnen uw polis vallen zijn:", normal));
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        cell.setBorder(0);
+        table2.addCell(cell);
+        
+        // Headers van table 2
+        table2.addCell(new Phrase("Behandeling", fontbold));
+        table2.addCell(new Phrase("Prijs", fontbold));
+        table2.addCell(new Phrase("Aantal", fontbold));
+        
+        cell = new PdfPCell(new Phrase("Totaalprijs", fontbold));
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(0);
+        cell.setPaddingBottom(5);
+        table2.addCell(cell);
+        
+     // Format voor de bedragen
+        NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
         
         // loopen door de manager om de maatschappij op te halen
         for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
@@ -279,6 +231,9 @@ public class Bon {
 			}
 		}
         
+        int x = 0;
+        double totaalPrijsPolis = 0.0;
+        double totaalPrijsZelf = 0.0;
         for (Behandeling behandeling : factuur.getBehandelingen()) {
         	for (String code : verzekering.getBehandelcodes()) {
         		if((behandeling.getBehandelCode().equals(code))){
@@ -291,12 +246,95 @@ public class Bon {
 		            cell.setBorder(0);
 		            cell.setPaddingBottom(5);
 		            table.addCell(cell);
-        		}
+		            
+		            totaalPrijsPolis += (bDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies());
+		            x = 1;
+		            break;
+        		} 
+        	}
+        	if (x == 0){
+        		table2.addCell(new Phrase(bDAO.getNaam(behandeling.getBehandelCode()), normal));
+	            table2.addCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode()))), normal));
+	            table2.addCell(new Phrase(String.valueOf(behandeling.getSessies()), normal));
+	            
+	            cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(getallenOpmaker.format(bDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies())), normal));
+	            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+	            cell.setBorder(0);
+	            cell.setPaddingBottom(5);
+	            table2.addCell(cell);
+	            
+	            totaalPrijsZelf += (bDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies());
+        	} else {
+        		x = 0;
         	}
         }
         
+        //Table 1 betaal informatie
+        cell = new PdfPCell(new Phrase("Excl. BTW", fontbold));
+        cell.setBorder(Rectangle.TOP);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((totaalPrijsPolis)), fontbold));
+        cell.setColspan(3);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(Rectangle.TOP);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("BTW 21%", fontbold));
+        cell.setBorder(0);
+        cell.setPaddingBottom(5);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(((getallenOpmaker.format(totaalPrijsPolis * 0.21)))), fontbold));
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(0);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("Incl. BTW", fontbold));
+        cell.setBorder(Rectangle.TOP);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(totaalPrijsPolis * 1.21))), fontbold));
+        cell.setColspan(3);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(Rectangle.TOP);
+        table.addCell(cell);
 		
+        //Table 2 betaal informatie
+        cell = new PdfPCell(new Phrase("Excl. BTW", fontbold));
+        cell.setBorder(Rectangle.TOP);
+        table2.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((totaalPrijsZelf)), fontbold));
+        cell.setColspan(3);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(Rectangle.TOP);
+        table2.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("BTW 21%", fontbold));
+        cell.setBorder(0);
+        cell.setPaddingBottom(5);
+        table2.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf(((getallenOpmaker.format(totaalPrijsZelf * 0.21)))), fontbold));
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(0);
+        table2.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("Incl. BTW", fontbold));
+        cell.setBorder(Rectangle.TOP);
+        table2.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(totaalPrijsZelf * 1.21))), fontbold));
+        cell.setColspan(3);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        cell.setBorder(Rectangle.TOP);
+        table2.addCell(cell);
+        
         vergoed.add(table);
+        vergoed.add(table2);
         
 		return vergoed;
 	}

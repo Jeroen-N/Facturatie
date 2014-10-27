@@ -1,10 +1,6 @@
 package facturatieSysteem.FacturatieSubsysteem.DataStoreLayer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -80,13 +76,12 @@ public class FactuurDAO implements FactuurDAOinf {
 						String status = factuurElement
 								.getElementsByTagName("Status").item(0)
 								.getTextContent();
+						
+						double totaalPrijs = Double.parseDouble(factuurElement
+								.getElementsByTagName("Totaalprijs").item(0)
+								.getTextContent());
 						// factuur
 
-						// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// TODO behandelingennode heeft maar 1 behandeling
-						// terwijl er 2 aanwezig zijn. Node2 echter heeft er wel
-						// gewoon 2 terwijl dit er ook 2 moeten zijn.//
-						// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 						ArrayList<Behandeling> behandelingen = new ArrayList<>();
 						Element factuurBehandelingenElement = (Element) factuurElement
@@ -201,7 +196,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						}
 						factuur = new Factuur(factuurNummer, factuurDatum,
 								vervalDatum, invoerBSN, vergoedeBedrag,
-								behandelingen, status);
+								behandelingen, status, totaalPrijs);
 						System.out.println();
 						facturen.add(factuur);
 					}
@@ -278,18 +273,21 @@ public class FactuurDAO implements FactuurDAOinf {
 							BehandelingId.setValue(behandeling
 									.getbehandelingId());
 							behandelAfspraakID.setAttributeNode(BehandelingId);
-
+							
 						}
 					}
-					// TODO totaalprijs moet nog toegevoegd worden.
 					
 					
 					Element eigenRisico = document.createElement("EigenRisco");
 					eigenRisico.appendChild(document.createTextNode(Double
 							.toString(factuur.getVergoedeBedrag())));
-					
+
 					Element status = document.createElement("Status");
-					status.appendChild(document.createTextNode(factuur.getStatus()));
+					status.appendChild(document.createTextNode(factuur
+							.getStatus()));
+					
+					Element totaalPrijs = document.createElement("Totaalprijs");
+					totaalPrijs.appendChild(document.createTextNode(Double.toString(factuur.getTotaalPrijs())));
 				}
 			}
 			return daoFactoryFacturatie.writeDocument();
@@ -298,7 +296,6 @@ public class FactuurDAO implements FactuurDAOinf {
 		}
 	}
 
-	// TODO nakijken, zitten nog fouten is
 	public ArrayList<Factuur> haalAlleFacturen() {
 		document = daoFactoryClient.getDocument();
 		try {
@@ -332,8 +329,13 @@ public class FactuurDAO implements FactuurDAOinf {
 							.getElementsByTagName("Status").item(0)
 							.getTextContent();
 
+					double totaalPrijs = Double.parseDouble(factuurElement
+							.getElementsByTagName("Totaalprijs").item(0)
+							.getTextContent());
+
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN, vergoedeBedrag, null, status);
+							vervalDatum, BSN, vergoedeBedrag, null, status,
+							totaalPrijs);
 					facturen.add(factuur);
 
 				}
