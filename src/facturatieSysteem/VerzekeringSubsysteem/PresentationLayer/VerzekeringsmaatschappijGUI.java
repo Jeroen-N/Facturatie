@@ -60,6 +60,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private  Integer row;
 	private  JTextArea Uitgebreide_Info;
 	private Verzekeringsmaatschappij maatschappij;
+	VerzekeringsmaatschappijManager VZmanager;
 
 	// The datamodel to be displayed in the JTable.
 	private  DataTableModelVerzekeringen dataTableModelVerzekeringen;
@@ -116,7 +117,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		zoekVeld.setMaximumSize(new Dimension(6, 20));
 		zoekKnop.setAlignmentY(TOP_ALIGNMENT);
 		zoekVeld.setColumns(15);
-		zoekVeld.setText("Maatschappij nummer...");
+		zoekVeld.setText("Maatschappij naam...");
 		
 		linkerpaneel.add(zoekLabel, BorderLayout.WEST);
 		linkerpaneel.add(zoekVeld, BorderLayout.EAST);
@@ -140,11 +141,14 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		
 		zoekKnop.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent e){
-				if (zoekVeld.getText().matches("([1-999])")){
-						fillTableZoekresultaat(zoekVeld.getText());		
+				if (zoekVeld.getText().matches(".*")){
+					fillTableZoekresultaat(zoekVeld.getText());	
 				}else{
-				showConfirmationWindow("Geen geldige zoekwaarde");
-			}
+					System.out.println("Hij doet het niet");
+				}
+					
+				
+			
 			}
 		});
 		
@@ -185,6 +189,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		knoppenPaneel.add(btnTypesToevoegen);
+		
 		
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
@@ -387,14 +392,17 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 }
 	
 	
-	public void fillTableZoekresultaat(String nummer){
+	
+	public void fillTableZoekresultaat(String naam){
+		verzekeringList = VZmanager.
+		System.out.println("test1");
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
 			
 		if(count > 0){
 			Verzekering_Table.removeAll();
 			dataTableModelVerzekeringen.setValues(verzekeringList);
 		}else{
-			showConfirmationWindow("Geen klanten gevonden");
+			showConfirmationWindow("Geen verzekering gevonden");
 		}
 	} 
 
