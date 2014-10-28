@@ -65,6 +65,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	// The datamodel to be displayed in the JTable.
 	private  DataTableModelVerzekeringen dataTableModelVerzekeringen;
 	private  ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
+	private ArrayList<Verzekeringsmaatschappij> verzekeringList2;
 
 	// Get a logger instance for the current class
 	Logger logger = Logger.getLogger(MainGUI.class);
@@ -92,7 +93,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		btnTypes = new JButton();
 		btnTypes.setEnabled(false);
 		
-		//nummer = maatschappij.getNr();
+		
 		
 		
 		
@@ -394,13 +395,18 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	
 	
 	public void fillTableZoekresultaat(String naam){
-		verzekeringList = VZmanager.
-		System.out.println("test1");
-		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
+		verzekeringList2 = new ArrayList<Verzekeringsmaatschappij>();
+		for(Verzekeringsmaatschappij maatschappij : verzekeringList){
+			
+			if(maatschappij.getNaam().toLowerCase().contains(naam.toLowerCase())){
+				verzekeringList2.add(maatschappij);
+			}
+		}
+		int count = (verzekeringList2 == null) ? 0 : verzekeringList2.size();
 			
 		if(count > 0){
 			Verzekering_Table.removeAll();
-			dataTableModelVerzekeringen.setValues(verzekeringList);
+			dataTableModelVerzekeringen.setValues(verzekeringList2);
 		}else{
 			showConfirmationWindow("Geen verzekering gevonden");
 		}
