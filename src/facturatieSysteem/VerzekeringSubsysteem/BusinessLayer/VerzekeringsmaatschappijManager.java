@@ -34,4 +34,7 @@ public interface VerzekeringsmaatschappijManager {
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
 
 	String maatschappijInfo(Verzekeringsmaatschappij maatschappij);
+
+	boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij,
+			Verzekeringstype type, String behandelcode);
 }

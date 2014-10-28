@@ -104,14 +104,15 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 	public boolean updateVerzekeringstypeXML(String maatschappijnr, Verzekeringstype type) {
 		document = daoFactory.getDocument();
 		try{
-		
 		Element facturatieSysteem = (Element) document.getElementsByTagName("facturatieSysteem").item(0);
 		NodeList maatschappijen = facturatieSysteem.getElementsByTagName("verzekeringsmaatschappij");
 		//loop through all clients
 			for(int i = 0; i < maatschappijen.getLength(); i++){
+				
 				Element maatschappijElement = (Element) maatschappijen.item(i);
 				String nr = maatschappijElement.getAttribute("maatschappijnr");
 				if(maatschappijnr.equals(nr)){
+					
 					Element verzekeringsPolissenElement = (Element) maatschappijElement.getElementsByTagName("verzekeringsTypes").item(0);
 					NodeList polissen = verzekeringsPolissenElement.getElementsByTagName("verzekeringsType");
 					for (int j = 0; j < polissen.getLength();j++){
@@ -130,12 +131,12 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 				}
 				
 				}
-				return daoFactory.writeDocument();
+				
 			}
+			return daoFactory.writeDocument();
 		} catch(DOMException e){
 			return false;
 		}
-		return false;
 	}
 	
 	@Override
@@ -162,8 +163,9 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 							behandelcodeElement.appendChild(document.createTextNode(behandelcode));
 							behandelCodes.appendChild(behandelcodeElement);
 							behandelCodes.appendChild(document.createTextNode("\n\t\t\t\t"));
+							break;
 						}
-						break;
+						
 					}
 				}
 			}
@@ -186,7 +188,6 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 				if(maatschappijnr.equals(nr)){
 					Element verzekeringsTypes = (Element) maatschappijElement.getElementsByTagName("verzekeringsTypes").item(0);
 					NodeList verzekeringType = verzekeringsTypes.getElementsByTagName("verzekeringsType");
-					//
 					for (int j = 0; j < verzekeringType.getLength();j++){
 						Element Type = (Element) verzekeringType.item(j);
 						String nrt = Type.getAttribute("typenr");

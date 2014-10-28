@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.log4j.Logger;
 
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.main.DataTableModel;
 
@@ -16,7 +15,10 @@ public class DataTableModelChangeType extends AbstractTableModel{
 	/**
 	 * 
 	 */
-	private  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private  Vector<String[]> cache; // will hold String[] objects . . .
 	private  int colCount;
 	private  String[] headers;

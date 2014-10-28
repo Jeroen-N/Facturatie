@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
-import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
 
@@ -47,7 +46,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	/**
 	 * 
 	 */
-	private  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private  JPanel VerzekeringPanel, zoekpaneel, tabelpaneel,
 			infopaneel, knoppenPaneel, linkerpaneel, rechterpaneel;
 
@@ -56,9 +58,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			btnToevoegen, btnTypes, btnTypesToevoegen;
 	private  JTable Verzekering_Table;
 	private  Integer row;
-	private  String naam;
 	private  JTextArea Uitgebreide_Info;
-	private Verzekeringstype type;
 	private Verzekeringsmaatschappij maatschappij;
 
 	// The datamodel to be displayed in the JTable.
@@ -204,7 +204,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			
 			public void mouseClicked(MouseEvent e){
 				if (btnTypes.isEnabled()) {
-					 System.out.println("verzekering geselecteerd!");
 					ChangeVerzekeringsTypeDialog changeVerzekeringsTypeDialog = new ChangeVerzekeringsTypeDialog(
 							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 0).toString());
 							changeVerzekeringsTypeDialog.setVisible(true);
@@ -244,7 +243,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			public void mouseClicked(MouseEvent d) {
 				// "Wijzigen verzekering wordt geklikt"
 				if (btnWijzigen.isEnabled()) {
-					 System.out.println("verzekering geselecteerd!");
 					ChangeVerzekeringDialog changeVerzekeringDialog = new ChangeVerzekeringDialog(
 							manager, Verzekering_Table.getModel().getValueAt(Verzekering_Table.getSelectedRow(), 0)
 									.toString());
@@ -254,15 +252,12 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 					changeVerzekeringDialog.setVisible(true);
 					changeVerzekeringDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
-							// System.out.println("window is closed");
 							Verzekering_Table.removeAll();
 							fillTable(manager);
 							Verzekering_Table.setRowSelectionInterval(row, row);
 							//fillField(row);
 						}
 					});
-				} else {
-					System.out.println("geen verzekering geselecteerd");
 				}
 			}
 		});
@@ -334,7 +329,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 
 	public void fillTable(VerzekeringsmaatschappijManager manager) {
 		verzekeringList = manager.getVerzekeringsmaatschappijen();
-		System.out.println(verzekeringList.size());
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
 
 		if (count > 0) {

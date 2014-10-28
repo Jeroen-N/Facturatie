@@ -48,7 +48,6 @@ public class ChangeVerzekeringDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ChangeVerzekeringDialog(VerzekeringsmaatschappijManager manager, String maatschappijnr) {
 		setTitle("Verzekering beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -59,7 +58,6 @@ public class ChangeVerzekeringDialog extends JDialog {
 		 */
 		
 		verzekering = manager.getVerzekeringsmaatschappij(maatschappijnr);
-		System.out.println(verzekering.getNaam());
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
