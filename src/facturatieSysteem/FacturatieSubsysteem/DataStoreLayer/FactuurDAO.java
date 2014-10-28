@@ -17,11 +17,9 @@ public class FactuurDAO implements FactuurDAOinf {
 	private ArrayList<Factuur> facturen = new ArrayList<Factuur>();
 	private Document document = null;
 	private ArrayList<Behandeling> behandelingen = new ArrayList<>();
-
+	private NodeList behandelAfspraken;
 	private Factuur factuur;
 	private DAOFactoryFactuur daoFactoryClient;
-	private DAOFactoryFactuur daoFactoryFacturatie;
-
 	/**
 	 * Haalt alle facturen op van de klant waarvan deze geladen moeten worden.
 	 * 
@@ -35,7 +33,6 @@ public class FactuurDAO implements FactuurDAOinf {
 			DAOFactoryFactuur daoFactoryClient,
 			DAOFactoryFactuur daoFactoryFacturatie) {
 		this.daoFactoryClient = daoFactoryClient;
-		this.daoFactoryFacturatie = daoFactoryFacturatie;
 	}
 
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
@@ -264,6 +261,7 @@ public class FactuurDAO implements FactuurDAOinf {
 					Element BehandelingenElement= (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
 					NodeList Behandelingen = BehandelingenElement.getElementsByTagName("Behandeling");
 					
+					
 					for (Behandeling behandeling : behandelingen) {
 						Element factuurBehandeling = document.createElement("FactuurBehandeling");
 						factuurBehandelingen.appendChild(factuurBehandeling);
@@ -271,11 +269,11 @@ public class FactuurDAO implements FactuurDAOinf {
 						//TODO Status updaten naar gefactuureerd!!!
 						
 						for (int j = 0; j < Behandelingen.getLength(); j++) {
-							Element factuurBehandelingElement = (Element) Behandelingen.item(j);
-							String behandelingID = factuurBehandelingElement.getAttribute("BehandelingID");
+							Element BehandelingElement = (Element) Behandelingen.item(j);
+							String behandelingID = BehandelingElement.getAttribute("id");
 							
 							if (behandelingID.equals(behandeling.getbehandelingId())){
-								Element Status = (Element) clientElement.getElementsByTagName("Gefactureerd").item(0);
+								behandelAfspraken = BehandelingElement.getElementsByTagName("behandelafspraak");
 								break;
 							}
 						}
@@ -288,6 +286,18 @@ public class FactuurDAO implements FactuurDAOinf {
 							Attr BehandelingId = document.createAttribute("BehandelingID");
 							BehandelingId.setValue(behandeling.getbehandelingId());
 							factuurBehandeling.setAttributeNode(BehandelingId);
+							
+							for(int k = 0; k < behandelAfspraken.getLength(); k++){
+								Element BehandelingafspraakElement = (Element)  behandelAfspraken.item(k);
+								String behandelingAfspraakID = BehandelingafspraakElement.getAttribute("ID");
+								
+								if (behandelingAfspraakID.equals(id)){
+									Element gefactureerd = (Element) BehandelingafspraakElement.getElementsByTagName("Gefactureerd").item(0);
+									gefactureerd.setTextContent("Ja");
+								}
+								
+							}
+							
 						}
 						
 						

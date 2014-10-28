@@ -10,7 +10,7 @@
 			<Telefoonnummer>0625235100</Telefoonnummer>
 			<Email>sjmblijl@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>80</ResterendEigenRisico>
+			<ResterendEigenRisico>0.0</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052185</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
@@ -53,7 +53,7 @@
 				<TevergoedenBedrag>200</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
-			</Factuur></Facturen>
+			</Factuur><Factuur FactuurNummer="262511"><FactuurDatum>28/10/2014</FactuurDatum><VervalDatum>11/11/2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="56"><BehandelafspraakID>365412</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="96"><BehandelafspraakID>261003</BehandelafspraakID><BehandelafspraakID>361004</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>265.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>345.0</Totaalprijs></Factuur></Facturen>
 		<Behandelingen>
 			<Behandeling id="12">
 				<behandelgegevens>
@@ -109,7 +109,7 @@
 					<Begintijd>09:00</Begintijd>
 					<Eindtijd>10:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Gefactureerd>Nee</Gefactureerd>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
@@ -157,7 +157,7 @@
 					<Begintijd>16:00</Begintijd>
 					<Eindtijd>17:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Gefactureerd>Nee</Gefactureerd>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 				<behandelafspraak ID="361004">
@@ -167,7 +167,7 @@
 					<Begintijd>09:00</Begintijd>
 					<Eindtijd>10:00</Eindtijd>
 					<Praktijkruimte>001</Praktijkruimte>
-					<Gefactureerd>Nee</Gefactureerd>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>
