@@ -25,9 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
@@ -46,7 +43,10 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	/**
 	 * 
 	 */
-	private  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private  JPanel changeVerzekeringType, changeType_1, changeType_2, buttonPane;
 	private  JTable typetable;
 	private  JScrollPane typeScrollPane;
@@ -54,10 +54,10 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	private  JTextField textFieldNaam;
 	private  JTextField textFieldEigenRisico;
 	private  Integer row;
-	private  JComboBox<String> comboBoxMaatschappij;
-	private  JComboBox<String> comboBoxVerzekeringsType;
-	private  VerzekeringsmaatschappijManager vermaatschappijManager;
-	
+	private  JComboBox<String> comboBoxBehandelCode, comboBoxBehandelCodeAdd;
+	private VerzekeringsmaatschappijManager manager;
+	private Verzekeringsmaatschappij maatschappij;
+	private String TypeNr;
 	
 	// The datamodel to be displayed in the JTable.
 	private DataTableModelChangeType dateTableModelChangeType;
@@ -71,13 +71,14 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	 */
 	@SuppressWarnings("serial")
 	public ChangeVerzekeringsTypeDialog(VerzekeringsmaatschappijManager manager, String nummer) {
+		this.manager = manager;
 		setBackground(Color.RED);
 		setTitle("Verzekeringstype beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 795, 509);
 		getContentPane().setLayout(new BorderLayout());
 		dateTableModelChangeType = new DataTableModelChangeType();
-		Verzekeringsmaatschappij maatschappij = manager.getVerzekeringsmaatschappij(nummer);
+		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
 		
 		{
 			/*
@@ -150,7 +151,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						typeScrollPane = new JScrollPane(typetable);
 						typetable.setFillsViewportHeight(true);
 						typeScrollPane.setBorder(new TitledBorder(new LineBorder(new Color(
-								0, 0, 0)), "Polislijst", TitledBorder.LEADING,
+								0, 0, 0)), "Typelijst", TitledBorder.LEADING,
 								TitledBorder.TOP, null, null));
 						typetable.getTableHeader().setReorderingAllowed(false);
 						typetable.getTableHeader().setResizingAllowed(false);
@@ -183,7 +184,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						changeType_2.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblVerzekering = new JLabel("Polis wijzigen");
+							JLabel lblVerzekering = new JLabel("Type wijzigen");
 							lblVerzekering.setPreferredSize(new Dimension(100,
 									20));
 							lblVerzekering
@@ -223,7 +224,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							textFieldTypeNr = new JTextField();
 							textFieldTypeNr.setColumns(15);
 							splitPanePolisNummer.setRightComponent(textFieldTypeNr);							
-							textFieldTypeNr.setEditable(true);
+							textFieldTypeNr.setEditable(false);
 						}
 					}
 					{
@@ -288,10 +289,28 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							textFieldEigenRisico.setColumns(15);
 							splitPaneEigenRisico.setRightComponent(textFieldEigenRisico);
 							textFieldEigenRisico.setEditable(true);
-							//textFieldEigenRisico.setText();
 						}
 					}
-					
+					{
+						JPanel panel = new JPanel();
+						panel.setMaximumSize(new Dimension(300, 20));
+						panel.setPreferredSize(new Dimension(300, 20));
+						panel.setMinimumSize(new Dimension(300, 20));
+						panel.setAlignmentY(0.0f);
+						panel.setAlignmentX(0.0f);
+						changeType_2.add(panel);
+						panel.setLayout(new BorderLayout(0, 0));
+						{
+							JLabel lblVerzekering = new JLabel("Behandelcode wijzigen");
+							lblVerzekering.setPreferredSize(new Dimension(100,
+									20));
+							lblVerzekering
+									.setMinimumSize(new Dimension(100, 20));
+							lblVerzekering
+									.setMaximumSize(new Dimension(100, 20));
+							panel.add(lblVerzekering, BorderLayout.NORTH);
+						}
+					}
 					{
 						JSplitPane splitPaneVerzekeringsType = new JSplitPane();
 						splitPaneVerzekeringsType.setMaximumSize(new Dimension(
@@ -304,44 +323,90 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						splitPaneVerzekeringsType.setBorder(null);
 						changeType_2.add(splitPaneVerzekeringsType);
 						{
-							JLabel lblVerzekeringstype = new JLabel(
-									"Verzekeringstype: ");
-							lblVerzekeringstype.setPreferredSize(new Dimension(
+							comboBoxBehandelCodeAdd = new JComboBox<String>();
+							
+							comboBoxBehandelCodeAdd.setEnabled(true);
+							comboBoxBehandelCodeAdd.setPreferredSize(new Dimension(
 									120, 16));
-							lblVerzekeringstype.setMinimumSize(new Dimension(
+							comboBoxBehandelCodeAdd.setMinimumSize(new Dimension(
 									120, 16));
-							lblVerzekeringstype.setMaximumSize(new Dimension(
+							comboBoxBehandelCodeAdd.setMaximumSize(new Dimension(
 									120, 16));
-							lblVerzekeringstype
-									.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblVerzekeringstype
-									.setHorizontalAlignment(SwingConstants.RIGHT);
-							splitPaneVerzekeringsType
-									.setLeftComponent(lblVerzekeringstype);
+							
+							splitPaneVerzekeringsType.setLeftComponent(comboBoxBehandelCodeAdd);
 						}
-						{
-							comboBoxVerzekeringsType = new JComboBox<String>();
-							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
-							comboBoxVerzekeringsType.setEnabled(true);
-							/*
-							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxMaatschappij.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
-										textFieldEigenRisico.setText(
-												Integer.toString(
-														vermaatschappijManager.getVerzekeringstype(
-																vermaatschappijManager.getVerzekeringsmaatschappij(
-																		comboBoxMaatschappij.getSelectedItem().toString()),
-																		comboBoxVerzekeringsType.getSelectedItem().toString())
-																		.getEigenRisico()));
+						{						
+							JButton btnOk = new JButton("Toevoegen");
+							splitPaneVerzekeringsType.setRightComponent(btnOk);
+							btnOk.addMouseListener(new MouseAdapter() {
+								public void mouseClicked(MouseEvent e) {
+									String behandelcode = comboBoxBehandelCodeAdd.getSelectedItem().toString();
+									 Component frame = null;
+										int n = JOptionPane.showConfirmDialog(
+											    frame,
+											    "Weet uw zeker dat u de behandelcode "+behandelcode+" wilt toevoegen",
+											    "Weet u het zeker?",
+											    JOptionPane.YES_NO_OPTION);
+										if(n == 0){
+											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+										}
 			
-									}
+									
 								}
-							});*/
+							});
+							
 						}
+						
 							
 					}
-
+					{
+						JSplitPane splitPaneVerzekeringsType = new JSplitPane();
+						splitPaneVerzekeringsType.setMaximumSize(new Dimension(
+								300, 30));
+						splitPaneVerzekeringsType.setMinimumSize(new Dimension(
+								300, 30));
+						splitPaneVerzekeringsType
+								.setPreferredSize(new Dimension(300, 30));
+						splitPaneVerzekeringsType.setDividerSize(0);
+						splitPaneVerzekeringsType.setBorder(null);
+						changeType_2.add(splitPaneVerzekeringsType);
+						{
+							comboBoxBehandelCode = new JComboBox<String>();
+							
+							comboBoxBehandelCode.setEnabled(true);
+							comboBoxBehandelCode.setPreferredSize(new Dimension(
+									120, 16));
+							comboBoxBehandelCode.setMinimumSize(new Dimension(
+									120, 16));
+							comboBoxBehandelCode.setMaximumSize(new Dimension(
+									120, 16));
+							
+							splitPaneVerzekeringsType.setLeftComponent(comboBoxBehandelCode);
+						}
+						{						
+							JButton btnOk = new JButton("Verwijderen");
+							splitPaneVerzekeringsType.setRightComponent(btnOk);
+							btnOk.addMouseListener(new MouseAdapter() {
+								public void mouseClicked(MouseEvent e) {
+									String behandelcode = comboBoxBehandelCode.getSelectedItem().toString();
+									 Component frame = null;
+										int n = JOptionPane.showConfirmDialog(
+											    frame,
+											    "Weet uw zeker dat u de behandelcode "+behandelcode+" wilt verwijderen",
+											    "Weet u het zeker?",
+											    JOptionPane.YES_NO_OPTION);
+										if(n == 0){
+											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+										}
+			
+									
+								}
+							});
+							
+						}
+						
+							
+					}		
 				}
 			}
 		{
@@ -360,30 +425,12 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						if (!comboBoxMaatschappij.getSelectedItem().equals("")){
-							/*String errorMessage =	manager.check
-									textFieldTypeNr.getText(),
-									comboBoxVerzekeringsType.getSelectedItem().toString(), 
-									textFieldNaam.getText(), 
-									.getText());
-							System.out.println(errorMessage);
-							if (!errorMessage.equals("")){
-								showConfirmationWindow(errorMessage);
-							}else{*/
-								/*if(!manager.updateVerzekeringPolisXML(
-										textFieldTypeNr.getText(), 
-										comboBoxVerzekeringsType.getSelectedItem().toString(), 
-										Double.parseDouble(textFieldEigenRisico.getText()),
-										textFieldNaam.getText(), 
-										.getText())){
-									showConfirmationWindow("Polis Teovoegen Mislukt");
-								}else{
-									dispose();
-								}*/
-							//}
-						}
-						else{
-							showConfirmationWindow("Geen verzekeringsmaatschappij gekozen");
+						if(!textFieldTypeNr.getText().equals(TypeNr) || textFieldNaam.getText().equals("")){
+							showConfirmationWindow("Geen type geselecteerd");
+						} else {
+							showConfirmationWindow("Type aangepast");
+							Verzekeringstype type = new Verzekeringstype(TypeNr,Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
+							manager.updateVerzekeringstype(maatschappij, type);
 						}
 					}
 				});
@@ -404,16 +451,15 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							 Component frame = null;
-							int n = JOptionPane.showConfirmDialog(
-								    frame,
-								    "Weet uw zeker dat u de polis met nummer "+textFieldTypeNr.getText()+" wilt verwijderen",
-								    "Weet u het zeker?",
-								    JOptionPane.YES_NO_OPTION);
-							if(n == 0){
-								//manager.deleteVerzekeringPolisXML(textFieldTypeNr.getText(), BSN);
-								dispose();
-							}
-							
+								int n = JOptionPane.showConfirmDialog(
+									    frame,
+									    "Weet uw zeker dat u de polis met nummer "+textFieldTypeNr.getText()+" wilt verwijderen",
+									    "Weet u het zeker?",
+									    JOptionPane.YES_NO_OPTION);
+								if(n == 0){
+									manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr));
+									dispose();
+								}							
 						}
 					});
 					buttonPane.add(btnPolisVerwijderen);
@@ -423,34 +469,17 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		}
 	}
 	public  void fillField(int row){
-		/*if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("") || 
-				comboBoxMaatschappij.getItemCount() > 0){
-		comboBoxMaatschappij.setSelectedIndex(0);
-		comboBoxVerzekeringsType.removeAllItems();
-		textFieldEigenRisico.removeAll();
-		}*/
-		String TypeNr = typetable.getModel().getValueAt(row, 0).toString();
+		comboBoxBehandelCode.removeAllItems();
+		TypeNr = typetable.getModel().getValueAt(row, 0).toString();
 		String naam = typetable.getModel().getValueAt(row, 1).toString();
 		String eigenRisico = typetable.getModel().getValueAt(row, 2).toString();
+		Verzekeringstype type = manager.getVerzekeringstype(maatschappij, TypeNr);
+		for(String behandelcode : type.getBehandelcodes()){
+			comboBoxBehandelCode.addItem(behandelcode);
+		}
 		textFieldTypeNr.setText(TypeNr);
-		//comboBoxVerzekeringsType.addItem(verType);
 		textFieldEigenRisico.setText(eigenRisico);
-		textFieldNaam.setText(naam);
-		/*for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
-			System.out.println("loop door maatschappijen");
-			for (Verzekeringstype type : maatschappij.getTypes()) {
-				System.out.println("loop door types" +type.getNaam());
-				if(type.getNaam().equals(verType)){
-					comboBoxMaatschappij.addItem( maatschappij.getNaam());
-					break;
-				}
-			}
-			
-			
-			
-			
-		}*/
-			
+		textFieldNaam.setText(naam);			
 	}
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;

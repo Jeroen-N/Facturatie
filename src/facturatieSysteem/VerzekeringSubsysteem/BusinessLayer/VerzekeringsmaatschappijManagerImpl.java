@@ -43,9 +43,13 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public boolean updateVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
-			verzekeringsMaatschappijen.remove(getVerzekeringsmaatschappij(maatschappij.getNr()));
-			verzekeringsMaatschappijen.add(maatschappij);
-			System.out.println(maatschappij.getNaam());
+			Verzekeringsmaatschappij maat = getVerzekeringsmaatschappij(maatschappij.getNr());
+			maat.setNaam(maatschappij.getNaam());
+			maat.setAdres(maatschappij.getAdres());
+			maat.setPostcode(maatschappij.getPostcode());
+			maat.setPlaats(maatschappij.getPlaats());
+			maat.setKVK(maatschappij.getKVK());
+			maat.setRekeningNR(maatschappij.getRekeningNR());
 			VerzekeringDAO.updateMaatschappijXML(maatschappij);
 			return true;
 		}
@@ -96,8 +100,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
-			maatschappij.deleteType(getVerzekeringstype(maatschappij, type.getNr()));
-			maatschappij.addType(type);
+			Verzekeringstype type2 = getVerzekeringstype(maatschappij, type.getNr());
+			type2.setEigenRisicio(type.getEigenRisico());
+			type2.setNaam(type.getNaam());
 			VerzekeringtypeDAO.updateVerzekeringstypeXML(maatschappij.getNr(), type);
 		}
 	}
@@ -105,7 +110,18 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
+			maatschappij.deleteType(type);
 			return VerzekeringtypeDAO.deleteVerzekeringstypeXML(maatschappij.getNr(), type);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
+		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
+			Verzekeringstype type2 = getVerzekeringstype(maatschappij, type.getNr());
+			type2.deleteCode(behandelcode);
+			return VerzekeringtypeDAO.removeBehandelCode(maatschappij.getNr(), type.getNr(), behandelcode);
 		}
 		return false;
 	}

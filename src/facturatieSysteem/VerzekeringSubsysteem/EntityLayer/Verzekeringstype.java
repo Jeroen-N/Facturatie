@@ -62,6 +62,10 @@ public class Verzekeringstype {
 		this.behandelcodes.add(code);
 	}
 	
+	public boolean deleteCode(String code){
+		return this.behandelcodes.remove(code);
+	}
+	
 	/*
 	 * @return de behandelcode
 	 */

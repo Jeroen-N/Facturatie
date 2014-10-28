@@ -35,7 +35,6 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddVerzekeringsTypeDialog(final VerzekeringsmaatschappijManager manager, Verzekeringsmaatschappij maatschappij) {
-		System.out.println(maatschappij.getNaam());
 		setTitle("Verzekeringstype beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
