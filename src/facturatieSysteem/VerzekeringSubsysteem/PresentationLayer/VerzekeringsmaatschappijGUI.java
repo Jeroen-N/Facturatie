@@ -171,18 +171,17 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.add(btnToevoegen);
 		knoppenPaneel.add(btnWijzigen);
 		knoppenPaneel.add(btnVerwijderen);
-		knoppenPaneel.add(btnTypes);
-		btnTypes.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
+		btnTypes.setIcon(new ImageIcon("Pictures/type-wijzigen.png"));
 		btnTypes.setMargin(new Insets(0, 0, 0, 0));
 		btnTypesToevoegen = new JButton();
-		btnTypesToevoegen.setIcon(new ImageIcon(
-				"Pictures/verzekering-xsmall.png"));
+		btnTypesToevoegen.setIcon(new ImageIcon("Pictures/type-toevoegen.png"));
 		btnTypesToevoegen.setMargin(new Insets(0, 0, 0, 0));
 		infopaneel.add(Uitgebreide_Info, BorderLayout.CENTER);
 		Uitgebreide_Info.setColumns(40);
 		Uitgebreide_Info.setEditable(false);
 		knoppenPaneel.add(btnTypesToevoegen);
-
+		knoppenPaneel.add(btnTypes);
+		
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
