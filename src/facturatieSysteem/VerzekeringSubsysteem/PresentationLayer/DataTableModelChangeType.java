@@ -72,7 +72,7 @@ public class DataTableModelChangeType extends AbstractTableModel{
 	 */
 	public void setValues(ArrayList<Verzekeringstype> verType) {
 		
-		logger.debug("setValues klanten");
+		logger.debug("setValues verzekeringen");
 		int colcount = getColumnCount();		int rowcount = verType.size();
 		String[][] values = new String[rowcount][colcount];
 		

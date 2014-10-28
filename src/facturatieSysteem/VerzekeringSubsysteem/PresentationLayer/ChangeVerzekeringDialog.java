@@ -69,7 +69,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				changeVerzekering = new JPanel();
-				verzekeringsManager.addTab("Klant wijzigen", null, changeVerzekering, null);
+				verzekeringsManager.addTab("Verzekering wijzigen", null, changeVerzekering, null);
 				changeVerzekering.setLayout(new BorderLayout(0, 0));
 				{
 					/*

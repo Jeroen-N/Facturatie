@@ -63,7 +63,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	
 	// The datamodel to be displayed in the JTable.
 	private DataTableModelChangeType dateTableModelChangeType;
-	private ArrayList<Verzekeringstype> polissen = null;
+	private ArrayList<Verzekeringstype> typen = null;
 	
 	// Get a logger instance for the current class
 	 Logger logger = Logger.getLogger(MainGUI.class);
@@ -143,11 +143,11 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						
 						typetable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 						
-						polissen = maatschappij.getTypes();
-						int count = (polissen == null) ? 0 : polissen.size();
+						typen = maatschappij.getTypes();
+						int count = (typen == null) ? 0 : typen.size();
 						
 						if(count > 0){
-							dateTableModelChangeType.setValues(polissen);
+							dateTableModelChangeType.setValues(typen);
 						}
 						
 						typeScrollPane = new JScrollPane(typetable);
@@ -197,49 +197,49 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						}
 					}
 					{
-						JSplitPane splitPanePolisNummer = new JSplitPane();
-						splitPanePolisNummer.setMaximumSize(new Dimension(300,
+						JSplitPane splitPaneTypeNummer = new JSplitPane();
+						splitPaneTypeNummer.setMaximumSize(new Dimension(300,
 								30));
-						splitPanePolisNummer.setMinimumSize(new Dimension(300,
+						splitPaneTypeNummer.setMinimumSize(new Dimension(300,
 								30));
-						splitPanePolisNummer.setPreferredSize(new Dimension(
+						splitPaneTypeNummer.setPreferredSize(new Dimension(
 								300, 30));
-						splitPanePolisNummer.setDividerSize(0);
-						splitPanePolisNummer.setBorder(null);
-						changeType_2.add(splitPanePolisNummer);
+						splitPaneTypeNummer.setDividerSize(0);
+						splitPaneTypeNummer.setBorder(null);
+						changeType_2.add(splitPaneTypeNummer);
 						{
-							JLabel lblPolisnummer = new JLabel("Type Nr: ");
-							lblPolisnummer.setPreferredSize(new Dimension(120,
+							JLabel lblTypeNummer = new JLabel("Type Nr: ");
+							lblTypeNummer.setPreferredSize(new Dimension(120,
 									16));
-							lblPolisnummer
+							lblTypeNummer
 									.setMinimumSize(new Dimension(120, 16));
-							lblPolisnummer
+							lblTypeNummer
 									.setMaximumSize(new Dimension(120, 16));
-							lblPolisnummer
+							lblTypeNummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblPolisnummer
+							lblTypeNummer
 									.setHorizontalAlignment(SwingConstants.RIGHT);
-							splitPanePolisNummer
-									.setLeftComponent(lblPolisnummer);
+							splitPaneTypeNummer
+									.setLeftComponent(lblTypeNummer);
 						}
 						{
 							textFieldTypeNr = new JTextField();
 							textFieldTypeNr.setColumns(15);
-							splitPanePolisNummer.setRightComponent(textFieldTypeNr);							
+							splitPaneTypeNummer.setRightComponent(textFieldTypeNr);							
 							textFieldTypeNr.setEditable(false);
 						}
 					}
 					{
-						JSplitPane splitPaneStartNaam = new JSplitPane();
-						splitPaneStartNaam.setPreferredSize(new Dimension(300,
+						JSplitPane splitPaneNaam = new JSplitPane();
+						splitPaneNaam.setPreferredSize(new Dimension(300,
 								30));
-						splitPaneStartNaam.setMinimumSize(new Dimension(300,
+						splitPaneNaam.setMinimumSize(new Dimension(300,
 								30));
-						splitPaneStartNaam.setMaximumSize(new Dimension(300,
+						splitPaneNaam.setMaximumSize(new Dimension(300,
 								30));
-						splitPaneStartNaam.setDividerSize(0);
-						splitPaneStartNaam.setBorder(null);
-						changeType_2.add(splitPaneStartNaam);
+						splitPaneNaam.setDividerSize(0);
+						splitPaneNaam.setBorder(null);
+						changeType_2.add(splitPaneNaam);
 						{
 							JLabel lblNaam = new JLabel("Naam: ");
 							lblNaam.setPreferredSize(new Dimension(120,
@@ -252,12 +252,12 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblNaam
 									.setHorizontalAlignment(SwingConstants.RIGHT);
-							splitPaneStartNaam.setLeftComponent(lblNaam);
+							splitPaneNaam.setLeftComponent(lblNaam);
 						}
 						{
 							textFieldNaam = new JTextField();
 							textFieldNaam.setColumns(15);
-							splitPaneStartNaam.setRightComponent(textFieldNaam);
+							splitPaneNaam.setRightComponent(textFieldNaam);
 						}
 					}
 					{
@@ -455,7 +455,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							 Component frame = null;
 								int n = JOptionPane.showConfirmDialog(
 									    frame,
-									    "Weet uw zeker dat u de polis met nummer "+textFieldTypeNr.getText()+" wilt verwijderen",
+									    "Weet u zeker dat u het type met nummer "+textFieldTypeNr.getText()+" wilt verwijderen",
 									    "Weet u het zeker?",
 									    JOptionPane.YES_NO_OPTION);
 								if(n == 0){
