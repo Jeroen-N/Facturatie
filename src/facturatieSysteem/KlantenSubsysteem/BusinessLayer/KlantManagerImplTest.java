@@ -58,14 +58,17 @@ public class KlantManagerImplTest {
 	@Test
 	public void testUpdateKlant() {
 		String BSN = "125651203";
+		String expRes = "Breda";
+		String plaats = null;
 		Klant klant = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Breda", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 		klantDAO.updateKlantXML(klant);
 		for (Klant k1 : klantDAO.getKlantenXML()) {
 			if (k1.getBSN().equals(BSN)) {
-				System.out.println("dsfdfsf");
-				assertTrue(k1.getWoonplaats() == "Breda");
+				//System.out.println(k1.getWoonplaats());
+				plaats = k1.getWoonplaats();
 			}
 		}
+		assertEquals(expRes, plaats);
 	}
 
 	@Test
@@ -185,6 +188,7 @@ public class KlantManagerImplTest {
 
 	@Test
 	public void testCreatePolisnummer() {
+		//niet testbaar, random generator
 		assertTrue(1 == 1);
 	}
 

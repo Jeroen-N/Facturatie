@@ -57,6 +57,10 @@ public class MainGUI {
 	private JTextArea PolisInfo;
 	private JPanel Info_Polis;
 	private JScrollPane scroll;
+	private JPanel loginPanel2 = new JPanel(new GridLayout(3, 2));
+	private JTextField inputFieldUser = new JTextField(10);
+	private JPasswordField inputFieldPass = new JPasswordField(10);
+	private JButton loginButton = new JButton("Login");
 
 	// The datamodel to be displayed in the JTable.
 	private DataTableModel dataTableModel;
@@ -66,6 +70,7 @@ public class MainGUI {
 	static Logger logger = Logger.getLogger(MainGUI.class);
 	private JButton btnChangePolis;
 	private JButton btnReset;
+	private JPanel loginPanel;
 
 	public MainGUI(KlantManager klantManager,
 			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager,
@@ -171,10 +176,6 @@ public class MainGUI {
 		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
 
 		/*
-		 * Create the Klantenbeheer button + add button to header_button
-		 */
-
-		/*
 		 * Create the Main Panel
 		 */
 		MainPanel = new JPanel();
@@ -182,7 +183,50 @@ public class MainGUI {
 		MainPanel.setLayout(new CardLayout(0, 0));
 
 		/*
-		 * Create panel + add to main panel
+		 * 
+		 */
+		loginPanel = new JPanel();
+		MainPanel.add(loginPanel, "name_49998732677638");
+		loginPanel2.add(new JLabel("Gebruikersnaam: "));
+		loginPanel2.add(inputFieldUser);
+		loginPanel2.add(new JLabel("Wachtwoord: "));
+		loginPanel2.add(inputFieldPass);
+		loginPanel2.add(new JLabel());
+		loginPanel2.add(loginButton);
+		loginPanel2.setPreferredSize(new Dimension(300, 100));
+		loginPanel2.setMaximumSize(loginPanel.getPreferredSize());
+		loginPanel2.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
+
+		/*
+		 * 
+		 */
+		loginButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				String username = inputFieldUser.getText();
+				String password = inputFieldPass.getText();
+
+				if (username.length() > 0 && password.length() > 0) {
+					if (loginManager.check(username, password)) {
+						inputFieldUser.setText("");
+						inputFieldPass.setText("");
+						loginPanel.setVisible(false);
+						KlantenPanel.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Gebruikersnaam, wachtwoord combinatie niet gevonden.");
+					}
+				} else {
+					JOptionPane
+							.showMessageDialog(null,
+									"Zowel de gebruikersnaam als wachtwoord dient ingevuld te zijn.");
+				}
+			}
+		});
+		loginPanel.add(loginPanel2);
+		
+		/*
+		 * 
 		 */
 		KlantenPanel = new JPanel();
 		KlantenPanel.setBackground(Color.WHITE);
@@ -587,9 +631,9 @@ public class MainGUI {
 		 */
 		VerzekeringPanel.setVisible(false);
 		VerzekeringsMaatschappijPanel.setVisible(false);
-		KlantenPanel.setVisible(true);
+		KlantenPanel.setVisible(false);
 		FacturatiePanel.setVisible(false);
-
+		loginPanel.setVisible(true);
 		/*
 		 * Set visibility of the frame
 		 */
