@@ -12,11 +12,12 @@ public class main {
 		//System.out.println(m1.haalFacturen("136521598"));
 		
 		//Instantieer alle managers hier
-		KlantManager KlantManager = new KlantManagerImpl();
-		VerzekeringsmaatschappijManager MaatschappijManager = new VerzekeringsmaatschappijManagerImpl();
+		KlantManager klantManager = new KlantManagerImpl();
+		VerzekeringsmaatschappijManager maatschappijManager = new VerzekeringsmaatschappijManagerImpl();
 		FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
+		LoginManager loginManager = new LoginManager();
 		
 		//Geeft alle managers hier mee
-		new MainGUI(KlantManager, MaatschappijManager, facturatieManager);
+		new MainGUI(klantManager, maatschappijManager, facturatieManager, loginManager);
 	}
 }

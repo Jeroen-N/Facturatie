@@ -53,6 +53,7 @@ public class MainGUI {
 			btnZoekKlant;
 	private FacturatieManager facturatieManager;
 	private VerzekeringsmaatschappijManager maatschappijManager;
+	private LoginManager loginManager;
 	private JTextArea PolisInfo;
 	private JPanel Info_Polis;
 	private JScrollPane scroll;
@@ -68,11 +69,12 @@ public class MainGUI {
 
 	public MainGUI(KlantManager klantManager,
 			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager,
-			FacturatieManager facturatieManager) {
+			FacturatieManager facturatieManager, LoginManager loginManager) {
 		logger.debug("Constructor");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
 		this.facturatieManager = facturatieManager;
+		this.loginManager = loginManager;
 		dataTableModel = new DataTableModel();
 		makeFrame();
 	}

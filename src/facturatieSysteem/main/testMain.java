@@ -7,7 +7,10 @@ public class testMain {
 		LoginManager m1 = new LoginManager();
 		String gebruikersnaam = "b1";
 		String wachtwoord = "fysio";
-		m1.check(gebruikersnaam, wachtwoord);
+		if(m1.check(gebruikersnaam, wachtwoord)){
+			System.out.println("True");
+			
+		}
 	}
 
 }
