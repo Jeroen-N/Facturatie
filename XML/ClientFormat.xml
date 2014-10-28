@@ -184,7 +184,7 @@
 			<Telefoonnummer>0683144715</Telefoonnummer>
 			<Email>xpjgerre@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>15</ResterendEigenRisico>
+			<ResterendEigenRisico>0.0</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052184</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
@@ -210,8 +210,7 @@
 				<TevergoedenBedrag>200</TevergoedenBedrag>
 				<Status>Niet betaald</Status>
 				<Totaalprijs>300</Totaalprijs>
-			</Factuur>
-		</Facturen>
+			</Factuur><Factuur FactuurNummer="262512"><FactuurDatum>28-10-2014</FactuurDatum><VervalDatum>11-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="02"><BehandelafspraakID>283619</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>35.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen>
 		<Behandelingen>
 			<Behandeling id="02">
 				<behandelgegevens>
@@ -238,7 +237,7 @@
 					<Begintijd>10:00</Begintijd>
 					<Eindtijd>11:00</Eindtijd>
 					<Praktijkruimte>003</Praktijkruimte>
-					<Gefactureerd>Nee</Gefactureerd>
+					<Gefactureerd>Ja</Gefactureerd>
 					<Opmerking>Client reageert goed op behandelingen.</Opmerking>
 				</behandelafspraak>
 			</Behandeling>

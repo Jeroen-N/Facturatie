@@ -19,45 +19,46 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-public class FacturatieGUI {
+@SuppressWarnings("serial")
+public class FacturatieGUI extends JFrame {
 
-	private static FacturatieManager facturatieManagerImpl;
-	private static Integer row;
-	private static JPanel buttonPanel;
-	private static JTextField zoekbalk;
-	private static JButton zoekKnop;
-	private static JButton terugKnop;
-	private static JButton factureerKnop;
-	private static JButton openFactuurKnop;
-	private static JButton printFactuurKnop;
-	private static JTable overzicht;
-	private static JTextArea factuur;
-	private static JScrollPane factuurTablePanel;
-	private static JScrollPane scrollPane = new JScrollPane();
-	private static JPanel mainPanel = new JPanel();
-	private static Klant klant;
-	private static ArrayList<Factuur> facturen;
-	private static DataTableModelFactuur dataTableModel;
-	private static JPanel eastPanel;
-	private static JPanel factuurPanel;
-	private static JScrollPane scrollFactuur;
-	private static VerzekeringsmaatschappijManager m1;
-	private static Verzekeringsmaatschappij maatschappijEind;
-	private static Color WHITE;
+	private  FacturatieManager facturatieManagerImpl;
+	private  Integer row;
+	private  JPanel buttonPanel;
+	private  JTextField zoekbalk;
+	private  JButton zoekKnop;
+	private  JButton terugKnop;
+	private  JButton factureerKnop;
+	private  JButton openFactuurKnop;
+	private  JButton printFactuurKnop;
+	private  JTable overzicht;
+	private  JTextArea factuur;
+	private  JScrollPane factuurTablePanel;
+	private  JScrollPane scrollPane = new JScrollPane();
+	private  JPanel mainPanel = new JPanel();
+	private  Klant klant;
+	private  ArrayList<Factuur> facturen;
+	private  DataTableModelFactuur dataTableModel;
+	private  JPanel eastPanel;
+	private  JPanel factuurPanel;
+	private  JScrollPane scrollFactuur;
+	private  VerzekeringsmaatschappijManager m1;
+	private  Verzekeringsmaatschappij maatschappijEind;
+	private  Color WHITE;
 	
-	public static JPanel FacturatieGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
+	public JPanel FactGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
 		JPanel paneel = new JPanel();
 		paneel.setName("FACTURATIE");
 		paneel.add(scrollPane, BorderLayout.CENTER);
 		m1 = m2;
 		facturatieManagerImpl = factManagerImpl;
-		klant = klnt;
 		facturen = new ArrayList<>();
 		dataTableModel = new DataTableModelFactuur();
 		return initComponents(factManagerImpl);
 	}
 
-	public static JPanel initComponents(FacturatieManager factManagerImpl) {
+	@SuppressWarnings("serial")
+	public JPanel initComponents(FacturatieManager factManagerImpl) {
 		// panels aanmaken
 
 		mainPanel = new JPanel();
@@ -115,8 +116,6 @@ public class FacturatieGUI {
 
 		//overzicht tabel aanmaken en vullen.
 		overzicht = new JTable(dataTableModel){
-
-			private static final long serialVersionUID = 1L;
 
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
@@ -216,27 +215,21 @@ public class FacturatieGUI {
 
 	}
 	
-	public static void fillTable(Klant klant){
-		
+	public void fillTable(Klant klant){
 		facturen = facturatieManagerImpl.haalFacturen(klant.getBSN());
-		int count = (facturen == null) ? 0 : facturen.size();
-				
-		
-		if(count > 0){
 		dataTableModel.setValues(facturen);
-		}
 	}
 	
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public static void fillField(int row){
+	public void fillField(int row){
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
 		System.out.println(factuur_nummer);
 		factuur.setText(facturatieManagerImpl.toonFactuur(factuur_nummer, klant));
 	}
 	
-	public static Factuur vindFactuur(int row2){
+	public Factuur vindFactuur(int row2){
 		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0).toString();
 		System.out.println(factuur_nummer2);
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);

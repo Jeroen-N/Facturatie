@@ -125,8 +125,7 @@ public class MainGUI {
 		Header.add(Header_Button, BorderLayout.EAST);
 
 		Header_Button.setLayout(new BorderLayout(0, 50));
-		JPanel gui = new VerzekeringsmaatschappijGUI()
-				.VerzekeringsGUI(maatschappijManager);
+		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnKlantenbeheer = new JButton("");
 		btnKlantenbeheer
@@ -413,16 +412,13 @@ public class MainGUI {
 		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
+		
 		btnFacturatie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (btnChangeKlant.isEnabled()) {
 					KlantenPanel.setVisible(false);
-					Klant fact = KlantManager.getKlant(Klant_Table.getModel()
-							.getValueAt(Klant_Table.getSelectedRow(), 1)
-							.toString());
-					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(
-							facturatieManager, fact, maatschappijManager));
+					FacturatiePanel.add(FacturatieGUI.FactGUI(facturatieManager, KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString()) , maatschappijManager));
 					FacturatiePanel.setVisible(true);
 				}
 			}
@@ -461,8 +457,7 @@ public class MainGUI {
 		btnChangeKlant
 				.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
 		btnChangeKlant.setMargin(new Insets(0, 0, 0, 0));
-		btnChangeKlant.setIcon(new ImageIcon(
-				"Pictures/change-contact-icon-xsmal.png"));
+		btnChangeKlant.setIcon(new ImageIcon("Pictures/change-contact-icon-xsmal.png"));
 		btnChangeKlant.setEnabled(false);
 		btnChangeKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnChangeKlant.setMinimumSize(new Dimension(0, 0));
@@ -473,12 +468,7 @@ public class MainGUI {
 				if (btnChangeKlant.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
 					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
-							KlantManager,
-							maatschappijManager,
-							Klant_Table
-									.getModel()
-									.getValueAt(Klant_Table.getSelectedRow(), 1)
-									.toString());
+							KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
 					changeKlantDialog
 							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
