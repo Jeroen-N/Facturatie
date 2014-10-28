@@ -15,6 +15,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
 	private VerzekeringsmaatschappijDAO VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 	private VerzekeringstypeDAO VerzekeringtypeDAO = new VerzekeringsDAOImpl();
+	private String errorMessage;
 	
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
@@ -134,5 +135,67 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	@Override
 	public String maatschappijInfo(Verzekeringsmaatschappij maatschappij) {
 		return "Verzekeringsmaatschappij \n\nNaam: "+ maatschappij.getNaam() + "\nAdres: " + maatschappij.getAdres() + "\nPlaats: " + maatschappij.getPlaats() + "\nPostcode: " + maatschappij.getPostcode() + "\nKVKnummer: " + maatschappij.getKVK() + "\nRekeningnummer: " + maatschappij.getRekeningNR();
+	}
+	@Override
+	public String checkVerzekering(String maatschappijnr, String Naam, String Adres,
+			String Postcode, String Plaats, String KVK, String RekeningNr) {
+		errorMessage = "";
+
+		
+		// Maatschappij nummer
+		if (!maatschappijnr.matches("([0-9]{3})")) {
+			if (maatschappijnr.length() < 1) {
+				errorMessage = errorMessage + "\nMaatschappij nummer niet ingevuld";
+			}
+			else{
+					errorMessage = errorMessage + "\nMaatschappij nummer niet correct";
+			}
+		}
+		
+		// Naam
+		if (Naam.length() < 1) {
+			errorMessage = errorMessage + "\nNaam niet ingevuld";
+		}
+		
+		// Adres
+		if (Adres.length() < 1) {
+			errorMessage = errorMessage + "\nAdres niet ingevuld";
+		}
+		
+		// Postcode
+		if (!Postcode.matches("([0-9]{4})([A-Z]{2})")) {
+			if (Postcode.length() < 1) {
+				errorMessage = errorMessage + "\nPostcode niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nPostcode niet correct";
+			}
+		}
+		
+		//Plaats
+		if (Plaats.length() < 1) {
+			errorMessage = errorMessage + "\nWoonplaats niet ingevuld";
+		}
+		
+		// KVK nummer
+	if(!KVK.matches("([0-9]{8})")){	
+		if (KVK.length() < 1) {
+				errorMessage = errorMessage + "\nKVK nummer niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nKVK nummer niet correct";
+			}
+		}
+		
+		// Rekening Nummer
+	if(!RekeningNr.matches("([0-9]{9})")){	
+		if (RekeningNr.length() < 1) {
+				errorMessage = errorMessage + "\nRekeningnummer niet ingevuld";
+			}
+			else{
+				errorMessage = errorMessage + "\nRekeningnummer niet correct";
+			}
+		}
+			return errorMessage;
 	}
 }

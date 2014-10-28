@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -340,6 +341,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 								splitPaneNr1.setRightComponent(textFieldNr2);
 								textFieldNr2.setColumns(15);
 								textFieldNr2.setText(verzekering.getNr());
+								textFieldNr2.setEditable(false);
 							}
 						
 						
@@ -524,11 +526,30 @@ public class ChangeVerzekeringDialog extends JDialog {
 					
 					wijzigButton.addMouseListener(new MouseAdapter(){
 						public void mouseClicked(MouseEvent e){
-						Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(textFieldNr2.getText(), textFieldNaam2.getText(), textFieldAdres2.getText(), textFieldPostcode2.getText(), textFieldPlaats2.getText(), Integer.parseInt(textFieldKVK2.getText()), Integer.parseInt(textFieldRekeningNr2.getText()));
-						manager.updateVerzekeringsmaatschappij(maatschappij);
-						dispose();
+						String errorMessage = manager.checkVerzekering(textFieldNr2.getText(), textFieldNaam2.getText(), textFieldAdres2.getText(), textFieldPostcode2.getText(), textFieldPlaats2.getText(), textFieldKVK2.getText(), textFieldRekeningNr2.getText());
+						
+						if (!errorMessage.equals("")) {
+							showConfirmationWindow(errorMessage);
+						} else {
+
+							Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(
+									textFieldNr2.getText(),
+									textFieldNaam2.getText(),
+									textFieldAdres2.getText(),
+									textFieldPostcode2.getText(),
+									textFieldPlaats2.getText(),
+									Integer.parseInt(textFieldKVK2.getText()),
+									Integer.parseInt(textFieldRekeningNr2.getText()));
+							manager.updateVerzekeringsmaatschappij(maatschappij);
+							dispose();
 					}
-					
+						}
+
+						private void showConfirmationWindow(String message) {
+							Component frame = null;
+							JOptionPane.showMessageDialog(frame, message);
+							
+						}
 					
 				});
 					JButton cancelButton = new JButton("Cancel");

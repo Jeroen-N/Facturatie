@@ -31,6 +31,8 @@ public interface VerzekeringsmaatschappijManager {
 	void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij,
 			Verzekeringstype type);
 	
+	public String checkVerzekering(String maatschappijnr, String Naam, String Adres, String Postcode, String Plaats, String KVK, String RekeningNr);
+	
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
 
 	String maatschappijInfo(Verzekeringsmaatschappij maatschappij);

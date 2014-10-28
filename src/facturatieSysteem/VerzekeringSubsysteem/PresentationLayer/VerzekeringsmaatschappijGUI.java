@@ -263,7 +263,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 							Verzekering_Table.removeAll();
 							fillTable(manager);
 							Verzekering_Table.setRowSelectionInterval(row, row);
-							//fillField(row);
+							
 						}
 					});
 				}
