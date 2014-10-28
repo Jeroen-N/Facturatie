@@ -413,13 +413,15 @@ public class MainGUI {
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
 		
-		FacturatieGUI FacturatieGUI = new FacturatieGUI();
-		JPanel facturatie = FacturatieGUI.FactGUI(facturatieManager, KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString()) , maatschappijManager);
+		
 		btnFacturatie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (btnChangeKlant.isEnabled()) {
 					KlantenPanel.setVisible(false);
+					FacturatiePanel.removeAll();
+					FacturatieGUI FacturatieGUI = new FacturatieGUI();
+					JPanel facturatie = FacturatieGUI.FactGUI(facturatieManager, KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString()) , maatschappijManager);
 					FacturatiePanel.add(facturatie);
 					FacturatiePanel.setVisible(true);
 				}
