@@ -34,7 +34,7 @@ public class AddVerzekeringDialog extends JDialog {
 	private JTextField textFieldKVK;
 	private JTextField textFieldRekeningNr;
 	private JTextField textFieldNr;
-	private String errorMessage;
+	
 
 	/**
 	 * Create the dialog.

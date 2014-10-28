@@ -168,7 +168,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 				errorMessage = errorMessage + "\nPostcode niet ingevuld";
 			}
 			else{
-				errorMessage = errorMessage + "\nPostcode niet correct";
+				errorMessage = errorMessage + "\nPostcode niet correct \nHoofdletters gebruiken svp!";
 			}
 		}
 		
