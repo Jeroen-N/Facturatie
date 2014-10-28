@@ -1,0 +1,23 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gebruikers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gebruiker">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="gebruikersnaam"/>
+                    <xs:element type="xs:string" name="wachtwoord"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
