@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
 
@@ -60,10 +61,13 @@ public class FacturatieGUI {
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout(0, 0));
+		mainPanel.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(30, 144, 255)));
 		eastPanel = new JPanel();
 		eastPanel.setLayout(new BorderLayout(0, 0));
 		buttonPanel = new JPanel();
 		factuurPanel = new JPanel();
+		
+
 		
 
 		// Tekst initialiseren van de knoppen, tekstvelden en textarea's.
@@ -71,11 +75,10 @@ public class FacturatieGUI {
 		factuur.setEditable(false);
 		scrollFactuur = new JScrollPane(factuur);
 		factuur.setRows(43);
-		factuur.setColumns(40);
+		factuur.setColumns(30);
 		factuur.setBorder(new TitledBorder(new LineBorder(new Color(
-				0, 0, 0)), "Factuur", TitledBorder.LEADING,
+				30, 144, 255)), "Factuur", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-	
 		
 		zoekKnop = new JButton();
 		zoekKnop.setText("Zoek");
@@ -128,7 +131,7 @@ public class FacturatieGUI {
 	overzicht.getTableHeader().setResizingAllowed(false);
 	
 	factuurTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
-			0, 0, 0)), "Facturenlijst", TitledBorder.LEADING,
+			30, 144, 255)), "Facturenlijst", TitledBorder.LEADING,
 			TitledBorder.TOP, null, null));
 	mainPanel.add(factuurTablePanel, BorderLayout.CENTER);
 
