@@ -41,4 +41,14 @@
 	   
 			
 			</verzekeringsTypes>    
-   </verzekeringsmaatschappij></facturatieSysteem>
+   </verzekeringsmaatschappij>	<verzekeringsmaatschappij maatschappijnr="002">
+		<naam>test</naam>
+		<adres>test</adres>
+		<postcode>4444GG</postcode>
+		<woonplaats>test</woonplaats>
+		<KVKNummer>87654321</KVKNummer>
+		<rekeningNummer>987654321</rekeningNummer>
+		<verzekeringsTypes>
+		</verzekeringsTypes>
+	</verzekeringsmaatschappij>
+</facturatieSysteem>

@@ -62,9 +62,11 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	private Verzekeringsmaatschappij maatschappij;
 
 	// The datamodel to be displayed in the JTable.
+
 	private DataTableModelVerzekeringen dataTableModelVerzekeringen;
 	private ArrayList<Verzekeringsmaatschappij> verzekeringList = null;
 	private ArrayList<Verzekeringsmaatschappij> verzekeringList2;
+
 
 	// Get a logger instance for the current class
 	Logger logger = Logger.getLogger(MainGUI.class);
@@ -91,6 +93,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info = new JTextArea();
 		btnTypes = new JButton();
 		btnTypes.setEnabled(false);
+
 
 		// / Zoekveld en knoppen
 		VerzekeringPanel.add(infopaneel, BorderLayout.EAST);
@@ -342,6 +345,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			dataTableModelVerzekeringen.setValues(verzekeringList);
 		}
 
+
 		Verzekering_Table.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent e) {
@@ -396,6 +400,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			Verzekering_Table.removeAll();
 			dataTableModelVerzekeringen.setValues(verzekeringList2);
 		} else {
+
 			showConfirmationWindow("Geen verzekering gevonden");
 		}
 	}
