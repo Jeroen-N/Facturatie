@@ -3,11 +3,12 @@ package facturatieSysteem.main;
 public class Gebruiker {
 	private String gebruikersnaam;
 	private String wachtwoord;
+	private boolean statusingelogd;
 
-	public Gebruiker(String gebruikersnaam, String wachtwoord) {
+	public Gebruiker(String gebruikersnaam, String wachtwoord, boolean statusingelogd) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.wachtwoord = wachtwoord;
-
+		this.statusingelogd = statusingelogd;
 	}
 
 	public String getGebruikersnaam() {
@@ -24,6 +25,14 @@ public class Gebruiker {
 
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
+	}
+
+	public boolean isStatusingelogd() {
+		return statusingelogd;
+	}
+
+	public void setStatusingelogd(boolean statusingelogd) {
+		this.statusingelogd = statusingelogd;
 	}
 	
 	

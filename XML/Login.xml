@@ -4,6 +4,14 @@
 		<gebruiker id="1">
 			<gebruikersnaam>b2</gebruikersnaam>
 			<wachtwoord>facturatie</wachtwoord>
+		</gebruiker>
+		<gebruiker id="2">
+			<gebruikersnaam>b1</gebruikersnaam>
+			<wachtwoord>fysio</wachtwoord>
+		</gebruiker>
+		<gebruiker id="3">
+			<gebruikersnaam>b4</gebruikersnaam>
+			<wachtwoord>facturatie4</wachtwoord>
 		</gebruiker>	
 	</gebruikers>
 </Login>

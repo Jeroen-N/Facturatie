@@ -39,7 +39,7 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		//System.out.println(factuur.getStatus());
 		//System.out.println();
 		
-		Bon bon = new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant);
+		Bon bon = new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant, v1);
 	}
 	
 	}
