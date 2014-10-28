@@ -395,7 +395,6 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	
 	public void fillTableZoekresultaat(String naam){
 		verzekeringList = VZmanager.
-		System.out.println("test1");
 		int count = (verzekeringList == null) ? 0 : verzekeringList.size();
 			
 		if(count > 0){
