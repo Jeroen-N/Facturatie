@@ -64,13 +64,17 @@ public class FacturatieGUI {
 		mainPanel.setLayout(new BorderLayout(0, 0));
 		mainPanel.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(30, 144, 255)));
 		mainPanel.setBackground(new Color(255, 255, 255));
+		
 		eastPanel = new JPanel();
 		eastPanel.setLayout(new BorderLayout(0, 0));
 		eastPanel.setPreferredSize(new Dimension(500, 10));
 		eastPanel.setBackground(new Color(255, 255, 255));
+		
 		buttonPanel = new JPanel();
 		buttonPanel.setBackground(new Color(255, 255, 255));
+		
 		factuurPanel = new JPanel();
+		factuurPanel.setLayout(new BorderLayout(0,0));
 		
 
 		
@@ -79,12 +83,10 @@ public class FacturatieGUI {
 		factuur = new JTextArea();
 		factuur.setEditable(false);
 		scrollFactuur = new JScrollPane(factuur);
-		scrollFactuur.setPreferredSize(new Dimension(500,10));
-		factuur.setRows(43);
-		factuur.setColumns(44);
 		factuur.setBorder(new TitledBorder(new LineBorder(new Color(
 				30, 144, 255)), "Factuur", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
+		scrollFactuur.setBorder(null);
 		
 		zoekKnop = new JButton();
 		zoekKnop.setText("Zoek");
@@ -187,8 +189,7 @@ public class FacturatieGUI {
 		buttonPanel.add(openFactuurKnop);
 		buttonPanel.add(printFactuurKnop);
 		
-		factuurPanel.add(factuur);
-		scrollFactuur.add(factuurPanel);
+		factuurPanel.add(scrollFactuur);
 		
 		eastPanel.add(factuurPanel, BorderLayout.CENTER);
 		eastPanel.add(buttonPanel, BorderLayout.SOUTH);

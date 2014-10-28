@@ -20,7 +20,6 @@ import javax.swing.text.MaskFormatter;
 import org.apache.log4j.Logger;
 
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager;
-import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
@@ -35,8 +34,6 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 
 public class MainGUI {
@@ -52,8 +49,8 @@ public class MainGUI {
 	private JTextArea Uitgebreide_Info;
 	private JFormattedTextField textFieldZoeken;
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
-			btnVerzekeringmaatschapij, btnKlantenbeheer,
-			btnAddPolis, btnZoekKlant;
+			btnVerzekeringmaatschapij, btnKlantenbeheer, btnAddPolis,
+			btnZoekKlant;
 	private FacturatieManager facturatieManager;
 	private VerzekeringsmaatschappijManager maatschappijManager;
 	private JTextArea PolisInfo;
@@ -70,7 +67,8 @@ public class MainGUI {
 	private JButton btnReset;
 
 	public MainGUI(KlantManager klantManager,
-			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManager facturatieManager) {
+			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager,
+			FacturatieManager facturatieManager) {
 		logger.debug("Constructor");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
@@ -79,7 +77,7 @@ public class MainGUI {
 		makeFrame();
 	}
 
-	@SuppressWarnings({"serial" })
+	@SuppressWarnings({ "serial" })
 	public void makeFrame() {
 
 		/*
@@ -87,8 +85,10 @@ public class MainGUI {
 		 */
 		frmFacturatiesysteem = new JFrame();
 		frmFacturatiesysteem.setBackground(new Color(255, 255, 255));
-		frmFacturatiesysteem.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		frmFacturatiesysteem.setIconImage(Toolkit.getDefaultToolkit().getImage("Pictures/verzekering-xsmall.png"));
+		frmFacturatiesysteem.setCursor(Cursor
+				.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		frmFacturatiesysteem.setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"Pictures/verzekering-xsmall.png"));
 		frmFacturatiesysteem.setTitle("Facturatiesysteem");
 		frmFacturatiesysteem.setName("Facturatiesysteem");
 		frmFacturatiesysteem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,13 +125,16 @@ public class MainGUI {
 		Header.add(Header_Button, BorderLayout.EAST);
 
 		Header_Button.setLayout(new BorderLayout(0, 50));
-		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
+		JPanel gui = new VerzekeringsmaatschappijGUI()
+				.VerzekeringsGUI(maatschappijManager);
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnKlantenbeheer = new JButton("");
-		btnKlantenbeheer.setToolTipText("Deze knop brengt u naar het klantenbeheer");
+		btnKlantenbeheer
+				.setToolTipText("Deze knop brengt u naar het klantenbeheer");
 		btnKlantenbeheer.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnKlantenbeheer.setMargin(new Insets(0, 0, 0, 0));
-		btnKlantenbeheer.setIcon(new ImageIcon("Pictures/contact-administration-xsmall.png"));
+		btnKlantenbeheer.setIcon(new ImageIcon(
+				"Pictures/contact-administration-xsmall.png"));
 		btnKlantenbeheer.setPreferredSize(new Dimension(50, 50));
 		Header_Button.add(btnKlantenbeheer);
 		btnKlantenbeheer.addActionListener(new ActionListener() {
@@ -145,10 +148,13 @@ public class MainGUI {
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 		btnVerzekeringmaatschapij = new JButton("");
-		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
-		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVerzekeringmaatschapij
+				.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
+		btnVerzekeringmaatschapij
+				.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnVerzekeringmaatschapij.setMargin(new Insets(0, 0, 0, 0));
-		btnVerzekeringmaatschapij.setIcon(new ImageIcon("Pictures/verzekering-xsmall.png"));
+		btnVerzekeringmaatschapij.setIcon(new ImageIcon(
+				"Pictures/verzekering-xsmall.png"));
 		btnVerzekeringmaatschapij.setPreferredSize(new Dimension(50, 50));
 		Header_Button.add(btnVerzekeringmaatschapij);
 		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
@@ -178,6 +184,7 @@ public class MainGUI {
 		 * Create panel + add to main panel
 		 */
 		KlantenPanel = new JPanel();
+		KlantenPanel.setBackground(Color.WHITE);
 		MainPanel.add(KlantenPanel, "name_11236108644850");
 		KlantenPanel.setLayout(new BorderLayout(0, 0));
 
@@ -189,22 +196,25 @@ public class MainGUI {
 				return false;
 			}
 		};
+		Klant_Table.setSelectionBackground(new Color(30, 144, 255));
 		String[] headers = new String[] { "Naam", "BSN", "Geboortedatum",
 				"Adres" };
 		dataTableModel.setTableHeader(headers);
+
+		Klant_Table.getTableHeader().setBackground(new Color(255, 255, 255));
 
 		TableColumn column = Klant_Table.getColumnModel().getColumn(0);
 		column.setPreferredWidth(6);
 
 		// Handle row selection, only one row can be selected
 		Klant_Table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		fillTable();
-		
+
 		KlantenTablePanel = new JScrollPane(Klant_Table);
 		Klant_Table.setFillsViewportHeight(true);
 		KlantenTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
-				0, 0, 0)), "Clientenlijst", TitledBorder.LEADING,
+				30, 144, 255)), "Clientenlijst", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		Klant_Table.getTableHeader().setReorderingAllowed(false);
 		Klant_Table.getTableHeader().setResizingAllowed(false);
@@ -214,22 +224,22 @@ public class MainGUI {
 		PanelEast.setPreferredSize(new Dimension(500, 10));
 		KlantenPanel.add(PanelEast, BorderLayout.EAST);
 		PanelEast.setLayout(new BorderLayout(0, 0));
-		
+
 		Klant_zoeken = new JPanel();
-		Klant_zoeken.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(30, 144, 255)));
+		Klant_zoeken.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(30, 144, 255)));
 		Klant_zoeken.setBackground(new Color(255, 255, 255));
 		PanelEast.add(Klant_zoeken, BorderLayout.NORTH);
 		Klant_zoeken.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		JSplitPane splitPaneZoeken = new JSplitPane();
 		splitPaneZoeken.setBackground(new Color(255, 255, 255));
-		splitPaneZoeken .setPreferredSize(new Dimension(300,30));
-		splitPaneZoeken .setMinimumSize(new Dimension(300,30));
-		splitPaneZoeken .setMaximumSize(new Dimension(300,30));
-		splitPaneZoeken .setDividerSize(0);
-		splitPaneZoeken .setBorder(null);
-		Klant_zoeken.add(splitPaneZoeken,BorderLayout.WEST );
-		
+		splitPaneZoeken.setPreferredSize(new Dimension(300, 30));
+		splitPaneZoeken.setMinimumSize(new Dimension(300, 30));
+		splitPaneZoeken.setMaximumSize(new Dimension(300, 30));
+		splitPaneZoeken.setDividerSize(0);
+		splitPaneZoeken.setBorder(null);
+		Klant_zoeken.add(splitPaneZoeken, BorderLayout.WEST);
+
 		MaskFormatter formatter = null;
 		try {
 			formatter = new MaskFormatter("##-##-####");
@@ -237,27 +247,27 @@ public class MainGUI {
 		} catch (ParseException e1) {
 			showConfirmationWindow("Zorg ervoor dat u het volgens het goede format invult: dag - maand - jaar");
 		}
-		
+
 		textFieldZoeken = new JFormattedTextField(formatter);
 		textFieldZoeken.setColumns(15);
 		textFieldZoeken.setText("dd-mm-yyyy");
 		textFieldZoeken.addMouseListener(new MouseAdapter() {
-			  @Override
-			  public void mouseClicked(MouseEvent e) {
-				  textFieldZoeken.setText("");
-			  }
-			});
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textFieldZoeken.setText("");
+			}
+		});
 		splitPaneZoeken.setRightComponent(textFieldZoeken);
-		
+
 		JLabel lblZoeken = new JLabel("Klant zoeken: ");
 		lblZoeken.setBackground(new Color(255, 255, 255));
-		lblZoeken.setPreferredSize(new Dimension(120,16));
+		lblZoeken.setPreferredSize(new Dimension(120, 16));
 		lblZoeken.setMinimumSize(new Dimension(120, 16));
 		lblZoeken.setMaximumSize(new Dimension(120, 16));
 		lblZoeken.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblZoeken.setHorizontalAlignment(SwingConstants.RIGHT);
 		splitPaneZoeken.setLeftComponent(lblZoeken);
-		
+
 		btnZoekKlant = new JButton("Zoeken");
 		btnZoekKlant.setToolTipText("Zoek naar de ingevulde geboortedatum");
 		btnZoekKlant.setIconTextGap(0);
@@ -265,15 +275,16 @@ public class MainGUI {
 		btnZoekKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (textFieldZoeken.getText().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
-					fillTableZoekresultaat(textFieldZoeken.getText());		
-				}else{
+				if (textFieldZoeken.getText().matches(
+						"([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+					fillTableZoekresultaat(textFieldZoeken.getText());
+				} else {
 					showConfirmationWindow("Geen geldige zoekwaarde");
 				}
 			}
 		});
-		Klant_zoeken.add(btnZoekKlant,BorderLayout.EAST );
-		
+		Klant_zoeken.add(btnZoekKlant, BorderLayout.EAST);
+
 		btnReset = new JButton("Reset");
 		btnReset.setToolTipText("Reset de tabel.");
 		btnReset.setIconTextGap(0);
@@ -292,7 +303,7 @@ public class MainGUI {
 		 * Create panel for more information about klant
 		 */
 		Klant_info = new JPanel();
-		Klant_info.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(30, 144, 255)));
+		Klant_info.setBorder(null);
 		PanelEast.add(Klant_info, BorderLayout.CENTER);
 		Klant_info.setLayout(new BorderLayout(0, 0));
 
@@ -300,16 +311,17 @@ public class MainGUI {
 		 * Add function to see more information
 		 */
 		Uitgebreide_Info = new JTextArea();
-		Uitgebreide_Info.setRows(25);
+		Uitgebreide_Info.setBorder(null);
+		Uitgebreide_Info.setRows(20);
 		Uitgebreide_Info.setColumns(30);
 		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info, BorderLayout.NORTH);
 		Klant_Table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(Klant_Table.getSelectedRow() >= 0){
-				row = Klant_Table.getSelectedRow();
-				fillField(row);
+				if (Klant_Table.getSelectedRow() >= 0) {
+					row = Klant_Table.getSelectedRow();
+					fillField(row);
 				}
 			}
 		});
@@ -330,15 +342,17 @@ public class MainGUI {
 		 */
 		Info_Polis = new JPanel();
 		Info_Polis.setMinimumSize(new Dimension(10, 50));
-		Info_Polis.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(30, 144, 255)));
+		Info_Polis.setBorder(null);
 		Klant_info.add(Info_Polis, BorderLayout.CENTER);
 		Info_Polis.setLayout(new BorderLayout(0, 0));
 		PolisInfo = new JTextArea();
+		PolisInfo.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(30, 144, 255)));
 		PolisInfo.setColumns(40);
 		PolisInfo.setPreferredSize(new Dimension(0, 50));
 		PolisInfo.setEditable(false);
 		scroll = new JScrollPane(PolisInfo);
 		scroll.setPreferredSize(new Dimension(4, 50));
+		scroll.setBorder(null);
 		Info_Polis.add(scroll);
 		DefaultCaret caret = (DefaultCaret) PolisInfo.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
@@ -347,15 +361,18 @@ public class MainGUI {
 		 * add panel for buttons underneath more information panel
 		 */
 		knoppen = new JPanel();
+		knoppen.setBorder(null);
 		knoppen.setBackground(new Color(255, 255, 255));
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 
 		knoppen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		btnChangePolis = new JButton("");
-		btnChangePolis.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
+		btnChangePolis
+				.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
 		btnChangePolis.setMargin(new Insets(0, 0, 0, 0));
-		btnChangePolis.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
+		btnChangePolis
+				.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
 		btnChangePolis.setEnabled(false);
 		btnChangePolis.addMouseListener(new MouseAdapter() {
 			@Override
@@ -363,8 +380,15 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangePolis.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
-					ChangeVerzekeringPolisDialog changeKlantDialog = new ChangeVerzekeringPolisDialog(KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					ChangeVerzekeringPolisDialog changeKlantDialog = new ChangeVerzekeringPolisDialog(
+							KlantManager,
+							maatschappijManager,
+							Klant_Table
+									.getModel()
+									.getValueAt(Klant_Table.getSelectedRow(), 1)
+									.toString());
+					changeKlantDialog
+							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
@@ -382,9 +406,10 @@ public class MainGUI {
 				}
 			}
 		});
-		
+
 		btnFacturatie = new JButton("");
-		btnFacturatie.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
+		btnFacturatie
+				.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
 		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
@@ -393,20 +418,25 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				if (btnChangeKlant.isEnabled()) {
 					KlantenPanel.setVisible(false);
-					Klant fact = KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(facturatieManager, fact, maatschappijManager));
+					Klant fact = KlantManager.getKlant(Klant_Table.getModel()
+							.getValueAt(Klant_Table.getSelectedRow(), 1)
+							.toString());
+					FacturatiePanel.add(FacturatieGUI.FacturatieGUI(
+							facturatieManager, fact, maatschappijManager));
 					FacturatiePanel.setVisible(true);
 				}
 			}
-		});		
-		
+		});
+
 		btnAddKlant = new JButton("");
-		btnAddKlant.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
+		btnAddKlant
+				.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
 		btnAddKlant.setMargin(new Insets(0, 0, 0, 0));
 		btnAddKlant.setIconTextGap(0);
 		btnAddKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnAddKlant.setMinimumSize(new Dimension(0, 0));
-		btnAddKlant.setIcon(new ImageIcon("Pictures/add-contact-icon-xsmall.png"));
+		btnAddKlant.setIcon(new ImageIcon(
+				"Pictures/add-contact-icon-xsmall.png"));
 		btnAddKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -426,11 +456,13 @@ public class MainGUI {
 				});
 			}
 		});
-		
+
 		btnChangeKlant = new JButton("");
-		btnChangeKlant.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
+		btnChangeKlant
+				.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
 		btnChangeKlant.setMargin(new Insets(0, 0, 0, 0));
-		btnChangeKlant.setIcon(new ImageIcon("Pictures/change-contact-icon-xsmal.png"));
+		btnChangeKlant.setIcon(new ImageIcon(
+				"Pictures/change-contact-icon-xsmal.png"));
 		btnChangeKlant.setEnabled(false);
 		btnChangeKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnChangeKlant.setMinimumSize(new Dimension(0, 0));
@@ -466,40 +498,50 @@ public class MainGUI {
 				}
 			}
 		});
-		
+
 		btnAddPolis = new JButton("");
-		btnAddPolis.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
+		btnAddPolis
+				.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
 		btnAddPolis.setMargin(new Insets(0, 0, 0, 0));
 		btnAddPolis.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
 		btnAddPolis.setEnabled(false);
 		btnAddPolis.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnAddPolis.setMinimumSize(new Dimension(0, 0));
 		btnAddPolis.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			if (btnChangeKlant.isEnabled()) {
-				AddVerzekeringPolisDialog addVerzekeringPolisDialog = new AddVerzekeringPolisDialog(KlantManager, maatschappijManager, Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-				addVerzekeringPolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				addVerzekeringPolisDialog.setModal(true);
-				addVerzekeringPolisDialog.setVisible(true);
-				addVerzekeringPolisDialog.addWindowListener(new WindowAdapter() {
-					public void windowClosed(WindowEvent e) {
-						Klant_Table.removeAll();
-						fillTable();
-						Klant_Table.setRowSelectionInterval(row, row);
-						Uitgebreide_Info.setText("");
-						fillField(row);									
-						}
-					});
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (btnChangeKlant.isEnabled()) {
+					AddVerzekeringPolisDialog addVerzekeringPolisDialog = new AddVerzekeringPolisDialog(
+							KlantManager,
+							maatschappijManager,
+							Klant_Table
+									.getModel()
+									.getValueAt(Klant_Table.getSelectedRow(), 1)
+									.toString());
+					addVerzekeringPolisDialog
+							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					addVerzekeringPolisDialog.setModal(true);
+					addVerzekeringPolisDialog.setVisible(true);
+					addVerzekeringPolisDialog
+							.addWindowListener(new WindowAdapter() {
+								public void windowClosed(WindowEvent e) {
+									Klant_Table.removeAll();
+									fillTable();
+									Klant_Table.setRowSelectionInterval(row,
+											row);
+									Uitgebreide_Info.setText("");
+									fillField(row);
+								}
+							});
 				}
 			}
 		});
 
-		knoppen.add(btnAddKlant);		
+		knoppen.add(btnAddKlant);
 		knoppen.add(btnChangeKlant);
 		knoppen.add(btnAddPolis);
 		knoppen.add(btnChangePolis);
-		knoppen.add(btnFacturatie);		
+		knoppen.add(btnFacturatie);
 
 		/*
 		 * Create the footer
@@ -526,6 +568,7 @@ public class MainGUI {
 		 * Create facturatiePanel + add to mainpanel
 		 */
 		FacturatiePanel = new JPanel();
+		FacturatiePanel.setBackground(new Color(255, 255, 255));
 		MainPanel.add(FacturatiePanel, "name_11228791079497");
 		FacturatiePanel.setLayout(new BorderLayout(0, 0));
 
@@ -556,47 +599,48 @@ public class MainGUI {
 		 */
 		frmFacturatiesysteem.setVisible(true);
 	}
+
 	/*
 	 * Methode om de table te kunnen vullen en updaten
 	 */
-	public void fillTable(){
+	public void fillTable() {
 		memberList = KlantManager.getKlanten();
 		int count = (memberList == null) ? 0 : memberList.size();
-		
-		if(count > 0){
-		dataTableModel.setValues(memberList);
+
+		if (count > 0) {
+			dataTableModel.setValues(memberList);
 		}
 	}
-	
-	public void fillTableZoekresultaat(String gebDatum){
+
+	public void fillTableZoekresultaat(String gebDatum) {
 		memberList = KlantManager.findKlant(gebDatum);
-		
+
 		int count = (memberList == null) ? 0 : memberList.size();
-			
-		if(count > 0){
+
+		if (count > 0) {
 			Klant_Table.removeAll();
 			Uitgebreide_Info.setText("");
 			PolisInfo.setText("");
 			dataTableModel.setValues(memberList);
-		}else{
+		} else {
 			showConfirmationWindow("Geen klanten gevonden");
 		}
 	}
-	
+
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
-	public void fillField(int row){
-		String b_s_n = Klant_Table.getModel().getValueAt(row, 1)
-				.toString();
+	public void fillField(int row) {
+		String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
 		Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
 		PolisInfo.setText("");
 		for (String s : KlantManager.toonPolis(b_s_n)) {
 			PolisInfo.append(s + System.getProperty("line.separator"));
 		}
 	}
+
 	public void showConfirmationWindow(String message) {
-		 Component frame = null;
+		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);
 
 	}

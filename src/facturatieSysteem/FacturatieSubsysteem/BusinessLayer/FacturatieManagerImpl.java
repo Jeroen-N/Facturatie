@@ -64,12 +64,12 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		String factuurNummer = Integer.toString(n2 + 1);
 
 		// De factuurdatum aanmaken
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		Calendar cal = Calendar.getInstance();
 		String vandaag = dateFormat.format(cal.getTime());
 
 		// De vervaldatum berekenen en aanmaken
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date()); // Now use today date.
 		c.add(Calendar.DATE, 14); // Adding 14 days

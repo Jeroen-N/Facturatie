@@ -44,7 +44,7 @@ public class Bon {
 		this.klant = klant;
 		this.verzekeringsmanager = verzekeringsmanager;
 		
-		file = factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf";
+		file = "Facturen/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf";
 		
 		create();
 	}
