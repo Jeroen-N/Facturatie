@@ -43,6 +43,7 @@ public class FacturatieGUI {
 	private static JScrollPane scrollFactuur;
 	private static VerzekeringsmaatschappijManager m1;
 	private static Verzekeringsmaatschappij maatschappijEind;
+	private static Color WHITE;
 	
 	public static JPanel FacturatieGUI(FacturatieManager factManagerImpl, Klant klnt, VerzekeringsmaatschappijManager m2) {
 		JPanel paneel = new JPanel();
@@ -62,9 +63,13 @@ public class FacturatieGUI {
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout(0, 0));
 		mainPanel.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(30, 144, 255)));
+		mainPanel.setBackground(new Color(255, 255, 255));
 		eastPanel = new JPanel();
 		eastPanel.setLayout(new BorderLayout(0, 0));
+		eastPanel.setPreferredSize(new Dimension(500, 10));
+		eastPanel.setBackground(new Color(255, 255, 255));
 		buttonPanel = new JPanel();
+		buttonPanel.setBackground(new Color(255, 255, 255));
 		factuurPanel = new JPanel();
 		
 
@@ -74,8 +79,9 @@ public class FacturatieGUI {
 		factuur = new JTextArea();
 		factuur.setEditable(false);
 		scrollFactuur = new JScrollPane(factuur);
+		scrollFactuur.setPreferredSize(new Dimension(500,10));
 		factuur.setRows(43);
-		factuur.setColumns(30);
+		factuur.setColumns(44);
 		factuur.setBorder(new TitledBorder(new LineBorder(new Color(
 				30, 144, 255)), "Factuur", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
@@ -126,6 +132,8 @@ public class FacturatieGUI {
 	fillTable(klant);
 	
 	factuurTablePanel = new JScrollPane(overzicht);
+	factuurTablePanel.setPreferredSize(new Dimension(450, 400));
+	factuurTablePanel.setBackground(new Color(255, 255, 255));
 	overzicht.setFillsViewportHeight(true);
 	overzicht.getTableHeader().setReorderingAllowed(false);
 	overzicht.getTableHeader().setResizingAllowed(false);
