@@ -123,6 +123,14 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		rechterpaneel.add(zoekKnop, BorderLayout.WEST);
 		rechterpaneel.add(resetKnop, BorderLayout.EAST);
 		
+		
+		resetKnop.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				zoekVeld.setText("");
+				fillTable(manager);
+			}
+		});
+		
 		zoekVeld.addMouseListener(new MouseAdapter(){
 			public void mouseClicked (MouseEvent e){
 				zoekVeld.setText("");
