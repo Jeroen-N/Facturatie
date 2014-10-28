@@ -59,13 +59,6 @@ public class Klant {
 	}
 
 	/*
-	 * Hierbij wordt de betaalwijze aangepast.
-	 */
-	public void SetIncassoOfFactuur(String Betaalwijze) {
-		this.Betaalwijze = Betaalwijze;
-	}
-
-	/*
 	 * In deze methode wordt het verzekeringstype van de client opgevraagd. Dit
 	 * wordt gedaan door middel van de getType methode uit verzekeringsPolis
 	 */

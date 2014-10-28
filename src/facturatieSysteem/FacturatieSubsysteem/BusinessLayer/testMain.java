@@ -18,7 +18,17 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		  ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<VerzekeringPolis>();
 		  VerzekeringPolis polis = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"); 
 		  VerzekeringPolissen.add(polis);
-		Klant klant = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso");
+		Klant klant = new Klant(BSN, 
+				"Sander Blijlevens", 
+				"Schijfstraat 26B", 
+				"4847SM", 
+				"Teteringen", 
+				"31-12-1995","0625235100",
+				"sjmblijl@avans.nl",
+				"NL47RABO0136052185",
+				25.25,
+				VerzekeringPolissen,
+				"incoasso");
 		VerzekeringsmaatschappijManagerImpl v1 = new VerzekeringsmaatschappijManagerImpl(); 
 		Factuur factuur = m1.factureer(klant, v1);
 		//System.out.println(factuur.getFactuurNummer());

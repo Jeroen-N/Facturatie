@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="Libraries/iText/itextpdf-5.5.3.jar"/>
 	<classpathentry kind="lib" path="Libraries/iText/itext-pdfa-5.5.3.jar"/>
 	<classpathentry kind="lib" path="Libraries/iText/itext-xtra-5.5.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
