@@ -2,8 +2,8 @@
 <Login xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Login.xsd">
 	<gebruikers>
 		<gebruiker id="1">
-			<gebruikersnaam></gebruikersnaam>
-			<wachtwoord></wachtwoord>
+			<gebruikersnaam>b2</gebruikersnaam>
+			<wachtwoord>facturatie</wachtwoord>
 		</gebruiker>	
 	</gebruikers>
 </Login>
