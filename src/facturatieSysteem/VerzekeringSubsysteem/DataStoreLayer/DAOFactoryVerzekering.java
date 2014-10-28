@@ -22,10 +22,14 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class DAOFactoryVerzekering {
-	private String xmlPath = "XML/facturatieSysteem.xml";
-	private String xsdPath = "XML/facturatieSysteem.xsd";
+	private String xmlPath;
+	private String xsdPath;
 	private Document document;		
 		
+	public DAOFactoryVerzekering(String xml, String xsd){
+		xmlPath = xml;
+		xsdPath = xsd;
+	}
 	public Document validateXML(){
 		try{
 			Schema schema = getValidationSchema();

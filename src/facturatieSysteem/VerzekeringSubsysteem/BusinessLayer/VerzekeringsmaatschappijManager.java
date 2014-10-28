@@ -39,4 +39,7 @@ public interface VerzekeringsmaatschappijManager {
 
 	boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij,
 			Verzekeringstype type, String behandelcode);
+
+	boolean addBehandelcode(Verzekeringsmaatschappij maatschappij,
+			Verzekeringstype type, String behandelcode);
 }

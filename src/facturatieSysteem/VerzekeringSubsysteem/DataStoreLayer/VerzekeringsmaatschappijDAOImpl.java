@@ -14,7 +14,7 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsmaatschappijDAOImpl implements VerzekeringsmaatschappijDAO {
 	private Document document;
-	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering();
+	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getMaatschappijenXML() {

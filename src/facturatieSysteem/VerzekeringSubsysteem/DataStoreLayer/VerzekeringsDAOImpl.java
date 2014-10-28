@@ -12,7 +12,7 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 	private Document document;
-	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering();
+	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
 	@Override
 	public boolean addVerzekeringstypeXML(String maatschappijnr,Verzekeringstype type) {

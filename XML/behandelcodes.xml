@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<behandelcodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
+<?xml version="1.0" encoding="UTF-8"?><behandelcodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="behandelcodes.xsd">
 	<behandeling behandelcode="001">
 		<behandelingnaam>Hamstring</behandelingnaam>
 		<aantalsessies>2</aantalsessies>

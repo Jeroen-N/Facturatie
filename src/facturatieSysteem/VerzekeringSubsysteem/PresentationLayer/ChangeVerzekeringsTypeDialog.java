@@ -26,6 +26,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAO;
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.main.MainGUI;
@@ -348,7 +350,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    "Weet u het zeker?",
 											    JOptionPane.YES_NO_OPTION);
 										if(n == 0){
-											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
 										}
 			
 									
@@ -470,12 +472,17 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	}
 	public  void fillField(int row){
 		comboBoxBehandelCode.removeAllItems();
+		comboBoxBehandelCodeAdd.removeAllItems();
 		TypeNr = typetable.getModel().getValueAt(row, 0).toString();
 		String naam = typetable.getModel().getValueAt(row, 1).toString();
 		String eigenRisico = typetable.getModel().getValueAt(row, 2).toString();
 		Verzekeringstype type = manager.getVerzekeringstype(maatschappij, TypeNr);
 		for(String behandelcode : type.getBehandelcodes()){
 			comboBoxBehandelCode.addItem(behandelcode);
+		}
+		BehandelDAO behandel = new BehandelDAOImpl();
+		for(String behandelcode : behandel.getBehandelcodes()){
+			comboBoxBehandelCodeAdd.addItem(behandelcode);
 		}
 		textFieldTypeNr.setText(TypeNr);
 		textFieldEigenRisico.setText(eigenRisico);

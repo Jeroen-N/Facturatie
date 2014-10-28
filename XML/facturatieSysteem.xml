@@ -11,13 +11,16 @@
 	         <naam>Basic</naam>
 	         <verplichtEigenRisico>250</verplichtEigenRisico>
 	         <behandelCodes>
-	            <behandelcode>001</behandelcode>
+	            
 	            <behandelcode>004</behandelcode>
 	            <behandelcode>005</behandelcode>
 	            <behandelcode>007</behandelcode>
 	            <behandelcode>008</behandelcode>
-				
-					</behandelCodes>
+					
+					
+					<behandelcode>001</behandelcode>
+					<behandelcode>002</behandelcode>
+				</behandelCodes>
 	      </verzekeringsType>
 	      <verzekeringsType typenr="002">
 	         <naam>All-risk</naam>

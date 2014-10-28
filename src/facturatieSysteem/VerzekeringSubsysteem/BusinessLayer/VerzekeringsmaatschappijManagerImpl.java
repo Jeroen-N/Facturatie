@@ -118,6 +118,17 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 	
 	@Override
+	public boolean addBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
+		if(getVerzekeringstype(maatschappij, type.getNr()) != null){			
+			if(!type.getBehandelcodes().contains(behandelcode)){
+				type.addCode(behandelcode);
+				return VerzekeringtypeDAO.addBehandelCode(maatschappij.getNr(), type.getNr(), behandelcode);
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
 			Verzekeringstype type2 = getVerzekeringstype(maatschappij, type.getNr());
