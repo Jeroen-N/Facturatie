@@ -529,8 +529,13 @@ public class MainGUI {
 							// System.out.println("window is closed");
 							Klant_Table.removeAll();
 							fillTable();
-							Klant_Table.setRowSelectionInterval(row, row);
 							Uitgebreide_Info.setText("");
+							PolisInfo.setText("");
+							try{
+							Klant_Table.setRowSelectionInterval(row, row);
+							} catch(IllegalArgumentException iae) {
+								
+							}
 							if(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString().equals(bsn)){
 								fillField(row);
 							} else {
