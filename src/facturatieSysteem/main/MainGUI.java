@@ -142,6 +142,7 @@ public class MainGUI {
 		btnKlantenbeheer.setIcon(new ImageIcon(
 				"Pictures/contact-administration-xsmall.png"));
 		btnKlantenbeheer.setPreferredSize(new Dimension(50, 50));
+		btnKlantenbeheer.setEnabled(false);
 		Header_Button.add(btnKlantenbeheer);
 		btnKlantenbeheer.addActionListener(new ActionListener() {
 			@Override
@@ -162,6 +163,7 @@ public class MainGUI {
 		btnVerzekeringmaatschapij.setIcon(new ImageIcon(
 				"Pictures/verzekering-xsmall.png"));
 		btnVerzekeringmaatschapij.setPreferredSize(new Dimension(50, 50));
+		btnVerzekeringmaatschapij.setEnabled(false);
 		Header_Button.add(btnVerzekeringmaatschapij);
 		btnVerzekeringmaatschapij.addActionListener(new ActionListener() {
 			@Override
@@ -212,6 +214,8 @@ public class MainGUI {
 						inputFieldPass.setText("");
 						loginPanel.setVisible(false);
 						KlantenPanel.setVisible(true);
+						btnKlantenbeheer.setEnabled(true);
+						btnVerzekeringmaatschapij.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null,
 								"Gebruikersnaam, wachtwoord combinatie niet gevonden.");
@@ -373,8 +377,7 @@ public class MainGUI {
 		Klant_Table.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent e) {
-						boolean rowsAreSelected = Klant_Table
-								.getSelectedRowCount() > 0;
+						boolean rowsAreSelected = Klant_Table.getSelectedRowCount() > 0;
 						btnChangeKlant.setEnabled(rowsAreSelected);
 						btnAddPolis.setEnabled(rowsAreSelected);
 						btnChangePolis.setEnabled(rowsAreSelected);
@@ -413,11 +416,9 @@ public class MainGUI {
 		knoppen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnChangePolis = new JButton("");
-		btnChangePolis
-				.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
+		btnChangePolis.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
 		btnChangePolis.setMargin(new Insets(0, 0, 0, 0));
-		btnChangePolis
-				.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
+		btnChangePolis.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
 		btnChangePolis.setEnabled(false);
 		btnChangePolis.addMouseListener(new MouseAdapter() {
 			@Override
@@ -517,10 +518,10 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangeKlant.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
+					String bsn = Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString();
 					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
 							KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
-					changeKlantDialog
-							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
@@ -530,7 +531,11 @@ public class MainGUI {
 							fillTable();
 							Klant_Table.setRowSelectionInterval(row, row);
 							Uitgebreide_Info.setText("");
-							fillField(row);
+							if(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString().equals(bsn)){
+								fillField(row);
+							} else {
+								Klant_Table.clearSelection();
+							}
 						}
 					});
 				} else {

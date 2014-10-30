@@ -694,7 +694,7 @@ public class ChangeKlantDialog extends JDialog {
 							if(klant.getBetaalMethode().equals("Incasso")){
 								comboBoxBetaalwijze2.addItem("Acceptgiro");
 							} else {
-							comboBoxBetaalwijze2.addItem("Incasso");
+								comboBoxBetaalwijze2.addItem("Incasso");
 							}
 							comboBoxBetaalwijze2.setEditable(false);
 							splitPaneBetaalwijze.setRightComponent(comboBoxBetaalwijze2);

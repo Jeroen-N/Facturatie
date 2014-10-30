@@ -499,10 +499,18 @@ public class AddKlantDialog extends JDialog {
 									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
-										for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
-											comboBoxVerzekeringsType.addItem(type.getNaam());
+										//Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
+										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
+										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){
+											if(selectedComboMaat.equals(maatschappij.getNaam())){
+												Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(maatschappij.getNr());
+												System.out.println(selectedMaatschappij);
+													for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
+														comboBoxVerzekeringsType.addItem(type.getNaam());
+												}
+											}
 										}
+										
 									}
 								}
 							});
@@ -543,7 +551,14 @@ public class AddKlantDialog extends JDialog {
 								public void actionPerformed(ActionEvent e) {
 									textFieldEigenRisico.setText("");
 									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""){
-										textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstype(vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString()),comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
+										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
+										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){
+											if(selectedComboMaat.equals(maatschappij.getNaam())){
+												Verzekeringsmaatschappij selectedMaat = vermaatschappijManager.getVerzekeringsmaatschappij(maatschappij.getNr());
+												textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstypeByName(selectedMaat,comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
+											}
+										}
+										
 									}
 								}
 							});

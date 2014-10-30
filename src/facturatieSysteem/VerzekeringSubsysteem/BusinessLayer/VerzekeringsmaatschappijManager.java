@@ -14,7 +14,7 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
 	
-	public  Verzekeringsmaatschappij getVerzekeringsmaatschappij(String naam);
+	public  Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr);
 	
 	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
 	
