@@ -446,7 +446,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 									comboBoxVerzekeringsType.getSelectedItem().toString(), 
 									textFieldStartDatum.getText(), 
 									textFieldEindDatum.getText());
-							System.out.println(errorMessage);
+							//System.out.println(errorMessage);
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
@@ -456,7 +456,7 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 										Double.parseDouble(textFieldEigenRisico.getText()),
 										textFieldStartDatum.getText(), 
 										textFieldEindDatum.getText())){
-									showConfirmationWindow("Polis Teovoegen Mislukt");
+									showConfirmationWindow("Polis Toevoegen Mislukt");
 								}else{
 									dispose();
 								}
@@ -483,15 +483,19 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 					btnPolisVerwijderen.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							 Component frame = null;
-							int n = JOptionPane.showConfirmDialog(
-								    frame,
-								    "Weet uw zeker dat u de polis met nummer "+textFieldPolisNummer.getText()+" wilt verwijderen",
-								    "Weet u het zeker?",
-								    JOptionPane.YES_NO_OPTION);
-							if(n == 0){
-								manager.deleteVerzekeringPolisXML(textFieldPolisNummer.getText(), BSN);
-								dispose();
+							if(polistable.getRowCount() > 1){
+								Component frame = null;
+								int n = JOptionPane.showConfirmDialog(
+									    frame,
+									    "Weet uw zeker dat u de polis met nummer "+textFieldPolisNummer.getText()+" wilt verwijderen",
+									    "Weet u het zeker?",
+									    JOptionPane.YES_NO_OPTION);
+								if(n == 0){
+									manager.deleteVerzekeringPolisXML(textFieldPolisNummer.getText(), BSN);
+									dispose();
+								}
+							} else {
+								showConfirmationWindow("U kan deze polis niet verwijderen, want dan heeft de klant geen polis meer!");
 							}
 							
 						}

@@ -220,7 +220,8 @@ public class KlantManagerImpl implements KlantManager {
 			}	
 		}
 		
-		if(!EindDatum.contains("") && !StartDatum.contains("")){
+		if(EindDatum.contains("") && StartDatum.contains("")){
+		//System.out.println("datum testen");
 		String beginDatum = StartDatum;
 		String eindDatum = EindDatum;
 		Date startDate;
@@ -228,8 +229,8 @@ public class KlantManagerImpl implements KlantManager {
 		try {
 				startDate = new SimpleDateFormat("dd-MM-yyyy").parse(beginDatum);
 				endDate = new SimpleDateFormat("dd-MM-yyyy").parse(eindDatum);
-				System.out.println(startDate);
-				System.out.println(endDate);
+				//System.out.println(startDate);
+				//System.out.println(endDate);
 				if(startDate.after(endDate)){
 					errorMessage = errorMessage + "\nDe einddatum is eerder dan de startdatum";
 				}

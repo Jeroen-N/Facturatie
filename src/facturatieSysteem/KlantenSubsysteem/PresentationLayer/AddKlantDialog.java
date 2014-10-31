@@ -128,7 +128,13 @@ public class AddKlantDialog extends JDialog {
 							splitPaneBSN.setLeftComponent(lblBsn);
 						}
 						{
-							textFieldBSN = new JTextField();
+							textFieldBSN = new JTextField("123456789");
+							textFieldBSN.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldBSN.setText("");
+								}
+							});
 							splitPaneBSN.setRightComponent(textFieldBSN);
 							textFieldBSN.setColumns(15);
 						}
@@ -151,7 +157,13 @@ public class AddKlantDialog extends JDialog {
 							splitPaneNaam.setLeftComponent(lblNaam);
 						}
 						{
-							textFieldNaam = new JTextField();
+							textFieldNaam = new JTextField("Voor en achternaam");
+							textFieldNaam.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldNaam.setText("");
+								}
+							});
 							splitPaneNaam.setRightComponent(textFieldNaam);
 							textFieldNaam.setColumns(15);
 						}
@@ -184,7 +196,13 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblGeboortedatum);
 						}
 						{
-							textFieldGebDatum = new JTextField();
+							textFieldGebDatum = new JTextField("dag-maand-jaar");
+							textFieldGebDatum.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldGebDatum.setText("");
+								}
+							});
 							splitPaneGebDatum
 									.setRightComponent(textFieldGebDatum);
 							textFieldGebDatum.setColumns(15);
@@ -209,7 +227,13 @@ public class AddKlantDialog extends JDialog {
 							splitPaneAdres.setLeftComponent(lblAdres);
 						}
 						{
-							textFieldAdres = new JTextField();
+							textFieldAdres = new JTextField("Straat + nummer");
+							textFieldAdres.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldAdres.setText("");
+								}
+							});
 							splitPaneAdres.setRightComponent(textFieldAdres);
 							textFieldAdres.setColumns(15);
 						}
@@ -238,7 +262,13 @@ public class AddKlantDialog extends JDialog {
 							splitPanePostCode.setLeftComponent(lblPostcode);
 						}
 						{
-							textFieldPostCode = new JTextField();
+							textFieldPostCode = new JTextField("1234AB");
+							textFieldPostCode.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldPostCode.setText("");
+								}
+							});
 							splitPanePostCode
 									.setRightComponent(textFieldPostCode);
 							textFieldPostCode.setColumns(15);
@@ -265,7 +295,13 @@ public class AddKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats);
 						}
 						{
-							textFieldPlaats = new JTextField();
+							textFieldPlaats = new JTextField("Plaatsnaam");
+							textFieldPlaats.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldPlaats.setText("");
+								}
+							});
 							splitPanePlaats.setRightComponent(textFieldPlaats);
 							textFieldPlaats.setColumns(15);
 						}
@@ -298,7 +334,13 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblTelefoonnummer);
 						}
 						{
-							textFieldTelefoonnummer = new JTextField();
+							textFieldTelefoonnummer = new JTextField("Mobiel");
+							textFieldTelefoonnummer.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldTelefoonnummer.setText("");
+								}
+							});
 							splitPaneTelefoonnummer
 									.setRightComponent(textFieldTelefoonnummer);
 							textFieldTelefoonnummer.setColumns(15);
@@ -322,7 +364,13 @@ public class AddKlantDialog extends JDialog {
 							splitPaneEmail.setLeftComponent(lblEmail);
 						}
 						{
-							textFieldEmail = new JTextField();
+							textFieldEmail = new JTextField("emailadres");
+							textFieldEmail.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldEmail.setText("");
+								}
+							});
 							splitPaneEmail.setRightComponent(textFieldEmail);
 							textFieldEmail.setColumns(15);
 						}
@@ -355,7 +403,7 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							comboBoxBetaalwijze = new JComboBox();
-							comboBoxBetaalwijze.addItem("");
+							comboBoxBetaalwijze.addItem("Selecteer 1 van de 2");
 							comboBoxBetaalwijze.addItem("Incasso");
 							comboBoxBetaalwijze.addItem("Acceptgiro");
 							splitPaneBetaalwijze
@@ -390,7 +438,13 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblRekeningnummer);
 						}
 						{
-							textFieldRkNummer = new JTextField();
+							textFieldRkNummer = new JTextField("Rekeningnummer");
+							textFieldRkNummer.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									textFieldRkNummer.setText("");
+								}
+							});
 							splitPaneRkNummer
 									.setRightComponent(textFieldRkNummer);
 							textFieldRkNummer.setColumns(15);
@@ -497,7 +551,7 @@ public class AddKlantDialog extends JDialog {
 								public void actionPerformed(ActionEvent e) {
 									comboBoxVerzekeringsType.removeAllItems();
 									textFieldEigenRisico.setText("");
-									comboBoxVerzekeringsType.addItem("");
+									comboBoxVerzekeringsType.addItem("Selecteer maatschappij");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
 										//Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
 										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
@@ -549,7 +603,7 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									textFieldEigenRisico.setText("");
+									textFieldEigenRisico.setText("Selecteer polis");
 									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""){
 										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
 										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){

@@ -426,25 +426,35 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangePolis.isEnabled()) {
 					// System.out.println("klant geselecteerd!");
-					ChangeVerzekeringPolisDialog changeKlantDialog = new ChangeVerzekeringPolisDialog(
+					String bsn = Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString();
+					ChangeVerzekeringPolisDialog changePolisDialog = new ChangeVerzekeringPolisDialog(
 							KlantManager,
 							maatschappijManager,
 							Klant_Table
 									.getModel()
 									.getValueAt(Klant_Table.getSelectedRow(), 1)
 									.toString());
-					changeKlantDialog
+					changePolisDialog
 							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					changeKlantDialog.setModal(true);
-					changeKlantDialog.setVisible(true);
-					changeKlantDialog.addWindowListener(new WindowAdapter() {
+					changePolisDialog.setModal(true);
+					changePolisDialog.setVisible(true);
+					changePolisDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
 							// System.out.println("window is closed");
 							Klant_Table.removeAll();
 							fillTable();
-							Klant_Table.setRowSelectionInterval(row, row);
 							Uitgebreide_Info.setText("");
-							fillField(row);
+							PolisInfo.setText("");
+							try{
+								Klant_Table.setRowSelectionInterval(row, row);
+								} catch(IllegalArgumentException iae) {
+									
+								}
+							if(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString().equals(bsn)){
+								fillField(row);
+							} else {
+								Klant_Table.clearSelection();
+							}
 						}
 					});
 				} else {
