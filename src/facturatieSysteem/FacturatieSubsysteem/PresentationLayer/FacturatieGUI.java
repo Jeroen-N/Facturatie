@@ -156,8 +156,7 @@ public class FacturatieGUI extends JFrame {
 						int row2 = overzicht.getSelectedRow();
 						Factuur factuur = vindFactuur(row2);
 						maatschappijEind = null;
-						for (Verzekeringsmaatschappij maatschappij : m1
-								.getVerzekeringsmaatschappijen()) {
+						for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
 							
 				        	//Loopen door de typeArray om het te op te halen van de maatschappij
 							for (Verzekeringstype type : maatschappij.getTypes()) {
@@ -175,6 +174,7 @@ public class FacturatieGUI extends JFrame {
 							}
 						}
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
+						
 						try {
 							File file = new File("Facturen/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf");
 							Desktop.getDesktop().open(file);
@@ -190,8 +190,7 @@ public class FacturatieGUI extends JFrame {
 						int row2 = overzicht.getSelectedRow();
 						Factuur factuur = vindFactuur(row2);
 						maatschappijEind = null;
-						for (Verzekeringsmaatschappij maatschappij : m1
-								.getVerzekeringsmaatschappijen()) {
+						for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
 							
 				        	//Loopen door de typeArray om het te op te halen van de maatschappij
 							for (Verzekeringstype type : maatschappij.getTypes()) {
@@ -206,8 +205,11 @@ public class FacturatieGUI extends JFrame {
 										maatschappijEind = maatschappij;
 										break;
 									}
+									
 							}
+							
 						}
+						
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
 						
 						
