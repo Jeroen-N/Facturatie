@@ -425,7 +425,6 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangePolis.isEnabled()) {
-					// System.out.println("klant geselecteerd!");
 					String bsn = Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString();
 					ChangeVerzekeringPolisDialog changePolisDialog = new ChangeVerzekeringPolisDialog(
 							KlantManager,
@@ -440,7 +439,6 @@ public class MainGUI {
 					changePolisDialog.setVisible(true);
 					changePolisDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
-							// System.out.println("window is closed");
 							Klant_Table.removeAll();
 							fillTable();
 							Uitgebreide_Info.setText("");
@@ -457,9 +455,7 @@ public class MainGUI {
 							}
 						}
 					});
-				} else {
-					System.out.println("geen klant geselecteerd");
-				}
+				} 
 			}
 		});
 
@@ -527,7 +523,6 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangeKlant.isEnabled()) {
-					// System.out.println("klant geselecteerd!");
 					String bsn = Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString();
 					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
 							KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
@@ -536,7 +531,6 @@ public class MainGUI {
 					changeKlantDialog.setVisible(true);
 					changeKlantDialog.addWindowListener(new WindowAdapter() {
 						public void windowClosed(WindowEvent e) {
-							// System.out.println("window is closed");
 							Klant_Table.removeAll();
 							fillTable();
 							Uitgebreide_Info.setText("");
@@ -553,9 +547,7 @@ public class MainGUI {
 							}
 						}
 					});
-				} else {
-					System.out.println("geen klant geselecteerd");
-				}
+				} 
 			}
 		});
 

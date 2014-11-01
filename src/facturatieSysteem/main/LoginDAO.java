@@ -35,9 +35,6 @@ public class LoginDAO {
 				String wachtwoord = gebruikerElement
 						.getElementsByTagName("wachtwoord").item(0)
 						.getTextContent();
-
-				System.out.println("Gebruikersnaam: " + gebruikersnaam
-						+ "Wachtwoord: " + wachtwoord);
 				Gebruiker g = new Gebruiker(gebruikersnaam, wachtwoord, false);
 				gebruikers.add(g);
 

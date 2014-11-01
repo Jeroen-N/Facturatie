@@ -8,7 +8,6 @@ public class testMain {
 		String gebruikersnaam = "b1";
 		String wachtwoord = "fysio";
 		if(m1.check(gebruikersnaam, wachtwoord)){
-			System.out.println("True");
 			
 		}
 	}

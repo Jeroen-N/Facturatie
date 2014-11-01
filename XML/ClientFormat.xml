@@ -18,7 +18,7 @@
 				<VerzekeringType>Kaas_Basic</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-01-2013</startDatum>
-				<eindDatum>31-12-2014</eindDatum>
+				<eindDatum>31-12-2013</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 		<Facturen>

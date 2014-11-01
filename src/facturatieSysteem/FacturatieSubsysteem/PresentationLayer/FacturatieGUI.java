@@ -172,24 +172,17 @@ public class FacturatieGUI extends JFrame {
 								String polisNaam = "";
 								for (VerzekeringPolis polis : klant
 										.getVerzekeringPolissen()) {
-									// System.out.println(polis.getVerzekeringsType());
 									polisNaam = polis.getVerzekeringsType();
 								}
 								// de maatschappij ophalen aan de hand van de
 								// klant zijn type
 								if (polisNaam.equals(type.getNaam())) {
-									// System.out.println(maatschappij);
 									maatschappijEind = maatschappij;
 									break;
 								}
 							}
 						}
-						// System.out.println(factuur);
-						// System.out.println(maatschappijEind);
-						// System.out.println(klant);
-						// System.out.println(m1);
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
-						System.out.println("Bon was created");
 							if (Desktop.isDesktopSupported()) {
 								try {
 									Desktop.getDesktop().open(new File("Facturen/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf"));
@@ -275,7 +268,6 @@ public class FacturatieGUI extends JFrame {
 
 	public void fillTable(Klant klant) {
 		facturen = facturatieManagerImpl.haalFacturen(klant.getBSN());
-		System.out.println(facturen.size());
 		dataTableModel.setValues(facturen);
 		facturen.clear();
 	}
@@ -286,7 +278,6 @@ public class FacturatieGUI extends JFrame {
 	public void fillField(int row) {
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0)
 				.toString();
-		System.out.println(factuur_nummer);
 		factuur.setText(facturatieManagerImpl
 				.toonFactuur(factuur_nummer, klant));
 	}
@@ -294,7 +285,6 @@ public class FacturatieGUI extends JFrame {
 	public Factuur vindFactuur(int row2) {
 		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0)
 				.toString();
-		System.out.println(factuur_nummer2);
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
 	}
 

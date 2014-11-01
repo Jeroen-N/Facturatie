@@ -64,7 +64,7 @@ public class KlantManagerImplTest {
 		klantDAO.updateKlantXML(klant);
 		for (Klant k1 : klantDAO.getKlantenXML()) {
 			if (k1.getBSN().equals(BSN)) {
-				//System.out.println(k1.getWoonplaats());
+
 				plaats = k1.getWoonplaats();
 			}
 		}

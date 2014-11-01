@@ -125,7 +125,6 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 				verzekeringsTypes.appendChild(document.createTextNode("\n\t\t\t"));
 				verzekeringsTypes.appendChild(verzekeringsType);
 				verzekeringsType.appendChild(document.createTextNode("\n\t\t\t\t"));
-				System.out.println("x");
 			}
 			
 			Attr typenr = document.createAttribute("typenr");

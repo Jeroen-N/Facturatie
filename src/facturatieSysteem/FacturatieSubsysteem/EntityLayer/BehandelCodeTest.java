@@ -24,7 +24,6 @@ public class BehandelCodeTest {
 
 	@Test
 	public void testGetBehandelCode() throws Exception {
-		System.out.println("de behandelcode wordt opgehaald");
 		int expResult = 001;
 		assertTrue(instance.getBehandelCode() == expResult);
 	}

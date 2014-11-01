@@ -31,13 +31,6 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 				"incoasso");
 		VerzekeringsmaatschappijManagerImpl v1 = new VerzekeringsmaatschappijManagerImpl(); 
 		Factuur factuur = m1.factureer(klant, v1);
-		//System.out.println(factuur.getFactuurNummer());
-		//System.out.println(factuur.getFactuurDatum());
-		//System.out.println(factuur.getVervalDatum());
-		//System.out.println(factuur.getBSN());
-		//System.out.println(factuur.getVergoedeBedrag());
-		//System.out.println(factuur.getStatus());
-		//System.out.println();
 		
 		Bon bon = new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant, v1);
 	}

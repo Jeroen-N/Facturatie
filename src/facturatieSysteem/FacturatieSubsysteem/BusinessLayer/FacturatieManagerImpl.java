@@ -127,7 +127,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			if (z == 0){
 				
 				// Behandeling wordt niet standaard vergoed
-				System.out.println("prijs voor behandeling"+behandelingDAO.getPrijs(behandeling.getBehandelCode()));
 				double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
 				totalePrijs += tijdelijkRisico;
 				
@@ -149,7 +148,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			
 			behandeling.setTotaalprijs(totalePrijs);
 			totaalPrijsFactuur += totalePrijs;
-			System.out.println("Totaalprijs behandelingen: "+ behandeling.getTotaalprijs());
 				
 		}
 		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
@@ -171,7 +169,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				return factuur.toString(factuur, loopBehandelingen(factuur));
 			}
 		}
-		System.out.println("leeg");
 		return "niks gevonden";
 	}
 
@@ -182,7 +179,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				return factuur;
 			}
 		}
-		System.out.println("leeg");
 		return null;
 	}
 	

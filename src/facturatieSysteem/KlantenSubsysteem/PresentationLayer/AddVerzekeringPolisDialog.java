@@ -517,12 +517,10 @@ public class AddVerzekeringPolisDialog extends JDialog {
 									textFieldEigenRisico.setText("");
 									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										//System.out.println("types combobox vullen");
 										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
 										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){
 											if(selectedComboMaat.equals(maatschappij.getNaam())){
 												Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(maatschappij.getNr());
-												System.out.println(selectedMaatschappij);
 													for (Verzekeringstype type : selectedMaatschappij.getTypes()) {
 														comboBoxVerzekeringsType.addItem(type.getNaam());
 												}
@@ -695,7 +693,6 @@ public class AddVerzekeringPolisDialog extends JDialog {
 									comboBoxVerzekeringsType.getSelectedItem().toString(), 
 									textFieldStartDatum.getText(), 
 									textFieldEindDatum.getText());
-							System.out.println(errorMessage);
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{

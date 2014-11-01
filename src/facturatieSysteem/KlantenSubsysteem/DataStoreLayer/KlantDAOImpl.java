@@ -175,21 +175,6 @@ public class KlantDAOImpl implements KlantDAO {
 				Double ResterendEigenRisico = Double.parseDouble(clientElement.getElementsByTagName("ResterendEigenRisico").item(0).getTextContent());
 				String RekeningNr = clientElement.getElementsByTagName("Rekeningnummer").item(0).getTextContent();
 				String Betaalwijze= clientElement.getElementsByTagName("BetaalMethode").item(0).getTextContent();
-				/*
-				System.out.println("client: " + (i+1));
-				System.out.println(BSN);
-				System.out.println(Naam);
-				System.out.println(Adres);
-				System.out.println(Postcode);
-				System.out.println(Woonplaats);
-				System.out.println(Geboortedatum);
-				System.out.println(TelefoonNr);
-				System.out.println(Email);
-				System.out.println(ResterendEigenRisico);
-				System.out.println(RekeningNr);
-				System.out.println(Betaalwijze);
-				System.out.println();
-				*/
 				Element polissenElement = (Element) clientElement.getElementsByTagName("VerzekeringPolissen").item(0);
 				NodeList polissen = polissenElement.getElementsByTagName("VerzekeringPolis");
 				ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
@@ -210,15 +195,7 @@ public class KlantDAOImpl implements KlantDAO {
 				//create Klant add to ArrayList
 				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				klantOverzicht.add(klant);
-				
-				/*
-				System.out.println(PolisNummer);
-				System.out.println(VerzekeringsType);
-				System.out.println(EigenRisico);
-				System.out.println(startDatum);
-				System.out.println(eindDatum);
-				System.out.println();
-				*/
+
 				
 			}
 

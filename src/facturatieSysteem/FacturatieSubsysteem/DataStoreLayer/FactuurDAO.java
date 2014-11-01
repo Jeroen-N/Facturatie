@@ -45,22 +45,15 @@ public class FactuurDAO implements FactuurDAOinf {
 				Element clientElement = (Element) clienten.item(i);
 				String BSN = clientElement.getAttribute("BSN");
 				if (BSN.equals(invoerBSN)) { // klant
-
-					System.out.println("");
-					System.out.println("BSN: " + BSN);
 					Element facturenElement = (Element) clientElement
 							.getElementsByTagName("Facturen").item(0);
 					NodeList facturenNode = facturenElement
 							.getElementsByTagName("Factuur");
-					System.out.println("aantal Facturen: "
-							+ facturenNode.getLength());
 					for (int j = 0; j < facturenNode.getLength(); j++) {
 
 						Element factuurElement = (Element) facturenNode.item(j);
 						String factuurNummer = factuurElement
 								.getAttribute("FactuurNummer");
-						System.out.print("factuur " + (j + 1)
-								+ " met factuurnummer " + factuurNummer);
 						String factuurDatum = factuurElement
 								.getElementsByTagName("FactuurDatum").item(0)
 								.getTextContent();
@@ -87,18 +80,13 @@ public class FactuurDAO implements FactuurDAOinf {
 								.item(0);
 						NodeList behandelingenNode = factuurBehandelingenElement
 								.getElementsByTagName("FactuurBehandeling");
-
-						System.out.println(" heeft "
-								+ behandelingenNode.getLength()
-								+ " behandelingen");
+						
 						for (int k = 0; k < behandelingenNode.getLength(); k++) {
 
 							Element behandelingElement = (Element) behandelingenNode
 									.item(k);
 							String behandelingid = behandelingElement
 									.getAttribute("BehandelingID");
-							System.out.println("\t Behandeling " + (k + 1)
-									+ " bevat BehandelingId: " + behandelingid);
 
 							NodeList BehandelafspraakIDsNode = behandelingElement
 									.getElementsByTagName("BehandelafspraakID");
@@ -107,9 +95,6 @@ public class FactuurDAO implements FactuurDAOinf {
 									.getLength(); y++) {
 								String behandelafspraakID = BehandelafspraakIDsNode
 										.item(y).getTextContent();
-								System.out
-										.println("\t\t BehandelafspraakID is:"
-												+ behandelafspraakID);
 								AfsprakenIDs.add(behandelafspraakID);
 							}
 
@@ -118,8 +103,6 @@ public class FactuurDAO implements FactuurDAOinf {
 									.item(0);
 							NodeList behandelingenNode2 = behandelingenElement
 									.getElementsByTagName("Behandeling");
-							// System.out.println("Behandelingen lengte: " +
-							// behandelingenNode2.getLength());
 
 							for (int l = 0; l < behandelingenNode2.getLength(); l++) {
 								Element behandelingElement2 = (Element) behandelingenNode2
@@ -144,42 +127,7 @@ public class FactuurDAO implements FactuurDAOinf {
 									String behandelEindDatum = behandelingElement2
 											.getElementsByTagName(
 													"BehandelEindDatum")
-											.item(0).getTextContent(); // matchende
-																		// behandeling
-																		// zoeken
-									/*
-									 * // Zoek nu bij alle behandelingen de
-									 * afspraken op. NodeList Gefactureerdnode =
-									 * behandelingElement2
-									 * .getElementsByTagName("Gefactureerd");
-									 * NodeList Statusnode =
-									 * behandelingElement2.
-									 * getElementsByTagName("Status"); int m =
-									 * 0; // Loop door de lijst afspraken heen.
-									 * for (int n = 0; n <
-									 * Gefactureerdnode.getLength(); n++) {
-									 * Element GefactureerdElement = (Element)
-									 * Gefactureerdnode.item(n); Element
-									 * StatusElement = (Element)
-									 * Statusnode.item(n);
-									 * //System.out.println("Lengte: " +
-									 * afspraaknode.getLength()); // Als de
-									 * afspraak niet gefactureerd is en deze wel
-									 * // voltooid is, wordt l opgehoogd met 1.
-									 * if
-									 * (GefactureerdElement.getTextContent().equals
-									 * ("Ja") &&
-									 * StatusElement.getTextContent().equals
-									 * ("Voltooid")) { //
-									 * System.out.println("Test2"); m++; } }
-									 */
-									System.out.println("\t\t Behandeling "
-											+ (k + 1) + " heeft "
-											+ AfsprakenIDs.size()
-											+ " afspraken");
-									// Reset de tellers en de string die
-									// toegevoegd wordt
-									// aan de behandelcode.
+											.item(0).getTextContent(); 
 
 									Behandeling behandeling = new Behandeling(
 											fysioPraktijkNummer, behandelingId,
@@ -195,7 +143,6 @@ public class FactuurDAO implements FactuurDAOinf {
 						factuur = new Factuur(factuurNummer, factuurDatum,
 								vervalDatum, invoerBSN, vergoedeBedrag,
 								behandelingen, status, totaalPrijs);
-						System.out.println();
 						facturen.add(factuur);
 					}
 				}
@@ -249,8 +196,6 @@ public class FactuurDAO implements FactuurDAOinf {
 					Element factuurBehandelingen = document
 							.createElement("FactuurBehandelingen");
 					factuurElement.appendChild(factuurBehandelingen);
-					
-					System.out.println("aantal behandelingen: "+factuur.getBehandelingen().size());
 					
 					// ArrayList met behandelingen vullen.
 					behandelingen = factuur.getBehandelingen();

@@ -9,7 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -446,7 +449,6 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 									comboBoxVerzekeringsType.getSelectedItem().toString(), 
 									textFieldStartDatum.getText(), 
 									textFieldEindDatum.getText());
-							//System.out.println(errorMessage);
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
@@ -513,6 +515,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		comboBoxVerzekeringsType.removeAllItems();
 		textFieldEigenRisico.removeAll();
 		}
+		textFieldStartDatum.setEditable(true);
+		textFieldEindDatum.setEditable(true);
 		String PolisNr = polistable.getModel().getValueAt(row, 0).toString();
 		String verType = polistable.getModel().getValueAt(row, 1).toString();
 		String eigenRisico = polistable.getModel().getValueAt(row, 2).toString();
@@ -523,12 +527,25 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		textFieldEigenRisico.setText(eigenRisico);
 		textFieldStartDatum.setText(StartDatum);
 		textFieldEindDatum.setText(EindDatum);
-		System.out.println(verType);
-		System.out.println("loop door maatschappijen");
+		
+		try {
+			SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
+			Date date = new Date();
+			Date date1 = new SimpleDateFormat("dd-MM-yyyy").parse(StartDatum);
+			Date date2 = new SimpleDateFormat("dd-MM-yyyy").parse(EindDatum);
+			if (date.after(date1)){
+				textFieldStartDatum.setEditable(false);
+			}
+			if (date.after(date2)){
+				textFieldEindDatum.setEditable(false);
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
-			System.out.println("loop door maatschappijen");
 			for (Verzekeringstype type : maatschappij.getTypes()) {
-				System.out.println("loop door types" +type.getNaam());
 				if(type.getNaam().equals(verType)){
 					comboBoxMaatschappij.addItem( maatschappij.getNaam());
 					break;

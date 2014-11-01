@@ -8,8 +8,6 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 
 public class main {
 	public static void main(String[] args){
-		//FacturatieManagerImpl m1 = new FacturatieManagerImpl();
-		//System.out.println(m1.haalFacturen("136521598"));
 		
 		//Instantieer alle managers hier
 		KlantManager klantManager = new KlantManagerImpl();

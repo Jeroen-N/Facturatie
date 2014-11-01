@@ -25,7 +25,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 
 	public double getPrijs(String invoerbehandelCode) {
 		document = daoFactoryBehandelcode.getDocument();
-		System.out.println(invoerbehandelCode);
 		double tarief = 0;
 		try {
 			Element codesElement = (Element) document.getElementsByTagName(
@@ -42,13 +41,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 							.getTextContent();
 					stringtarief = stringtarief.replaceAll(",", ".");
 					tarief = Double.parseDouble(stringtarief);
-
-					/*
-					 * System.out.println("tarief");
-					 * 
-					 * 
-					 * System.out.println();
-					 */
 
 				}
 			}
@@ -111,7 +103,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 								.getElementsByTagName("behandelafspraak");
 						int l = 0;
 						// Loop door de lijst afspraken heen.
-						System.out.println("aantal afspraken "+afspraaknode.getLength());
 						afspraakIDs = new ArrayList<>();
 						for (int k = 0; k < afspraaknode.getLength(); k++) {
 							Element afspraakElement = (Element) afspraaknode
@@ -120,7 +111,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 							// voltooid is, wordt l opgehoogd met 1.
 							if (!afspraakElement.getElementsByTagName("Gefactureerd").item(0).getTextContent().equals("Ja")
 								&& afspraakElement.getElementsByTagName("Status").item(0).getTextContent().equals("Voltooid")) {
-								System.out.println("Behandeling nog niet gefactureerd");
 								l++;
 								afspraakIDs.add(afspraakElement
 										.getAttribute("ID"));
@@ -129,7 +119,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 
 						// Reset de tellers en de string die toegevoegd wordt
 						// aan de behandelcode.
-						System.out.println(behandelingId);
 						Behandeling behandeling = new Behandeling(
 								praktijkNummer, behandelingId, behandelcode,
 								behandelStartDatum, behandelEindDatum, BSN,
@@ -155,7 +144,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 
 	public String getNaam(String invoerbehandelCode) {
 		document = daoFactoryBehandelcode.getDocument();
-		System.out.println(invoerbehandelCode);
 		String behandelingNaam = "";
 		try {
 			Element codesElement = (Element) document.getElementsByTagName(
@@ -170,13 +158,6 @@ public class BehandelingDAO implements BehandelDAOinf {
 					behandelingNaam = behandelingElement
 							.getElementsByTagName("behandelingnaam").item(0)
 							.getTextContent();
-
-					/*
-					 * System.out.println("behandelignNaam");
-					 * 
-					 * 
-					 * System.out.println();
-					 */
 
 				}
 			}
