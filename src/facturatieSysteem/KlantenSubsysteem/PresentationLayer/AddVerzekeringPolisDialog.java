@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -48,6 +51,7 @@ public class AddVerzekeringPolisDialog extends JDialog {
 	private JTextField textFieldStartDatum;
 	private JTextField textFieldEindDatum;
 	private JTextField textFieldEigenRisico;
+	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
@@ -193,7 +197,7 @@ public class AddVerzekeringPolisDialog extends JDialog {
 						{
 							textFieldGebDatum = new JTextField();
 							splitPaneGebDatum.setRightComponent(textFieldGebDatum);
-							textFieldGebDatum.setText(klant.getGeboortedatum());
+							textFieldGebDatum.setText(df1.format(klant.getGeboortedatum()));
 							textFieldGebDatum.setEditable(false);
 							textFieldGebDatum.setColumns(15);
 
@@ -699,15 +703,19 @@ public class AddVerzekeringPolisDialog extends JDialog {
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
-								if(!manager.addVerzekeringPolisXML(BSN,
-										textFieldPolisNummer.getText(), 
-										comboBoxVerzekeringsType.getSelectedItem().toString(), 
-										Double.parseDouble(textFieldEigenRisico.getText()),
-										textFieldStartDatum.getText(), 
-										textFieldEindDatum.getText())){
-									showConfirmationWindow("Polis Teovoegen Mislukt");
-								}else{
-									dispose();
+								try {
+									if(!manager.addVerzekeringPolisXML(BSN,
+											textFieldPolisNummer.getText(), 
+											comboBoxVerzekeringsType.getSelectedItem().toString(), 
+											Double.parseDouble(textFieldEigenRisico.getText()),
+											df1.parse(textFieldStartDatum.getText()), 
+											df1.parse(textFieldEindDatum.getText()))){
+										showConfirmationWindow("Polis Teovoegen Mislukt");
+									}else{
+										dispose();
+									}
+								} catch (NumberFormatException | ParseException e1) {
+									e1.printStackTrace();
 								}
 							}
 						}

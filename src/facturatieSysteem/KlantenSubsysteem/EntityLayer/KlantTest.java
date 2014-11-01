@@ -2,10 +2,12 @@ package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,9 +23,9 @@ public class KlantTest {
 		String polisNummer = "123456";
 		  String BSN = "125651201";
 		  VerzekeringPolissen = new ArrayList<VerzekeringPolis>();
-		  polis = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"); 
+		  polis = new VerzekeringPolis(polisNummer, "007", 1125.48, new SimpleDateFormat("dd-MM-yyyy").parse("01-01-2010"), new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2011")); 
 		  VerzekeringPolissen.add(polis);
-		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
+		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen",new SimpleDateFormat("dd-MM-yyyy").parse("31-12-1995"),"0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 	}
 
 	@After
@@ -89,9 +91,9 @@ public class KlantTest {
 	}
 	
 	@Test
-	public void testgetGeboortedatum(){
-		String expResult = ("31-12-1995");
-		String Result = instance.getGeboortedatum();
+	public void testgetGeboortedatum() throws ParseException{
+		Date expResult = new SimpleDateFormat("dd-MM-yyyy").parse("31-12-1995");
+		Date Result = instance.getGeboortedatum();
 		assertEquals(expResult, Result);
 	}
 	

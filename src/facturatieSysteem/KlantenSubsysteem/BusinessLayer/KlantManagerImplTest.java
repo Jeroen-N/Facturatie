@@ -2,11 +2,14 @@ package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.DOMException;
 
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAOImpl;
@@ -32,9 +35,9 @@ public class KlantManagerImplTest {
 		polisNummer = "123456";
 		  BSN = "125651201";
 		  VerzekeringPolissen = new ArrayList<VerzekeringPolis>();
-		  polis = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011"); 
+		  polis = new VerzekeringPolis(polisNummer, "007", 1125.48, new SimpleDateFormat("dd-MM-yyyy").parse("01-01-2010"), new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2011")); 
 		  VerzekeringPolissen.add(polis);
-		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
+		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", new SimpleDateFormat("dd-MM-yyyy").parse("31-12-1995"),"0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 	}
 	
 	@After
@@ -56,11 +59,11 @@ public class KlantManagerImplTest {
 	}
 
 	@Test
-	public void testUpdateKlant() {
+	public void testUpdateKlant() throws ParseException {
 		String BSN = "125651203";
 		String expRes = "Breda";
 		String plaats = null;
-		Klant klant = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Breda", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
+		Klant klant = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Breda", new SimpleDateFormat("dd-MM-yyyy").parse("31-12-1995"),"0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 		klantDAO.updateKlantXML(klant);
 		for (Klant k1 : klantDAO.getKlantenXML()) {
 			if (k1.getBSN().equals(BSN)) {
@@ -72,8 +75,8 @@ public class KlantManagerImplTest {
 	}
 
 	@Test
-	public void testFindKlant() {
-		assertTrue(2 == klantDAO.findKlantXML("31-12-1995").size());
+	public void testFindKlant() throws DOMException, ParseException {
+		assertTrue(2 == klantDAO.findKlantXML(new SimpleDateFormat("dd-MM-yyyy").parse("31-12-1995")).size());
 	}
 
 	@Test
@@ -123,13 +126,13 @@ public class KlantManagerImplTest {
 	}
 
 	@Test
-	public void testCreatePolis() {
-		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011");
+	public void testCreatePolis() throws ParseException {
+		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "007", 1125.48, new SimpleDateFormat("dd-MM-yyyy").parse("01-01-2010"), new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2011"));
 		assertTrue(polis1.getPolisNummer() == polisNummer);
 	}
 
 	@Test
-	public void testAddVerzekeringPolisXML() {
+	public void testAddVerzekeringPolisXML() throws ParseException {
 		String BSN = "125651202";
 		int i = 0;
 		int j = 0;
@@ -138,7 +141,7 @@ public class KlantManagerImplTest {
 				i = k1.getVerzekeringPolissen().size();
 			}
 		}
-		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011");
+		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "007", 1125.48, new SimpleDateFormat("dd-MM-yyyy").parse("01-01-2010"), new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2011"));
 		polisDAO.addVerzekeringPolisXML(BSN, polis1);
 		for (Klant k2 : klantDAO.getKlantenXML()) {
 			if (k2.getBSN().equals(BSN)) {
@@ -151,8 +154,8 @@ public class KlantManagerImplTest {
 	}
 
 	@Test
-	public void testUpdateVerzekeringPolisXML() {
-		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "009", 1125.48, "01-01-2010", "31-12-2011");
+	public void testUpdateVerzekeringPolisXML() throws ParseException {
+		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "009", 1125.48, new SimpleDateFormat("dd-MM-yyyy").parse("01-01-2010"), new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2011"));
 		polisDAO.updateVerzekeringPolisXML(polis1);
 		for (Klant k1 : klantDAO.getKlantenXML()) {
 			if (k1.getBSN().equals(BSN)) {

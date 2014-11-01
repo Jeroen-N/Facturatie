@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -50,6 +53,7 @@ public class AddKlantDialog extends JDialog {
 	private JComboBox<String> comboBoxBetaalwijze;
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
+	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 
 	/**
 	 * Create the dialog.
@@ -730,48 +734,60 @@ public class AddKlantDialog extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						if (!comboBoxMaatschappij.getSelectedItem().equals("")){
-							String errorMessage = manager.checkKlant(
-									textFieldBSN.getText(),
-									textFieldNaam.getText(),
-									textFieldAdres.getText(), 
-									textFieldPostCode.getText(),
-									textFieldPlaats.getText(),
-									textFieldGebDatum.getText(),
-									textFieldTelefoonnummer.getText(),
-									textFieldEmail.getText(),
-									textFieldRkNummer.getText(),
-									comboBoxBetaalwijze.getSelectedItem().toString()) +
-							manager.checkPolis(
-									textFieldPolisNummer.getText(),
-									comboBoxVerzekeringsType.getSelectedItem().toString(), 
-									textFieldStartDatum.getText(), 
-									textFieldEindDatum.getText());
+							String errorMessage= "";
+							try {
+								errorMessage = manager.checkKlant(
+										textFieldBSN.getText(),
+										textFieldNaam.getText(),
+										textFieldAdres.getText(), 
+										textFieldPostCode.getText(),
+										textFieldPlaats.getText(),
+										df1.parse(textFieldGebDatum.getText()),
+										textFieldTelefoonnummer.getText(),
+										textFieldEmail.getText(),
+										textFieldRkNummer.getText(),
+										comboBoxBetaalwijze.getSelectedItem().toString()) + manager.checkPolis(
+										textFieldPolisNummer.getText(),
+										comboBoxVerzekeringsType.getSelectedItem().toString(), 
+										textFieldStartDatum.getText(), 
+										textFieldEindDatum.getText());
+							} catch (ParseException e2) {
+								e2.printStackTrace();
+							}
 							System.out.println(errorMessage);
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
 								ArrayList<VerzekeringPolis>verzekeringPolissen = new ArrayList<>();
-								verzekeringPolissen.add(
-										manager.createPolis
-										(textFieldPolisNummer.getText(), 
+								try {
+									verzekeringPolissen.add(
+											manager.createPolis
+											(textFieldPolisNummer.getText(), 
 												comboBoxVerzekeringsType.getSelectedItem().toString(), 
 												Double.parseDouble(textFieldEigenRisico.getText()),
-												textFieldStartDatum.getText(), 
-												textFieldEindDatum.getText()));
-								if( !manager.createKlant(
+												df1.parse(textFieldStartDatum.getText()), 
+												df1.parse(textFieldEindDatum.getText())));
+								} catch (NumberFormatException | ParseException e1) {
+									e1.printStackTrace();
+								}
+								try {
+									if( !manager.createKlant(
 										textFieldBSN.getText(), 
 										textFieldNaam.getText(), 
 										textFieldAdres.getText(), 
 										textFieldPostCode.getText(), 
 										textFieldPlaats.getText(), 
-										textFieldGebDatum.getText(), 
+										df1.parse(textFieldGebDatum.getText()), 
 										textFieldTelefoonnummer.getText(), 
 										textFieldEmail.getText(), 
 										textFieldRkNummer.getText(), 
 										Double.parseDouble(textFieldEigenRisico.getText()), 
 										verzekeringPolissen, 
 										comboBoxBetaalwijze.getSelectedItem().toString())){
-									showConfirmationWindow("Toevoegen klant mislukt");
+										showConfirmationWindow("Toevoegen klant mislukt");
+									}
+								} catch (NumberFormatException | ParseException e1) {
+									e1.printStackTrace();
 								}
 								dispose();
 							}

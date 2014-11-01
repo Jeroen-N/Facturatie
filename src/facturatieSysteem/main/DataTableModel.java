@@ -1,6 +1,9 @@
 package facturatieSysteem.main;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
@@ -18,7 +21,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
  */
 @SuppressWarnings("serial")
 public class DataTableModel extends AbstractTableModel {
-
+	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	private Vector<String[]> cache; // will hold String[] objects . . .
 	private int colCount;
 	private String[] headers;
@@ -83,7 +86,7 @@ public class DataTableModel extends AbstractTableModel {
 			
 			String memberNaam = klant.getNaam();
 			String bsn = klant.getBSN();
-			String gebDatum = klant.getGeboortedatum();
+			String gebDatum = df1.format(klant.getGeboortedatum());
 			String adres = klant.getAdres();
 			
 			String[] value = { memberNaam, bsn, gebDatum, adres};

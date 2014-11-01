@@ -1,11 +1,14 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
 import java.security.SecureRandom;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
+import org.w3c.dom.DOMException;
 
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.DAOFactoryKlant;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
@@ -23,13 +26,14 @@ public class KlantManagerImpl implements KlantManager {
 	private String errorMessage;
 	private static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
 	private ArrayList<String> polissen = new ArrayList<>();
+	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public KlantManagerImpl(){
 		DAOFactory.validateXML();
 	}
 	
 	public boolean createKlant(String BSN, String Naam, String Adres,
-			String Postcode, String Woonplaats, String Geboortedatum,
+			String Postcode, String Woonplaats, Date Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
 			double ResterendEigenRisico,
 			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze) {
@@ -48,7 +52,7 @@ public class KlantManagerImpl implements KlantManager {
 	}
 
 	public boolean updateKlant(String BSN, String Naam, String Adres,
-			String Postcode, String Woonplaats, String Geboortedatum,
+			String Postcode, String Woonplaats, Date Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
 			double ResterendEigenRisico,
 			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
@@ -60,8 +64,14 @@ public class KlantManagerImpl implements KlantManager {
 	}
 	
 	
-	public ArrayList<Klant> findKlant(String gebDatum) {
-		return KlantDAO.findKlantXML(gebDatum);
+	public ArrayList<Klant> findKlant(Date gebDatum){
+		try {
+			return KlantDAO.findKlantXML(gebDatum);
+		} catch (DOMException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public Klant getKlant(String BSN){
@@ -100,7 +110,7 @@ public class KlantManagerImpl implements KlantManager {
 		return KlantDAO.verwijderKlantXML(BSN);
 	}
 
-	public String checkKlant(String BSN, String Naam, String Adres, String Postcode, String Woonplaats, String Geboortedatum,String TelefoonNr, String Email, String RkNummer, String Betaalwijze) {
+	public String checkKlant(String BSN, String Naam, String Adres, String Postcode, String Woonplaats, Date Geboortedatum,String TelefoonNr, String Email, String RkNummer, String Betaalwijze) {
 		errorMessage = "";
 		// nog toe tevoegen:
 		// controleer de waardes die ingevuld zijn
@@ -128,8 +138,8 @@ public class KlantManagerImpl implements KlantManager {
 		}
 		
 		// GeboorteDatum
-		if (!Geboortedatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
-			if (Geboortedatum.length() < 1) {
+		if (!df1.format(Geboortedatum).matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+			if (df1.format(Geboortedatum).length() < 1) {
 				errorMessage = errorMessage + "\nGeboortedatum niet ingevuld";
 			}else{
 			errorMessage = errorMessage + "\nGeboortedatum niet correct ";
@@ -242,17 +252,17 @@ public class KlantManagerImpl implements KlantManager {
 		return errorMessage;
 	}
 	
-	public VerzekeringPolis createPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+	public VerzekeringPolis createPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
 		return polis;
 	}
 	
-	public boolean addVerzekeringPolisXML(String BSN, String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+	public boolean addVerzekeringPolisXML(String BSN, String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
 		return polisDAO.addVerzekeringPolisXML(BSN, polis);
 	}
 	
-	public boolean updateVerzekeringPolisXML(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
+	public boolean updateVerzekeringPolisXML(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
 		VerzekeringPolis polis = new VerzekeringPolis(PolisNummer, VerzekeringsType, ExtraEigenRisico, StartDatum, EindDatum);
 		return polisDAO.updateVerzekeringPolisXML(polis);
 	}
@@ -285,7 +295,5 @@ public class KlantManagerImpl implements KlantManager {
 		
 		return KlantDAO.getBSNs();
 		
-	}
-
-	
+	}	
 }

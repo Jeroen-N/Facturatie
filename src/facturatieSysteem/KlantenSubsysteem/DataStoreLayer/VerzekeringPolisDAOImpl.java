@@ -1,5 +1,8 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -12,6 +15,7 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
 	private Document document;
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
+	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	
 	@Override
 	public boolean addVerzekeringPolisXML(String addBSN, VerzekeringPolis polis){
@@ -46,12 +50,12 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
 				Element startDatum = document.createElement("startDatum");
-				startDatum.appendChild(document.createTextNode(polis.getStartDatum()));
+				startDatum.appendChild(document.createTextNode(df1.format(polis.getStartDatum())));
 				verzekeringPolis.appendChild(startDatum);
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
 				Element eindDatum = document.createElement("eindDatum");
-				eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
+				eindDatum.appendChild(document.createTextNode(df1.format(polis.getEindDatum())));
 				verzekeringPolis.appendChild(eindDatum);
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
@@ -91,8 +95,8 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 					//fill elements with the information
 					verzekeringsType.setTextContent(polis.getVerzekeringsType());
 					eigenRisico.setTextContent(Double.toString((polis.getExtraEigenRisico())));
-					startDatum.setTextContent(polis.getStartDatum());
-					eindDatum.setTextContent(polis.getEindDatum());
+					startDatum.setTextContent(df1.format(polis.getStartDatum()));
+					eindDatum.setTextContent(df1.format(polis.getEindDatum()));
 					break;
 				}
 				
