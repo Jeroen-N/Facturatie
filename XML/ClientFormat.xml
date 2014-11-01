@@ -15,7 +15,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="87JH9G">
-				<VerzekeringType>Basic</VerzekeringType>
+				<VerzekeringType>Kaas_Basic</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-01-2013</startDatum>
 				<eindDatum>31-12-2014</eindDatum>
@@ -189,13 +189,13 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="KJ8JUY">
-				<VerzekeringType>Basic</VerzekeringType>
+				<VerzekeringType>Kaas_Basic</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-01-2013</startDatum>
 				<eindDatum>31-12-2013</eindDatum>
 			</VerzekeringPolis>
 			<VerzekeringPolis PolisNummer="123456">
-				<VerzekeringType>009</VerzekeringType>
+				<VerzekeringType>Kaas_Basic</VerzekeringType>
 				<EigenRisico>1125.48</EigenRisico>
 				<startDatum>01-01-2010</startDatum>
 				<eindDatum>31-12-2011</eindDatum>
