@@ -23,12 +23,8 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 
 public class ChangeKlantDialog extends JDialog {
@@ -56,7 +52,6 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldEmail2;
 	private JTextField textFieldRkNummer2;
 	private JComboBox<String> comboBoxBetaalwijze2;
-	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	/**
 	 * Create the dialog.
 	 */
@@ -199,7 +194,7 @@ public class ChangeKlantDialog extends JDialog {
 						{
 							textFieldGebDatum = new JTextField();
 							splitPaneGebDatum.setRightComponent(textFieldGebDatum);
-							textFieldGebDatum.setText(df1.format(klant.getGeboortedatum()));
+							textFieldGebDatum.setText(klant.getGeboortedatum());
 							textFieldGebDatum.setEditable(false);
 							textFieldGebDatum.setColumns(15);
 
@@ -522,7 +517,7 @@ public class ChangeKlantDialog extends JDialog {
 						{
 							textFieldGebDatum2 = new JTextField();
 							splitPaneGebDatum.setRightComponent(textFieldGebDatum2);
-							textFieldGebDatum2.setText(df1.format(klant.getGeboortedatum()));
+							textFieldGebDatum2.setText(klant.getGeboortedatum());
 							textFieldGebDatum2.setColumns(15);
 
 						}
@@ -754,43 +749,34 @@ public class ChangeKlantDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						String errorMessage= "";
-						try {
-							errorMessage = manager.checkKlant(
-									"999999999",
-									textFieldNaam2.getText(),
-									textFieldAdres2.getText(), 
-									textFieldPostCode2.getText(),
-									textFieldPlaats2.getText(),
-									df1.parse(textFieldGebDatum2.getText()),
-									textFieldTelefoonnummer2.getText(),
-									textFieldEmail2.getText(),
-									textFieldRkNummer2.getText(),
-									comboBoxBetaalwijze2.getSelectedItem().toString());
-						} catch (ParseException e1) {
-							e1.printStackTrace();
-						}
+						String errorMessage = manager.checkKlant(
+								"999999999",
+								textFieldNaam2.getText(),
+								textFieldAdres2.getText(), 
+								textFieldPostCode2.getText(),
+								textFieldPlaats2.getText(),
+								textFieldGebDatum2.getText(),
+								textFieldTelefoonnummer2.getText(),
+								textFieldEmail2.getText(),
+								textFieldRkNummer2.getText(),
+								comboBoxBetaalwijze2.getSelectedItem().toString());
 						if (!errorMessage.equals("")){
 							showConfirmationWindow(errorMessage);
 						}
 						else{
-						try {
-							manager.updateKlant(
-									textFieldBSN2.getText(), 
-									textFieldNaam2.getText(), 
-									textFieldAdres2.getText(), 
-									textFieldPostCode2.getText(), 
-									textFieldPlaats2.getText(), 
-									df1.parse(textFieldGebDatum2.getText()), 
-									textFieldTelefoonnummer2.getText(), 
-									textFieldEmail2.getText(), 
-									textFieldRkNummer2.getText(), 
-									klant.getResterendEigenRisico(), 
-									klant.getVerzekeringPolissen(), 
-									comboBoxBetaalwijze2.getSelectedItem().toString());
-						} catch (ParseException e1) {
-							e1.printStackTrace();
-						}
+						manager.updateKlant(
+								textFieldBSN2.getText(), 
+								textFieldNaam2.getText(), 
+								textFieldAdres2.getText(), 
+								textFieldPostCode2.getText(), 
+								textFieldPlaats2.getText(), 
+								textFieldGebDatum2.getText(), 
+								textFieldTelefoonnummer2.getText(), 
+								textFieldEmail2.getText(), 
+								textFieldRkNummer2.getText(), 
+								klant.getResterendEigenRisico(), 
+								klant.getVerzekeringPolissen(), 
+								comboBoxBetaalwijze2.getSelectedItem().toString());
 						dispose();	
 						}
 					}

@@ -2,17 +2,16 @@ package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Date;
 
 public class VerzekeringPolis {
 
 	private String PolisNummer;
 	private String VerzekeringsType;
 	private double ExtraEigenRisico;
-	private Date StartDatum;
-	private Date EindDatum;
+	private String StartDatum;
+	private String EindDatum;
 	
-	public VerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, Date StartDatum, Date EindDatum){
+	public VerzekeringPolis(String PolisNummer, String VerzekeringsType, double ExtraEigenRisico, String StartDatum, String EindDatum){
 		this.PolisNummer = PolisNummer;
 		this.VerzekeringsType = VerzekeringsType;
 		this.ExtraEigenRisico = ExtraEigenRisico;
@@ -32,11 +31,11 @@ public class VerzekeringPolis {
 		return ExtraEigenRisico;
 	}
 	
-	public Date getStartDatum(){
+	public String getStartDatum(){
 		return StartDatum;
 	}
 	
-	public Date getEindDatum(){
+	public String getEindDatum(){
 		return EindDatum;
 	}
 	

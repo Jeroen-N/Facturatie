@@ -9,11 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -62,7 +58,6 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	private JComboBox<String> comboBoxMaatschappij;
 	private JComboBox<String> comboBoxVerzekeringsType;
 	private VerzekeringsmaatschappijManager vermaatschappijManager;
-	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	
 	// The datamodel to be displayed in the JTable.
 	private DataTableModelChangePolis dataTableModelChangePolis;
@@ -394,7 +389,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						{
 							textFieldStartDatum = new JTextField();
 							textFieldStartDatum.setColumns(15);
-							splitPaneStartDatum.setRightComponent(textFieldStartDatum);
+							splitPaneStartDatum
+									.setRightComponent(textFieldStartDatum);
 						}
 					}
 					{
@@ -454,19 +450,15 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							if (!errorMessage.equals("")){
 								showConfirmationWindow(errorMessage);
 							}else{
-								try {
-									if(!manager.updateVerzekeringPolisXML(
-											textFieldPolisNummer.getText(), 
-											comboBoxVerzekeringsType.getSelectedItem().toString(), 
-											Double.parseDouble(textFieldEigenRisico.getText()),
-											df1.parse(textFieldStartDatum.getText()), 
-											df1.parse(textFieldEindDatum.getText()))){
-										showConfirmationWindow("Polis Toevoegen Mislukt");
-									}else{
-										dispose();
-									}
-								} catch (NumberFormatException | ParseException e1){
-									e1.printStackTrace();
+								if(!manager.updateVerzekeringPolisXML(
+										textFieldPolisNummer.getText(), 
+										comboBoxVerzekeringsType.getSelectedItem().toString(), 
+										Double.parseDouble(textFieldEigenRisico.getText()),
+										textFieldStartDatum.getText(), 
+										textFieldEindDatum.getText())){
+									showConfirmationWindow("Polis Toevoegen Mislukt");
+								}else{
+									dispose();
 								}
 							}
 						}
@@ -531,21 +523,12 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		textFieldEigenRisico.setText(eigenRisico);
 		textFieldStartDatum.setText(StartDatum);
 		textFieldEindDatum.setText(EindDatum);
-		
-		SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = new Date();
-		System.out.println(dt1.format(date));
-		try {
-			Date date1 = new SimpleDateFormat("dd-MM-yyyy").parse(StartDatum);
-			System.out.println( dt1.format(date1) );
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		System.out.println(verType);
+		System.out.println("loop door maatschappijen");
 		for (Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()) {
+			System.out.println("loop door maatschappijen");
 			for (Verzekeringstype type : maatschappij.getTypes()) {
+				System.out.println("loop door types" +type.getNaam());
 				if(type.getNaam().equals(verType)){
 					comboBoxMaatschappij.addItem( maatschappij.getNaam());
 					break;
@@ -556,5 +539,6 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);
+
 	}
 }

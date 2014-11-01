@@ -1,10 +1,6 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
-
-import org.w3c.dom.DOMException;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
@@ -18,7 +14,7 @@ public interface KlantDAO {
 
 	public boolean verwijderKlantXML(String BSN);
 
-	public ArrayList<Klant> findKlantXML(Date gebDatum) throws DOMException, ParseException;
+	public ArrayList<Klant> findKlantXML(String gebDatum);
 	
 	public ArrayList<String> getBSNs();
 

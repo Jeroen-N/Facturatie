@@ -1,9 +1,6 @@
 package facturatieSysteem.KlantenSubsysteem.PresentationLayer;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
@@ -22,7 +19,6 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 	private Vector<String[]> cache; // will hold String[] objects . . .
 	private int colCount;
 	private String[] headers;
-	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 
 	// Get a logger instance for the current class
 	static Logger logger = Logger.getLogger(DataTableModel.class);
@@ -85,10 +81,10 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 			String Polisnummer = polis.getPolisNummer();
 			String VerzekeringsType = polis.getVerzekeringsType();
 			String eigenRisico = String.valueOf(polis.getExtraEigenRisico());
-			Date startdatum = polis.getStartDatum();
-			Date einddatum = polis.getEindDatum();
+			String startdatum = polis.getStartDatum();
+			String einddatum = polis.getEindDatum();
 			
-			String[] value = { Polisnummer, VerzekeringsType, eigenRisico, df1.format(startdatum), df1.format(einddatum)};
+			String[] value = { Polisnummer, VerzekeringsType, eigenRisico, startdatum, einddatum};
 	
 			values[i] = value;
 		}

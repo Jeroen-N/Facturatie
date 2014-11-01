@@ -1,9 +1,5 @@
 package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -23,7 +19,6 @@ public class KlantDAOImpl implements KlantDAO {
 	private Document document;
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
 	private ArrayList<String> BSNs;
-	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 	
 	@Override
 	public boolean addKlantXML(Klant klant){
@@ -86,7 +81,7 @@ public class KlantDAOImpl implements KlantDAO {
 			
 			clientGegevens.appendChild(document.createTextNode("\n\t\t\t"));
 			Element geboortedatum = document.createElement("Geboortedatum");
-			geboortedatum.appendChild(document.createTextNode(df1.format(klant.getGeboortedatum())));
+			geboortedatum.appendChild(document.createTextNode(klant.getGeboortedatum()));
 			clientGegevens.appendChild(geboortedatum);
 			
 			clientGegevens.appendChild(document.createTextNode("\n\t\t\t"));
@@ -137,12 +132,12 @@ public class KlantDAOImpl implements KlantDAO {
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
 				Element startDatum = document.createElement("startDatum");
-				startDatum.appendChild(document.createTextNode(df1.format(polis.getStartDatum())));
+				startDatum.appendChild(document.createTextNode(polis.getStartDatum()));
 				verzekeringPolis.appendChild(startDatum);
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t\t"));
 				Element eindDatum = document.createElement("eindDatum");
-				eindDatum.appendChild(document.createTextNode(df1.format(polis.getEindDatum())));
+				eindDatum.appendChild(document.createTextNode(polis.getEindDatum()));
 				verzekeringPolis.appendChild(eindDatum);
 				
 				verzekeringPolis.appendChild(document.createTextNode("\n\t\t\t"));// </VerzekeringPolis>
@@ -174,7 +169,7 @@ public class KlantDAOImpl implements KlantDAO {
 				String Adres = clientElement.getElementsByTagName("Adres").item(0).getTextContent();
 				String Postcode = clientElement.getElementsByTagName("Postcode").item(0).getTextContent();
 				String Woonplaats = clientElement.getElementsByTagName("Woonplaats").item(0).getTextContent();
-				Date Geboortedatum =  df1.parse(clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent());
+				String Geboortedatum = clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent();
 				String TelefoonNr = clientElement.getElementsByTagName("Telefoonnummer").item(0).getTextContent();
 				String Email = clientElement.getElementsByTagName("Email").item(0).getTextContent();
 				Double ResterendEigenRisico = Double.parseDouble(clientElement.getElementsByTagName("ResterendEigenRisico").item(0).getTextContent());
@@ -205,8 +200,8 @@ public class KlantDAOImpl implements KlantDAO {
 					String PolisNummer = polisElement.getAttribute("PolisNummer");
 					String VerzekeringsType = polisElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
 					Double EigenRisico = Double.parseDouble(polisElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-					Date startDatum =  df1.parse(polisElement.getElementsByTagName("startDatum").item(0).getTextContent());
-					Date eindDatum =  df1.parse(polisElement.getElementsByTagName("eindDatum").item(0).getTextContent());
+					String startDatum = polisElement.getElementsByTagName("startDatum").item(0).getTextContent();
+					String eindDatum = polisElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 					
 					//create Polis and add to ArrayList
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
@@ -229,14 +224,12 @@ public class KlantDAOImpl implements KlantDAO {
 
 		}catch(DOMException e){
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 		return klantOverzicht;	    
 	}
 	
 	@Override
-	public ArrayList<Klant> findKlantXML(Date gebDatum) throws DOMException, ParseException, NumberFormatException{
+	public ArrayList<Klant> findKlantXML(String gebDatum){
 		document = daoFactory.getDocument();
 		zoekResultaat = new ArrayList<Klant>();
 		ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<>();
@@ -249,7 +242,6 @@ public class KlantDAOImpl implements KlantDAO {
 			String Geboortedatum = clientElement.getElementsByTagName("Geboortedatum").item(0).getTextContent();
 			if(gebDatum.equals(Geboortedatum)){
 				//get all information of Client
-				Date gbdatum = df1.parse(Geboortedatum);
 				String BSN = clientElement.getAttribute("BSN");
 				String Naam = clientElement.getElementsByTagName("Naam").item(0).getTextContent();
 				String Adres = clientElement.getElementsByTagName("Adres").item(0).getTextContent();
@@ -268,14 +260,14 @@ public class KlantDAOImpl implements KlantDAO {
 					String PolisNummer = polisElement.getAttribute("PolisNummer");
 					String VerzekeringsType = clientElement.getElementsByTagName("VerzekeringType").item(0).getTextContent();
 					Double EigenRisico = Double.parseDouble(clientElement.getElementsByTagName("EigenRisico").item(0).getTextContent());
-					Date startDatum = df1.parse(clientElement.getElementsByTagName("startDatum").item(0).getTextContent());
-					Date eindDatum =  df1.parse(clientElement.getElementsByTagName("eindDatum").item(0).getTextContent());
+					String startDatum = clientElement.getElementsByTagName("startDatum").item(0).getTextContent();
+					String eindDatum = clientElement.getElementsByTagName("eindDatum").item(0).getTextContent();
 					
 					VerzekeringPolis Polis = new VerzekeringPolis(PolisNummer,VerzekeringsType,EigenRisico, startDatum, eindDatum);
 					VerzekeringPolissen.add(Polis);	
 				}
 				//create Klant and add to ArrayList
-				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, gbdatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
+				klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats, Geboortedatum, TelefoonNr, Email, RekeningNr, ResterendEigenRisico, VerzekeringPolissen, Betaalwijze);
 				zoekResultaat.add(klant);
 				
 			}
@@ -312,7 +304,7 @@ public class KlantDAOImpl implements KlantDAO {
 				Adres.setTextContent(klant.getAdres());
 				Postcode.setTextContent(klant.getPostcode());
 				Woonplaats.setTextContent(klant.getWoonplaats());
-				Geboortedatum.setTextContent(df1.format(klant.getGeboortedatum()));
+				Geboortedatum.setTextContent(klant.getGeboortedatum());
 				TelefoonNr.setTextContent(klant.getTelefoonnummer());
 				Email.setTextContent(klant.getEmail());
 				Betaalwijze.setTextContent(klant.getBetaalMethode());

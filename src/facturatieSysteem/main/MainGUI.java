@@ -5,11 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -64,7 +61,6 @@ public class MainGUI {
 	private JTextField inputFieldUser = new JTextField(10);
 	private JPasswordField inputFieldPass = new JPasswordField(10);
 	private JButton loginButton = new JButton("Login");
-	private DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 
 	// The datamodel to be displayed in the JTable.
 	private DataTableModel dataTableModel;
@@ -330,11 +326,7 @@ public class MainGUI {
 			public void mouseClicked(MouseEvent e) {
 				if (textFieldZoeken.getText().matches(
 						"([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
-					try {
-						fillTableZoekresultaat(df1.parse((textFieldZoeken.getText())));
-					} catch (ParseException e1){
-						e1.printStackTrace();
-					}
+					fillTableZoekresultaat(textFieldZoeken.getText());
 				} else {
 					showConfirmationWindow("Geen geldige zoekwaarde");
 				}
@@ -680,7 +672,7 @@ public class MainGUI {
 		}
 	}
 
-	public void fillTableZoekresultaat(Date gebDatum) {
+	public void fillTableZoekresultaat(String gebDatum) {
 		memberList = KlantManager.findKlant(gebDatum);
 
 		int count = (memberList == null) ? 0 : memberList.size();
