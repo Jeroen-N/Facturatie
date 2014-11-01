@@ -102,9 +102,12 @@ public class FacturatieGUI extends JFrame {
 		factureerKnop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				facturatieManagerImpl.factureer(klant, m1);
+				if (facturatieManagerImpl.factureer(klant, m1) == null){
+					showConfirmationWindow("Deze klant heeft behandelingen om te factureren");
+				}else{
 				facturen.clear();
 				fillTable(klant);
+				}
 			}
 		});
 
@@ -230,9 +233,7 @@ public class FacturatieGUI extends JFrame {
 								.getValueAt(overzicht.getSelectedRow(), 0)
 								.toString();
 						if (value.equals(factuur.getFactuurNummer())) {
-							File file = new File("Facturen/"
-									+ factuur.getFactuurDatum() + "-"
-									+ factuur.getFactuurNummer() + ".pdf");
+							File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
 							if (file.exists()) {
 								if (Desktop.isDesktopSupported()) {
 									try {
@@ -240,6 +241,7 @@ public class FacturatieGUI extends JFrame {
 									} catch (IOException e1) {
 										showConfirmationWindow("desktop is not supported!");
 									}
+									file.delete();
 								}
 							} else {
 								showConfirmationWindow("File doesn't exist, the invoice couldn't be created");
@@ -276,15 +278,12 @@ public class FacturatieGUI extends JFrame {
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
 	public void fillField(int row) {
-		String factuur_nummer = overzicht.getModel().getValueAt(row, 0)
-				.toString();
-		factuur.setText(facturatieManagerImpl
-				.toonFactuur(factuur_nummer, klant));
+		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
+		factuur.setText(facturatieManagerImpl.toonFactuur(factuur_nummer, klant));
 	}
 
 	public Factuur vindFactuur(int row2) {
-		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0)
-				.toString();
+		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0).toString();
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
 	}
 

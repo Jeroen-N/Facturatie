@@ -123,19 +123,21 @@ public class Factuur implements ImmutableFactuur {
 
 	public String toString(Factuur factuur, String behandelingen){
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
-        String risk = getallenOpmaker.format(vergoedeBedrag);
+        String totaalPrijs1	 = getallenOpmaker.format(totaalPrijs);
+        String vergoedeBedrag1	 = getallenOpmaker.format(vergoedeBedrag);
 		return "Factuurnummer: \t" 				+ 	factuurNummer 				+ "\n" +
 				"Factuurdatum: \t\t" 			+ 	factuurDatum 				+ "\n" +
 				"Vervaldatum: \t\t"				+	vervalDatum					+ "\n" +
-				"Resterend eigen risico: \t"	+ "\u20ac" +	risk			+ "\n" +
+				"Tebetalen: \t\t"					+ "\u20ac" +	totaalPrijs1			+ "\n" +
+				"Vergoede bedrag: \t"			+ "\u20ac" +	vergoedeBedrag1		+ "\n" +
 				"Status: \t\t"					+ 	status						+ "\n" +
 				behandelingen;
 	}
 	
 	public String toStringBon(Klant klant){
 		NumberFormat getallenOpmaker = new DecimalFormat("###,##0.00");
-        String risk = getallenOpmaker.format(vergoedeBedrag);
-		return "Klantnummer: \t\t" 				+ klant.getBSN() 			+ "\n" +
+        String risk = getallenOpmaker.format(klant.getResterendEigenRisico());
+		return  "Burger service nummer: \t" 		+ klant.getBSN() 			+ "\n" +
 				"Factuurnummer: \t\t"			+ factuurNummer 			+ "\n" +
 				"Factuurdatum: \t\t"			+ factuurDatum				+ "\n" +
 				"Vervaldatum: \t\t"				+ vervalDatum				+ "\n" +

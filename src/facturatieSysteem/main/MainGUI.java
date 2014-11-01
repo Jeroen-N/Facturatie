@@ -203,6 +203,7 @@ public class MainGUI {
 		 * 
 		 */
 		loginButton.addActionListener(new java.awt.event.ActionListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				String username = inputFieldUser.getText();

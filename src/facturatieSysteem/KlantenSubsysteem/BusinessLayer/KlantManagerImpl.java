@@ -220,7 +220,7 @@ public class KlantManagerImpl implements KlantManager {
 			}	
 		}
 		
-		if(EindDatum.contains("") && StartDatum.contains("")){);
+		if(EindDatum.contains("") && StartDatum.contains("")){
 		String beginDatum = StartDatum;
 		String eindDatum = EindDatum;
 		Date startDate;

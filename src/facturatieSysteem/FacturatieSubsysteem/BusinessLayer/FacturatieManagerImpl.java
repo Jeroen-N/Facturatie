@@ -150,10 +150,15 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			totaalPrijsFactuur += totalePrijs;
 				
 		}
+		if (behandelingenlijst.size() != 0){
 		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
 				teVergoedenPrijs, behandelingenlijst, "Niet betaald", totaalPrijsFactuur);
 		factuurDAO.maakFactuur(klant, f);
+		
 		return f;
+		}
+		return null;
+		
 	}
 
 	@Override

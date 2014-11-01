@@ -10,7 +10,6 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 
 
 public class testMain {
-private static ArrayList<Factuur> facturen = new ArrayList<>();
 	public static void main(String[] args) {
 		FacturatieManagerImpl m1 = new FacturatieManagerImpl();
 		String polisNummer = "123456";
@@ -32,7 +31,7 @@ private static ArrayList<Factuur> facturen = new ArrayList<>();
 		VerzekeringsmaatschappijManagerImpl v1 = new VerzekeringsmaatschappijManagerImpl(); 
 		Factuur factuur = m1.factureer(klant, v1);
 		
-		Bon bon = new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant, v1);
+		new Bon(m1, factuur, v1.getVerzekeringsmaatschappij("Kaas Verzekeringen"),klant, v1);
 	}
 	
 	}

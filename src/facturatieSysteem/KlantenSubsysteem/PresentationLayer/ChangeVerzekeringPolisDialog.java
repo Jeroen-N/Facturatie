@@ -529,7 +529,6 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		textFieldEindDatum.setText(EindDatum);
 		
 		try {
-			SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
 			Date date = new Date();
 			Date date1 = new SimpleDateFormat("dd-MM-yyyy").parse(StartDatum);
 			Date date2 = new SimpleDateFormat("dd-MM-yyyy").parse(EindDatum);
