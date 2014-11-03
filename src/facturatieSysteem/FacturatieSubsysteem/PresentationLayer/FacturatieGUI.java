@@ -103,7 +103,7 @@ public class FacturatieGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (facturatieManagerImpl.factureer(klant, m1) == null){
-					showConfirmationWindow("Deze klant heeft behandelingen om te factureren");
+					showConfirmationWindow("Deze klant heeft geen behandelingen om te factureren");
 				}else{
 				facturen.clear();
 				fillTable(klant);
@@ -190,7 +190,7 @@ public class FacturatieGUI extends JFrame {
 								try {
 									Desktop.getDesktop().open(new File("Facturen/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf"));
 								} catch (IOException e1) {
-									showConfirmationWindow("desktop is not supported!");
+									showConfirmationWindow("Desktop is not supported!");
 								}
 							}
 						}
