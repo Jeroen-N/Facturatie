@@ -50,7 +50,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ChangeVerzekeringDialog(VerzekeringsmaatschappijManager manager, String maatschappijnr) {
-		setTitle("Verzekering beheer");
+		setTitle("Verzekeringsmaatschappij beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
@@ -69,7 +69,7 @@ public class ChangeVerzekeringDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				changeVerzekering = new JPanel();
-				verzekeringsManager.addTab("Verzekering wijzigen", null, changeVerzekering, null);
+				verzekeringsManager.addTab("Maatschappij wijzigen", null, changeVerzekering, null);
 				changeVerzekering.setLayout(new BorderLayout(0, 0));
 				{
 					/*

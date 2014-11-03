@@ -41,7 +41,7 @@ public class AddVerzekeringDialog extends JDialog {
 	 */
 	public AddVerzekeringDialog(final VerzekeringsmaatschappijManager manager) {
 
-		setTitle("Verzekeringen beheer");
+		setTitle("Verzekeringsmaatschappij beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
@@ -58,7 +58,7 @@ public class AddVerzekeringDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				JPanel addVerzekering = new JPanel();
-				VerzekeringsmaatschappijManager.addTab("Verzekering toevoegen",
+				VerzekeringsmaatschappijManager.addTab("Maatschappij toevoegen",
 						null, addVerzekering, null);
 				addVerzekering.setLayout(new BorderLayout(0, 0));
 				{
@@ -91,7 +91,7 @@ public class AddVerzekeringDialog extends JDialog {
 						addVerzekering_1.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblVerzekering = new JLabel("Verzekering");
+							JLabel lblVerzekering = new JLabel("Maatschappij");
 							lblVerzekering.setPreferredSize(new Dimension(100,
 									20));
 							lblVerzekering

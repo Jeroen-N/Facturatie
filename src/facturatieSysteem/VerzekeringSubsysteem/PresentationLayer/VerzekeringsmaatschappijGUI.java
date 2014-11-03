@@ -282,7 +282,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 				int n = JOptionPane
 						.showConfirmDialog(
 								frame,
-								"Weet uw zeker dat u deze verzekering wilt verwijderen",
+								"Weet uw zeker dat u deze maatschappij wilt verwijderen",
 								"Verwijderen", JOptionPane.YES_NO_OPTION);
 				if (n == 0) {
 					String nummer = Verzekering_Table.getModel()
@@ -320,7 +320,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		totaalLijst.setViewportView(Verzekering_Table);
 		Verzekering_Table.setFillsViewportHeight(true);
 		totaalLijst.setBorder(new TitledBorder(new LineBorder(
-				new Color(0, 0, 0)), "Verzekeringsmaatschappijenlijst",
+				new Color(0, 0, 0)), "Verzekeringsmaatschappijen lijst",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		VerzekeringPanel.add(totaalLijst, BorderLayout.CENTER);
 
@@ -400,7 +400,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			dataTableModelVerzekeringen.setValues(verzekeringList2);
 		} else {
 
-			showConfirmationWindow("Geen verzekering gevonden");
+			showConfirmationWindow("Geen maatschappij gevonden");
 		}
 	}
 

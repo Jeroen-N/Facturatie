@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><facturatieSysteem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="facturatieSysteem.xsd">
 	<verzekeringsmaatschappij maatschappijnr="001">
-      <naam>Kaas Verzekeringen</naam>
-      <adres>Kaaslaan 11</adres>
-      <postcode>1234AB</postcode>
-      <woonplaats>Kaas</woonplaats>
-      <KVKNummer>12345678</KVKNummer>
-      <rekeningNummer>123456789</rekeningNummer>
+      <naam>CGZ Verzekeringen</naam>
+      <adres>Oranjeboomstraat 112</adres>
+      <postcode>3311AC</postcode>
+      <woonplaats>Rotterdam</woonplaats>
+      <KVKNummer>81546371</KVKNummer>
+      <rekeningNummer>921386577</rekeningNummer>
 	  <verzekeringsTypes>
 	  	  <verzekeringsType typenr="001">
 	         <naam>Kaas_Basic</naam>
@@ -37,42 +37,5 @@
 	      </verzekeringsType>
 		</verzekeringsTypes>    
    </verzekeringsmaatschappij>	
-   <verzekeringsmaatschappij maatschappijnr="002">
-		<naam>test</naam>
-		<adres>test</adres>
-		<postcode>4444GG</postcode>
-		<woonplaats>test</woonplaats>
-		<KVKNummer>87654321</KVKNummer>
-		<rekeningNummer>987654321</rekeningNummer>
-		<verzekeringsTypes>
-		 <verzekeringsType typenr="001">
-	         <naam>test_Basic</naam>
-	         <verplichtEigenRisico>250</verplichtEigenRisico>
-	         <behandelCodes>
-	            <behandelcode>004</behandelcode>
-	            <behandelcode>005</behandelcode>
-	            <behandelcode>007</behandelcode>
-	            <behandelcode>008</behandelcode>
-				<behandelcode>001</behandelcode>
-				<behandelcode>002</behandelcode>
-			s</behandelCodes>
-	      </verzekeringsType>
-	      <verzekeringsType typenr="002">
-	         <naam>test_All-risk</naam>
-	         <verplichtEigenRisico>250</verplichtEigenRisico>
-	         <behandelCodes>
-	            <behandelcode>001</behandelcode>
-	            <behandelcode>002</behandelcode>
-	            <behandelcode>003</behandelcode>
-	            <behandelcode>004</behandelcode>
-	            <behandelcode>005</behandelcode>
-	            <behandelcode>006</behandelcode>
-	            <behandelcode>007</behandelcode>
-	            <behandelcode>008</behandelcode>
-	            <behandelcode>009</behandelcode>
-	            <behandelcode>010</behandelcode>
-	         </behandelCodes>
-	      </verzekeringsType>
-		</verzekeringsTypes>
-	</verzekeringsmaatschappij>
+   
 </facturatieSysteem>
