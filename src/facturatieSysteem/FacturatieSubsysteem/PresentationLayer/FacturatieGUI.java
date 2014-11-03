@@ -187,11 +187,13 @@ public class FacturatieGUI extends JFrame {
 						}
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
 							if (Desktop.isDesktopSupported()) {
+								File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
 								try {
-									Desktop.getDesktop().open(new File("Facturen/" + factuur.getFactuurDatum() + "-" + factuur.getFactuurNummer() + ".pdf"));
+									Desktop.getDesktop().open(file);
 								} catch (IOException e1) {
 									showConfirmationWindow("Desktop is not supported!");
 								}
+								
 							}
 						}
 				});
@@ -231,10 +233,11 @@ public class FacturatieGUI extends JFrame {
 							File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
 							if (file.exists()) {
 								if (Desktop.isDesktopSupported()) {
+									
 									try {
 										Desktop.getDesktop().print(file);
 									} catch (IOException e1) {
-										showConfirmationWindow("desktop is not supported!");
+										showConfirmationWindow("There was no printer found.");
 									}
 									file.delete();
 								}
