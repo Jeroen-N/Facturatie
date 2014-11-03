@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Copy (2) of Facturatiesysteem</name>
+	<name>FacturatieClient</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,10 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<variableList>
-		<variable>
-			<name>pictures</name>
-			<value>file:/Users/xandergerreman/Google%20Drive/Periode%205/Proftaak/Facturatie/Pictures</value>
-		</variable>
-	</variableList>
 </projectDescription>

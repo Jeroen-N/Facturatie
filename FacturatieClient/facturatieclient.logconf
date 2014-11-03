@@ -1,0 +1,35 @@
+#
+# Log4J configuratiebestand.
+# Levels: TRACE < DEBUG < INFO < WARN < ERROR < FATAL
+#
+
+# Geef het default loglevel, en geef de appenders.
+# Een appender bepaalt waar de logging wordt geschreven: console, file, server, WinNT log, ...
+# Je kunt deze namen zelf kiezen; stdout en file kun je aanpassen.
+log4j.rootLogger = DEBUG, stdout, logfile
+
+# Beschrijf type en layout van appender 'stdout'
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+# Beschrijf de layout waarin je de logging output voor 'stdout' wilt zien.
+# Voorbeelden:
+# 2014-05-28 10:30:46,478 [main] INFO  example.hello.Server - Server ready
+# log4j.appender.stdout.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
+# 7791 [main] INFO  example.hello.Server  - Server ready
+log4j.appender.stdout.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+#  INFO [main] (Server.java:92) - Server ready
+#log4j.appender.stdout.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
+
+# Beschrijf de layout voor de 'logfile' appender - voegt logregels toe aan bestand.
+log4j.logger.mylogger=DEBUG, logfile
+log4j.appender.logfile=org.apache.log4j.RollingFileAppender
+log4j.appender.logfile.File=HelloClient/log/helloclient.log
+log4j.appender.logfile.MaxFileSize=100KB
+log4j.appender.logfile.MaxBackupIndex=1
+log4j.appender.logfile.Threshold=DEBUG
+log4j.appender.logfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.logfile.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+
+# Print alleen berichten >= INFO voor deze class (dus skip DEBUG)
+# log4j.example.hello.HelloImpl = INFO
