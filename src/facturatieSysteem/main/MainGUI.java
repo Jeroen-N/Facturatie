@@ -150,10 +150,12 @@ public class MainGUI {
 				VerzekeringPanel.setVisible(false);
 				VerzekeringsMaatschappijPanel.setVisible(false);
 				KlantenPanel.setVisible(true);
+				FacturatiePanel.removeAll();
 				FacturatiePanel.setVisible(false);
 			}
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
+		
 		btnVerzekeringmaatschapij = new JButton("");
 		btnVerzekeringmaatschapij
 				.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
@@ -199,6 +201,11 @@ public class MainGUI {
 		loginPanel2.setMaximumSize(loginPanel.getPreferredSize());
 		loginPanel2.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
 
+		InputMap im = loginButton.getInputMap();
+        im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
+        im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
+        frmFacturatiesysteem.getRootPane().setDefaultButton(loginButton);
+       		
 		/*
 		 * 
 		 */
@@ -334,7 +341,7 @@ public class MainGUI {
 			}
 		});
 		Klant_zoeken.add(btnZoekKlant, BorderLayout.EAST);
-
+		
 		btnReset = new JButton("Reset");
 		btnReset.setToolTipText("Reset de tabel.");
 		btnReset.setIconTextGap(0);
@@ -466,7 +473,7 @@ public class MainGUI {
 		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
-		
+		FacturatieGUI FacturatieGUI = new FacturatieGUI();
 		
 		btnFacturatie.addMouseListener(new MouseAdapter() {
 			@Override
@@ -474,9 +481,7 @@ public class MainGUI {
 				if (btnChangeKlant.isEnabled()) {
 					KlantenPanel.setVisible(false);
 					FacturatiePanel.removeAll();
-					FacturatieGUI FacturatieGUI = new FacturatieGUI();
-					JPanel facturatie = FacturatieGUI.FactGUI(facturatieManager, KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString()) , maatschappijManager);
-					FacturatiePanel.add(facturatie);
+					FacturatiePanel.add(FacturatieGUI.FactGUI(facturatieManager, KlantManager.getKlant(Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString()) , maatschappijManager));
 					FacturatiePanel.setVisible(true);
 				}
 			}

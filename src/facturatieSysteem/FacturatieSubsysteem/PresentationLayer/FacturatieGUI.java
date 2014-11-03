@@ -202,18 +202,15 @@ public class FacturatieGUI extends JFrame {
 						int row2 = overzicht.getSelectedRow();
 						Factuur factuur = vindFactuur(row2);
 						maatschappijEind = null;
-						for (Verzekeringsmaatschappij maatschappij : m1
-								.getVerzekeringsmaatschappijen()) {
+						for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
 
 							// Loopen door de typeArray om het te op te halen
 							// van de maatschappij
-							for (Verzekeringstype type : maatschappij
-									.getTypes()) {
+							for (Verzekeringstype type : maatschappij.getTypes()) {
 
 								// loopen voor het type
 								String polisNaam = "";
-								for (VerzekeringPolis polis : klant
-										.getVerzekeringPolissen()) {
+								for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 									polisNaam = polis.getVerzekeringsType();
 								}
 								// de maatschappij ophalen aan de hand van de
@@ -229,9 +226,7 @@ public class FacturatieGUI extends JFrame {
 
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
 
-						String value = overzicht.getModel()
-								.getValueAt(overzicht.getSelectedRow(), 0)
-								.toString();
+						String value = overzicht.getModel().getValueAt(overzicht.getSelectedRow(), 0).toString();
 						if (value.equals(factuur.getFactuurNummer())) {
 							File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
 							if (file.exists()) {
