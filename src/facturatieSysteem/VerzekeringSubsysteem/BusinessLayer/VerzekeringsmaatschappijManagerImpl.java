@@ -164,14 +164,24 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		
 		// Naam
+	if(!Naam.matches("([A-Z, a-z]{1,50})")){
 		if (Naam.length() < 1) {
 			errorMessage = errorMessage + "\nNaam niet ingevuld";
+		}else{
+			errorMessage = errorMessage + "\nEen naam kan alleen uit letters bestaan!";
 		}
+	}
 		
-		// Adres
+		
+		// Adres	
+	if(!Adres.matches("([A-Z, a-z]{1,50})([ ]{1})([0-9]{1,9})")){
 		if (Adres.length() < 1) {
 			errorMessage = errorMessage + "\nAdres niet ingevuld";
+		}else{
+			errorMessage = errorMessage + "\nHet adres moet bestaan uit een straat gevolgd door een spatie en een nummer!";
 		}
+	}
+		
 		
 		// Postcode
 		if (!Postcode.matches("([0-9]{4})([A-Z]{2})")) {
@@ -184,9 +194,14 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		
 		//Plaats
+	if(!Plaats.matches("([A-Z, a-z]{1,99})")){
 		if (Plaats.length() < 1) {
 			errorMessage = errorMessage + "\nWoonplaats niet ingevuld";
+		}else{
+			errorMessage = errorMessage + "\nEen plaatsnaam kan alleen uit letters bestaan!";
 		}
+	}
+		
 		
 		// KVK nummer
 	if(!KVK.matches("([0-9]{8})")){	

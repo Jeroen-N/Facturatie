@@ -101,7 +101,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		zoekpaneel.setLayout(new BorderLayout(0, 0));
 		zoekpaneel.add(linkerpaneel, BorderLayout.WEST);
 		zoekpaneel.add(rechterpaneel, BorderLayout.EAST);
-		JLabel zoekLabel = new JLabel("Verzekering zoeken: ");
+		JLabel zoekLabel = new JLabel("Zoeken: ");
 		zoekLabel.setPreferredSize(new Dimension(120, 16));
 		zoekLabel.setMinimumSize(new Dimension(120, 16));
 		zoekLabel.setMaximumSize(new Dimension(120, 16));
@@ -320,7 +320,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		totaalLijst.setViewportView(Verzekering_Table);
 		Verzekering_Table.setFillsViewportHeight(true);
 		totaalLijst.setBorder(new TitledBorder(new LineBorder(
-				new Color(0, 0, 0)), "Verzekeringenlijst",
+				new Color(0, 0, 0)), "Verzekeringsmaatschappijenlijst",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		VerzekeringPanel.add(totaalLijst, BorderLayout.CENTER);
 
