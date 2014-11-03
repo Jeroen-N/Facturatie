@@ -397,11 +397,13 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    "Weet uw zeker dat u de behandelcode "+behandelcode+" wilt verwijderen",
 											    "Weet u het zeker?",
 											    JOptionPane.YES_NO_OPTION);
+												
 										if(n == 0){
 											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											
 										}
-			
-									
+										
+											
 								}
 							});
 							
@@ -460,7 +462,8 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									    JOptionPane.YES_NO_OPTION);
 								if(n == 0){
 									manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr));
-									dispose();
+									
+									
 								}							
 						}
 					});
