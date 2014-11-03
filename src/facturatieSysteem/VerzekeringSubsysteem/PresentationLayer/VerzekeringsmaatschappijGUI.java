@@ -181,6 +181,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Uitgebreide_Info.setEditable(false);
 		knoppenPaneel.add(btnTypesToevoegen);
 		knoppenPaneel.add(btnTypes);
+		btnTypesToevoegen.setEnabled(false);
 		
 		// / TABEL VULLEN
 		Verzekering_Table = new JTable(dataTableModelVerzekeringen) {
@@ -293,6 +294,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 
 					manager.deleteVerzekeringsmaatschappij(m1);
 					fillTable(manager);
+					Uitgebreide_Info.setText("");
 
 				}
 
@@ -353,6 +355,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 						btnWijzigen.setEnabled(rowsAreSelected);
 						btnVerwijderen.setEnabled(rowsAreSelected);
 						btnTypes.setEnabled(rowsAreSelected);
+						btnTypesToevoegen.setEnabled(rowsAreSelected);
 
 					}
 
