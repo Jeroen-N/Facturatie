@@ -23,8 +23,10 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.rmi.RemoteException;
 
 
 public class ChangeKlantDialog extends JDialog {
@@ -764,19 +766,24 @@ public class ChangeKlantDialog extends JDialog {
 							showConfirmationWindow(errorMessage);
 						}
 						else{
-						manager.updateKlant(
-								textFieldBSN2.getText(), 
-								textFieldNaam2.getText(), 
-								textFieldAdres2.getText(), 
-								textFieldPostCode2.getText(), 
-								textFieldPlaats2.getText(), 
-								textFieldGebDatum2.getText(), 
-								textFieldTelefoonnummer2.getText(), 
-								textFieldEmail2.getText(), 
-								textFieldRkNummer2.getText(), 
-								klant.getResterendEigenRisico(), 
-								klant.getVerzekeringPolissen(), 
-								comboBoxBetaalwijze2.getSelectedItem().toString());
+						try {
+							manager.updateKlant(
+									textFieldBSN2.getText(), 
+									textFieldNaam2.getText(), 
+									textFieldAdres2.getText(), 
+									textFieldPostCode2.getText(), 
+									textFieldPlaats2.getText(), 
+									textFieldGebDatum2.getText(), 
+									textFieldTelefoonnummer2.getText(), 
+									textFieldEmail2.getText(), 
+									textFieldRkNummer2.getText(), 
+									klant.getResterendEigenRisico(), 
+									klant.getVerzekeringPolissen(), 
+									comboBoxBetaalwijze2.getSelectedItem().toString());
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						dispose();	
 						}
 					}
@@ -799,7 +806,12 @@ public class ChangeKlantDialog extends JDialog {
 							    "Klant verwijderen",
 							    JOptionPane.YES_NO_OPTION);
 						if(n == 0){
-							manager.verwijderKlantXML(BSN);
+							try {
+								manager.verwijderKlantXML(BSN);
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							dispose();
 						}
 						

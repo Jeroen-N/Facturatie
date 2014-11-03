@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -752,20 +753,28 @@ public class AddKlantDialog extends JDialog {
 												Double.parseDouble(textFieldEigenRisico.getText()),
 												textFieldStartDatum.getText(), 
 												textFieldEindDatum.getText()));
-								if( !manager.createKlant(
-										textFieldBSN.getText(), 
-										textFieldNaam.getText(), 
-										textFieldAdres.getText(), 
-										textFieldPostCode.getText(), 
-										textFieldPlaats.getText(), 
-										textFieldGebDatum.getText(), 
-										textFieldTelefoonnummer.getText(), 
-										textFieldEmail.getText(), 
-										textFieldRkNummer.getText(), 
-										Double.parseDouble(textFieldEigenRisico.getText()), 
-										verzekeringPolissen, 
-										comboBoxBetaalwijze.getSelectedItem().toString())){
-									showConfirmationWindow("Toevoegen klant mislukt");
+								try {
+									if( !manager.createKlant(
+											textFieldBSN.getText(), 
+											textFieldNaam.getText(), 
+											textFieldAdres.getText(), 
+											textFieldPostCode.getText(), 
+											textFieldPlaats.getText(), 
+											textFieldGebDatum.getText(), 
+											textFieldTelefoonnummer.getText(), 
+											textFieldEmail.getText(), 
+											textFieldRkNummer.getText(), 
+											Double.parseDouble(textFieldEigenRisico.getText()), 
+											verzekeringPolissen, 
+											comboBoxBetaalwijze.getSelectedItem().toString())){
+										showConfirmationWindow("Toevoegen klant mislukt");
+									}
+								} catch (NumberFormatException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (RemoteException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
 								}
 								dispose();
 							}

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -626,7 +627,12 @@ public class MainGUI {
 	 * Methode om de table te kunnen vullen en updaten
 	 */
 	public void fillTable() {
-		memberList = KlantManager.getKlanten();
+		try {
+			memberList = KlantManager.getKlanten();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int count = (memberList == null) ? 0 : memberList.size();
 
 		if (count > 0) {
