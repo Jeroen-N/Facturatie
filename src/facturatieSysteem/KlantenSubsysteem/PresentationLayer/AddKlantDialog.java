@@ -549,11 +549,10 @@ public class AddKlantDialog extends JDialog {
 							}
 							comboBoxMaatschappij.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									comboBoxVerzekeringsType.removeAllItems();
+									comboBoxVerzekeringsType.removeAllItems();;
 									textFieldEigenRisico.setText("");
-									comboBoxVerzekeringsType.addItem("Selecteer maatschappij");
+									comboBoxVerzekeringsType.addItem("");
 									if(comboBoxMaatschappij.getSelectedItem() != ""){
-										//Verzekeringsmaatschappij selectedMaatschappij = vermaatschappijManager.getVerzekeringsmaatschappij(comboBoxMaatschappij.getSelectedItem().toString());
 										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
 										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){
 											if(selectedComboMaat.equals(maatschappij.getNaam())){
@@ -563,7 +562,6 @@ public class AddKlantDialog extends JDialog {
 												}
 											}
 										}
-										
 									}
 								}
 							});
@@ -602,7 +600,6 @@ public class AddKlantDialog extends JDialog {
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
-									textFieldEigenRisico.setText("Selecteer polis");
 									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxVerzekeringsType.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""){
 										String selectedComboMaat = comboBoxMaatschappij.getSelectedItem().toString();
 										for(Verzekeringsmaatschappij maatschappij : vermaatschappijManager.getVerzekeringsmaatschappijen()){
@@ -611,7 +608,6 @@ public class AddKlantDialog extends JDialog {
 												textFieldEigenRisico.setText(Integer.toString(vermaatschappijManager.getVerzekeringstypeByName(selectedMaat,comboBoxVerzekeringsType.getSelectedItem().toString()).getEigenRisico()));
 											}
 										}
-										
 									}
 								}
 							});

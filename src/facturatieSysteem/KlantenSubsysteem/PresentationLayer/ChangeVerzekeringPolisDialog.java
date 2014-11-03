@@ -312,21 +312,6 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 							comboBoxVerzekeringsType = new JComboBox<String>();
 							splitPaneVerzekeringsType.setRightComponent(comboBoxVerzekeringsType);
 							comboBoxVerzekeringsType.setEnabled(false);
-							/*
-							comboBoxVerzekeringsType.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									if(comboBoxMaatschappij.getSelectedItem() != "" && comboBoxMaatschappij.getSelectedItem() != null && comboBoxVerzekeringsType.getSelectedItem() != ""&& comboBoxVerzekeringsType.getSelectedItem() != null){
-										textFieldEigenRisico.setText(
-												Integer.toString(
-														vermaatschappijManager.getVerzekeringstype(
-																vermaatschappijManager.getVerzekeringsmaatschappij(
-																		comboBoxMaatschappij.getSelectedItem().toString()),
-																		comboBoxVerzekeringsType.getSelectedItem().toString())
-																		.getEigenRisico()));
-			
-									}
-								}
-							});*/
 						}
 							
 					}

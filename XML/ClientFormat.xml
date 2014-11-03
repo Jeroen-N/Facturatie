@@ -167,6 +167,12 @@
 				<EigenRisico>1125.48</EigenRisico>
 				<startDatum>01-01-2010</startDatum>
 				<eindDatum>31-12-2011</eindDatum>
+			</VerzekeringPolis>
+			<VerzekeringPolis PolisNummer="BJOWB2">
+				<VerzekeringType>Kaas_All-risk</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>01-01-2015</startDatum>
+				<eindDatum>01-01-2016</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
 		<Facturen>
 			<Factuur FactuurNummer="202738">

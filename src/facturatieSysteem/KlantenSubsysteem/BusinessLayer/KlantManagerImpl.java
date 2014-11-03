@@ -134,7 +134,21 @@ public class KlantManagerImpl implements KlantManager {
 			}else{
 			errorMessage = errorMessage + "\nGeboortedatum niet correct ";
 			}
+		}else{
+			Date gbDatum;
+			try {
+				gbDatum = new SimpleDateFormat("dd-MM-yyyy").parse(Geboortedatum);
+				Date date = new Date();
+				if(gbDatum.after(date)){
+					errorMessage = errorMessage + "\nDe geboortedatum kan niet in de toekomst zijn";
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+		
 		
 		// adres
 		if (Adres.length() < 1) {
@@ -210,6 +224,8 @@ public class KlantManagerImpl implements KlantManager {
 			}			
 		}
 		
+		
+		
 		// EindDatum
 		if (!EindDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 			if (EindDatum.length() < 1) {
@@ -220,14 +236,10 @@ public class KlantManagerImpl implements KlantManager {
 			}	
 		}
 		
-		if(EindDatum.contains("") && StartDatum.contains("")){
-		String beginDatum = StartDatum;
-		String eindDatum = EindDatum;
-		Date startDate;
-		Date endDate;
+		if(StartDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})") && EindDatum.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")){
 		try {
-				startDate = new SimpleDateFormat("dd-MM-yyyy").parse(beginDatum);
-				endDate = new SimpleDateFormat("dd-MM-yyyy").parse(eindDatum);
+				Date startDate = new SimpleDateFormat("dd-MM-yyyy").parse(StartDatum);
+				Date endDate = new SimpleDateFormat("dd-MM-yyyy").parse(EindDatum);
 
 				if(startDate.after(endDate)){
 					errorMessage = errorMessage + "\nDe einddatum is eerder dan de startdatum";
@@ -236,7 +248,6 @@ public class KlantManagerImpl implements KlantManager {
 				e.printStackTrace();
 			}
 		}
-		
 		return errorMessage;
 	}
 	
