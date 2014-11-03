@@ -1,0 +1,22 @@
+//
+// Facturatieserver server.policy file.
+//
+// Om deze settings te wijzigen kun je eventueel gebruik maken van de Java policytool.
+// Gebruik: start policytool vanaf de commandline, en open het juiste policy bestand.
+//
+//
+
+grant {
+	permission java.security.AllPermission;
+};
+
+/*
+grant 
+{
+	// Het kan zijn dat je zelf een regel hieronder moet wijzigen om je het juiste IP-adres toe te voegen.
+	permission java.net.SocketPermission "localhost", "listen, accept, connect, resolve";
+	permission java.net.SocketPermission "192.168.27.128", "accept, connect, resolve";
+	permission java.net.SocketPermission "127.0.0.1:1099", "connect,resolve";
+	
+};
+*/

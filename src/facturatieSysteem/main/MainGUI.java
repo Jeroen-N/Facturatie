@@ -72,10 +72,8 @@ public class MainGUI {
 	private JButton btnReset;
 	private JPanel loginPanel;
 
-	public MainGUI(KlantManager klantManager,
-			VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager,
-			FacturatieManager facturatieManager, LoginManager loginManager) {
-		logger.debug("Constructor");
+	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManager facturatieManager, LoginManager loginManager) {
+		logger.debug("Constructor main gui");
 		this.KlantManager = klantManager;
 		this.maatschappijManager = verzekeringsmaatschappijmanager;
 		this.facturatieManager = facturatieManager;
@@ -86,16 +84,13 @@ public class MainGUI {
 
 	@SuppressWarnings({ "serial" })
 	public void makeFrame() {
-
 		/*
 		 * Create the frame
 		 */
 		frmFacturatiesysteem = new JFrame();
 		frmFacturatiesysteem.setBackground(new Color(255, 255, 255));
-		frmFacturatiesysteem.setCursor(Cursor
-				.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		frmFacturatiesysteem.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				"Pictures/verzekering-xsmall.png"));
+		frmFacturatiesysteem.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		frmFacturatiesysteem.setIconImage(Toolkit.getDefaultToolkit().getImage("Pictures/verzekering-xsmall.png"));
 		frmFacturatiesysteem.setTitle("Facturatiesysteem");
 		frmFacturatiesysteem.setName("Facturatiesysteem");
 		frmFacturatiesysteem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,8 +112,7 @@ public class MainGUI {
 		lblFacturatiesysteem = new JLabel("FacturatieSysteem");
 		lblFacturatiesysteem.setForeground(new Color(255, 255, 255));
 		lblFacturatiesysteem.setBackground(SystemColor.controlHighlight);
-		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD
-				| Font.ITALIC, 26));
+		lblFacturatiesysteem.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 26));
 		Header.setLayout(new BorderLayout(5, 5));
 		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
 
@@ -135,12 +129,10 @@ public class MainGUI {
 		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnKlantenbeheer = new JButton("");
-		btnKlantenbeheer
-				.setToolTipText("Deze knop brengt u naar het klantenbeheer");
+		btnKlantenbeheer.setToolTipText("Deze knop brengt u naar het klantenbeheer");
 		btnKlantenbeheer.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnKlantenbeheer.setMargin(new Insets(0, 0, 0, 0));
-		btnKlantenbeheer.setIcon(new ImageIcon(
-				"Pictures/contact-administration-xsmall.png"));
+		btnKlantenbeheer.setIcon(new ImageIcon("Pictures/contact-administration-xsmall.png"));
 		btnKlantenbeheer.setPreferredSize(new Dimension(50, 50));
 		btnKlantenbeheer.setEnabled(false);
 		Header_Button.add(btnKlantenbeheer);
@@ -157,13 +149,10 @@ public class MainGUI {
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 		
 		btnVerzekeringmaatschapij = new JButton("");
-		btnVerzekeringmaatschapij
-				.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
-		btnVerzekeringmaatschapij
-				.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
+		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnVerzekeringmaatschapij.setMargin(new Insets(0, 0, 0, 0));
-		btnVerzekeringmaatschapij.setIcon(new ImageIcon(
-				"Pictures/verzekering-xsmall.png"));
+		btnVerzekeringmaatschapij.setIcon(new ImageIcon("Pictures/verzekering-xsmall.png"));
 		btnVerzekeringmaatschapij.setPreferredSize(new Dimension(50, 50));
 		btnVerzekeringmaatschapij.setEnabled(false);
 		Header_Button.add(btnVerzekeringmaatschapij);
@@ -254,8 +243,7 @@ public class MainGUI {
 			}
 		};
 		Klant_Table.setSelectionBackground(new Color(30, 144, 255));
-		String[] headers = new String[] { "Naam", "BSN", "Geboortedatum",
-				"Adres" };
+		String[] headers = new String[] { "Naam", "BSN", "Geboortedatum", "Adres" };
 		dataTableModel.setTableHeader(headers);
 
 		Klant_Table.getTableHeader().setBackground(new Color(255, 255, 255));
@@ -270,9 +258,7 @@ public class MainGUI {
 
 		KlantenTablePanel = new JScrollPane(Klant_Table);
 		Klant_Table.setFillsViewportHeight(true);
-		KlantenTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(
-				30, 144, 255)), "Clientenlijst", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
+		KlantenTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(30, 144, 255)), "Clientenlijst", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		Klant_Table.getTableHeader().setReorderingAllowed(false);
 		Klant_Table.getTableHeader().setResizingAllowed(false);
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
@@ -332,8 +318,7 @@ public class MainGUI {
 		btnZoekKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (textFieldZoeken.getText().matches(
-						"([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
+				if (textFieldZoeken.getText().matches("([0-9]{2})-([0-9]{2})-([0-9]{4})")) {
 					fillTableZoekresultaat(textFieldZoeken.getText());
 				} else {
 					showConfirmationWindow("Geen geldige zoekwaarde");
@@ -437,12 +422,8 @@ public class MainGUI {
 					ChangeVerzekeringPolisDialog changePolisDialog = new ChangeVerzekeringPolisDialog(
 							KlantManager,
 							maatschappijManager,
-							Klant_Table
-									.getModel()
-									.getValueAt(Klant_Table.getSelectedRow(), 1)
-									.toString());
-					changePolisDialog
-							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					changePolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changePolisDialog.setModal(true);
 					changePolisDialog.setVisible(true);
 					changePolisDialog.addWindowListener(new WindowAdapter() {
@@ -468,8 +449,7 @@ public class MainGUI {
 		});
 
 		btnFacturatie = new JButton("");
-		btnFacturatie
-				.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
+		btnFacturatie.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
 		btnFacturatie.setEnabled(false);
 		btnFacturatie.setMargin(new Insets(0, 0, 0, 0));
 		btnFacturatie.setIcon(new ImageIcon("Pictures/factureer-xsmall.png"));
@@ -488,21 +468,17 @@ public class MainGUI {
 		});
 
 		btnAddKlant = new JButton("");
-		btnAddKlant
-				.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
+		btnAddKlant.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
 		btnAddKlant.setMargin(new Insets(0, 0, 0, 0));
 		btnAddKlant.setIconTextGap(0);
 		btnAddKlant.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnAddKlant.setMinimumSize(new Dimension(0, 0));
-		btnAddKlant.setIcon(new ImageIcon(
-				"Pictures/add-contact-icon-xsmall.png"));
+		btnAddKlant.setIcon(new ImageIcon("Pictures/add-contact-icon-xsmall.png"));
 		btnAddKlant.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AddKlantDialog addKlantDialog = new AddKlantDialog(
-						KlantManager, maatschappijManager);
-				addKlantDialog
-						.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				AddKlantDialog addKlantDialog = new AddKlantDialog(KlantManager, maatschappijManager);
+				addKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				addKlantDialog.setModal(true);
 				addKlantDialog.setVisible(true);
 				addKlantDialog.addWindowListener(new WindowAdapter() {
@@ -517,8 +493,7 @@ public class MainGUI {
 		});
 
 		btnChangeKlant = new JButton("");
-		btnChangeKlant
-				.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
+		btnChangeKlant.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
 		btnChangeKlant.setMargin(new Insets(0, 0, 0, 0));
 		btnChangeKlant.setIcon(new ImageIcon("Pictures/change-contact-icon-xsmal.png"));
 		btnChangeKlant.setEnabled(false);
@@ -530,8 +505,7 @@ public class MainGUI {
 				// "Wijzigen klant wordt geklikt"
 				if (btnChangeKlant.isEnabled()) {
 					String bsn = Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString();
-					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(
-							KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					ChangeKlantDialog changeKlantDialog = new ChangeKlantDialog(KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
 					changeKlantDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					changeKlantDialog.setModal(true);
 					changeKlantDialog.setVisible(true);
@@ -558,8 +532,7 @@ public class MainGUI {
 		});
 
 		btnAddPolis = new JButton("");
-		btnAddPolis
-				.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
+		btnAddPolis.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
 		btnAddPolis.setMargin(new Insets(0, 0, 0, 0));
 		btnAddPolis.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
 		btnAddPolis.setEnabled(false);
@@ -569,19 +542,11 @@ public class MainGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (btnChangeKlant.isEnabled()) {
-					AddVerzekeringPolisDialog addVerzekeringPolisDialog = new AddVerzekeringPolisDialog(
-							KlantManager,
-							maatschappijManager,
-							Klant_Table
-									.getModel()
-									.getValueAt(Klant_Table.getSelectedRow(), 1)
-									.toString());
-					addVerzekeringPolisDialog
-							.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					AddVerzekeringPolisDialog addVerzekeringPolisDialog = new AddVerzekeringPolisDialog(KlantManager,maatschappijManager,Klant_Table.getModel().getValueAt(Klant_Table.getSelectedRow(), 1).toString());
+					addVerzekeringPolisDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					addVerzekeringPolisDialog.setModal(true);
 					addVerzekeringPolisDialog.setVisible(true);
-					addVerzekeringPolisDialog
-							.addWindowListener(new WindowAdapter() {
+					addVerzekeringPolisDialog.addWindowListener(new WindowAdapter() {
 								public void windowClosed(WindowEvent e) {
 									Klant_Table.removeAll();
 									fillTable();
@@ -618,8 +583,7 @@ public class MainGUI {
 		lblCreatedByInfosys.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblCreatedByInfosys.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreatedByInfosys.setForeground(new Color(255, 255, 255));
-		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD
-				| Font.ITALIC, 12));
+		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
 		Footer.add(lblCreatedByInfosys);
 
 		/*

@@ -1,11 +1,14 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
-public interface KlantManager {
+public interface KlantManager extends Remote{
+	
+	public static final String servicename = "Hello";
 	
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,

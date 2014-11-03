@@ -1,0 +1,24 @@
+#
+# Log4J configuratiebestand.
+# Levels: DEBUG < INFO < WARN < ERROR < FATAL
+#
+
+# Geef het default loglevel, en geef de appenders.
+# Een appender bepaalt waar de logging wordt geschreven: console, file, server, WinNT log, ...
+# Je kunt deze namen zelf kiezen; stdout en file kun je aanpassen.
+log4j.rootLogger = DEBUG, stdout
+
+# Beschrijf type en layout van appender 'stdout'
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+# Beschrijf de layout waarin je de logging output voor 'stdout' wilt zien.
+# Voorbeelden:
+# 2014-05-28 10:30:46,478 [main] INFO  example.hello.Server - Server ready
+# log4j.appender.stdout.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
+# 7791 [main] INFO  example.hello.Server  - Server ready
+# log4j.appender.stdout.layout.ConversionPattern = %-4r [%t] %-5p %c %x - %m%n
+log4j.appender.stdout.layout.ConversionPattern = %d{yyyy-MM-dd HH:mm:ss} [%5p] %C{1} - %m%n
+#  INFO [main] (Server.java:92) - Server ready
+#log4j.appender.stdout.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
+
