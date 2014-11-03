@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -34,7 +35,9 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AddVerzekeringsTypeDialog(final VerzekeringsmaatschappijManager manager, Verzekeringsmaatschappij maatschappij) {
+	public AddVerzekeringsTypeDialog(
+			final VerzekeringsmaatschappijManager manager,
+			Verzekeringsmaatschappij maatschappij) {
 		setTitle("Verzekeringstype beheer");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
@@ -52,8 +55,9 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 				 * JPanel, de basispaneel, wordt aangemaakt
 				 */
 				JPanel addVerzekering = new JPanel();
-				VerzekeringsmaatschappijManager.addTab("Verzekeringstype toevoegen",
-						null, addVerzekering, null);
+				VerzekeringsmaatschappijManager.addTab(
+						"Verzekeringstype toevoegen", null, addVerzekering,
+						null);
 				addVerzekering.setLayout(new BorderLayout(0, 0));
 				{
 					/*
@@ -85,10 +89,14 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 						addVerzekering_1.add(panel);
 						panel.setLayout(new BorderLayout(0, 0));
 						{
-							JLabel lblVerzekering = new JLabel("Verzekeringstype");
-							lblVerzekering.setPreferredSize(new Dimension(100, 20));
-							lblVerzekering.setMinimumSize(new Dimension(100, 20));
-							lblVerzekering.setMaximumSize(new Dimension(100, 20));
+							JLabel lblVerzekering = new JLabel(
+									"Verzekeringstype");
+							lblVerzekering.setPreferredSize(new Dimension(100,
+									20));
+							lblVerzekering
+									.setMinimumSize(new Dimension(100, 20));
+							lblVerzekering
+									.setMaximumSize(new Dimension(100, 20));
 							panel.add(lblVerzekering, BorderLayout.WEST);
 						}
 					}
@@ -114,97 +122,129 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 							splitPaneNr.setRightComponent(textFieldTypeNr);
 							textFieldTypeNr.setColumns(15);
 						}
-						
+
 						{
 							JSplitPane splitPaneNaam = new JSplitPane();
-							splitPaneNaam.setMinimumSize(new Dimension(300, 30));
-							splitPaneNaam.setMaximumSize(new Dimension(300, 30));
+							splitPaneNaam
+									.setMinimumSize(new Dimension(300, 30));
+							splitPaneNaam
+									.setMaximumSize(new Dimension(300, 30));
 							splitPaneNaam.setBorder(null);
 							splitPaneNaam.setDividerSize(0);
-							splitPaneNaam.setPreferredSize(new Dimension(300, 30));
+							splitPaneNaam.setPreferredSize(new Dimension(300,
+									30));
 							addVerzekering_1.add(splitPaneNaam);
 							{
-						
-						
-						
-						{
-							JLabel lblNaam = new JLabel("Naam: ");
-							lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
-							lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblNaam.setPreferredSize(new Dimension(120, 16));
-							lblNaam.setMinimumSize(new Dimension(120, 16));
-							lblNaam.setMaximumSize(new Dimension(120, 16));
-							splitPaneNaam.setLeftComponent(lblNaam);
-						}
-						{
-							textFieldNaam = new JTextField();
-							splitPaneNaam.setRightComponent(textFieldNaam);
-							textFieldNaam.setColumns(15);
-						}
-					}
-					{
-						JSplitPane splitPaneAdres = new JSplitPane();
-						splitPaneAdres.setMinimumSize(new Dimension(300, 30));
-						splitPaneAdres.setMaximumSize(new Dimension(300, 30));
-						splitPaneAdres.setBorder(null);
-						splitPaneAdres.setDividerSize(0);
-						splitPaneAdres.setPreferredSize(new Dimension(300, 30));
-						addVerzekering_1.add(splitPaneAdres);
-						{
-							JLabel lblAdres = new JLabel("Eigen Risico: ");
-							lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
-							lblAdres.setHorizontalAlignment(SwingConstants.RIGHT);
-							lblAdres.setPreferredSize(new Dimension(120, 16));
-							lblAdres.setMinimumSize(new Dimension(120, 16));
-							lblAdres.setMaximumSize(new Dimension(120, 16));
-							splitPaneAdres.setLeftComponent(lblAdres);
-						}
-						{
-							textFieldEigenRisico = new JTextField();
-							splitPaneAdres.setRightComponent(textFieldEigenRisico);
-							textFieldEigenRisico.setColumns(15);
-						}
-					}
-					
 
-				JPanel buttonPane = new JPanel();
-				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-				getContentPane().add(buttonPane, BorderLayout.SOUTH);
-					
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-				
-				okButton.addMouseListener(new MouseAdapter(){
-					
-					public void mouseClicked(MouseEvent e){
-						//TODO extra attribuut maatschappijnr
-						Verzekeringstype type = new Verzekeringstype(textFieldTypeNr.getText(), Integer.parseInt(textFieldEigenRisico.getText()), textFieldNaam.getText());
-						manager.addVerzekeringstype(maatschappij, type);
-						dispose();
-					}
-						
-					
-						
-				}); 
-				
-				
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						dispose();
-					}
-				});
-				buttonPane.add(cancelButton);
+								{
+									JLabel lblNaam = new JLabel("Naam: ");
+									lblNaam.setHorizontalAlignment(SwingConstants.RIGHT);
+									lblNaam.setHorizontalTextPosition(SwingConstants.RIGHT);
+									lblNaam.setPreferredSize(new Dimension(120,
+											16));
+									lblNaam.setMinimumSize(new Dimension(120,
+											16));
+									lblNaam.setMaximumSize(new Dimension(120,
+											16));
+									splitPaneNaam.setLeftComponent(lblNaam);
+								}
+								{
+									textFieldNaam = new JTextField();
+									splitPaneNaam
+											.setRightComponent(textFieldNaam);
+									textFieldNaam.setColumns(15);
+								}
+							}
+							{
+								JSplitPane splitPaneAdres = new JSplitPane();
+								splitPaneAdres.setMinimumSize(new Dimension(
+										300, 30));
+								splitPaneAdres.setMaximumSize(new Dimension(
+										300, 30));
+								splitPaneAdres.setBorder(null);
+								splitPaneAdres.setDividerSize(0);
+								splitPaneAdres.setPreferredSize(new Dimension(
+										300, 30));
+								addVerzekering_1.add(splitPaneAdres);
+								{
+									JLabel lblAdres = new JLabel(
+											"Eigen Risico: ");
+									lblAdres.setHorizontalTextPosition(SwingConstants.RIGHT);
+									lblAdres.setHorizontalAlignment(SwingConstants.RIGHT);
+									lblAdres.setPreferredSize(new Dimension(
+											120, 16));
+									lblAdres.setMinimumSize(new Dimension(120,
+											16));
+									lblAdres.setMaximumSize(new Dimension(120,
+											16));
+									splitPaneAdres.setLeftComponent(lblAdres);
+								}
+								{
+									textFieldEigenRisico = new JTextField();
+									splitPaneAdres
+											.setRightComponent(textFieldEigenRisico);
+									textFieldEigenRisico.setColumns(15);
+								}
+							}
 
-			}			
-		}				
+							JPanel buttonPane = new JPanel();
+							buttonPane.setLayout(new FlowLayout(
+									FlowLayout.RIGHT));
+							getContentPane()
+									.add(buttonPane, BorderLayout.SOUTH);
+
+							JButton okButton = new JButton("OK");
+							okButton.setActionCommand("OK");
+							buttonPane.add(okButton);
+							getRootPane().setDefaultButton(okButton);
+
+							okButton.addMouseListener(new MouseAdapter() {
+
+								public void mouseClicked(MouseEvent e) {
+									// TODO extra attribuut maatschappijnr
+									String errorMessage = manager.checkType(
+											textFieldTypeNr.getText(),
+											textFieldNaam.getText(),
+											Integer.parseInt(textFieldEigenRisico
+													.getText()));
+
+									if (!errorMessage.equals("")) {
+										showConfirmationWindow(errorMessage);
+									} else {
+										Verzekeringstype type = new Verzekeringstype(
+												textFieldTypeNr.getText(),
+												Integer.parseInt(textFieldEigenRisico
+														.getText()),
+												textFieldNaam.getText());
+										manager.addVerzekeringstype(
+												maatschappij, type);
+										dispose();
+									}
+								}
+
+							});
+
+							JButton cancelButton = new JButton("Cancel");
+							cancelButton.setActionCommand("Cancel");
+							cancelButton.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									dispose();
+								}
+							});
+							buttonPane.add(cancelButton);
+							
+							
+
+						}
+						
+					}
+				}
+			}
+		}
+	}
+	public void showConfirmationWindow(String message){
+		Component frame = null;
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }
-	}
-}
-}
-		

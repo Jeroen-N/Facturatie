@@ -33,6 +33,8 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public String checkVerzekering(String maatschappijnr, String Naam, String Adres, String Postcode, String Plaats, String KVK, String RekeningNr);
 	
+	public String checkType(String type, String naam, int eigenRisico);
+	
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
 
 	String maatschappijInfo(Verzekeringsmaatschappij maatschappij);
