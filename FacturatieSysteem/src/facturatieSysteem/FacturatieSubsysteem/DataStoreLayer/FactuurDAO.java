@@ -85,7 +85,7 @@ public class FactuurDAO implements FactuurDAOinf {
 
 							Element behandelingElement = (Element) behandelingenNode
 									.item(k);
-							String behandelingid = behandelingElement
+							String behandelingId = behandelingElement
 									.getAttribute("BehandelingID");
 
 							NodeList BehandelafspraakIDsNode = behandelingElement
@@ -128,14 +128,14 @@ public class FactuurDAO implements FactuurDAOinf {
 											.getElementsByTagName(
 													"BehandelEindDatum")
 											.item(0).getTextContent(); 
-
+									*/
 									Behandeling behandeling = new Behandeling(
-											fysioPraktijkNummer, behandelingId,
-											behandelCode, behandelStartDatum,
-											behandelEindDatum, BSN,
+											null, behandelingId,
+											null, null,
+											null, BSN,
 											AfsprakenIDs, 00,
 											AfsprakenIDs.size());
-									behandelingen.add(behandeling);
+									behandelingen.add(behandeling);/*
 									// m = 0;
 								}
 							}*/
