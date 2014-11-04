@@ -12,6 +12,10 @@
 		<gebruiker id="3">
 			<gebruikersnaam>b4</gebruikersnaam>
 			<wachtwoord>facturatie4</wachtwoord>
-		</gebruiker>	
+		</gebruiker>
+		<gebruiker id="4">
+			<gebruikersnaam> </gebruikersnaam>
+			<wachtwoord> </wachtwoord>
+		</gebruiker>		
 	</gebruikers>
 </Login>
