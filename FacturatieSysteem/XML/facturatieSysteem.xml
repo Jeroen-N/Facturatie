@@ -35,7 +35,8 @@
 	            <behandelcode>010</behandelcode>
 	         </behandelCodes>
 	      </verzekeringsType>
-		</verzekeringsTypes>    
+		
+			</verzekeringsTypes>    
    </verzekeringsmaatschappij>	
    
 </facturatieSysteem>

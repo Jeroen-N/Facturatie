@@ -145,45 +145,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							panel.add(lblKlant, BorderLayout.WEST);
 						}
 					}
-					{
-						typetable = new JTable(dateTableModelChangeType) {
-							public boolean isCellEditable(int rowIndex, int mColIndex) {
-								return false;
-							}
-						};
-						String[] headers = new String[] { "Type Nr", "Naam", "Eigen risico"};
-						dateTableModelChangeType.setTableHeader(headers);
-						
-						TableColumn column = typetable.getColumnModel().getColumn(0);
-						column.setPreferredWidth(6);
-						
-						typetable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						
-						typen = maatschappij.getTypes();
-						int count = (typen == null) ? 0 : typen.size();
-						
-						if(count > 0){
-							dateTableModelChangeType.setValues(typen);
-						}
-						
-						typeScrollPane = new JScrollPane(typetable);
-						typetable.setFillsViewportHeight(true);
-						typeScrollPane.setBorder(new TitledBorder(new LineBorder(new Color(
-								0, 0, 0)), "Typelijst", TitledBorder.LEADING,
-								TitledBorder.TOP, null, null));
-						typetable.getTableHeader().setReorderingAllowed(false);
-						typetable.getTableHeader().setResizingAllowed(false);
-						changeType_1.add(typeScrollPane, BorderLayout.CENTER);
-						typetable.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								row = typetable.getSelectedRow();
-								fillField(row);
-								}
-						});
-						
-						
-						}
+					fillTable();
 					}
 				}
 				
@@ -448,9 +410,10 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						if(!textFieldTypeNr.getText().equals(TypeNr) || textFieldNaam.getText().equals("")){
 							showConfirmationWindow("Geen type geselecteerd");
 						} else {
-							Verzekeringstype type = new Verzekeringstype(TypeNr,Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
+							Verzekeringstype type = new Verzekeringstype(textFieldTypeNr.getText(),Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
 							if(manager.updateVerzekeringstype(maatschappij, type)){
 								showConfirmationWindow("Verzekeringstype aangepast");
+								fillTable();
 							} else {
 								showConfirmationWindow("Verzekeringstype niet aangepast");
 							}
@@ -486,6 +449,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									} else {
 										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr))){
 											showConfirmationWindow("Verzekeringstype verwijderd");
+											fillTable();
 										} else {
 											showConfirmationWindow("Verzekeringstype niet verwijderd");
 										}
@@ -498,6 +462,43 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	public void fillTable(){
+		typetable = new JTable(dateTableModelChangeType) {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
+		String[] headers = new String[] { "Type Nr", "Naam", "Eigen risico"};
+		dateTableModelChangeType.setTableHeader(headers);
+		
+		TableColumn column = typetable.getColumnModel().getColumn(0);
+		column.setPreferredWidth(6);
+		
+		typetable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		typen = maatschappij.getTypes();
+		int count = (typen == null) ? 0 : typen.size();
+		
+		if(count > 0){
+			dateTableModelChangeType.setValues(typen);
+		}
+		
+		typeScrollPane = new JScrollPane(typetable);
+		typetable.setFillsViewportHeight(true);
+		typeScrollPane.setBorder(new TitledBorder(new LineBorder(new Color(
+				0, 0, 0)), "Typelijst", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		typetable.getTableHeader().setReorderingAllowed(false);
+		typetable.getTableHeader().setResizingAllowed(false);
+		changeType_1.add(typeScrollPane, BorderLayout.CENTER);
+		typetable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				row = typetable.getSelectedRow();
+				fillField(row);
+				}
+		});
 	}
 	public  void fillField(int row){
 		comboBoxBehandelCode.removeAllItems();
