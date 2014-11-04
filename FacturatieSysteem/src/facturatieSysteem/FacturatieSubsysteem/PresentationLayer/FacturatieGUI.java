@@ -286,6 +286,7 @@ public class FacturatieGUI extends JFrame {
 				.toString();
 		factuur.setText(facturatieManagerImpl
 				.toonFactuur(factuur_nummer, klant));
+		facturen.clear();
 	}
 
 	public Factuur vindFactuur(int row2) {
