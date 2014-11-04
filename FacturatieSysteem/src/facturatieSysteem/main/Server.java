@@ -8,7 +8,6 @@ import java.rmi.server.UnicastRemoteObject;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerIFrmi;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 
