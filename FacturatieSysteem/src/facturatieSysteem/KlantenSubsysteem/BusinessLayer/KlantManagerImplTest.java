@@ -164,7 +164,7 @@ public class KlantManagerImplTest {
 	@Test
 	public void testCheckKlant() {
 		//check functions worden niet getest
-		assertTrue(1 == 1);
+		//assertTrue(1 == 1);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class KlantManagerImplTest {
 	@Test
 	public void testCheckPolis() {
 		//check functions worden niet getest
-		assertTrue(1 == 1);
+		//assertTrue(1 == 1);
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class KlantManagerImplTest {
 	@Test
 	public void testCreatePolisnummer() {
 		//niet testbaar, random generator
-		assertTrue(1 == 1);
+		//assertTrue(1 == 1);
 	}
 
 	/**

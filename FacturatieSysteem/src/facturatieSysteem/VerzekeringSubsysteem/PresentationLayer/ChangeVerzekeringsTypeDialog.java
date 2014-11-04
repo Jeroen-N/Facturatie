@@ -76,7 +76,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings("serial")
 	public ChangeVerzekeringsTypeDialog(VerzekeringsmaatschappijManager manager, KlantManager klantmanager, String nummer) {
 		this.manager = manager;
 		setBackground(Color.RED);
@@ -463,6 +462,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 			}
 		}
 	}
+	@SuppressWarnings("serial")
 	public void fillTable(){
 		typetable = new JTable(dateTableModelChangeType) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {

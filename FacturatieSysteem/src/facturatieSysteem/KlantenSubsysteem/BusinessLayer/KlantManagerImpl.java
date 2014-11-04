@@ -1,6 +1,5 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
-import java.rmi.RemoteException;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
