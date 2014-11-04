@@ -156,6 +156,10 @@ public class FacturatieGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				row = overzicht.getSelectedRow();
 				fillField(row);
+			}
+			
+			});
+				
 				openFactuurKnop.addActionListener(new ActionListener() {
 
 					@Override
@@ -190,14 +194,15 @@ public class FacturatieGUI extends JFrame {
 								File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
 								try {
 									Desktop.getDesktop().open(file);
+									file.deleteOnExit();
 								} catch (IOException e1) {
 									showConfirmationWindow("Desktop is not supported!");
 								}
 								
 							}
 						}
+				
 				});
-
 				printFactuurKnop.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -229,11 +234,13 @@ public class FacturatieGUI extends JFrame {
 						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
 
 						String value = overzicht.getModel().getValueAt(overzicht.getSelectedRow(), 0).toString();
+						File file = null;
 						if (value.equals(factuur.getFactuurNummer())) {
-							File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+							file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+							System.out.println(file);
 							if (file.exists()) {
+								System.out.println("print");
 								if (Desktop.isDesktopSupported()) {
-									
 									try {
 										Desktop.getDesktop().print(file);
 									} catch (IOException e1) {
@@ -247,8 +254,7 @@ public class FacturatieGUI extends JFrame {
 						}
 					}
 				});
-			}
-		});
+			
 
 		// panels vullen
 		buttonPanel.add(factureerKnop);
@@ -276,12 +282,15 @@ public class FacturatieGUI extends JFrame {
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
 	public void fillField(int row) {
-		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
-		factuur.setText(facturatieManagerImpl.toonFactuur(factuur_nummer, klant));
+		String factuur_nummer = overzicht.getModel().getValueAt(row, 0)
+				.toString();
+		factuur.setText(facturatieManagerImpl
+				.toonFactuur(factuur_nummer, klant));
 	}
 
 	public Factuur vindFactuur(int row2) {
-		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0).toString();
+		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0)
+				.toString();
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
 	}
 
