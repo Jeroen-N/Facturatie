@@ -14,7 +14,6 @@ public class main {
 		VerzekeringsmaatschappijManager maatschappijManager = new VerzekeringsmaatschappijManagerImpl();
 		FacturatieManagerImpl facturatieManager = new FacturatieManagerImpl();
 		LoginManager loginManager = new LoginManager();
-		
 		//Geeft alle managers hier mee
 		new MainGUI(klantManager, maatschappijManager, facturatieManager, loginManager);
 	}

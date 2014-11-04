@@ -70,4 +70,6 @@ public interface KlantManager {
 
 	public ArrayList<String> getBSNs();
 
+	boolean typeGebruikt(String typenaam);
+
 }

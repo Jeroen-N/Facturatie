@@ -128,7 +128,7 @@ public class MainGUI {
 		Header.add(Header_Button, BorderLayout.EAST);
 
 		Header_Button.setLayout(new BorderLayout(0, 50));
-		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager);
+		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager, KlantManager);
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnKlantenbeheer = new JButton("");
 		btnKlantenbeheer.setToolTipText("Deze knop brengt u naar het klantenbeheer");

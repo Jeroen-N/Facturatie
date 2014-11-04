@@ -16,7 +16,7 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public  Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr);
 	
-	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
+	public boolean addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type);
 	
 	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String Naam);
 
@@ -28,7 +28,7 @@ public interface VerzekeringsmaatschappijManager {
 
 	boolean updateVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij);
 
-	void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij,
+	boolean updateVerzekeringstype(Verzekeringsmaatschappij maatschappij,
 			Verzekeringstype type);
 	
 	public String checkVerzekering(String maatschappijnr, String Naam, String Adres, String Postcode, String Plaats, String KVK, String RekeningNr);

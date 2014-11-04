@@ -38,6 +38,7 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
@@ -72,7 +73,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 	Logger logger = Logger.getLogger(MainGUI.class);
 
 	@SuppressWarnings({ "serial", "unused" })
-	public JPanel VerzekeringsGUI(VerzekeringsmaatschappijManager manager) {
+	public JPanel VerzekeringsGUI(VerzekeringsmaatschappijManager manager, KlantManager klantmanager) {
 		tabelpaneel = new JPanel();
 		knoppenPaneel = new JPanel();
 		zoekpaneel = new JPanel();
@@ -212,7 +213,7 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (btnTypes.isEnabled()) {
 					ChangeVerzekeringsTypeDialog changeVerzekeringsTypeDialog = new ChangeVerzekeringsTypeDialog(
-							manager, Verzekering_Table
+							manager, klantmanager , Verzekering_Table
 									.getModel()
 									.getValueAt(
 											Verzekering_Table.getSelectedRow(),
@@ -292,7 +293,11 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 					Verzekeringsmaatschappij m1 = manager
 							.getVerzekeringsmaatschappij(nummer);
 
-					manager.deleteVerzekeringsmaatschappij(m1);
+					if(manager.deleteVerzekeringsmaatschappij(m1)){
+						showConfirmationWindow("Maatschappij verwijderd");
+					} else {
+						showConfirmationWindow("Maatschappij kon niet worden verwijderd");
+					}
 					fillTable(manager);
 					Uitgebreide_Info.setText("");
 

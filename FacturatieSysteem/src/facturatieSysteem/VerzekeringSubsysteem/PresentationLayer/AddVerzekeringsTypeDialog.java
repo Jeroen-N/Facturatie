@@ -214,11 +214,13 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 												textFieldTypeNr.getText(),
 												Integer.parseInt(textFieldEigenRisico.getText()),
 												textFieldNaam.getText());
-										manager.addVerzekeringstype(
-												maatschappij, type);
-										dispose();
-										showConfirmationWindow("Type succesvol toegevoegd!");
-										
+										if(manager.addVerzekeringstype(
+												maatschappij, type)){
+											dispose();
+											showConfirmationWindow("Type succesvol toegevoegd!");
+										} else {
+											showConfirmationWindow("Type niet succesvol toegevoegd!");
+										}
 									}
 								}
 

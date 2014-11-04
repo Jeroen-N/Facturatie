@@ -144,6 +144,18 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 			}
 		return null;
 	}
+	
+	//Checkt of een type in gebruik is
+	public boolean typeGebruikt(String typenaam){
+		for(Klant klant : getKlanten()){
+			for(VerzekeringPolis polis : klant.getVerzekeringPolissen()){
+				if(polis.getVerzekeringsType().equals(typenaam)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/* (non-Javadoc)
 	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#verwijderKlantXML(java.lang.String)

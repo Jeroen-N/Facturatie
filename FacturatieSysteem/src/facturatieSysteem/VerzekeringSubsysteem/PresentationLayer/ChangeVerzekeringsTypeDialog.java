@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAO;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAOImpl;
@@ -76,7 +77,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	@SuppressWarnings("serial")
-	public ChangeVerzekeringsTypeDialog(VerzekeringsmaatschappijManager manager, String nummer) {
+	public ChangeVerzekeringsTypeDialog(VerzekeringsmaatschappijManager manager, KlantManager klantmanager, String nummer) {
 		this.manager = manager;
 		setBackground(Color.RED);
 		setTitle("Verzekeringstype beheer");
@@ -447,9 +448,12 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						if(!textFieldTypeNr.getText().equals(TypeNr) || textFieldNaam.getText().equals("")){
 							showConfirmationWindow("Geen type geselecteerd");
 						} else {
-							showConfirmationWindow("Type aangepast");
 							Verzekeringstype type = new Verzekeringstype(TypeNr,Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
-							manager.updateVerzekeringstype(maatschappij, type);
+							if(manager.updateVerzekeringstype(maatschappij, type)){
+								showConfirmationWindow("Verzekeringstype aangepast");
+							} else {
+								showConfirmationWindow("Verzekeringstype niet aangepast");
+							}
 						}
 					}
 				});
@@ -476,9 +480,16 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									    "Weet u het zeker?",
 									    JOptionPane.YES_NO_OPTION);
 								if(n == 0){
-									manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr));
-									
-									
+									Verzekeringstype type = manager.getVerzekeringstype(maatschappij,TypeNr);
+									if(klantmanager.typeGebruikt(type.getNaam())){
+										showConfirmationWindow("Verzekeringstype nog in gebruik");
+									} else {
+										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr))){
+											showConfirmationWindow("Verzekeringstype verwijderd");
+										} else {
+											showConfirmationWindow("Verzekeringstype niet verwijderd");
+										}
+									}
 								}							
 						}
 					});

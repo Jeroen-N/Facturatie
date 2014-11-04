@@ -61,9 +61,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 
 	@Override
 	public boolean deleteVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
-		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
+		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null && maatschappij.getTypes() == null){
 			verzekeringsMaatschappijen.remove(maatschappij);
 			VerzekeringDAO.deleteMaatschappijXML(maatschappij.getNr());
+			return true;
 		}
 		return false;
 	}
@@ -93,21 +94,23 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 	}
 
 	@Override
-	public void addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+	public boolean addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) == null){
 			maatschappij.addType(type);
-			VerzekeringtypeDAO.addVerzekeringstypeXML(maatschappij.getNr(), type);
+			return VerzekeringtypeDAO.addVerzekeringstypeXML(maatschappij.getNr(), type);
 		}
+		return false;
 	}
 
 	@Override
-	public void updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
+	public boolean updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
 			Verzekeringstype type2 = getVerzekeringstype(maatschappij, type.getNr());
 			type2.setEigenRisicio(type.getEigenRisico());
 			type2.setNaam(type.getNaam());
-			VerzekeringtypeDAO.updateVerzekeringstypeXML(maatschappij.getNr(), type);
+			return VerzekeringtypeDAO.updateVerzekeringstypeXML(maatschappij.getNr(), type);
 		}
+		return false;
 	}
 
 	@Override
