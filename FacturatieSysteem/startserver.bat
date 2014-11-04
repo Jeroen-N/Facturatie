@@ -6,6 +6,8 @@
 cd \xampp\htdocs\facturatie
 
 :: Start java met het juiste classpath
+:: Server en registry moeten het zelfde ip adres hebben, die van ons.
+:: Client krijgt het ip adres van de ander groep, en viseversa
 java -cp .\bin;.\libs\log4j-1.2.17.jar facturatieSysteem.main.Server localhost
  
 :: Wanneer je securityproblemen wilt oplossen, voeg dan onderstaande optie aan het command toe.

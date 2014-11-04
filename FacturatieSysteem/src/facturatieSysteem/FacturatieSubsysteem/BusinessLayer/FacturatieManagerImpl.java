@@ -134,7 +134,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				afspraakIDs.add(afspraak.get(1));
 				code = afspraak.get(7);
 			}
+			if (afspraakIDs.size() >= 0){
 			behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
+			}
 		}
 		
 		for (Behandeling behandeling : behandelingenlijst) {	
