@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.DAOFactoryFactuur;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
@@ -124,7 +126,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		double totaalPrijsFactuur = 0;
 		//TODO behandelingen ophalen uit andere systeem;
 		
-		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
+		Map<String, ArrayList<ArrayList<String>>> behandelingen = null;
+		for(String behandeling : behandelingen.keySet()){
+			ArrayList<String> afspraakIDs = new ArrayList<String>();
+			String code = null;
+			for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
+				afspraakIDs.add(afspraak.get(1));
+				code = afspraak.get(7);
+			}
+			behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
+		}
+		
 		for (Behandeling behandeling : behandelingenlijst) {	
 			totalePrijs = 00;	
 			for (String code : verzekering.getBehandelcodes()) {
