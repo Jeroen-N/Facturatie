@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="src" path="/HelloIF"/>
 	<classpathentry kind="lib" path="libraries/org.apache.log4j_1.2.15.v201012070815.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Facturatiesysteem"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

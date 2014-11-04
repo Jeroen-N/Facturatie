@@ -16,7 +16,7 @@ public interface KlantManager extends Remote {
 	 * Method to call the service name
 	 */
 	/** The Constant servicename. */
-	public static final String servicename = "Hello";
+	public static final String servicename = "Facturatiesysteem";
 
 
 	/**
