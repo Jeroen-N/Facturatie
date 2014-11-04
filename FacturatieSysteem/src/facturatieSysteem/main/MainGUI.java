@@ -655,12 +655,7 @@ public class MainGUI {
 	 * Methode om de table te kunnen vullen en updaten
 	 */
 	public void fillTable() {
-		try {
 			memberList = KlantManager.getKlanten();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		int count = (memberList == null) ? 0 : memberList.size();
 
 		if (count > 0) {

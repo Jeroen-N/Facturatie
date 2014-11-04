@@ -69,7 +69,7 @@ public class Client {
 		}
 		
 		// Configure logging. 
-		PropertyConfigurator.configure("./helloclient/facturatieclient.logconf");
+		PropertyConfigurator.configure("./FacturatieClient/facturatieclient.logconf");
 	     
 		logger.info("Starting application ---------------------------------");
 
