@@ -29,6 +29,7 @@ import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.ChangeVerzekeringPolisDialog;
+import facturatieSysteem.LoginSubSysteem.BusinessLayer.LoginManager;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 import java.awt.event.MouseAdapter;

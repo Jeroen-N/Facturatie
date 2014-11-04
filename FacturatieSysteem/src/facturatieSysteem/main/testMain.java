@@ -1,5 +1,7 @@
 package facturatieSysteem.main;
 
+import facturatieSysteem.LoginSubSysteem.BusinessLayer.LoginManager;
+
 public class testMain {
 
 	public static void main(String[] args) {

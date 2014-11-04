@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.LoginSubSysteem.EntityLayer;
 
 public class Gebruiker {
 	private String gebruikersnaam;

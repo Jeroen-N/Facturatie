@@ -1,6 +1,10 @@
-package facturatieSysteem.main;
+package facturatieSysteem.LoginSubSysteem.BusinessLayer;
 
 import java.util.ArrayList;
+
+import facturatieSysteem.LoginSubSysteem.DataStoreLayer.DAOFactoryLogin;
+import facturatieSysteem.LoginSubSysteem.DataStoreLayer.LoginDAO;
+import facturatieSysteem.LoginSubSysteem.EntityLayer.Gebruiker;
 
 public class LoginManager {
 	private DAOFactoryLogin daoFactoryLogin = new DAOFactoryLogin(

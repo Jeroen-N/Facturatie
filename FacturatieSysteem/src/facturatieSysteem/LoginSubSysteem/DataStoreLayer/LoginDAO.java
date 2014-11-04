@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.LoginSubSysteem.DataStoreLayer;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,8 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import facturatieSysteem.LoginSubSysteem.EntityLayer.Gebruiker;
 
 public class LoginDAO {
 	private Document document = null;

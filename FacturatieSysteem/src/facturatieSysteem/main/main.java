@@ -3,6 +3,7 @@ package facturatieSysteem.main;
 import facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManagerImpl;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
+import facturatieSysteem.LoginSubSysteem.BusinessLayer.LoginManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 
