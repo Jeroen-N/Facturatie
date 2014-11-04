@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class provides a data model for the JTable component in the UI. Using this data model
  * enables us to quickly perform operations on the table containing member information. The contents of 
@@ -19,11 +20,17 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 @SuppressWarnings("serial")
 public class DataTableModel extends AbstractTableModel {
 
+	/** The cache. */
 	private Vector<String[]> cache; // will hold String[] objects . . .
+	
+	/** The col count. */
 	private int colCount;
+	
+	/** The headers. */
 	private String[] headers;
 
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(DataTableModel.class);
 
 	/**
@@ -67,8 +74,8 @@ public class DataTableModel extends AbstractTableModel {
 	
 	/**
 	 * Set the values of the data table model.
-	 * 
-	 * @param members ArrayList containing the values to be set.
+	 *
+	 * @param klanten the new values
 	 */
 	public void setValues(ArrayList<Klant> klanten) {
 		
@@ -110,6 +117,9 @@ public class DataTableModel extends AbstractTableModel {
 
 	/**
 	 * Get the name of column [i].
+	 *
+	 * @param i the i
+	 * @return the column name
 	 */
 	public String getColumnName(int i) { 
 		return headers[i];
@@ -117,6 +127,8 @@ public class DataTableModel extends AbstractTableModel {
 
 	/**
 	 * Get the number of columns in the model.
+	 *
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		return colCount;
@@ -124,6 +136,8 @@ public class DataTableModel extends AbstractTableModel {
 
 	/**
 	 * Get the number of rows.
+	 *
+	 * @return the row count
 	 */
 	public int getRowCount() {
 		return cache.size();
@@ -131,6 +145,10 @@ public class DataTableModel extends AbstractTableModel {
 
 	/**
 	 * Get the value at [row,col].
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @return the value at
 	 */
 	public Object getValueAt(int row, int col) {
 		return ((String[]) cache.elementAt(row))[col];

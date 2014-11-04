@@ -9,7 +9,17 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class testMain.
+ */
 public class testMain {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		FacturatieManagerImpl m1 = new FacturatieManagerImpl();
 		String polisNummer = "123456";

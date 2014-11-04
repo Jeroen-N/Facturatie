@@ -17,19 +17,42 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FacturatieManagerImpl.
+ */
 public class FacturatieManagerImpl implements FacturatieManager {
+	
+	/** The dao factory behandelcodes. */
 	private DAOFactoryFactuur daoFactoryBehandelcodes = new DAOFactoryFactuur(
 			"XML/behandelcodes.xml", "XML/behandelcodes.xsd");
+	
+	/** The dao factory client. */
 	private DAOFactoryFactuur daoFactoryClient = new DAOFactoryFactuur(
 			"XML/ClientFormat.xml", "XML/ClientFormat.xsd");
+	
+	/** The dao factory facturatie. */
 	private DAOFactoryFactuur daoFactoryFacturatie = new DAOFactoryFactuur(
 			"XML/facturatieSysteem.xml", "XML/facturatieSysteem.xsd");
+	
+	/** The factuur dao. */
 	private FactuurDAO factuurDAO;
+	
+	/** The behandeling dao. */
 	private BehandelingDAO behandelingDAO;
+	
+	/** The facturen. */
 	private ArrayList<Factuur> facturen;
+	
+	/** The verzekering. */
 	private Verzekeringstype verzekering;
+	
+	/** The Behandelingen. */
 	private ArrayList<Behandeling> Behandelingen;
 
+	/**
+	 * Instantiates a new facturatie manager impl.
+	 */
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
@@ -43,10 +66,16 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getBDAO()
+	 */
 	public BehandelingDAO getBDAO(){
 		return behandelingDAO;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#factureer(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant, facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager)
+	 */
 	@Override
 	public Factuur factureer(Klant klant,
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
@@ -161,11 +190,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#haalFacturen(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
 		return factuurDAO.haalFacturen(invoerBSN);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#toonFactuur(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	 */
 	@Override
 	public String toonFactuur(String factuur_nummer, Klant klant) {
 		facturen = haalFacturen(klant.getBSN());
@@ -177,6 +212,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return "niks gevonden";
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getFactuur(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	 */
 	public Factuur getFactuur(String factuur_nummer, Klant klant) {
 		facturen = haalFacturen(klant.getBSN());
 		for (Factuur factuur : facturen) {
@@ -187,6 +225,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#loopBehandelingen(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+	 */
 	public String loopBehandelingen(Factuur factuur) {
 		String naam = "";
 		Behandelingen = factuur.getBehandelingen();
@@ -202,6 +243,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return naam;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getTotaalPrijs(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+	 */
 	public double getTotaalPrijs(Factuur factuur){
 		double totPrijs = 0.0;
 		for(Behandeling behandeling : factuur.getBehandelingen()){
@@ -210,6 +254,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return totPrijs;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getTotaalinclBTW(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+	 */
 	public double getTotaalinclBTW(Factuur factuur){
 		double totPrijs = 0.0;
 		double totPrijsBTW = 0.0;
