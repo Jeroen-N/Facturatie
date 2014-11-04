@@ -58,7 +58,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 	private  JScrollPane typeScrollPane;
 	private  JTextField textFieldTypeNr;
 	private  JTextField textFieldNaam;
-	private  JFormattedTextField textFieldEigenRisico;
+	private  JTextField textFieldEigenRisico;
 	private  Integer row;
 	private  JComboBox<String> comboBoxBehandelCode, comboBoxBehandelCodeAdd;
 	private VerzekeringsmaatschappijManager manager;
@@ -264,7 +264,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									.setLeftComponent(lblEigenRisico);
 						}
 						{
-							textFieldEigenRisico = new JFormattedTextField(formatter);
+							textFieldEigenRisico = new JTextField();
 							textFieldEigenRisico.setColumns(15);
 							splitPaneEigenRisico.setRightComponent(textFieldEigenRisico);
 							textFieldEigenRisico.setEditable(true);
