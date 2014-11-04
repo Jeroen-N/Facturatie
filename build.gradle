@@ -1,0 +1,76 @@
+
+def projectName = "Facturatiesysteem" 
+def rootDir = "C:/xampp/htdocs/facturatie/"
+
+subprojects {
+	apply plugin: "java"
+	apply plugin: "eclipse"
+
+    version = '1.0'			// version will be postfixed to jar-name
+	
+	repositories {
+        mavenCentral()
+	}
+
+	configurations { 
+		runtime
+	}
+}
+
+project(':FacturatieSysteem') {
+	
+    dependencies {
+        compile project(':FacturatieSysteem'), 'log4j:log4j:1+'
+    }
+
+	def classesDir = new File(rootDir)
+	
+	task classesDirExists << {
+		if (!classesDir.isDirectory()) {
+			println 'Directory ' + classesDir + ' does not exist. Creating it.'
+			classesDir.mkdirs()
+		}
+	}
+
+	task deploylocal(type: Copy){
+		if (classesDir.isDirectory()) {
+			from ('FacturatieServer.policy'){
+				into 'resources'
+			}
+			from ('FacturatieServer.logconf'){
+				into 'resources'
+			}
+			from (configurations.runtime) {
+				into 'libs'
+			}
+			from ('build/classes/main') {
+				into 'bin'
+			}
+			from ('../FacturatieSysteem/build/classes/main') {
+				into 'bin'
+			}
+			into { classesDir }
+		}
+		dependsOn classesDirExists
+	}
+	build.finalizedBy deploylocal
+	
+}
+
+project(':FacturatieClient') {
+
+    dependencies {
+        compile project(':FacturatieSysteem'), 'log4j:log4j:1+'
+	}
+
+	task deploylocal(type: Copy) {
+		from configurations.runtime
+		from 'build/classes/main'
+		from '../FacturatieSysteem/build/classes/main'
+		from '../shared/build/classes/main'
+		into 'build/deploy'
+		dependsOn build
+	}
+	build.finalizedBy deploylocal
+}
+
