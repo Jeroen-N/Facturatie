@@ -27,7 +27,20 @@
 				<startDatum>10-06-2001</startDatum>
 				<eindDatum>10-06-2002</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen><Factuur FactuurNummer="262513"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="12"><BehandelafspraakID>126548</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>0.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>29.5</Totaalprijs></Factuur><Factuur FactuurNummer="262514"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="56"><BehandelafspraakID>265481</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>25.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>20.0</Totaalprijs></Factuur></Facturen>
+		<Facturen>
+			<Factuur FactuurNummer="262513">
+				<FactuurDatum>01-11-2014</FactuurDatum>
+				<VervalDatum>15-11-2014</VervalDatum>
+				<FactuurBehandelingen>
+					<FactuurBehandeling BehandelingID="12">
+						<BehandelafspraakID>126548</BehandelafspraakID>
+					</FactuurBehandeling>
+				</FactuurBehandelingen>
+				<TevergoedenBedrag>0.0</TevergoedenBedrag>
+				<Status>Niet betaald</Status>
+				<Totaalprijs>29.5</Totaalprijs>
+			</Factuur>
+			<Factuur FactuurNummer="262514"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="56"><BehandelafspraakID>265481</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>25.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>20.0</Totaalprijs></Factuur></Facturen>
 	</Client>
 	<Client BSN="125651202">
 		<ClientGegevens>

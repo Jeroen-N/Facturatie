@@ -81,6 +81,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
 		// Nieuw factuurnummer aanmaken
 		facturen = factuurDAO.haalAlleFacturen();
+		
 		int n1 = 0;
 		int n2 = 0;
 		for (Factuur lijstFactuur : facturen) {
@@ -195,10 +196,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		ArrayList<Behandeling> behandelingen = null;
+		
 		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
 		 for (Factuur factuur: facturen){
-			 factuur.setBehandelingen(behandelingen);
+			 for (Behandeling behandeling : factuur.getBehandelingen()){
+				 String BSN = behandeling.getBSN();
+				 String behandelingId = behandeling.getbehandelingId();
+				 ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();			 
+				 
+				 //TODO rest van info ophalen uit ander systeem
+				 //behandeling.setBehandelCode(behandelCode);
+			 }
 		 }
 		 return facturen;
 	}

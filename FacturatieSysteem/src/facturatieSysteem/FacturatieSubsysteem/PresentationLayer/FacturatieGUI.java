@@ -105,8 +105,8 @@ public class FacturatieGUI extends JFrame {
 				if (facturatieManagerImpl.factureer(klant, m1) == null){
 					showConfirmationWindow("Deze klant heeft geen behandelingen om te factureren");
 				}else{
-				facturen.clear();
-				fillTable(klant);
+					facturen.clear();
+					fillTable(klant);
 				}
 			}
 		});
@@ -157,104 +157,104 @@ public class FacturatieGUI extends JFrame {
 				row = overzicht.getSelectedRow();
 				fillField(row);
 			}
-			
-			});
-				
-				openFactuurKnop.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int row2 = overzicht.getSelectedRow();
-						Factuur factuur = vindFactuur(row2);
-						maatschappijEind = null;
-						for (Verzekeringsmaatschappij maatschappij : m1
-								.getVerzekeringsmaatschappijen()) {
+		});
 
-							// Loopen door de typeArray om het te op te halen
-							// van de maatschappij
-							for (Verzekeringstype type : maatschappij
-									.getTypes()) {
+		openFactuurKnop.addActionListener(new ActionListener() {
 
-								// loopen voor het type
-								String polisNaam = "";
-								for (VerzekeringPolis polis : klant
-										.getVerzekeringPolissen()) {
-									polisNaam = polis.getVerzekeringsType();
-								}
-								// de maatschappij ophalen aan de hand van de
-								// klant zijn type
-								if (polisNaam.equals(type.getNaam())) {
-									maatschappijEind = maatschappij;
-									break;
-								}
-							}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row2 = overzicht.getSelectedRow();
+				Factuur factuur = vindFactuur(row2);
+				maatschappijEind = null;
+				for (Verzekeringsmaatschappij maatschappij : m1
+						.getVerzekeringsmaatschappijen()) {
+
+					// Loopen door de typeArray om het te op te halen
+					// van de maatschappij
+					for (Verzekeringstype type : maatschappij
+							.getTypes()) {
+
+						// loopen voor het type
+						String polisNaam = "";
+						for (VerzekeringPolis polis : klant
+								.getVerzekeringPolissen()) {
+							polisNaam = polis.getVerzekeringsType();
 						}
-						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
-							if (Desktop.isDesktopSupported()) {
-								File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
-								try {
-									Desktop.getDesktop().open(file);
-									file.deleteOnExit();
-								} catch (IOException e1) {
-									showConfirmationWindow("Desktop is not supported!");
-								}
-								
-							}
-						}
-				
-				});
-				printFactuurKnop.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int row2 = overzicht.getSelectedRow();
-						Factuur factuur = vindFactuur(row2);
-						maatschappijEind = null;
-						for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
-
-							// Loopen door de typeArray om het te op te halen
-							// van de maatschappij
-							for (Verzekeringstype type : maatschappij.getTypes()) {
-
-								// loopen voor het type
-								String polisNaam = "";
-								for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
-									polisNaam = polis.getVerzekeringsType();
-								}
-								// de maatschappij ophalen aan de hand van de
-								// klant zijn type
-								if (polisNaam.equals(type.getNaam())) {
-									maatschappijEind = maatschappij;
-									break;
-								}
-
-							}
-
-						}
-
-						new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
-
-						String value = overzicht.getModel().getValueAt(overzicht.getSelectedRow(), 0).toString();
-						File file = null;
-						if (value.equals(factuur.getFactuurNummer())) {
-							file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
-							System.out.println(file);
-							if (file.exists()) {
-								System.out.println("print");
-								if (Desktop.isDesktopSupported()) {
-									try {
-										Desktop.getDesktop().print(file);
-									} catch (IOException e1) {
-										showConfirmationWindow("There was no printer found.");
-									}
-									file.delete();
-								}
-							} else {
-								showConfirmationWindow("File doesn't exist, the invoice couldn't be created");
-							}
+						// de maatschappij ophalen aan de hand van de
+						// klant zijn type
+						if (polisNaam.equals(type.getNaam())) {
+							maatschappijEind = maatschappij;
+							break;
 						}
 					}
-				});
-			
+				}
+				new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
+				if (Desktop.isDesktopSupported()) {
+					File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+					try {
+						Desktop.getDesktop().open(file);
+						file.deleteOnExit();
+					} catch (IOException e1) {
+						showConfirmationWindow("Desktop is not supported!");
+					}
+
+				}
+			}
+
+		});
+		printFactuurKnop.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row2 = overzicht.getSelectedRow();
+				Factuur factuur = vindFactuur(row2);
+				maatschappijEind = null;
+				for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
+
+					// Loopen door de typeArray om het te op te halen
+					// van de maatschappij
+					for (Verzekeringstype type : maatschappij.getTypes()) {
+
+						// loopen voor het type
+						String polisNaam = "";
+						for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
+							polisNaam = polis.getVerzekeringsType();
+						}
+						// de maatschappij ophalen aan de hand van de
+						// klant zijn type
+						if (polisNaam.equals(type.getNaam())) {
+							maatschappijEind = maatschappij;
+							break;
+						}
+
+					}
+
+				}
+
+				new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
+
+				String value = overzicht.getModel().getValueAt(overzicht.getSelectedRow(), 0).toString();
+				File file = null;
+				if (value.equals(factuur.getFactuurNummer())) {
+					file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+					System.out.println(file);
+					if (file.exists()) {
+						System.out.println("print");
+						if (Desktop.isDesktopSupported()) {
+							try {
+								Desktop.getDesktop().print(file);
+							} catch (IOException e1) {
+								showConfirmationWindow("There was no printer found.");
+							}
+							file.delete();
+						}
+					} else {
+						showConfirmationWindow("File doesn't exist, the invoice couldn't be created");
+					}
+				}
+			}
+		});
+
 
 		// panels vullen
 		buttonPanel.add(factureerKnop);
