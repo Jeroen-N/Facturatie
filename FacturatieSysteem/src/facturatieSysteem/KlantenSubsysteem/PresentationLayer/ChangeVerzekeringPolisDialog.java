@@ -34,7 +34,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
-import facturatieSysteem.main.MainGUI;
+import facturatieSysteem.main.PresentationLayer.MainGUI;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

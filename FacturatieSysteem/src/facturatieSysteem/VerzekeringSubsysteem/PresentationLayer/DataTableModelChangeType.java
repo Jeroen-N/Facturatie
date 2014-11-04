@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.log4j.Logger;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
-import facturatieSysteem.main.DataTableModel;
+import facturatieSysteem.main.dataTableModel.DataTableModel;
 
 public class DataTableModelChangeType extends AbstractTableModel{
 

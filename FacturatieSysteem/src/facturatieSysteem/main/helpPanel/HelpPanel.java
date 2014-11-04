@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.main.helpPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

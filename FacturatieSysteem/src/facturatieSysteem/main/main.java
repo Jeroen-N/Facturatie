@@ -6,6 +6,7 @@ import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 import facturatieSysteem.LoginSubSysteem.BusinessLayer.LoginManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
+import facturatieSysteem.main.PresentationLayer.MainGUI;
 
 public class main {
 	public static void main(String[] args){

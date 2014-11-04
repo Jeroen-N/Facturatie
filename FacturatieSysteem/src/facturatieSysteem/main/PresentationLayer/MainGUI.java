@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.main.PresentationLayer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +24,8 @@ import facturatieSysteem.FacturatieSubsysteem.PresentationLayer.FacturatieGUI;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.PresentationLayer.VerzekeringsmaatschappijGUI;
+import facturatieSysteem.main.dataTableModel.DataTableModel;
+import facturatieSysteem.main.helpPanel.HelpPanel;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddKlantDialog;
 import facturatieSysteem.KlantenSubsysteem.PresentationLayer.AddVerzekeringPolisDialog;

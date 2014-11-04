@@ -40,6 +40,7 @@ import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.*;
 import facturatieSysteem.main.*;
+import facturatieSysteem.main.PresentationLayer.MainGUI;
 
 public class VerzekeringsmaatschappijGUI extends JFrame {
 	/**

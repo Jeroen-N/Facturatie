@@ -1,4 +1,4 @@
-package facturatieSysteem.main;
+package facturatieSysteem.main.dataTableModel;
 
 import java.util.ArrayList;
 import java.util.Vector;
