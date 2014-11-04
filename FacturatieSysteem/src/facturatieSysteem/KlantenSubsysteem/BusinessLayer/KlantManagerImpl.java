@@ -381,24 +381,18 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 	
 	public ArrayList<ArrayList<String>> getKlantenRMI(){
 		ArrayList<ArrayList<String>> klanten = new ArrayList<ArrayList<String>>();
-		try {
-			for(Klant klant : getKlanten()){
-				ArrayList<String> klant1 = new ArrayList<String>();
-				klant1.add(klant.getBSN());// ID 0 
-				klant1.add(klant.getNaam());// ID 1
-				klant1.add(klant.getGeboortedatum());// ID 2
-				klant1.add(klant.getAdres());// ID 3
-				klant1.add(klant.getWoonplaats());// ID 4
-				klant1.add(klant.getPostcode());// ID 5
-				klant1.add(klant.getTelefoonnummer());// ID 6
-				klant1.add(klant.getEmail());// ID 7
-				klanten.add(klant1);
-			}
-			return klanten;
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(Klant klant : getKlanten()){
+			ArrayList<String> klant1 = new ArrayList<String>();
+			klant1.add(klant.getBSN());// ID 0 
+			klant1.add(klant.getNaam());// ID 1
+			klant1.add(klant.getGeboortedatum());// ID 2
+			klant1.add(klant.getAdres());// ID 3
+			klant1.add(klant.getWoonplaats());// ID 4
+			klant1.add(klant.getPostcode());// ID 5
+			klant1.add(klant.getTelefoonnummer());// ID 6
+			klant1.add(klant.getEmail());// ID 7
+			klanten.add(klant1);
 		}
-		return null;
+		return klanten;
 	}
 }
