@@ -359,8 +359,12 @@ public class AddVerzekeringDialog extends JDialog {
 											Integer.parseInt(textFieldRekeningNr
 													.getText()));
 									if(manager.checkKvk(maatschappij) == true){
-										manager.addVerzekeringsmaatschappij(maatschappij);
+										
+									if(manager.addVerzekeringsmaatschappij(maatschappij)){
 										dispose();
+									}else{
+										showConfirmationWindow("Maatschappij nummer bestaat al!");
+									}
 									}else{
 										showConfirmationWindow("KVK nummer bestaat al!");
 									}
