@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
@@ -27,6 +29,7 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 
 
 // TODO: Auto-generated Javadoc
@@ -57,7 +60,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldPostCode;
 	
 	/** The text field plaats. */
-	private JTextField textFieldPlaats;
+	private JFormattedTextField textFieldPlaats;
 	
 	/** The text field telefoonnummer. */
 	private JTextField textFieldTelefoonnummer;
@@ -69,7 +72,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldRkNummer;
 	
 	/** The text field naam2. */
-	private JTextField textFieldNaam2;
+	private JFormattedTextField textFieldNaam2;
 	
 	/** The text field geb datum2. */
 	private JTextField textFieldGebDatum2;
@@ -84,7 +87,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldPostCode2;
 	
 	/** The text field plaats2. */
-	private JTextField textFieldPlaats2;
+	private JFormattedTextField textFieldPlaats2;
 	
 	/** The text field telefoonnummer2. */
 	private JTextField textFieldTelefoonnummer2;
@@ -97,6 +100,8 @@ public class ChangeKlantDialog extends JDialog {
 	
 	/** The combo box betaalwijze2. */
 	private JComboBox<String> comboBoxBetaalwijze2;
+	
+	
 	
 	/**
 	 * Create the dialog.
@@ -112,6 +117,15 @@ public class ChangeKlantDialog extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
+		/**
+		 * masked format aanmaken
+		 */
+		MaskFormatter formatter = null;
+		  try {
+		    formatter = new MaskFormatter("?????????");
+		  } catch (ParseException e) {
+		    e.printStackTrace();
+		  }
 		/*
 		 * Klant wordt opgehaald
 		 */
@@ -326,7 +340,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats);
 						}
 						{
-							textFieldPlaats = new JTextField();
+							textFieldPlaats = new JFormattedTextField(formatter);
 							splitPanePlaats.setRightComponent(textFieldPlaats);
 							textFieldPlaats.setText(klant.getWoonplaats());
 							textFieldPlaats.setEditable(false);
@@ -530,7 +544,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPaneNaam.setLeftComponent(lblNaam);
 						}
 						{
-							textFieldNaam2 = new JTextField();
+							textFieldNaam2 = new JFormattedTextField(formatter);
 							splitPaneNaam.setRightComponent(textFieldNaam2);
 							textFieldNaam2.setText(klant.getNaam());
 							textFieldNaam2.setColumns(15);
@@ -646,7 +660,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats2);
 						}
 						{
-							textFieldPlaats2 = new JTextField();
+							textFieldPlaats2 = new JFormattedTextField(formatter);
 							splitPanePlaats.setRightComponent(textFieldPlaats2);
 							textFieldPlaats2.setText(klant.getWoonplaats());
 							textFieldPlaats2.setColumns(15);
