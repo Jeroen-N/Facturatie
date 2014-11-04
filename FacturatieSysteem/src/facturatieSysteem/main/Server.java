@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
+import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerIFrmi;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 
 public class Server {
@@ -37,8 +38,8 @@ public class Server {
 		logger.debug("Starting application ---------------------------------");
 		
 		System.setProperty("java.rmi.server.hostname", hostname);
-		System.setProperty("java.rmi.server.codebase", "http://" + hostname + "facturatie/bin/");
-		System.setProperty("java.security.policy", "http://" + hostname + "facturatie/resources/FacturatieServer.policy");
+		System.setProperty("java.rmi.server.codebase", "http://" + hostname + "/facturatie/bin/");
+		System.setProperty("java.security.policy", "http://" + hostname + "/facturatie/resources/FacturatieServer.policy");
 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
@@ -48,12 +49,12 @@ public class Server {
 		try {
 			logger.debug("Creating stub");
 			KlantManagerImpl obj = new KlantManagerImpl();
-			KlantManager stub = (KlantManager) UnicastRemoteObject.exportObject(obj, 0);
+			KlantManagerIFrmi stub = (KlantManagerIFrmi) UnicastRemoteObject.exportObject(obj, 0);
 
 			logger.debug("Locating registry on host '" + hostname + "'");
 			Registry registry = LocateRegistry.getRegistry(hostname);
-			logger.debug("Trying to register stub using name '" + KlantManager.servicename + "'");
-			registry.rebind(KlantManager.servicename, stub);
+			logger.debug("Trying to register stub using name '" + KlantManagerIFrmi.servicename + "'");
+			registry.rebind(KlantManagerIFrmi.servicename, stub);
 			logger.debug("Stub registered");
 
 			logger.info("Server ready");

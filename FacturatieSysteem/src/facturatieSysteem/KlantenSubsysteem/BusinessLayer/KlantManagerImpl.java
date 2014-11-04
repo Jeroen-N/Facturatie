@@ -20,7 +20,7 @@ import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 /**
  * The Class KlantManagerImpl.
  */
-public class KlantManagerImpl implements KlantManager {
+public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 	
 	/** The klant. */
 	private Klant klant;
@@ -61,8 +61,7 @@ public class KlantManagerImpl implements KlantManager {
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
 			double ResterendEigenRisico,
-			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze)
-			throws RemoteException {
+			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
 
 		klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
 				Geboortedatum, TelefoonNr, Email, RekeningNr,
@@ -75,7 +74,7 @@ public class KlantManagerImpl implements KlantManager {
 	/* (non-Javadoc)
 	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlanten()
 	 */
-	public ArrayList<Klant> getKlanten() throws RemoteException {
+	public ArrayList<Klant> getKlanten(){
 		// functie voor het ophalen van klanten
 		return KlantDAO.getKlantenXML();
 	}
@@ -87,8 +86,7 @@ public class KlantManagerImpl implements KlantManager {
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
 			double ResterendEigenRisico,
-			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze)
-			throws RemoteException {
+			ArrayList<VerzekeringPolis> VerzekeringPolissen, String Betaalwijze){
 
 		Klant klant = new Klant(BSN, Naam, Adres, Postcode, Woonplaats,
 				Geboortedatum, TelefoonNr, Email, RekeningNr,
@@ -109,16 +107,12 @@ public class KlantManagerImpl implements KlantManager {
 	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlant(java.lang.String)
 	 */
 	public Klant getKlant(String BSN) {
-		try {
 			for (Klant klant : getKlanten()) {
 				if (klant.getBSN().equals(BSN)) {
 					return klant;
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return null;
 	}
 
@@ -126,16 +120,11 @@ public class KlantManagerImpl implements KlantManager {
 	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#toonKlant(java.lang.String)
 	 */
 	public String toonKlant(String BSN) {
-		try {
 			for (Klant klant : getKlanten()) {
 				if (klant.getBSN().equals(BSN)) {
 					return klant.toString();
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "niks gevonden";
 	}
 
@@ -144,7 +133,6 @@ public class KlantManagerImpl implements KlantManager {
 	 */
 	public ArrayList<String> toonPolis(String BSN) {
 		polissen.clear();
-		try {
 			for (Klant klant : getKlanten()) {
 				if (klant.getBSN().equals(BSN)) {
 					for (int i = klant.getVerzekeringPolissen().size(); i > 0; i--) {
@@ -154,17 +142,13 @@ public class KlantManagerImpl implements KlantManager {
 					return polissen;
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return null;
 	}
 
 	/* (non-Javadoc)
 	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#verwijderKlantXML(java.lang.String)
 	 */
-	public boolean verwijderKlantXML(String BSN) throws RemoteException{
+	public boolean verwijderKlantXML(String BSN){
 		return KlantDAO.verwijderKlantXML(BSN);
 	}
 
@@ -373,7 +357,6 @@ public class KlantManagerImpl implements KlantManager {
 			int randomCharIndex = random.nextInt(CHARSET_AZ_09.length);
 			result[i] = CHARSET_AZ_09[randomCharIndex];
 		}
-		try {
 			for (Klant klant : getKlanten()) {
 				for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 					if (polis.getPolisNummer().equals(result)) {
@@ -383,10 +366,6 @@ public class KlantManagerImpl implements KlantManager {
 					}
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "EEEEEE";
 	}
 

@@ -810,9 +810,6 @@ public class AddKlantDialog extends JDialog {
 								} catch (NumberFormatException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
-								} catch (RemoteException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
 								}
 								dispose();
 							}

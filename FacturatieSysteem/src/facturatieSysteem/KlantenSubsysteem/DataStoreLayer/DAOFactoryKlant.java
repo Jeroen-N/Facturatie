@@ -28,10 +28,10 @@ import org.xml.sax.SAXException;
 public class DAOFactoryKlant {
 	
 	/** The xml path. */
-	private String xmlPath = "XML/ClientFormat.xml";
+	private String xmlPath = "./XML/ClientFormat.xml";
 	
 	/** The xsd path. */
-	private String xsdPath = "XML/ClientFormat.xsd";
+	private String xsdPath = "./XML/ClientFormat.xsd";
 	
 	/** The document. */
 	private Document document;		

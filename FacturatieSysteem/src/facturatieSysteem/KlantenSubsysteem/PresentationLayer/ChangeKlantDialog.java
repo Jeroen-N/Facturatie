@@ -827,7 +827,6 @@ public class ChangeKlantDialog extends JDialog {
 							showConfirmationWindow(errorMessage);
 						}
 						else{
-						try {
 							manager.updateKlant(
 									textFieldBSN2.getText(), 
 									textFieldNaam2.getText(), 
@@ -841,10 +840,6 @@ public class ChangeKlantDialog extends JDialog {
 									klant.getResterendEigenRisico(), 
 									klant.getVerzekeringPolissen(), 
 									comboBoxBetaalwijze2.getSelectedItem().toString());
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
 						dispose();	
 						}
 					}
@@ -867,12 +862,7 @@ public class ChangeKlantDialog extends JDialog {
 							    "Klant verwijderen",
 							    JOptionPane.YES_NO_OPTION);
 						if(n == 0){
-							try {
 								manager.verwijderKlantXML(BSN);
-							} catch (RemoteException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
 							dispose();
 						}
 						
