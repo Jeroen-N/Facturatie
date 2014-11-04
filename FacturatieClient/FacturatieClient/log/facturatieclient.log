@@ -1,0 +1,4 @@
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+33   [main] DEBUG facturatie.client.Client  - Locating registry on localhost
+80   [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+104  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem

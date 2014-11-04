@@ -69,11 +69,11 @@ public class Client {
 		}
 		
 		// Configure logging. 
-		PropertyConfigurator.configure("./FacturatieClient/facturatieclient.logconf");
+		PropertyConfigurator.configure("./facturatieclient.logconf");
 	     
 		logger.info("Starting application ---------------------------------");
 
-		System.setProperty("java.security.policy", "http://" + hostname + "/classes/resources/facturatieserver.policy");
+		System.setProperty("java.security.policy", "http://" + hostname + "/facturatie/resources/facturatieserver.policy");
 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
