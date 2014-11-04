@@ -379,10 +379,12 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 						.addWindowListener(new WindowAdapter() {
 							public void windowClosed(WindowEvent e) {
 								Verzekering_Table.removeAll();
+								updateTable();
 
 							}
 						});
 			}
+			
 		});
 
 	}
@@ -411,5 +413,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);
 
+	}
+	
+	@SuppressWarnings("unused")
+	private void updateTable(){
+		dataTableModelVerzekeringen.fireTableDataChanged();
 	}
 }
