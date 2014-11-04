@@ -196,9 +196,6 @@ public class MainGUI {
         im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
         frmFacturatiesysteem.getRootPane().setDefaultButton(loginButton);
        		
-		/*
-		 * 
-		 */
 		loginButton.addActionListener(new java.awt.event.ActionListener() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -354,7 +351,7 @@ public class MainGUI {
 		 * Add function to see more information
 		 */
 		Uitgebreide_Info = new JTextArea();
-		Uitgebreide_Info.setBorder(null);
+		Uitgebreide_Info.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(30, 144, 255)));
 		Uitgebreide_Info.setRows(20);
 		Uitgebreide_Info.setColumns(30);
 		Uitgebreide_Info.setEditable(false);
@@ -388,13 +385,13 @@ public class MainGUI {
 		Klant_info.add(Info_Polis, BorderLayout.CENTER);
 		Info_Polis.setLayout(new BorderLayout(0, 0));
 		PolisInfo = new JTextArea();
-		PolisInfo.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(30, 144, 255)));
+		PolisInfo.setBorder(null);
 		PolisInfo.setColumns(40);
-		PolisInfo.setPreferredSize(new Dimension(0, 50));
 		PolisInfo.setEditable(false);
 		scroll = new JScrollPane(PolisInfo);
 		scroll.setPreferredSize(new Dimension(4, 50));
 		scroll.setBorder(null);
+		scroll.getVerticalScrollBar().setValue(0);
 		Info_Polis.add(scroll);
 		DefaultCaret caret = (DefaultCaret) PolisInfo.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
@@ -403,7 +400,7 @@ public class MainGUI {
 		 * add panel for buttons underneath more information panel
 		 */
 		knoppen = new JPanel();
-		knoppen.setBorder(null);
+		knoppen.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(30, 144, 255)));
 		knoppen.setBackground(new Color(255, 255, 255));
 		Klant_info.add(knoppen, BorderLayout.SOUTH);
 

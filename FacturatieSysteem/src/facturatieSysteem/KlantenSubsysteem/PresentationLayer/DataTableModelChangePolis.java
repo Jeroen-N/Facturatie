@@ -10,17 +10,26 @@ import org.apache.log4j.Logger;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.main.DataTableModel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataTableModelChangePolis.
+ */
 public class DataTableModelChangePolis extends AbstractTableModel{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The cache. */
 	private Vector<String[]> cache; // will hold String[] objects . . .
+	
+	/** The col count. */
 	private int colCount;
+	
+	/** The headers. */
 	private String[] headers;
 
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(DataTableModel.class);
 
 	/**
@@ -64,8 +73,8 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 	
 	/**
 	 * Set the values of the data table model.
-	 * 
-	 * @param members ArrayList containing the values to be set.
+	 *
+	 * @param verPolis the new values
 	 */
 	public void setValues(ArrayList<VerzekeringPolis> verPolis) {
 		
@@ -108,6 +117,9 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 
 	/**
 	 * Get the name of column [i].
+	 *
+	 * @param i the i
+	 * @return the column name
 	 */
 	public String getColumnName(int i) { 
 		return headers[i];
@@ -115,6 +127,8 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 
 	/**
 	 * Get the number of columns in the model.
+	 *
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		return colCount;
@@ -122,6 +136,8 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 
 	/**
 	 * Get the number of rows.
+	 *
+	 * @return the row count
 	 */
 	public int getRowCount() {
 		return cache.size();
@@ -129,6 +145,10 @@ public class DataTableModelChangePolis extends AbstractTableModel{
 
 	/**
 	 * Get the value at [row,col].
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @return the value at
 	 */
 	public Object getValueAt(int row, int col) {
 		return ((String[]) cache.elementAt(row))[col];

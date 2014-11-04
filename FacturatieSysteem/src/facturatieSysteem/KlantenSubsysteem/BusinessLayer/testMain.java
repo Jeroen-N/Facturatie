@@ -1,10 +1,23 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class testMain.
+ */
 public class testMain {
+	
+	/** The Verzekering polissen. */
 	private static ArrayList<VerzekeringPolis> VerzekeringPolissen;
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		KlantManager manager = new KlantManagerImpl();
@@ -16,10 +29,15 @@ public class testMain {
 		VerzekeringPolissen.add(polis);
 		
 		//Klant toevoegen
-			if(manager.createKlant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso")){
-				System.out.println("Klant met BSN nummer: "+BSN+" succesvol toegevoegd");
-			}else{
-				System.out.println("klant toevoegen mislukt");
+			try {
+				if(manager.createKlant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incoasso")){
+					System.out.println("Klant met BSN nummer: "+BSN+" succesvol toegevoegd");
+				}else{
+					System.out.println("klant toevoegen mislukt");
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			/*
 		polisNummer = manager.createPolisnummer();

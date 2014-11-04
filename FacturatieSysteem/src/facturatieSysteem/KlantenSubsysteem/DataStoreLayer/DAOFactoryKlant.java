@@ -21,11 +21,26 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DAOFactoryKlant.
+ */
 public class DAOFactoryKlant {
+	
+	/** The xml path. */
 	private String xmlPath = "XML/ClientFormat.xml";
+	
+	/** The xsd path. */
 	private String xsdPath = "XML/ClientFormat.xsd";
+	
+	/** The document. */
 	private Document document;		
 		
+	/**
+	 * Validate xml.
+	 *
+	 * @return the document
+	 */
 	public Document validateXML(){
 		try{
 			Schema schema = getValidationSchema();
@@ -53,6 +68,11 @@ public class DAOFactoryKlant {
 		return document;
 	}
 	
+	/**
+	 * Gets the validation schema.
+	 *
+	 * @return the validation schema
+	 */
 	public Schema getValidationSchema() {
 		Schema schema = null;
 
@@ -68,6 +88,12 @@ public class DAOFactoryKlant {
 		return schema;
 	}
 
+	/**
+	 * Validate document.
+	 *
+	 * @param schema the schema
+	 * @return true, if successful
+	 */
 	public boolean validateDocument(Schema schema) {
 
 		System.out.println("validateDocument");
@@ -89,6 +115,11 @@ public class DAOFactoryKlant {
 	}
 	
 
+	/**
+	 * Write document.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean writeDocument() {
 
 		try {
@@ -107,6 +138,11 @@ public class DAOFactoryKlant {
 		return false;
 	}
 	
+	/**
+	 * Gets the document.
+	 *
+	 * @return the document
+	 */
 	public Document getDocument(){
 		try{
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();

@@ -2,16 +2,16 @@
 
 	<Client BSN="125651203">
 		<ClientGegevens>
-			<Naam>Sander Blijlevens</Naam>
-			<Adres>Schijfstraat 26B</Adres>
-			<Postcode>4847SM</Postcode>
+			<Naam>Xander Gerreman</Naam>
+			<Adres>Marialaan 9a</Adres>
+			<Postcode>4834VG</Postcode>
 			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>31-12-1995</Geboortedatum>
-			<Telefoonnummer>0625235100</Telefoonnummer>
-			<Email>sjmblijl@avans.nl</Email>
+			<Geboortedatum>10-06-1994</Geboortedatum>
+			<Telefoonnummer>0682739024</Telefoonnummer>
+			<Email>xpjgerre@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
 			<ResterendEigenRisico>0.0</ResterendEigenRisico>
-			<Rekeningnummer>NL47RABO0136052185</Rekeningnummer>
+			<Rekeningnummer>NL47RABO0136052159</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="87JH9G">
@@ -20,7 +20,13 @@
 				<startDatum>01-01-2013</startDatum>
 				<eindDatum>31-12-2013</eindDatum>
 			</VerzekeringPolis>
-		</VerzekeringPolissen>
+		
+			<VerzekeringPolis PolisNummer="BDVJLX">
+				<VerzekeringType>Kaas_Basic</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>10-06-2001</startDatum>
+				<eindDatum>10-06-2002</eindDatum>
+			</VerzekeringPolis></VerzekeringPolissen>
 		<Facturen><Factuur FactuurNummer="262513"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="12"><BehandelafspraakID>126548</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>0.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>29.5</Totaalprijs></Factuur><Factuur FactuurNummer="262514"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="56"><BehandelafspraakID>265481</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>25.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>20.0</Totaalprijs></Factuur></Facturen>
 		<Behandelingen>
 			<Behandeling id="12">
@@ -173,6 +179,12 @@
 				<EigenRisico>250.0</EigenRisico>
 				<startDatum>01-01-2015</startDatum>
 				<eindDatum>01-01-2016</eindDatum>
+			</VerzekeringPolis>
+			<VerzekeringPolis PolisNummer="0GUNC4">
+				<VerzekeringType>Kaas_All-risk</VerzekeringType>
+				<EigenRisico>250.0</EigenRisico>
+				<startDatum>03-11-2014</startDatum>
+				<eindDatum>05-12-2015</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
 		<Facturen>
 			<Factuur FactuurNummer="202738">

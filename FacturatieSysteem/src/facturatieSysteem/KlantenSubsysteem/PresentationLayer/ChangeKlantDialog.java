@@ -29,33 +29,81 @@ import java.awt.event.ActionEvent;
 import java.rmi.RemoteException;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChangeKlantDialog.
+ */
 public class ChangeKlantDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The change klant_1. */
 	private JPanel changeKlant, changeKlant_1;
+	
+	/** The text field naam. */
 	private JTextField textFieldNaam;
+	
+	/** The text field geb datum. */
 	private JTextField textFieldGebDatum;
+	
+	/** The text field bsn. */
 	private JTextField textFieldBSN;
+	
+	/** The text field adres. */
 	private JTextField textFieldAdres;
+	
+	/** The text field post code. */
 	private JTextField textFieldPostCode;
+	
+	/** The text field plaats. */
 	private JTextField textFieldPlaats;
+	
+	/** The text field telefoonnummer. */
 	private JTextField textFieldTelefoonnummer;
+	
+	/** The text field email. */
 	private JTextField textFieldEmail;
+	
+	/** The text field rk nummer. */
 	private JTextField textFieldRkNummer;
+	
+	/** The text field naam2. */
 	private JTextField textFieldNaam2;
+	
+	/** The text field geb datum2. */
 	private JTextField textFieldGebDatum2;
+	
+	/** The text field bs n2. */
 	private JTextField textFieldBSN2;
+	
+	/** The text field adres2. */
 	private JTextField textFieldAdres2;
+	
+	/** The text field post code2. */
 	private JTextField textFieldPostCode2;
+	
+	/** The text field plaats2. */
 	private JTextField textFieldPlaats2;
+	
+	/** The text field telefoonnummer2. */
 	private JTextField textFieldTelefoonnummer2;
+	
+	/** The text field email2. */
 	private JTextField textFieldEmail2;
+	
+	/** The text field rk nummer2. */
 	private JTextField textFieldRkNummer2;
+	
+	/** The combo box betaalwijze2. */
 	private JComboBox<String> comboBoxBetaalwijze2;
+	
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param vermaatschappijManager the vermaatschappij manager
+	 * @param BSN the bsn
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ChangeKlantDialog(final KlantManager manager,
@@ -84,8 +132,7 @@ public class ChangeKlantDialog extends JDialog {
 				changeKlant.setLayout(new BorderLayout(0, 0));
 				{
 					/*
-					 * Om de oude en nieuwe klant gegevens te scheiden is er
-					 * gebruik gemaakt van een seperator
+					 * 
 					 */
 					JSeparator separator = new JSeparator();
 					separator.setOrientation(SwingConstants.VERTICAL);
@@ -833,6 +880,12 @@ public class ChangeKlantDialog extends JDialog {
 			
 		}
 	}
+	
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

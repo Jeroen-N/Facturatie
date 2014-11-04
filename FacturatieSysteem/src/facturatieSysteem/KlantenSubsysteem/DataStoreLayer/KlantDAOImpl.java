@@ -11,15 +11,36 @@ import org.w3c.dom.NodeList;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KlantDAOImpl.
+ */
 public class KlantDAOImpl implements KlantDAO {
+	
+	/** The Verzekering polissen. */
 	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
+	
+	/** The klant overzicht. */
 	private ArrayList<Klant> klantOverzicht;
+	
+	/** The zoek resultaat. */
 	private ArrayList<Klant> zoekResultaat;
+	
+	/** The klant. */
 	private Klant klant;
+	
+	/** The document. */
 	private Document document;
+	
+	/** The dao factory. */
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
+	
+	/** The BS ns. */
 	private ArrayList<String> BSNs;
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#addKlantXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	 */
 	@Override
 	public boolean addKlantXML(Klant klant){
 		document = daoFactory.getDocument();
@@ -153,6 +174,14 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 	}
 	
+	/*
+	 * 
+	 * @param
+	 * @return
+	 */
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#getKlantenXML()
+	 */
 	@Override
 	public ArrayList<Klant> getKlantenXML() {
 		document = daoFactory.getDocument();
@@ -205,6 +234,9 @@ public class KlantDAOImpl implements KlantDAO {
 		return klantOverzicht;	    
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#findKlantXML(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Klant> findKlantXML(String gebDatum){
 		document = daoFactory.getDocument();
@@ -253,6 +285,9 @@ public class KlantDAOImpl implements KlantDAO {
 		return zoekResultaat;	
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#updateKlantXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	 */
 	@Override
 	public boolean updateKlantXML(Klant klant) {
 		document = daoFactory.getDocument();
@@ -296,6 +331,9 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#verwijderKlantXML(java.lang.String)
+	 */
 	@Override
 	public boolean verwijderKlantXML(String verwijderBSN) {
 		document = daoFactory.getDocument();
@@ -321,6 +359,9 @@ public class KlantDAOImpl implements KlantDAO {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#getBSNs()
+	 */
 	@Override
 	public ArrayList<String> getBSNs(){
 		BSNs = new ArrayList<String>();

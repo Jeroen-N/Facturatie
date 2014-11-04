@@ -45,32 +45,65 @@ import javax.swing.table.TableColumn;
 import org.apache.log4j.Logger;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChangeVerzekeringPolisDialog.
+ */
 public class ChangeVerzekeringPolisDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The button pane. */
 	private JPanel changeVerzekeringPolis, changePolis_1, changePolis_2, buttonPane;
+	
+	/** The polistable. */
 	private JTable polistable;
+	
+	/** The polis scroll pane. */
 	private JScrollPane polisScrollPane;
+	
+	/** The text field polis nummer. */
 	private JTextField textFieldPolisNummer;
+	
+	/** The text field start datum. */
 	private JTextField textFieldStartDatum;
+	
+	/** The text field eind datum. */
 	private JTextField textFieldEindDatum;
+	
+	/** The text field eigen risico. */
 	private JTextField textFieldEigenRisico;
+	
+	/** The row. */
 	private Integer row;
+	
+	/** The combo box maatschappij. */
 	private JComboBox<String> comboBoxMaatschappij;
+	
+	/** The combo box verzekerings type. */
 	private JComboBox<String> comboBoxVerzekeringsType;
+	
+	/** The vermaatschappij manager. */
 	private VerzekeringsmaatschappijManager vermaatschappijManager;
 	
 	// The datamodel to be displayed in the JTable.
+	/** The data table model change polis. */
 	private DataTableModelChangePolis dataTableModelChangePolis;
+	
+	/** The polissen. */
 	private ArrayList<VerzekeringPolis> polissen = null;
 	
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(MainGUI.class);
 	
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param vermaatschappijManager the vermaatschappij manager
+	 * @param BSN the bsn
 	 */
 	@SuppressWarnings("serial")
 	public ChangeVerzekeringPolisDialog(final KlantManager manager, final VerzekeringsmaatschappijManager vermaatschappijManager, final String BSN) {
@@ -493,6 +526,12 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Fill field.
+	 *
+	 * @param row the row
+	 */
 	public void fillField(int row){
 		if(comboBoxMaatschappij.getItemCount() > 0 && comboBoxVerzekeringsType.getItemCount() > 0 && !textFieldEigenRisico.getText().equals("") || 
 				comboBoxMaatschappij.getItemCount() > 0){
@@ -537,6 +576,12 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

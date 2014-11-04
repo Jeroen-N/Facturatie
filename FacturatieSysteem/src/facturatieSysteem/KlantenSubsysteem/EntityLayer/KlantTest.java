@@ -8,13 +8,27 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KlantTest.
+ */
 public class KlantTest {
 
+	/** The instance. */
 	private Klant instance;
+	
+	/** The Verzekering polissen. */
 	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
+	
+	/** The polis. */
 	private VerzekeringPolis polis;
 	
 	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		String polisNummer = "123456";
@@ -25,10 +39,20 @@ public class KlantTest {
 		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 	}
 
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Test set totaal eigen risico.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void testSetTotaalEigenRisico() throws Exception {
 		System.out.println("Het totaal eigen risico wordt geset");
@@ -37,6 +61,9 @@ public class KlantTest {
 		assertTrue(instance.getResterendEigenRisico() == expResult);
 	}
 	
+	/**
+	 * Test bereken totaal eigen risico.
+	 */
 	@Test
 	public void testBerekenTotaalEigenRisico(){
 		double eindBedrag = 0;
@@ -45,6 +72,9 @@ public class KlantTest {
 		assertTrue(eindBedrag != 0);
 	}
 	
+	/**
+	 * Testget verzekering polissen.
+	 */
 	@Test
 	public void testgetVerzekeringPolissen(){
 		ArrayList<VerzekeringPolis> testPolis = instance.getVerzekeringPolissen();
@@ -52,6 +82,9 @@ public class KlantTest {
 		assertTrue(!testPolis.isEmpty());
 	}
 
+	/**
+	 * Test get bsn.
+	 */
 	@Test
 	public void testGetBSN(){
 		String expResult = "125651201";
@@ -59,6 +92,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget naam.
+	 */
 	@Test
 	public void testgetNaam(){
 		String expResult = ("Sander Blijlevens");
@@ -66,6 +102,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget adres.
+	 */
 	@Test
 	public void testgetAdres(){
 		String expResult = ("Schijfstraat 26B");
@@ -73,6 +112,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget postcode.
+	 */
 	@Test
 	public void testgetPostcode(){
 		String expResult = ("4847SM");
@@ -80,6 +122,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget woonplaats.
+	 */
 	@Test
 	public void testgetWoonplaats(){
 		String expResult = ("Teteringen");
@@ -87,6 +132,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget geboortedatum.
+	 */
 	@Test
 	public void testgetGeboortedatum(){
 		String expResult = ("31-12-1995");
@@ -94,6 +142,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget telefoonnummer.
+	 */
 	@Test
 	public void testgetTelefoonnummer(){
 		String expResult = ("0625235100");
@@ -101,6 +152,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget email.
+	 */
 	@Test
 	public void testgetEmail(){
 		String expResult = ("sjmblijl@avans.nl");
@@ -108,6 +162,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget rekening.
+	 */
 	@Test
 	public void testgetRekening(){
 		String expResult = ("NL47RABO0136052185");
@@ -115,6 +172,9 @@ public class KlantTest {
 		assertEquals(expResult, Result);
 	}
 	
+	/**
+	 * Testget betaalmethode.
+	 */
 	@Test
 	public void testgetBetaalmethode(){
 		String expResult = "incasso";

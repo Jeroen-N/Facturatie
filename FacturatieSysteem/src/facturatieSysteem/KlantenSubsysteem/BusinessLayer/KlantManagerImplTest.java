@@ -15,16 +15,38 @@ import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAOImp
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KlantManagerImplTest.
+ */
 public class KlantManagerImplTest {
 
+	/** The instance. */
 	private Klant instance;
+	
+	/** The Verzekering polissen. */
 	private ArrayList<VerzekeringPolis> VerzekeringPolissen;
+	
+	/** The polis. */
 	private VerzekeringPolis polis;
+	
+	/** The klant dao. */
 	private KlantDAO klantDAO;
+	
+	/** The polis dao. */
 	private VerzekeringPolisDAO polisDAO;
+	
+	/** The bsn. */
 	private String BSN;
+	
+	/** The polis nummer. */
 	private String polisNummer;
 	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		klantDAO = new KlantDAOImpl();
@@ -37,16 +59,27 @@ public class KlantManagerImplTest {
 		instance = new Klant(BSN, "Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100","sjmblijl@avans.nl","NL47RABO0136052185",25.25,VerzekeringPolissen,"incasso");
 	}
 	
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		klantDAO.verwijderKlantXML(BSN);
 	}
 	
+	/**
+	 * Test get klanten.
+	 */
 	@Test
 	public void testGetKlanten() {
 		assertTrue(2 == klantDAO.getKlantenXML().size());
 	}
 	
+	/**
+	 * Test create klant.
+	 */
 	@Test
 	public void testCreateKlant() {
 		int i= klantDAO.getKlantenXML().size();
@@ -55,6 +88,9 @@ public class KlantManagerImplTest {
 		
 	}
 
+	/**
+	 * Test update klant.
+	 */
 	@Test
 	public void testUpdateKlant() {
 		String BSN = "125651203";
@@ -71,11 +107,17 @@ public class KlantManagerImplTest {
 		assertEquals(expRes, plaats);
 	}
 
+	/**
+	 * Test find klant.
+	 */
 	@Test
 	public void testFindKlant() {
 		assertTrue(2 == klantDAO.findKlantXML("31-12-1995").size());
 	}
 
+	/**
+	 * Test get klant.
+	 */
 	@Test
 	public void testGetKlant() {
 		for (Klant k1 : klantDAO.getKlantenXML()) {
@@ -85,6 +127,9 @@ public class KlantManagerImplTest {
 		}
 	}
 
+	/**
+	 * Test toon klant.
+	 */
 	@Test
 	public void testToonKlant() {
 		for (Klant k1 : klantDAO.getKlantenXML()) {
@@ -94,6 +139,9 @@ public class KlantManagerImplTest {
 		}
 	}
 
+	/**
+	 * Test toon polis.
+	 */
 	@Test
 	public void testToonPolis() {
 		VerzekeringPolissen.clear();
@@ -110,24 +158,36 @@ public class KlantManagerImplTest {
 
 	
 
+	/**
+	 * Test check klant.
+	 */
 	@Test
 	public void testCheckKlant() {
 		//check functions worden niet getest
 		assertTrue(1 == 1);
 	}
 
+	/**
+	 * Test check polis.
+	 */
 	@Test
 	public void testCheckPolis() {
 		//check functions worden niet getest
 		assertTrue(1 == 1);
 	}
 
+	/**
+	 * Test create polis.
+	 */
 	@Test
 	public void testCreatePolis() {
 		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "007", 1125.48, "01-01-2010", "31-12-2011");
 		assertTrue(polis1.getPolisNummer() == polisNummer);
 	}
 
+	/**
+	 * Test add verzekering polis xml.
+	 */
 	@Test
 	public void testAddVerzekeringPolisXML() {
 		String BSN = "125651202";
@@ -150,6 +210,9 @@ public class KlantManagerImplTest {
 		
 	}
 
+	/**
+	 * Test update verzekering polis xml.
+	 */
 	@Test
 	public void testUpdateVerzekeringPolisXML() {
 		VerzekeringPolis polis1 = new VerzekeringPolis(polisNummer, "009", 1125.48, "01-01-2010", "31-12-2011");
@@ -165,6 +228,9 @@ public class KlantManagerImplTest {
 		}
 	}
 
+	/**
+	 * Test delete verzekering polis xml.
+	 */
 	@Test
 	public void testDeleteVerzekeringPolisXML() {
 		String BSN = "125651202";
@@ -186,17 +252,26 @@ public class KlantManagerImplTest {
 		
 	}
 
+	/**
+	 * Test create polisnummer.
+	 */
 	@Test
 	public void testCreatePolisnummer() {
 		//niet testbaar, random generator
 		assertTrue(1 == 1);
 	}
 
+	/**
+	 * Test get bs ns.
+	 */
 	@Test
 	public void testGetBSNs() {
 		assertTrue(2 == klantDAO.getBSNs().size());
 	}
 
+	/**
+	 * Test verwijder klant xml.
+	 */
 	@Test
 	public void testVerwijderKlantXML() {
 		int i= klantDAO.getKlantenXML().size();

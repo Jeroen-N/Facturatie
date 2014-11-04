@@ -8,11 +8,21 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VerzekeringPolisDAOImpl.
+ */
 public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 
+	/** The document. */
 	private Document document;
+	
+	/** The dao factory. */
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#addVerzekeringPolisXML(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis)
+	 */
 	@Override
 	public boolean addVerzekeringPolisXML(String addBSN, VerzekeringPolis polis){
 		document = daoFactory.getDocument();
@@ -65,6 +75,9 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#updateVerzekeringPolisXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis)
+	 */
 	@Override
 	public boolean updateVerzekeringPolisXML(VerzekeringPolis polis) {
 		document = daoFactory.getDocument();
@@ -105,6 +118,9 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#verwijderPolisXML(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public boolean verwijderPolisXML(String Polisnummer, String BSN) {
 		document = daoFactory.getDocument();

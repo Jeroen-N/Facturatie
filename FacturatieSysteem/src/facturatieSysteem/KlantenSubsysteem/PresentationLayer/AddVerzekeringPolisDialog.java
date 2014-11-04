@@ -29,30 +29,69 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschap
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddVerzekeringPolisDialog.
+ */
 public class AddVerzekeringPolisDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The text field naam. */
 	private JTextField textFieldNaam;
+	
+	/** The text field geb datum. */
 	private JTextField textFieldGebDatum;
+	
+	/** The text field bsn. */
 	private JTextField textFieldBSN;
+	
+	/** The text field adres. */
 	private JTextField textFieldAdres;
+	
+	/** The text field post code. */
 	private JTextField textFieldPostCode;
+	
+	/** The text field plaats. */
 	private JTextField textFieldPlaats;
+	
+	/** The text field telefoonnummer. */
 	private JTextField textFieldTelefoonnummer;
+	
+	/** The text field email. */
 	private JTextField textFieldEmail;
+	
+	/** The text field rk nummer. */
 	private JTextField textFieldRkNummer;
+	
+	/** The add verzekering polis. */
 	private JPanel addVerzekeringPolis;
+	
+	/** The text field polis nummer. */
 	private JTextField textFieldPolisNummer;
+	
+	/** The text field start datum. */
 	private JTextField textFieldStartDatum;
+	
+	/** The text field eind datum. */
 	private JTextField textFieldEindDatum;
+	
+	/** The text field eigen risico. */
 	private JTextField textFieldEigenRisico;
 
+	/** The combo box maatschappij. */
 	private JComboBox<String> comboBoxMaatschappij;
+	
+	/** The combo box verzekerings type. */
 	private JComboBox<String> comboBoxVerzekeringsType;
+	
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param vermaatschappijManager the vermaatschappij manager
+	 * @param BSN the bsn
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AddVerzekeringPolisDialog(final KlantManager manager,
@@ -727,6 +766,12 @@ public class AddVerzekeringPolisDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

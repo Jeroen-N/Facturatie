@@ -16,20 +16,47 @@ import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAOImp
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KlantManagerImpl.
+ */
 public class KlantManagerImpl implements KlantManager {
+	
+	/** The klant. */
 	private Klant klant;
+	
+	/** The DAO factory. */
 	private DAOFactoryKlant DAOFactory = new DAOFactoryKlant();
+	
+	/** The Klant dao. */
 	private KlantDAO KlantDAO = new KlantDAOImpl();
+	
+	/** The polis dao. */
 	private VerzekeringPolisDAO polisDAO = new VerzekeringPolisDAOImpl();
+	
+	/** The error message. */
 	private String errorMessage;
+	
+	/** The Constant CHARSET_AZ_09. */
 	private static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 			.toCharArray();
+	
+	/** The polissen. */
 	private ArrayList<String> polissen = new ArrayList<>();
 
+	/**
+	 * Instantiates a new klant manager impl.
+	 */
 	public KlantManagerImpl() {
 		DAOFactory.validateXML();
 	}
 
+	/*
+	 * 
+	 */
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#createKlant(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, double, java.util.ArrayList, java.lang.String)
+	 */
 	public boolean createKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
@@ -45,11 +72,17 @@ public class KlantManagerImpl implements KlantManager {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlanten()
+	 */
 	public ArrayList<Klant> getKlanten() throws RemoteException {
 		// functie voor het ophalen van klanten
 		return KlantDAO.getKlantenXML();
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#updateKlant(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, double, java.util.ArrayList, java.lang.String)
+	 */
 	public boolean updateKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RekeningNr,
@@ -65,10 +98,16 @@ public class KlantManagerImpl implements KlantManager {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#findKlant(java.lang.String)
+	 */
 	public ArrayList<Klant> findKlant(String gebDatum) {
 		return KlantDAO.findKlantXML(gebDatum);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getKlant(java.lang.String)
+	 */
 	public Klant getKlant(String BSN) {
 		try {
 			for (Klant klant : getKlanten()) {
@@ -83,6 +122,9 @@ public class KlantManagerImpl implements KlantManager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#toonKlant(java.lang.String)
+	 */
 	public String toonKlant(String BSN) {
 		try {
 			for (Klant klant : getKlanten()) {
@@ -97,6 +139,9 @@ public class KlantManagerImpl implements KlantManager {
 		return "niks gevonden";
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#toonPolis(java.lang.String)
+	 */
 	public ArrayList<String> toonPolis(String BSN) {
 		polissen.clear();
 		try {
@@ -116,10 +161,16 @@ public class KlantManagerImpl implements KlantManager {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#verwijderKlantXML(java.lang.String)
+	 */
 	public boolean verwijderKlantXML(String BSN) throws RemoteException{
 		return KlantDAO.verwijderKlantXML(BSN);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#checkKlant(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public String checkKlant(String BSN, String Naam, String Adres,
 			String Postcode, String Woonplaats, String Geboortedatum,
 			String TelefoonNr, String Email, String RkNummer, String Betaalwijze) {
@@ -220,6 +271,9 @@ public class KlantManagerImpl implements KlantManager {
 		return errorMessage;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#checkPolis(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public String checkPolis(String PolisNummer, String type,
 			String StartDatum, String EindDatum) {
 		errorMessage = "";
@@ -269,6 +323,9 @@ public class KlantManagerImpl implements KlantManager {
 		return errorMessage;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#createPolis(java.lang.String, java.lang.String, double, java.lang.String, java.lang.String)
+	 */
 	public VerzekeringPolis createPolis(String PolisNummer,
 			String VerzekeringsType, double ExtraEigenRisico,
 			String StartDatum, String EindDatum) {
@@ -277,6 +334,9 @@ public class KlantManagerImpl implements KlantManager {
 		return polis;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#addVerzekeringPolisXML(java.lang.String, java.lang.String, java.lang.String, double, java.lang.String, java.lang.String)
+	 */
 	public boolean addVerzekeringPolisXML(String BSN, String PolisNummer,
 			String VerzekeringsType, double ExtraEigenRisico,
 			String StartDatum, String EindDatum) {
@@ -285,6 +345,9 @@ public class KlantManagerImpl implements KlantManager {
 		return polisDAO.addVerzekeringPolisXML(BSN, polis);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#updateVerzekeringPolisXML(java.lang.String, java.lang.String, double, java.lang.String, java.lang.String)
+	 */
 	public boolean updateVerzekeringPolisXML(String PolisNummer,
 			String VerzekeringsType, double ExtraEigenRisico,
 			String StartDatum, String EindDatum) {
@@ -293,10 +356,16 @@ public class KlantManagerImpl implements KlantManager {
 		return polisDAO.updateVerzekeringPolisXML(polis);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#deleteVerzekeringPolisXML(java.lang.String, java.lang.String)
+	 */
 	public boolean deleteVerzekeringPolisXML(String PolisNummer, String BSN) {
 		return polisDAO.verwijderPolisXML(PolisNummer, BSN);
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#createPolisnummer()
+	 */
 	public String createPolisnummer() {
 		Random random = new SecureRandom();
 		char[] result = new char[6];
@@ -321,6 +390,9 @@ public class KlantManagerImpl implements KlantManager {
 		return "EEEEEE";
 	}
 
+	/* (non-Javadoc)
+	 * @see facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager#getBSNs()
+	 */
 	public ArrayList<String> getBSNs() {
 		new ArrayList<String>();
 
