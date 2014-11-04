@@ -39,14 +39,13 @@ package facturatie.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
-import example.interfaces.hello.HelloIF;
 
 public class Client {
 	
@@ -97,11 +96,11 @@ public class Client {
             
             logger.info("Contents of registry: " + Arrays.toString(registry.list()));
             
-            HelloIF stub = (HelloIF) registry.lookup(BehandelingIF.servicename);
-    		logger.info("Found '" + HelloIF.servicename + "' in registry");
+            RapportageIF stub = (RapportageIF) registry.lookup(RapportageIF.servicename);
+    		logger.info("Found '" + RapportageIF.servicename + "' in registry");
             
     		logger.trace("Calling getBehandelingen()");
-            String response = stub.getBehandelingen();
+            ArrayList<ArrayList<String>> response = stub.getGegevens();
             logger.info("Response: " + response);
         } 
 		catch (java.security.AccessControlException e) {

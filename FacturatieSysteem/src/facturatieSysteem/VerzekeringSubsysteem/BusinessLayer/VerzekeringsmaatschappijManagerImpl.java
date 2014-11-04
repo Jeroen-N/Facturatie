@@ -252,9 +252,13 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		
 		if(!Naam.matches("[A-Z, a-z]{1,50}")){
 			if(Naam.length() < 1){
+				errorMessage = errorMessage + "\nNaam niet ingevuld";
+			}else{
+					errorMessage = errorMessage + "\nNaam niet correct";
+				}
 
 
-		}
+		
 		}
 	
 		return errorMessage;
