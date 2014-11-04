@@ -540,8 +540,18 @@ public class ChangeVerzekeringDialog extends JDialog {
 									textFieldPlaats2.getText(),
 									Integer.parseInt(textFieldKVK2.getText()),
 									Integer.parseInt(textFieldRekeningNr2.getText()));
-							manager.updateVerzekeringsmaatschappij(maatschappij);
-							dispose();
+							
+							if(manager.checkKvk(maatschappij) == true){
+								manager.updateVerzekeringsmaatschappij(maatschappij);
+								System.out.println("Test");
+								dispose();
+							}else{
+								showConfirmationWindow("KVK nummer bestaat al!");
+								System.out.println("Test2");
+							}
+							
+							
+							
 					}
 						}
 

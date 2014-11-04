@@ -35,6 +35,8 @@ public interface VerzekeringsmaatschappijManager {
 	
 	public String checkType(String typenr, String EigenRisico, String Naam);
 	
+	public boolean checkKvk(Verzekeringsmaatschappij maatschappij);
+	
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam);
 
 	String maatschappijInfo(Verzekeringsmaatschappij maatschappij);
