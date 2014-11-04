@@ -1,0 +1,82 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Clienten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Client" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Behandelingen">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Behandeling" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="behandelgegevens">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:int" name="Fysiotherapeut"/>
+                                <xs:element type="xs:int" name="Behandelcode"/>
+                                <xs:element type="xs:int" name="fysioPraktijkNummer"/>
+                                <xs:element type="xs:string" name="BehandelStartDatum"/>
+                                <xs:element type="xs:string" name="BehandelEindDatum"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="behandelafspraak" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:int" name="Sessie"/>
+                                <xs:element type="xs:string" name="Status"/>
+                                <xs:element type="xs:string" name="Datum"/>
+                                <xs:element type="xs:string" name="Begintijd"/>
+                                <xs:element type="xs:string" name="Eindtijd"/>
+                                <xs:element type="xs:int" name="Praktijkruimte"/>
+								<xs:element type="xs:string" name="Gefactureerd"/>
+                                <xs:element type="xs:string" name="Opmerking"/>
+                              </xs:sequence>
+                              <xs:attribute type="xs:int" name="ID"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:int" name="id"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Diagnoses">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Diagnose">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Behandelcodes">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Behandelcode" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:int">
+                                        <xs:attribute type="xs:int" name="id"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element type="xs:string" name="Datum"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:int" name="BSN"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

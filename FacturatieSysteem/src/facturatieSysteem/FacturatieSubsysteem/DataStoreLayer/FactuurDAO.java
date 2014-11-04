@@ -97,13 +97,13 @@ public class FactuurDAO implements FactuurDAOinf {
 										.item(y).getTextContent();
 								AfsprakenIDs.add(behandelafspraakID);
 							}
-
+							/*
 							Element behandelingenElement = (Element) clientElement
 									.getElementsByTagName("Behandelingen")
 									.item(0);
 							NodeList behandelingenNode2 = behandelingenElement
 									.getElementsByTagName("Behandeling");
-
+							
 							for (int l = 0; l < behandelingenNode2.getLength(); l++) {
 								Element behandelingElement2 = (Element) behandelingenNode2
 										.item(l);
@@ -138,7 +138,7 @@ public class FactuurDAO implements FactuurDAOinf {
 									behandelingen.add(behandeling);
 									// m = 0;
 								}
-							}
+							}*/
 						}
 						factuur = new Factuur(factuurNummer, factuurDatum,
 								vervalDatum, invoerBSN, vergoedeBedrag,
@@ -212,7 +212,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						factuurBehandelingen.appendChild(factuurBehandeling);
 						
 						//TODO Status updaten naar gefactuureerd!!!
-						
+						/*
 						for (int j = 0; j < Behandelingen.getLength(); j++) {
 							Element BehandelingElement = (Element) Behandelingen.item(j);
 							String behandelingID = BehandelingElement.getAttribute("id");
@@ -222,16 +222,16 @@ public class FactuurDAO implements FactuurDAOinf {
 								break;
 							}
 						}
-						
+						*/
 						for (String id : behandeling.getAfspraakIDs()) {
 							Element behandelAfspraakID = document.createElement("BehandelafspraakID");
 							behandelAfspraakID.appendChild(document.createTextNode(id));
-							
 							factuurBehandeling.appendChild(behandelAfspraakID);
+							
 							Attr BehandelingId = document.createAttribute("BehandelingID");
 							BehandelingId.setValue(behandeling.getbehandelingId());
 							factuurBehandeling.setAttributeNode(BehandelingId);
-							
+							/*
 							for(int k = 0; k < behandelAfspraken.getLength(); k++){
 								Element BehandelingafspraakElement = (Element)  behandelAfspraken.item(k);
 								String behandelingAfspraakID = BehandelingafspraakElement.getAttribute("ID");
@@ -242,7 +242,7 @@ public class FactuurDAO implements FactuurDAOinf {
 								}
 								
 							}
-							
+							*/
 						}
 						
 						

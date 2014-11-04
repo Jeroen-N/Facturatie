@@ -195,7 +195,12 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		return factuurDAO.haalFacturen(invoerBSN);
+		ArrayList<Behandeling> behandelingen = null;
+		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
+		 for (Factuur factuur: facturen){
+			 factuur.setBehandelingen(behandelingen);
+		 }
+		 return facturen;
 	}
 
 	/* (non-Javadoc)
