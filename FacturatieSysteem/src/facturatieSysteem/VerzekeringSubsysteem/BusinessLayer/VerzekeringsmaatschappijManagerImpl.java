@@ -225,11 +225,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 			return errorMessage;
 	}
 	@Override
-	public String checkType(String type, String naam, int eigenRisico) {
+	public String checkType(String typenr, String EigenRisico, String Naam) {
 		errorMessage = "";
 			
-		if (!type.matches("([0-9]{3})")) {
-			if (type.length() < 1) {
+		if (!typenr.matches("([0-9]{3})")) {
+			if (typenr.length() < 1) {
 				errorMessage = errorMessage + "\nType nummer niet ingevuld";
 			}
 			else{
@@ -237,14 +237,21 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 			}
 		}
 		
-		if(!naam.matches("[A-Z, a-z]{1,50}")){
-			if(naam.length() < 1){
+		if(!EigenRisico.matches("([0-9]{1,10})")){
+			if(EigenRisico.length() < 1){
+				errorMessage = errorMessage + "\nEigenrisico niet ingevuld";
+		}else{
+				errorMessage = errorMessage + "\nEigenrisico niet correct";
+		}
+	}
+		
+		if(!Naam.matches("[A-Z, a-z]{1,50}")){
+			if(Naam.length() < 1){
 				errorMessage = errorMessage + "\nNaam niet ingevuld";				
 			}else{
 				errorMessage = errorMessage + "\nNaam niet correct";
 			}
-		}	
-				
+		}
 		
 		return errorMessage;
 	}

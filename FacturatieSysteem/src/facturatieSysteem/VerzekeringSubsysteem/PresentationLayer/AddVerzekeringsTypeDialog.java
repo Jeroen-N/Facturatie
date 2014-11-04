@@ -204,21 +204,21 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 									// TODO extra attribuut maatschappijnr
 									String errorMessage = manager.checkType(
 											textFieldTypeNr.getText(),
-											textFieldNaam.getText(),
-											Integer.parseInt(textFieldEigenRisico
-													.getText()));
+											textFieldEigenRisico.getText(),
+											textFieldNaam.getText());
 
 									if (!errorMessage.equals("")) {
 										showConfirmationWindow(errorMessage);
 									} else {
 										Verzekeringstype type = new Verzekeringstype(
 												textFieldTypeNr.getText(),
-												Integer.parseInt(textFieldEigenRisico
-														.getText()),
+												Integer.parseInt(textFieldEigenRisico.getText()),
 												textFieldNaam.getText());
 										manager.addVerzekeringstype(
 												maatschappij, type);
 										dispose();
+										showConfirmationWindow("Type succesvol toegevoegd!");
+										
 									}
 								}
 

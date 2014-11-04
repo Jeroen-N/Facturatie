@@ -160,10 +160,10 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		knoppenPaneel.setPreferredSize(new Dimension(250, 70));
 		knoppenPaneel.setMaximumSize(new Dimension(250, 250));
 		infopaneel.add(knoppenPaneel, BorderLayout.SOUTH);
-		btnToevoegen.setIcon(new ImageIcon("Pictures/new-polis-xsmall.png"));
-		btnWijzigen.setIcon(new ImageIcon("Pictures/change-polis-xsmall.png"));
+		btnToevoegen.setIcon(new ImageIcon("Pictures/maatschappij-toevoegen-icon.png"));
+		btnWijzigen.setIcon(new ImageIcon("Pictures/maatschappij-wijzigen-icon.png"));
 		btnVerwijderen
-				.setIcon(new ImageIcon("Pictures/delete-polis-xsmall.png"));
+				.setIcon(new ImageIcon("Pictures/maatschappij-verwijderen-icon.png"));
 		btnToevoegen.setMargin(new Insets(0, 0, 0, 0));
 		btnWijzigen.setMargin(new Insets(0, 0, 0, 0));
 		btnVerwijderen.setMargin(new Insets(0, 0, 0, 0));

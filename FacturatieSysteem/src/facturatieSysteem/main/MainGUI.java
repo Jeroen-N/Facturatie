@@ -156,7 +156,7 @@ public class MainGUI {
 		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
 		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnVerzekeringmaatschapij.setMargin(new Insets(0, 0, 0, 0));
-		btnVerzekeringmaatschapij.setIcon(new ImageIcon("Pictures/verzekering-xsmall.png"));
+		btnVerzekeringmaatschapij.setIcon(new ImageIcon("Pictures/maatschappij-beheer-icon.png"));
 		btnVerzekeringmaatschapij.setPreferredSize(new Dimension(50, 50));
 		btnVerzekeringmaatschapij.setEnabled(false);
 		Header_Button.add(btnVerzekeringmaatschapij);
