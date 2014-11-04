@@ -81,7 +81,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
 		// Nieuw factuurnummer aanmaken
 		facturen = factuurDAO.haalAlleFacturen();
-		
 		int n1 = 0;
 		int n2 = 0;
 		for (Factuur lijstFactuur : facturen) {
@@ -117,13 +116,14 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			for (Verzekeringstype type : maatschappij.getTypes()) {
 				if (polisNaam.equals(type.getNaam())) {
 					verzekering = verzekeringsmanager.getVerzekeringstypeByName(maatschappij, polisNaam);
-					
 				}
 			}
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
 		double totaalPrijsFactuur = 0;
+		//TODO behandelingen ophalen uit andere systeem;
+		
 		behandelingenlijst = behandelingDAO.getBehandelingen(klant);
 		for (Behandeling behandeling : behandelingenlijst) {	
 			totalePrijs = 00;	
@@ -146,10 +146,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 						//Eigenrisico = 0
 						teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
 					}
-					
-					
-					
-					
 					z=1;
 					break;
 				}
@@ -163,7 +159,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				if (klant.getResterendEigenRisico() != 0) {
 					
 					if (klant.getResterendEigenRisico() >= totalePrijs) {
-						
 
 					} else {
 						teVergoedenPrijs += totalePrijs- klant.getResterendEigenRisico();
@@ -175,7 +170,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			}else{
 				z= 0;
 			}
-			
 			behandeling.setTotaalprijs(totalePrijs);
 			totaalPrijsFactuur += totalePrijs;
 				
