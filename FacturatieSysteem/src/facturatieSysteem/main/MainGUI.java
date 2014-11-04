@@ -72,6 +72,8 @@ public class MainGUI {
 	private JButton btnChangePolis;
 	private JButton btnReset;
 	private JPanel loginPanel;
+	private JPanel helpPanel;
+	private JButton btnHelp;
 
 	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManager facturatieManager, LoginManager loginManager) {
 		logger.debug("Constructor main gui");
@@ -145,11 +147,12 @@ public class MainGUI {
 				KlantenPanel.setVisible(true);
 				FacturatiePanel.removeAll();
 				FacturatiePanel.setVisible(false);
+				helpPanel.setVisible(false);
 			}
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 		
-		btnVerzekeringmaatschapij = new JButton("");
+		btnVerzekeringmaatschapij = new JButton();
 		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
 		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnVerzekeringmaatschapij.setMargin(new Insets(0, 0, 0, 0));
@@ -165,10 +168,32 @@ public class MainGUI {
 				VerzekeringsMaatschappijPanel.add(gui);
 				VerzekeringsMaatschappijPanel.setVisible(true);
 				FacturatiePanel.setVisible(false);
+				helpPanel.setVisible(false);
 			}
 		});
 		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
-
+		
+		HelpPanel help = new HelpPanel();
+		btnHelp = new JButton();
+		btnHelp.setToolTipText("Deze knop geeft u alles over deze applicatie");
+		btnHelp.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnHelp.setMargin(new Insets(0, 0, 0, 0));
+		btnHelp.setIcon(new ImageIcon("Pictures/help.png"));
+		btnHelp.setPreferredSize(new Dimension(50, 50));
+		btnHelp.setEnabled(false);
+		Header_Button.add(btnHelp);
+		btnHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				KlantenPanel.setVisible(false);
+				VerzekeringPanel.setVisible(false);
+				helpPanel.add(help.HelpPanel());
+				helpPanel.setVisible(true);
+				FacturatiePanel.setVisible(false);
+				VerzekeringsMaatschappijPanel.setVisible(false);
+			}
+		});
+		
 		/*
 		 * Create the Main Panel
 		 */
@@ -211,6 +236,7 @@ public class MainGUI {
 						KlantenPanel.setVisible(true);
 						btnKlantenbeheer.setEnabled(true);
 						btnVerzekeringmaatschapij.setEnabled(true);
+						btnHelp.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null,
 								"Gebruikersnaam, wachtwoord combinatie niet gevonden.");
@@ -605,6 +631,10 @@ public class MainGUI {
 		VerzekeringsMaatschappijPanel = new JPanel();
 		MainPanel.add(VerzekeringsMaatschappijPanel, "name_11248877742559");
 		VerzekeringsMaatschappijPanel.setLayout(new BorderLayout(0, 0));
+		
+		helpPanel = new JPanel();
+		MainPanel.add(helpPanel, "name_4048322699538");
+		helpPanel.setLayout(new BorderLayout(0,0));
 
 		/*
 		 * Set the visibility of the panels
@@ -614,6 +644,7 @@ public class MainGUI {
 		KlantenPanel.setVisible(false);
 		FacturatiePanel.setVisible(false);
 		loginPanel.setVisible(true);
+		helpPanel.setVisible(false);
 		/*
 		 * Set visibility of the frame
 		 */
