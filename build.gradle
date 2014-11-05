@@ -18,10 +18,6 @@ subprojects {
 }
 
 project(':FacturatieSysteem') {
-	
-    dependencies {
-        compile project(':FacturatieSysteem'), 'log4j:log4j:1+'
-    }
 
 	def classesDir = new File(rootDir)
 	
@@ -34,19 +30,28 @@ project(':FacturatieSysteem') {
 
 	task deploylocal(type: Copy){
 		if (classesDir.isDirectory()) {
-			from ('FacturatieServer.policy'){
+			from ('../FacturatieSysteem/resources'){
 				into 'resources'
 			}
-			from ('FacturatieServer.logconf'){
-				into 'resources'
+			from ('../FacturatieSysteem/XML'){
+				into 'XML'
 			}
-			from (configurations.runtime) {
+			from ('configurations.runtime') {
 				into 'libs'
 			}
-			from ('build/classes/main') {
-				into 'bin'
+			from ('../FacturatieSysteem/Libraries/log4j-1.2.17.jar'){
+				into 'libs'
 			}
-			from ('../FacturatieSysteem/build/classes/main') {
+			from ('../FacturatieSysteem/Libraries/iText'){
+				into 'bin/iText'
+			}
+			from ('../FacturatieClient/build/classes/main/facturatie') {
+				into 'bin/facturatieClient'
+			}
+			from ('../FacturatieSysteem/bin/facturatieSysteem') {
+				into 'bin/facturatieSysteem'
+			}
+			from ('../FacturatieSysteem/bin'){
 				into 'bin'
 			}
 			into { classesDir }
