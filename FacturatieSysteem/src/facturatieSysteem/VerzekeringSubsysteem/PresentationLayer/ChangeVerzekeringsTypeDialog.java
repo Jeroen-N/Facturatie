@@ -265,7 +265,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						}
 						{
 							textFieldEigenRisico = new JTextField();
-							textFieldEigenRisico.setColumns(15);
 							splitPaneEigenRisico.setRightComponent(textFieldEigenRisico);
 							textFieldEigenRisico.setEditable(true);
 						}
@@ -328,6 +327,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    JOptionPane.YES_NO_OPTION);
 										if(n == 0){
 											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											fillField(typetable.getSelectedRow());
 										}
 			
 									
@@ -377,7 +377,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 												
 										if(n == 0){
 											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
-											
+											fillField(typetable.getSelectedRow());
 										}
 										
 											
