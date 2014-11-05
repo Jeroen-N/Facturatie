@@ -8,8 +8,8 @@
       <rekeningNummer>921386577</rekeningNummer>
 	  <verzekeringsTypes>
 	  	  <verzekeringsType typenr="001">
-	         <naam>Kaas_Basic</naam>
-	         <verplichtEigenRisico>250</verplichtEigenRisico>
+	         <naam>Basic</naam>
+	         <verplichtEigenRisico>200</verplichtEigenRisico>
 	         <behandelCodes>
 	            <behandelcode>004</behandelcode>
 	            <behandelcode>005</behandelcode>
@@ -20,12 +20,9 @@
 			</behandelCodes>
 	      </verzekeringsType>
 	      <verzekeringsType typenr="002">
-	         <naam>Kaas_All-risk</naam>
-	         <verplichtEigenRisico>250</verplichtEigenRisico>
+	         <naam>All-risk</naam>
+	         <verplichtEigenRisico>285</verplichtEigenRisico>
 	         <behandelCodes>
-	            
-	            
-	            
 	            <behandelcode>004</behandelcode>
 	            <behandelcode>005</behandelcode>
 	            <behandelcode>006</behandelcode>
@@ -42,11 +39,11 @@
 			</verzekeringsTypes>    
    </verzekeringsmaatschappij>	
    
-	<verzekeringsmaatschappij maatschappijnr="001">
-		<naam>Naam</naam>
-		<adres>Straat 12</adres>
+	<verzekeringsmaatschappij maatschappijnr="002">
+		<naam>Betering Verzekeringen</naam>
+		<adres>Toulonselaan 12</adres>
 		<postcode>3333HG</postcode>
-		<woonplaats>Plaats</woonplaats>
+		<woonplaats>Dordrecht</woonplaats>
 		<KVKNummer>87654321</KVKNummer>
 		<rekeningNummer>987654321</rekeningNummer>
 		<verzekeringsTypes>
