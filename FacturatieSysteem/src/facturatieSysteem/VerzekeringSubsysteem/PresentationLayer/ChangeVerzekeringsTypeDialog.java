@@ -38,7 +38,10 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 import org.apache.log4j.Logger;
 
 
@@ -83,7 +86,13 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		dateTableModelChangeType = new DataTableModelChangeType();
 		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
 		
+		fillTable();
+		
 		{
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
@@ -130,7 +139,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							panel.add(lblKlant, BorderLayout.WEST);
 						}
 					}
-					fillTable();
+					
 					}
 				}
 				
@@ -251,7 +260,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 						}
 						{
 							textFieldEigenRisico = new JTextField();
-							textFieldEigenRisico.setColumns(15);
 							splitPaneEigenRisico.setRightComponent(textFieldEigenRisico);
 							textFieldEigenRisico.setEditable(true);
 						}
@@ -313,7 +321,8 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    "Weet u het zeker?",
 											    JOptionPane.YES_NO_OPTION);
 										if(n == 0){
-											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()), behandelcode);
+											fillField(typetable.getSelectedRow());
 										}
 			
 									
@@ -362,8 +371,8 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    JOptionPane.YES_NO_OPTION);
 												
 										if(n == 0){
-											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
-											
+											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()), behandelcode);
+											fillField(typetable.getSelectedRow());
 										}
 										
 											
@@ -398,6 +407,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							Verzekeringstype type = new Verzekeringstype(textFieldTypeNr.getText(),Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
 							if(manager.updateVerzekeringstype(maatschappij, type)){
 								showConfirmationWindow("Verzekeringstype aangepast");
+								dateTableModelChangeType.fireTableDataChanged();
 								fillTable();
 							} else {
 								showConfirmationWindow("Verzekeringstype niet aangepast");
@@ -432,8 +442,9 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									if(klantmanager.typeGebruikt(type.getNaam())){
 										showConfirmationWindow("Verzekeringstype nog in gebruik");
 									} else {
-										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr))){
+										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()))){
 											showConfirmationWindow("Verzekeringstype verwijderd");
+											dateTableModelChangeType.fireTableDataChanged();
 											fillTable();
 										} else {
 											showConfirmationWindow("Verzekeringstype niet verwijderd");
@@ -458,7 +469,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		};
 		String[] headers = new String[] { "Type Nr", "Naam", "Eigen risico"};
 		dateTableModelChangeType.setTableHeader(headers);
-		
 		TableColumn column = typetable.getColumnModel().getColumn(0);
 		column.setPreferredWidth(6);
 		
