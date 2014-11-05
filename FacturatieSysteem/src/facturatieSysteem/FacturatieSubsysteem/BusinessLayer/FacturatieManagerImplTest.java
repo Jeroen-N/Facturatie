@@ -13,14 +13,12 @@ import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
-import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManagerImpl;
 
 public class FacturatieManagerImplTest {
 	private Klant klant;
 	private VerzekeringsmaatschappijManagerImpl verzekeringsmngr;
 	private FacturatieManagerImpl instance;
-	private ArrayList<Factuur> facturen;
 	private FactuurDAO factuurDAO;
 	private DAOFactoryFactuur daoFactoryBehandelcodes;
 	private DAOFactoryFactuur daoFactoryFacturatie;
@@ -29,7 +27,7 @@ public class FacturatieManagerImplTest {
 	@Before
 	public void setUp() throws Exception {
 		ArrayList<VerzekeringPolis> VerzekeringPolissen = new ArrayList<VerzekeringPolis>();
-		facturen = new ArrayList<Factuur>();
+		new ArrayList<Factuur>();
 		factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
 		klant = new Klant("125651201","Sander Blijlevens", "Schijfstraat 26B", "4847SM", "Teteringen", "31-12-1995","0625235100", "sjmblijl@avans.nl", "NL47RABO0136052185", 25.25, VerzekeringPolissen, "incoasso");
@@ -43,7 +41,7 @@ public class FacturatieManagerImplTest {
 
 	@Test
 	public void testFactureer() {
-		facturen = factuurDAO.haalAlleFacturen();
+		factuurDAO.haalAlleFacturen();
 		int expResult = factuurDAO.haalAlleFacturen().size() + 1;
 		instance.factureer(klant, verzekeringsmngr);
 		int result = factuurDAO.haalAlleFacturen().size();

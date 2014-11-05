@@ -101,9 +101,9 @@ public class FacturatieGUI extends JFrame {
 		factureerKnop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (facturatieManagerImpl.factureer(klant, m1) == null){
+				if (facturatieManagerImpl.factureer(klant, m1) == null) {
 					showConfirmationWindow("Deze klant heeft geen behandelingen om te factureren");
-				}else{
+				} else {
 					facturen.clear();
 					fillTable(klant);
 				}
@@ -171,8 +171,7 @@ public class FacturatieGUI extends JFrame {
 
 					// Loopen door de typeArray om het te op te halen
 					// van de maatschappij
-					for (Verzekeringstype type : maatschappij
-							.getTypes()) {
+					for (Verzekeringstype type : maatschappij.getTypes()) {
 
 						// loopen voor het type
 						String polisNaam = "";
@@ -188,9 +187,12 @@ public class FacturatieGUI extends JFrame {
 						}
 					}
 				}
-				new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
+				new Bon(facturatieManagerImpl, factuur, maatschappijEind,
+						klant, m1);
 				if (Desktop.isDesktopSupported()) {
-					File file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+					File file = new File("Facturen/"
+							+ factuur.getFactuurDatum() + "-"
+							+ factuur.getFactuurNummer() + ".pdf");
 					try {
 						Desktop.getDesktop().open(file);
 						file.deleteOnExit();
@@ -208,7 +210,8 @@ public class FacturatieGUI extends JFrame {
 				int row2 = overzicht.getSelectedRow();
 				Factuur factuur = vindFactuur(row2);
 				maatschappijEind = null;
-				for (Verzekeringsmaatschappij maatschappij : m1.getVerzekeringsmaatschappijen()) {
+				for (Verzekeringsmaatschappij maatschappij : m1
+						.getVerzekeringsmaatschappijen()) {
 
 					// Loopen door de typeArray om het te op te halen
 					// van de maatschappij
@@ -216,7 +219,8 @@ public class FacturatieGUI extends JFrame {
 
 						// loopen voor het type
 						String polisNaam = "";
-						for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
+						for (VerzekeringPolis polis : klant
+								.getVerzekeringPolissen()) {
 							polisNaam = polis.getVerzekeringsType();
 						}
 						// de maatschappij ophalen aan de hand van de
@@ -230,12 +234,15 @@ public class FacturatieGUI extends JFrame {
 
 				}
 
-				new Bon(facturatieManagerImpl, factuur, maatschappijEind, klant, m1);
+				new Bon(facturatieManagerImpl, factuur, maatschappijEind,
+						klant, m1);
 
-				String value = overzicht.getModel().getValueAt(overzicht.getSelectedRow(), 0).toString();
+				String value = overzicht.getModel()
+						.getValueAt(overzicht.getSelectedRow(), 0).toString();
 				File file = null;
 				if (value.equals(factuur.getFactuurNummer())) {
-					file = new File("Facturen/"+ factuur.getFactuurDatum() + "-"+ factuur.getFactuurNummer() + ".pdf");
+					file = new File("Facturen/" + factuur.getFactuurDatum()
+							+ "-" + factuur.getFactuurNummer() + ".pdf");
 					System.out.println(file);
 					if (file.exists()) {
 						System.out.println("print");
@@ -253,7 +260,6 @@ public class FacturatieGUI extends JFrame {
 				}
 			}
 		});
-
 
 		// panels vullen
 		buttonPanel.add(factureerKnop);
@@ -277,8 +283,10 @@ public class FacturatieGUI extends JFrame {
 		facturen.clear();
 	}
 
-	/*
-	 * Methode om het informatie veld te kunnen vullen en updaten
+	/**
+	 * method to fill the field with the linked information
+	 * 
+	 * @param row
 	 */
 	public void fillField(int row) {
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0)
@@ -288,12 +296,23 @@ public class FacturatieGUI extends JFrame {
 		facturen.clear();
 	}
 
+	/**
+	 * finds the factuur
+	 * 
+	 * @param row2
+	 * @return Factuur
+	 */
 	public Factuur vindFactuur(int row2) {
 		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0)
 				.toString();
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
 	}
 
+	/**
+	 * shows a confirmation window with a costum message
+	 * 
+	 * @param message
+	 */
 	public void showConfirmationWindow(String message) {
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

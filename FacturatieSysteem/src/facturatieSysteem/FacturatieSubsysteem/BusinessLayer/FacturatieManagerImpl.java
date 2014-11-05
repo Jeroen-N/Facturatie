@@ -26,31 +26,31 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
  * The Class FacturatieManagerImpl.
  */
 public class FacturatieManagerImpl implements FacturatieManager {
-	
+
 	/** The dao factory behandelcodes. */
 	private DAOFactoryFactuur daoFactoryBehandelcodes = new DAOFactoryFactuur(
 			"XML/behandelcodes.xml", "XML/behandelcodes.xsd");
-	
+
 	/** The dao factory client. */
 	private DAOFactoryFactuur daoFactoryClient = new DAOFactoryFactuur(
 			"XML/ClientFormat.xml", "XML/ClientFormat.xsd");
-	
+
 	/** The dao factory facturatie. */
 	private DAOFactoryFactuur daoFactoryFacturatie = new DAOFactoryFactuur(
 			"XML/facturatieSysteem.xml", "XML/facturatieSysteem.xsd");
-	
+
 	/** The factuur dao. */
 	private FactuurDAO factuurDAO;
-	
+
 	/** The behandeling dao. */
 	private BehandelingDAO behandelingDAO;
-	
+
 	/** The facturen. */
 	private ArrayList<Factuur> facturen;
-	
+
 	/** The verzekering. */
 	private Verzekeringstype verzekering;
-	
+
 	/** The Behandelingen. */
 	private ArrayList<Behandeling> Behandelingen;
 
@@ -58,6 +58,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 * Instantiates a new facturatie manager impl.
 	 */
 	private Client client = new Client();
+
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
@@ -71,15 +72,23 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getBDAO()
+	/**
+	 * returns the behandelingDAO
+	 * 
+	 * @return behandelingDAO
 	 */
-	public BehandelingDAO getBDAO(){
+	public BehandelingDAO getBDAO() {
 		return behandelingDAO;
 	}
-	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#factureer(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant, facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager)
+
+	/**
+	 * creates the a new factuur linked with the client
+	 * 
+	 * @param klant
+	 *            the client
+	 * @param verzekeringsmanager
+	 *            the insurance manager
+	 * @return the new factuur
 	 */
 	@Override
 	public Factuur factureer(Klant klant,
@@ -117,119 +126,146 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 			polisNaam = polis.getVerzekeringsType();
 		}
-		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager.getVerzekeringsmaatschappijen()) {
+		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
+				.getVerzekeringsmaatschappijen()) {
 			for (Verzekeringstype type : maatschappij.getTypes()) {
 				if (polisNaam.equals(type.getNaam())) {
-					verzekering = verzekeringsmanager.getVerzekeringstypeByName(maatschappij, polisNaam);
+					verzekering = verzekeringsmanager
+							.getVerzekeringstypeByName(maatschappij, polisNaam);
 				}
 			}
 		}
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
 		double totaalPrijsFactuur = 0;
-		//TODO behandelingen ophalen uit andere systeem;
-		
-		HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = client.getGegevens();
-		
-		for(String bsn : klanten.keySet()){
-			if (bsn.equals(klant.getBSN())){
-				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(klant.getBSN());
-				for(String behandeling : behandelingen.keySet()){
+		// TODO behandelingen ophalen uit andere systeem;
+
+		HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = client
+				.getGegevens();
+
+		for (String bsn : klanten.keySet()) {
+			if (bsn.equals(klant.getBSN())) {
+				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten
+						.get(klant.getBSN());
+				for (String behandeling : behandelingen.keySet()) {
 					ArrayList<String> afspraakIDs = new ArrayList<String>();
 					String code = null;
-					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
+					for (ArrayList<String> afspraak : behandelingen
+							.get(behandeling)) {
 						afspraakIDs.add(afspraak.get(1));
 						code = afspraak.get(7);
 					}
-					if (afspraakIDs.size() >= 0){
-						behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
+					if (afspraakIDs.size() >= 0) {
+						behandelingenlijst.add(new Behandeling(null,
+								behandeling, code, null, null, klant.getBSN(),
+								afspraakIDs, 00, afspraakIDs.size()));
 					}
 				}
-			}	
+			}
 		}
 
-		for (Behandeling behandeling : behandelingenlijst) {	
-			totalePrijs = 00;	
+		for (Behandeling behandeling : behandelingenlijst) {
+			totalePrijs = 00;
 			for (String code : verzekering.getBehandelcodes()) {
 				z = 0;
-				if (behandeling.getBehandelCode().equals(code)) {	
+				if (behandeling.getBehandelCode().equals(code)) {
 					// Behandeling wordt standaard vergoed
-					double p = behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
-					//teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies() - klant.getResterendEigenRisico();
+					double p = behandelingDAO.getPrijs(behandeling
+							.getBehandelCode()) * behandeling.getSessies();
+					// teVergoedenPrijs +=
+					// behandelingDAO.getPrijs(behandeling.getBehandelCode()) *
+					// behandeling.getSessies() -
+					// klant.getResterendEigenRisico();
 					if (klant.getResterendEigenRisico() != 0) {
 						if (klant.getResterendEigenRisico() >= (p)) {
-							klant.setTotaalEigenRisico(klant.getResterendEigenRisico()- (p));
+							klant.setTotaalEigenRisico(klant
+									.getResterendEigenRisico() - (p));
 							totalePrijs += p;
-						}else{
-							teVergoedenPrijs += p - klant.getResterendEigenRisico();
+						} else {
+							teVergoedenPrijs += p
+									- klant.getResterendEigenRisico();
 							totalePrijs = klant.getResterendEigenRisico();
 							klant.setTotaalEigenRisico(0);
 						}
-					}else{
-						//Eigenrisico = 0
-						teVergoedenPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode()) * behandeling.getSessies();
+					} else {
+						// Eigenrisico = 0
+						teVergoedenPrijs += behandelingDAO.getPrijs(behandeling
+								.getBehandelCode()) * behandeling.getSessies();
 					}
-					z=1;
+					z = 1;
 					break;
 				}
 			}
-			if (z == 0){
-				
+			if (z == 0) {
+
 				// Behandeling wordt niet standaard vergoed
-				double tijdelijkRisico = behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
+				double tijdelijkRisico = behandelingDAO.getPrijs(behandeling
+						.getBehandelCode()) * behandeling.getSessies();
 				totalePrijs += tijdelijkRisico;
-				
+
 				if (klant.getResterendEigenRisico() != 0) {
-					
+
 					if (klant.getResterendEigenRisico() >= totalePrijs) {
 
 					} else {
-						teVergoedenPrijs += totalePrijs- klant.getResterendEigenRisico();
-						klant.setTotaalEigenRisico(0);	
+						teVergoedenPrijs += totalePrijs
+								- klant.getResterendEigenRisico();
+						klant.setTotaalEigenRisico(0);
 					}
-				}else{
-					
+				} else {
+
 				}
-			}else{
-				z= 0;
+			} else {
+				z = 0;
 			}
 			behandeling.setTotaalprijs(totalePrijs);
 			totaalPrijsFactuur += totalePrijs;
-				
+
 		}
-		if (behandelingenlijst.size() != 0){
-		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
-				teVergoedenPrijs, behandelingenlijst, "Niet betaald", totaalPrijsFactuur);
-		factuurDAO.maakFactuur(klant, f);
-		
-		return f;
+		if (behandelingenlijst.size() != 0) {
+			Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
+					teVergoedenPrijs, behandelingenlijst, "Niet betaald",
+					totaalPrijsFactuur);
+			factuurDAO.maakFactuur(klant, f);
+
+			return f;
 		}
 		return null;
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#haalFacturen(java.lang.String)
+	/**
+	 * gets an arraylist of facturen.
+	 * 
+	 * @param invoerBSN
+	 *            the bsn of the client
+	 * @return arraylist<factuur> the list of facturen linked to the client
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		
-		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
-		 for (Factuur factuur: facturen){
-			 for (Behandeling behandeling : factuur.getBehandelingen()){
-				 String BSN = behandeling.getBSN();
-				 String behandelingId = behandeling.getbehandelingId();
-				 ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();			 
-				 
-				 //TODO rest van info ophalen uit ander systeem
-				 //behandeling.setBehandelCode(behandelCode);
-			 }
-		 }
-		 return facturen;
+
+		ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
+		for (Factuur factuur : facturen) {
+			for (Behandeling behandeling : factuur.getBehandelingen()) {
+				String BSN = behandeling.getBSN();
+				String behandelingId = behandeling.getbehandelingId();
+				ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();
+
+				// TODO rest van info ophalen uit ander systeem
+				// behandeling.setBehandelCode(behandelCode);
+			}
+		}
+		return facturen;
 	}
 
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#toonFactuur(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	/**
+	 * shows the factuur on the gui
+	 *
+	 * @param factuur_nummer
+	 *            number of the factuur
+	 * @param klant
+	 *            the client we need the factuur from
+	 * @return String to show the factuur in the gui
 	 */
 	@Override
 	public String toonFactuur(String factuur_nummer, Klant klant) {
@@ -242,9 +278,17 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		return "niks gevonden";
 	}
 
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getFactuur(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	/**
+	 * get the factuur with the given number of the given client
+	 *
+	 * @param factuur_nummer
+	 *            the number we use to search the specified factuur.
+	 * @param klant
+	 *            the client we used to lookup the specified factuur.
+	 * 
+	 * @return factuur the factuur we looked for
 	 */
+
 	public Factuur getFactuur(String factuur_nummer, Klant klant) {
 		facturen = haalFacturen(klant.getBSN());
 		for (Factuur factuur : facturen) {
@@ -254,9 +298,13 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		}
 		return null;
 	}
-	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#loopBehandelingen(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+
+	/**
+	 * loops through the specified factuur to show all the treatment
+	 * 
+	 * @param factuur
+	 *            the factuur we loop through
+	 * @return string a string containing the treatment
 	 */
 	public String loopBehandelingen(Factuur factuur) {
 		String naam = "";
@@ -272,27 +320,37 @@ public class FacturatieManagerImpl implements FacturatieManager {
 
 		return naam;
 	}
-	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getTotaalPrijs(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+
+	/**
+	 * gets the total price off the factuur
+	 * 
+	 * @param factuur
+	 *            the factuur used to get te total price
+	 * @return double returns the price
 	 */
-	public double getTotaalPrijs(Factuur factuur){
+	public double getTotaalPrijs(Factuur factuur) {
 		double totPrijs = 0.0;
-		for(Behandeling behandeling : factuur.getBehandelingen()){
-			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
+		for (Behandeling behandeling : factuur.getBehandelingen()) {
+			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())
+					* behandeling.getSessies();
 		}
 		return totPrijs;
 	}
-	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.FacturatieSubsysteem.BusinessLayer.FacturatieManager#getTotaalinclBTW(facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur)
+
+	/**
+	 * gets total price incl. tax
+	 * 
+	 * @param factuur
+	 *            the factuur we use to get the price.
+	 * @return double the price
 	 */
-	public double getTotaalinclBTW(Factuur factuur){
+	public double getTotaalinclBTW(Factuur factuur) {
 		double totPrijs = 0.0;
 		double totPrijsBTW = 0.0;
 		double btw = 1.21;
-		for(Behandeling behandeling : factuur.getBehandelingen()){
-			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())* behandeling.getSessies();
+		for (Behandeling behandeling : factuur.getBehandelingen()) {
+			totPrijs += behandelingDAO.getPrijs(behandeling.getBehandelCode())
+					* behandeling.getSessies();
 		}
 		totPrijsBTW = totPrijs * btw;
 		return totPrijsBTW;
