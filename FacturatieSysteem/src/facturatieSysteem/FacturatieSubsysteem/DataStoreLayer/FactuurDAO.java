@@ -203,8 +203,8 @@ public class FactuurDAO implements FactuurDAOinf {
 					// Loopen door de behandelingen en factuurbehandelingen
 					// vullen.
 					
-					Element BehandelingenElement= (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
-					NodeList Behandelingen = BehandelingenElement.getElementsByTagName("Behandeling");
+					//Element BehandelingenElement= (Element) clientElement.getElementsByTagName("Behandelingen").item(0);
+					//NodeList Behandelingen = BehandelingenElement.getElementsByTagName("Behandeling");
 					
 					
 					for (Behandeling behandeling : behandelingen) {

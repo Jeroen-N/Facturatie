@@ -152,3 +152,57 @@
 448  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
 448  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
 480  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+69   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+353  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+446  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+446  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+489  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+69   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+361  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+471  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+471  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+512  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+82   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+368  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+455  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+456  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+482  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+66   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+341  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+434  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+434  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+467  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+70   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+357  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+447  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+447  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+474  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+64   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+341  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+422  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+422  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+447  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+73   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+369  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+459  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+459  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+481  [main] INFO  facturatie.client.Client  - Response: {125651201={1916=[[125651201, 9927, 08:00, 08:30, 06-11-2014, Nee, Test, 001,002,004,009], [125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001,002,004,009]]}, 125651202={4745=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004,006,008,010]]}}
+1    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+63   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+517  [main] INFO  facturatie.client.Client  - Contents of registry: []
+578  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+77   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+361  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+457  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+457  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+498  [main] INFO  facturatie.client.Client  - Response: {125651201={12=[[125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001]]}, 125651202={15=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004]]}}
