@@ -11,5 +11,5 @@ public interface KlantManagerIFrmi extends Remote {
 	/** The Constant servicename. */
 	public static final String servicename = "Facturatiesysteem";
 	
-	public ArrayList<Klant> getKlanten() throws RemoteException;
+	public ArrayList<ArrayList<String>> getKlantenRMI() throws RemoteException;
 }
