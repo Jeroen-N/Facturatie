@@ -88,12 +88,6 @@ public class VerzekeringsmaatschappijManagerTest {
 		assertTrue(instance.getTypes().size() >= 1);
 	}
 
-	public void testgetVerzekeringstypeByName() throws Exception {
-		typelijst.clear();
-		typelijst.add(type);
-		assertTrue(instance.getTypes().size() >= 1);
-	}
-
 	public void testaddVerzekeringstype() throws Exception {
 		int i = instance.getTypes().size();
 		instance.addType(type);

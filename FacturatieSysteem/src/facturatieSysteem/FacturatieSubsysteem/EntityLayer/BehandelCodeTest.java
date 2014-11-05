@@ -76,7 +76,7 @@ public class BehandelCodeTest {
 	
 	@Test
 	public void testGetTariefBehandeling(){
-		double expResult = 79.50;
+		double expResult = 89.50;
 		assertTrue(expResult == instance.getTariefBehandeling());
 	}
 	
