@@ -5,9 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import facturatie.client.Client;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.DAOFactoryFactuur;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.FactuurDAO;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.BehandelingDAO;
@@ -55,6 +57,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	/**
 	 * Instantiates a new facturatie manager impl.
 	 */
+	private Client client = new Client();
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
@@ -126,19 +129,25 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		double totaalPrijsFactuur = 0;
 		//TODO behandelingen ophalen uit andere systeem;
 		
-		Map<String, ArrayList<ArrayList<String>>> behandelingen = null;
-		for(String behandeling : behandelingen.keySet()){
-			ArrayList<String> afspraakIDs = new ArrayList<String>();
-			String code = null;
-			for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
-				afspraakIDs.add(afspraak.get(1));
-				code = afspraak.get(7);
-			}
-			if (afspraakIDs.size() >= 0){
-			behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
-			}
-		}
+		HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = client.getGegevens();
 		
+		for(String bsn : klanten.keySet()){
+			if (bsn.equals(klant.getBSN())){
+				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(klant.getBSN());
+				for(String behandeling : behandelingen.keySet()){
+					ArrayList<String> afspraakIDs = new ArrayList<String>();
+					String code = null;
+					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
+						afspraakIDs.add(afspraak.get(1));
+						code = afspraak.get(7);
+					}
+					if (afspraakIDs.size() >= 0){
+						behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
+					}
+				}
+			}	
+		}
+
 		for (Behandeling behandeling : behandelingenlijst) {	
 			totalePrijs = 00;	
 			for (String code : verzekering.getBehandelcodes()) {

@@ -406,7 +406,6 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 			klant1.add(klant.getTelefoonnummer());// ID 6
 			klant1.add(klant.getEmail());// ID 7
 			klanten.add(klant1);
-			
 		}
 		return klanten;
 	}

@@ -54,10 +54,10 @@ public class Client {
 	
 	// Get a logger instance for the current class
 	static Logger logger = Logger.getLogger(Client.class);
-
-    private Client() {
+	private static HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> response = new HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>>();
+    public Client() {
 		logger.trace("Constructor");
-		logger.trace("Done");    	
+		logger.trace("Done");
     }
 
     public static void main(String[] args) {
@@ -104,7 +104,7 @@ public class Client {
     		
     		if(stub != null){
 	    		logger.info("Calling stub.getBehandelingen()");
-	            HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> response = stub.getGegevens();
+	            response = stub.getGegevens();
 	            logger.info("Response: " + response);
     		} else {
     			logger.info("stub is null");
@@ -117,5 +117,8 @@ public class Client {
             logger.error("Error: " + e.getMessage());
             // e.printStackTrace();
         }
+    }
+    public HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> getGegevens(){
+    	return response;
     }
 }
