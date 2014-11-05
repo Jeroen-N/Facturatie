@@ -9,23 +9,39 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HeaderAndFooter.
+ */
 public class HeaderAndFooter extends PdfPageEventHelper {
 
+    /** The factuur. */
     private Factuur factuur;
 
 
+    /** The footer. */
     protected Phrase footer;
+    
+    /** The header. */
     protected Phrase header;
 
     /*
      * Font for header and footer part.
      */
+    /** The header font. */
     private static Font headerFont = new Font(Font.getFamily("Times-Roman"), 9, Font.NORMAL);
+    
+    /** The footer font. */
     private static Font footerFont = new Font(Font.getFamily("Times-Roman"), 9, Font.BOLD);
 
 
     /*
      * constructor
+     */
+    /**
+     * Instantiates a new header and footer.
+     *
+     * @param factuur the factuur
      */
     public HeaderAndFooter(Factuur factuur) {
         super();
@@ -38,6 +54,9 @@ public class HeaderAndFooter extends PdfPageEventHelper {
     }
 
 
+    /* (non-Javadoc)
+     * @see com.itextpdf.text.pdf.PdfPageEventHelper#onEndPage(com.itextpdf.text.pdf.PdfWriter, com.itextpdf.text.Document)
+     */
     @Override
     public void onEndPage(PdfWriter writer, Document document) {
 

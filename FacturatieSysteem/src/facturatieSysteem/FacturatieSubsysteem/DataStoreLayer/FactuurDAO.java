@@ -19,6 +19,18 @@ public class FactuurDAO implements FactuurDAOinf {
 	private ArrayList<Behandeling> behandelingen = new ArrayList<>();
 	private Factuur factuur;
 	private DAOFactoryFactuur daoFactoryClient;
+	
+	/**
+	 * De constructor van de klasse Factuurdao welke 3 objecten nodig heeft van de verschillende soorten daoFactories
+	 * @param daoFactoryBehandelcode
+	 * @param daoFactoryClient
+	 * @param daoFactoryFacturatie
+	 */
+	public FactuurDAO(DAOFactoryFactuur daoFactoryBehandelcode,
+			DAOFactoryFactuur daoFactoryClient,
+			DAOFactoryFactuur daoFactoryFacturatie) {
+		this.daoFactoryClient = daoFactoryClient;
+	}
 
 	/**
 	 * Haalt alle facturen op van de klant waarvan deze geladen moeten worden.
@@ -28,13 +40,6 @@ public class FactuurDAO implements FactuurDAOinf {
 	 * 
 	 * @return ArrayList van facturen van de desbetreffende klant
 	 */
-
-	public FactuurDAO(DAOFactoryFactuur daoFactoryBehandelcode,
-			DAOFactoryFactuur daoFactoryClient,
-			DAOFactoryFactuur daoFactoryFacturatie) {
-		this.daoFactoryClient = daoFactoryClient;
-	}
-
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
 		document = daoFactoryClient.getDocument();
 		try {
@@ -100,13 +105,13 @@ public class FactuurDAO implements FactuurDAOinf {
 							Behandeling behandeling = new Behandeling(null,
 									behandelingId, null, null, null, BSN,
 									AfsprakenIDs, 00, AfsprakenIDs.size());
-							behandelingen.add(behandeling);
+							behandelingen.add(behandeling); //behandeling
 
 						}
 						factuur = new Factuur(factuurNummer, factuurDatum,
 								vervalDatum, invoerBSN, vergoedeBedrag,
 								behandelingen, status, totaalPrijs);
-						facturen.add(factuur);
+						facturen.add(factuur); //factuur objecten maken en aan de arraylist toevoegen
 					}
 				}
 			}
@@ -119,7 +124,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	/**
-	 * creates the factuur
+	 * Creates an object of the type factuur
 	 *
 	 * @param klant
 	 * @param factuur
@@ -172,8 +177,7 @@ public class FactuurDAO implements FactuurDAOinf {
 
 					// Loopen door de behandelingen en factuurbehandelingen
 					// vullen.
-					
-				
+
 					for (Behandeling behandeling : behandelingen) {
 						Element factuurBehandeling = document
 								.createElement("FactuurBehandeling");
@@ -185,7 +189,7 @@ public class FactuurDAO implements FactuurDAOinf {
 							behandelAfspraakID.appendChild(document
 									.createTextNode(id));
 							factuurBehandeling.appendChild(behandelAfspraakID);
-
+							//Maak de behandelingID aan
 							Attr BehandelingId = document
 									.createAttribute("BehandelingID");
 							BehandelingId.setValue(behandeling
@@ -195,18 +199,18 @@ public class FactuurDAO implements FactuurDAOinf {
 						}
 
 					}
-
+					//Maak element tevergoedenbedrag aan
 					Element eigenRisico = document
 							.createElement("TevergoedenBedrag");
 					eigenRisico.appendChild(document.createTextNode(Double
 							.toString(factuur.getVergoedeBedrag())));
 					factuurElement.appendChild(eigenRisico);
-
+					//Maak element status aan
 					Element status = document.createElement("Status");
 					status.appendChild(document.createTextNode(factuur
 							.getStatus()));
 					factuurElement.appendChild(status);
-
+					//Maak element totaalprijs aan
 					Element totaalPrijs = document.createElement("Totaalprijs");
 					totaalPrijs.appendChild(document.createTextNode(Double
 							.toString(factuur.getTotaalPrijs())));
@@ -227,7 +231,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	}
 
 	/**
-	 * gets all facturen
+	 * Gets all the objects of facturen in the XML file
 	 * 
 	 * @return the list of facturen
 	 */
@@ -298,8 +302,10 @@ public class FactuurDAO implements FactuurDAOinf {
 					}
 					
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN, vergoedeBedrag, behandelingen, status,
-							totaalPrijs);
+
+							vervalDatum, BSN, vergoedeBedrag, null, status,
+							totaalPrijs); //Maak factuur aan met alle voorgaande opgehaalde onderdelen
+
 					facturen.add(factuur);
 
 				}

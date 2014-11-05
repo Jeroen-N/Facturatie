@@ -9,14 +9,23 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
-
+/**
+ * The BehandelingDAO class which implements the BehandelDAOinf interface
+ * @author night_000
+ *
+ */
 public class BehandelingDAO implements BehandelDAOinf {
-
+	
 	private Document document = null;
 	private DAOFactoryFactuur daoFactoryBehandelcode;
 	private DAOFactoryFactuur daoFactoryClient;
 	private String behandelingId;
-
+	/**
+	 * The constructor for the BehandelingDAO which creates an object
+	 * of this class with a given daoFactoryBehandelcode and a given daoFactoryClient
+	 * @param daoFactoryBehandelcode
+	 * @param daoFactoryClient
+	 */
 	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode,
 			DAOFactoryFactuur daoFactoryClient) {
 		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
@@ -25,7 +34,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 	}
 
 	/**
-	 * gets the price of the specified treatment
+	 * Gets the price of a treatment with the given treatmentcode
 	 * 
 	 * @param behandelCode
 	 * @return double the price
@@ -34,15 +43,18 @@ public class BehandelingDAO implements BehandelDAOinf {
 		document = daoFactoryBehandelcode.getDocument();
 		double tarief = 0;
 		try {
+			//Zoek naar behandelcodes
 			Element codesElement = (Element) document.getElementsByTagName(
 					"behandelcodes").item(0);
 			NodeList codes = codesElement.getElementsByTagName("behandeling");
 			for (int i = 0; i < codes.getLength(); i++) {
 				Element behandelingElement = (Element) codes.item(i);
+				//Haal het attribuut behandelcode op bij de behandeling
 				String behandelcode = behandelingElement
 						.getAttribute("behandelcode");
+				//Als de behandelcode matcht met de invoerbehandelCode
 				if (behandelcode.equals(invoerbehandelCode)) {
-
+					//Haal het tarief op van de behandelcode
 					String stringtarief = behandelingElement
 							.getElementsByTagName("tariefbehandeling").item(0)
 							.getTextContent();
@@ -58,7 +70,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 	}
 
 	/**
-	 * gets an list of treatments given to the specified client
+	 * Gets an list of treatments given to the specified client
 	 * 
 	 * @param klant
 	 * @return an list of the given treatments
@@ -161,7 +173,7 @@ public class BehandelingDAO implements BehandelDAOinf {
 	}
 
 	/**
-	 * get the name of the treatment
+	 * Get the name of the treatment with the given treatmentcode
 	 * 
 	 * @param invoerbehandelCode
 	 * @return String of the name
@@ -170,15 +182,18 @@ public class BehandelingDAO implements BehandelDAOinf {
 		document = daoFactoryBehandelcode.getDocument();
 		String behandelingNaam = "";
 		try {
+			//Zoek naar elementen genaamd behandelcodes
 			Element codesElement = (Element) document.getElementsByTagName(
 					"behandelcodes").item(0);
 			NodeList codes = codesElement.getElementsByTagName("behandeling");
 			for (int i = 0; i < codes.getLength(); i++) {
 				Element behandelingElement = (Element) codes.item(i);
+			//Haal de codes op van elke code
 				String behandelcode = behandelingElement
 						.getAttribute("behandelcode");
+				//Als de behandelcode matcht met de invoerbehandelcode
 				if (behandelcode.equals(invoerbehandelCode)) {
-
+					//Haal de naam op van de behandeling
 					behandelingNaam = behandelingElement
 							.getElementsByTagName("behandelingnaam").item(0)
 							.getTextContent();
