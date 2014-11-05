@@ -38,10 +38,6 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 import org.apache.log4j.Logger;
 
 
@@ -86,13 +82,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		dateTableModelChangeType = new DataTableModelChangeType();
 		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
 		
-		fillTable();
-		
 		{
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
@@ -142,7 +132,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 					
 					}
 				}
-				
+				fillTable();
 				{
 					changeType_2 = new JPanel();
 					changeVerzekeringType.add(changeType_2, BorderLayout.EAST);
