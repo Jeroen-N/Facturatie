@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Behandeling;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
+/**
+ * The interface BehandelDAOinf which will be implemented by the BehandelingDAO class.
+ */
 public interface BehandelDAOinf {
 	/**
-	 * gets the price of the specified treatment
+	 * Calls the getPrijs() method from the BehandelingDAO which gets the price of the specified treatmentcode.
 	 * 
 	 * @param behandelCode
 	 * @return double the price
@@ -15,7 +18,7 @@ public interface BehandelDAOinf {
 	public double getPrijs(String behandelCode);
 
 	/**
-	 * gets an list of treatments given to the specified client
+	 * Calls the getBehandelingen() method from the BehandelingDAO which gets an list of treatments given to the specified client
 	 * 
 	 * @param klant
 	 * @return an list of the given treatments

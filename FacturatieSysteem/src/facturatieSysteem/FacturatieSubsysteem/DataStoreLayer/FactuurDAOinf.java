@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
+	/**
+	 * The interface FactoorDAOinf which will be implemented by the FactuurDAO
+	 * @author night_000
+	 *
+	 */
 public interface FactuurDAOinf {
 	/**
-	 * gets the facturen for the specified client
+	 * Gets the facturen for the specified client in the haalFacturen() method of the FactuurDAO
 	 * 
 	 * @param invoerBSN
 	 * @return arraylist<factuur>
@@ -15,7 +20,7 @@ public interface FactuurDAOinf {
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
 	/**
-	 * creates a new factuur
+	 * Creates a new factuur in the maakFactuur() method of the FactuurDAO
 	 * 
 	 * @param klant
 	 * @param factuur
@@ -24,7 +29,7 @@ public interface FactuurDAOinf {
 	public boolean maakFactuur(Klant klant, Factuur factuur);
 
 	/**
-	 * gets all facturen
+	 * Gets all the objects of facturen in the haalAlleFacturen() method of the FactuurDAO
 	 * 
 	 * @return ArrayList<Factuur>
 	 */

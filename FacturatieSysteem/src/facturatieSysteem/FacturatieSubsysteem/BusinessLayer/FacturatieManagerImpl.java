@@ -21,7 +21,7 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class FacturatieManagerImpl.
+ * The Class FacturatieManagerImpl which implements the FacturatieManager interface.
  */
 public class FacturatieManagerImpl implements FacturatieManager {
 
@@ -57,7 +57,13 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	private Client client = new Client();
 
+
+	/*The constructor method to create an object of FacturatieManagerImpl
+	 * 
+	 */
+
 	private HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = new HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>>() ;
+
 
 
 	public FacturatieManagerImpl() {
@@ -74,7 +80,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * returns the behandelingDAO
+	 * Returns the object of the type behandelingDAO
 	 * 
 	 * @return behandelingDAO
 	 */
@@ -83,7 +89,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * creates the a new factuur linked with the client
+	 * Creates a new factuur by the given customer and the manager of the insurance company.
 	 * 
 	 * @param klant
 	 *            the client
@@ -127,18 +133,27 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		double totalePrijs = 00;
 		double teVergoedenPrijs = 00;
 		String polisNaam = "";
+		//Loop door de verzekeringspolissen heen van de klant en haal het verzekeringstype
+		//en zet dit in een variabele genaamd polisnaam.
 		for (VerzekeringPolis polis : klant.getVerzekeringPolissen()) {
 			polisNaam = polis.getVerzekeringsType();
 		}
+		
+		//Loop door de verzekeringsmaatschappijen heen
 		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
 				.getVerzekeringsmaatschappijen()) {
+			//Loop per verzekeringsmaatschappij door alle types
 			for (Verzekeringstype type : maatschappij.getTypes()) {
+				//Als de polisnaam van de klant overeen komt met de naam van de verzekeringsmaatschappij
+				//vul dan het Verzekeringstype veld verzekering met het type dat opgehaald
+				//wordt bij de betreffende manager met de maatschappij en de polisnaam die eerder gevonden zijn.
 				if (polisNaam.equals(type.getNaam())) {
 					verzekering = verzekeringsmanager
 							.getVerzekeringstypeByName(maatschappij, polisNaam);
 				}
 			}
 		}
+		//Initialiseer de lijst van behandelingen en maak lokale variabelen z en totaalPrijsFactuur aan.
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
 		double totaalPrijsFactuur = 0;
@@ -169,27 +184,36 @@ public class FacturatieManagerImpl implements FacturatieManager {
 				}
 			}
 		}
-
+		//Voor elke behandeling in de lijst van behandelingen
 		for (Behandeling behandeling : behandelingenlijst) {
 			totalePrijs = 00;
+			//Zet de int totalePrijs op 00;
+			//Voor elke behandelingscodes die horen bij het verzekeringstype
 			for (String code : verzekering.getBehandelcodes()) {
 				z = 0;
+				//Als de code van de behandeling gelijk is aan de code van het verzekeringstype
 				if (behandeling.getBehandelCode().equals(code)) {
 					// Behandeling wordt standaard vergoed
+					//Maak een lokale double aan genaamd p en haal hier de prijs van een behandeling aan
+					//vermenigvuldigd met het aantal sessies 
 					double p = behandelingDAO.getPrijs(behandeling
 							.getBehandelCode()) * behandeling.getSessies();
-					// teVergoedenPrijs +=
-					// behandelingDAO.getPrijs(behandeling.getBehandelCode()) *
-					// behandeling.getSessies() -
-					// klant.getResterendEigenRisico();
+					//Als het resterend eigen risico van de klant niet 0 is
 					if (klant.getResterendEigenRisico() != 0) {
+						//Als het resterend eigen risico van de klant groter is dan de waarde van p
 						if (klant.getResterendEigenRisico() >= (p)) {
+							//Maak het eigen risico als gevolg van het oude resterend eigen risico minus de waarde van p
 							klant.setTotaalEigenRisico(klant
 									.getResterendEigenRisico() - (p));
+							//Verhoog de totale prijs met de waarde van p
 							totalePrijs += p;
-						} else {
+						} 
+						//Het resterend eigen risico is niet groter dan de waarde van p
+						else {
+							//De tevergoeden prijs wordt opgehoogd met de waarde van p minus het resterend eigen risico
 							teVergoedenPrijs += p
 									- klant.getResterendEigenRisico();
+							//De prijs van de factuur wordt het nu nog resterend eigen risico van de klant.
 							totalePrijs = klant.getResterendEigenRisico();
 							klant.setTotaalEigenRisico(0);
 						}
@@ -219,7 +243,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 						klant.setTotaalEigenRisico(0);
 					}
 				} else {
-
+					
 				}
 			} else {
 				z = 0;
@@ -228,12 +252,15 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			totaalPrijsFactuur += totalePrijs;
 
 		}
+		//Als de lijst van de behandelingen niet leeg is
 		if (behandelingenlijst.size() != 0) {
+			//Maak een object factuur aan met alle vorige opgedane waardes benodigd om dit object te maken
+			//en zet de status standaard op niet betaald
 			Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
 					teVergoedenPrijs, behandelingenlijst, "Niet betaald",
 					totaalPrijsFactuur);
+			//Geef het factuurobject mee aan de factuurDAO die het in XML gaat verwerken en geef de klant mee
 			factuurDAO.maakFactuur(klant, f);
-
 			return f;
 		}
 		return null;
@@ -241,7 +268,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * gets an arraylist of facturen.
+	 * Gets an arraylist of facturen matched with the BSN from the customer
 	 * 
 	 * @param invoerBSN
 	 *            the bsn of the client
@@ -249,6 +276,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
+
 
 		String[] args = {};
 		client.main(args);
@@ -277,10 +305,11 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			 }
 		 }
 		 return facturen;
+
 	}
 
 	/**
-	 * shows the factuur on the gui
+	 * Shows the factuur on the gui with the given number of the factuur and the customer
 	 *
 	 * @param factuur_nummer
 	 *            number of the factuur
@@ -300,7 +329,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * get the factuur with the given number of the given client
+	 * Get the factuur with the given number of factuur and the customer
 	 *
 	 * @param factuur_nummer
 	 *            the number we use to search the specified factuur.
@@ -321,7 +350,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * loops through the specified factuur to show all the treatment
+	 * Loops through the specified factuur to show all the treatments and returns a String with the name of the treatment
 	 * 
 	 * @param factuur
 	 *            the factuur we loop through
@@ -343,7 +372,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * gets the total price off the factuur
+	 * Gets the total price off the factuur
 	 * 
 	 * @param factuur
 	 *            the factuur used to get te total price
@@ -359,7 +388,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	}
 
 	/**
-	 * gets total price incl. tax
+	 * Gets total price incl. tax of the given object from factuur
 	 * 
 	 * @param factuur
 	 *            the factuur we use to get the price.
