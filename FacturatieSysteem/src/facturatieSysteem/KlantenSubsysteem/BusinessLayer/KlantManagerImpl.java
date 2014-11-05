@@ -1,5 +1,6 @@
 package facturatieSysteem.KlantenSubsysteem.BusinessLayer;
 
+import java.rmi.RemoteException;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -391,10 +392,11 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 
 	}
 	
-	public ArrayList<ArrayList<String>> getKlantenRMI(){
+	public ArrayList<ArrayList<String>> getKlantenRMI() throws RemoteException{
 		ArrayList<ArrayList<String>> klanten = new ArrayList<ArrayList<String>>();
 		for(Klant klant : getKlanten()){
 			ArrayList<String> klant1 = new ArrayList<String>();
+			//klant1.add("hello");
 			klant1.add(klant.getBSN());// ID 0 
 			klant1.add(klant.getNaam());// ID 1
 			klant1.add(klant.getGeboortedatum());// ID 2
@@ -404,6 +406,7 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 			klant1.add(klant.getTelefoonnummer());// ID 6
 			klant1.add(klant.getEmail());// ID 7
 			klanten.add(klant1);
+			
 		}
 		return klanten;
 	}

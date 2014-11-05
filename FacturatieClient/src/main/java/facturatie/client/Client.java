@@ -42,6 +42,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -75,7 +76,7 @@ public class Client {
 	     
 		logger.info("Starting application ---------------------------------");
 
-		System.setProperty("java.security.policy", "http://" + hostname + "/facturatie/resources/facturatieserver.policy");
+		System.setProperty("java.security.policy", "http://" + hostname + "/FysioSysteem/resources/fysiosysteem.policy");
 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
@@ -101,9 +102,13 @@ public class Client {
             RapportageIF stub = (RapportageIF) registry.lookup(RapportageIF.servicename);
     		logger.info("Found '" + RapportageIF.servicename + "' in registry");
             
-    		logger.trace("Calling getBehandelingen()");
-            ArrayList<ArrayList<String>> response = stub.getGegevens();
-            logger.info("Response: " + response);
+    		if(stub != null){
+	    		logger.trace("Calling stub.getBehandelingen()");
+	            HashMap<String, ArrayList<ArrayList<String>>> response = stub.getGegevens();
+	            logger.info("Response: " + response);
+    		} else {
+    			logger.info("stub is null");
+    		}
         } 
 		catch (java.security.AccessControlException e) {
 			logger.error("Could not connect to registry: " + e.getMessage());			

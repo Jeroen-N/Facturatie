@@ -24,3 +24,100 @@
 	java.net.ConnectException: Connection timed out: connect
 1    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
 0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+73   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+384  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+493  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+83   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+394  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+425  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+1    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+59   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+452  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+508  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+65   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+446  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+509  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+231  [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+629  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
+659  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+71   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+402  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+551  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+627  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+389  [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+700  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+781  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+815  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+244  [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+574  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+655  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+707  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+1    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+68   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+386  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+481  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+536  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+70   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+384  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+455  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+485  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+71   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+395  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+483  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+530  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+76   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+398  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+494  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+556  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+72   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+374  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+454  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+486  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+72   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+351  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+91   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+377  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+473  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+562  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+64   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+345  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+425  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+463  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+81   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+361  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+437  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+471  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+76   [main] DEBUG facturatie.client.Client  - Locating registry on 145.48.112.85
+379  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+472  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+510  [main] ERROR facturatie.client.Client  - Error: RemoteException occurred in server thread; nested exception is: 
+	java.rmi.UnmarshalException: unrecognized method hash: method not supported by remote object
