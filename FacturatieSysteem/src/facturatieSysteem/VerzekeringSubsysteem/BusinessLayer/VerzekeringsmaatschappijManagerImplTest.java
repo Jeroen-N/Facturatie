@@ -13,7 +13,8 @@ import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.Verzekeringsmaatsc
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-public class VerzekeringsmaatschappijManagerTest {
+public class VerzekeringsmaatschappijManagerImplTest {
+
 	private Verzekeringsmaatschappij instance;
 	private VerzekeringsmaatschappijManager manager;
 	private VerzekeringsmaatschappijDAO verzekeringDAO;
@@ -34,18 +35,21 @@ public class VerzekeringsmaatschappijManagerTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+
 	@Test
-	public void testgetVerzekeringsMaatschappij() throws Exception {
+	public void testgetVerzekeringsMaatschappij() {
 		assertTrue(2 == verzekeringDAO.getMaatschappijenXML().size());
 	}
+
 	@Test
-	public void testaddVerzekeringsmaatschappij() throws Exception {
+	public void testaddVerzekeringsmaatschappij() {
 		int i = verzekeringDAO.getMaatschappijenXML().size();
 		verzekeringDAO.addMaatschappijXML(instance);
 		assertTrue(i + 1 == verzekeringDAO.getMaatschappijenXML().size());
 	}
+
 	@Test
-	public void testupdateVerzekeringsmaatschappij() throws Exception {
+	public void testupdateVerzekeringsmaatschappij() {
 		String nr = "002";
 		String rekNr = "987654322";
 		String KVK = "88776655";
@@ -63,32 +67,39 @@ public class VerzekeringsmaatschappijManagerTest {
 		}
 		assertEquals(expRes, plaats);
 	}
+
 	@Test
-	public void testdeleteVerzekeringsmaatschappij() throws Exception {
+	public void testdeleteVerzekeringsmaatschappij() {
 		manager.addVerzekeringsmaatschappij(instance);
 		manager.deleteVerzekeringsmaatschappij(instance);
 		assertTrue(manager.getVerzekeringsmaatschappij("002") == null);
 	}
+
+	
 	@Test
-	public void testgetVerzekeringsmaatschappijen() throws Exception {
+	public void testgetVerzekeringsmaatschappijen() {
 		verzekeringsMaatschappijen.clear();
 		verzekeringsMaatschappijen.add(instance);
 		assertTrue(manager.getVerzekeringsmaatschappijen().size() >= 1);
 	}
+	
+
 	@Test
-	public void testgetVerzekeringstype() throws Exception {
+	public void testgetVerzekeringstype() {
 		typelijst.clear();
 		typelijst.add(type);
 		assertTrue(instance.getTypes().size() >= 1);
 	}
 
-	public void testaddVerzekeringstype() throws Exception {
+	@Test
+	public void testaddVerzekeringstype() {
 		int i = instance.getTypes().size();
 		instance.addType(type);
 		assertTrue(i + 1 == instance.getTypes().size());
 	}
+
 	@Test
-	public void testupdateVerzekeringstype() throws Exception {
+	public void testupdateVerzekeringstype() {
 		String nummer = "255";
 		String naam = null;
 		String expRes = "Typenaam";
@@ -101,10 +112,13 @@ public class VerzekeringsmaatschappijManagerTest {
 		}
 		assertEquals(expRes, naam);
 	}
+
+	
 	@Test
-	public void testImportdata() throws Exception {
+	public void testImportdata() {
 		verzekeringsMaatschappijen.clear();
 		verzekeringsMaatschappijen.add(instance);
 		assertTrue(manager.getVerzekeringsmaatschappijen().size() >= 1);
 	}
+
 }
