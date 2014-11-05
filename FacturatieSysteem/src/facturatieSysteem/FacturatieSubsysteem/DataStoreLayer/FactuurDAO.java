@@ -112,6 +112,7 @@ public class FactuurDAO implements FactuurDAOinf {
 								vervalDatum, invoerBSN, vergoedeBedrag,
 								behandelingen, status, totaalPrijs);
 						facturen.add(factuur); //factuur objecten maken en aan de arraylist toevoegen
+						behandelingen.clear();
 					}
 				}
 			}

@@ -176,11 +176,16 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					ArrayList<String> afspraakIDs = new ArrayList<String>();
 					String code = null;
 					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
+						int z1 =0;
 						for (String afspraakID : afspraakIDs1){
-							if(afspraakID != afspraak.get(1)){
-								afspraakIDs.add(afspraak.get(1));
-								
+							if(afspraakID == afspraak.get(1)){
+								z1 = 1;
 							}
+						}
+						if(z1 == 0){
+							afspraakIDs.add(afspraak.get(1));
+						}else{
+							z1 =0;
 						}
 						code = afspraak.get(7);
 					}
@@ -284,7 +289,8 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
+		
+		 facturen = factuurDAO.haalFacturen(invoerBSN);
 		 for (Factuur factuur: facturen){
 			 for (Behandeling behandeling : factuur.getBehandelingen()){
 				for(String bsn : klanten.keySet()){
