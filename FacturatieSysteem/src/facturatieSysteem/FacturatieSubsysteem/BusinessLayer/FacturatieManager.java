@@ -10,11 +10,12 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 // TODO: Auto-generated Javadoc
 /**
  * The Interface FacturatieManager.
+ * This interface will be implemented by the FacturatieManagerImpl
  */
 public interface FacturatieManager {
 
 	/**
-	 * Factureer.
+	 * This method will initiate the factureer() method from the FacturatieManagerImpl which will create a factuur.
 	 *
 	 * @param klant the klant
 	 * @param verzekeringsmanager the verzekeringsmanager
@@ -23,7 +24,8 @@ public interface FacturatieManager {
 	public Factuur factureer(Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager);
 
 	/**
-	 * Haal facturen.
+	 * This method will initiate the haalFacturen() method from the FacturatieManagerImpl which will get al the objects
+	 * from factuur that exist.
 	 *
 	 * @param invoerBSN the invoer bsn
 	 * @return the array list
@@ -31,7 +33,8 @@ public interface FacturatieManager {
 	public ArrayList<Factuur> haalFacturen(String invoerBSN);
 
 	/**
-	 * Toon factuur.
+	 * This method will initate the toonFactuur() method from the FacturatieManagerImpl which will get the specified 
+	 * object of factuur by searching with the given customer and a factuur number.
 	 *
 	 * @param factuur_nummer the factuur_nummer
 	 * @param klant the klant
@@ -40,7 +43,8 @@ public interface FacturatieManager {
 	public String toonFactuur(String factuur_nummer, Klant klant);
 	
 	/**
-	 * Loop behandelingen.
+	 * This method will initate the loopBehandelingen() method from the FacturatieManagerImpl which will run through all the
+	 * treatments which are needed.
 	 *
 	 * @param factuur the factuur
 	 * @return the string
@@ -48,7 +52,8 @@ public interface FacturatieManager {
 	public String loopBehandelingen(Factuur factuur);
 	
 	/**
-	 * Gets the totaal prijs.
+	 * This method will initiate getTotaalPrijs() method from the FacturatieManagerImpl which gets the total cost
+	 * of an object from the type factuur.
 	 *
 	 * @param factuur the factuur
 	 * @return the totaal prijs
@@ -56,7 +61,8 @@ public interface FacturatieManager {
 	public double getTotaalPrijs(Factuur factuur);
 	
 	/**
-	 * Gets the totaalincl btw.
+	 * This method will initiate the getTotaalinclBTW() method from the FacturatieManagerImpl which gets the total cost
+	 * with the tax price included.
 	 *
 	 * @param factuur the factuur
 	 * @return the totaalincl btw
@@ -64,7 +70,8 @@ public interface FacturatieManager {
 	public double getTotaalinclBTW(Factuur factuur);
 	
 	/**
-	 * Gets the factuur.
+	 * This method will initiate the getFactuur() method from the FacturatieManagerImpl which gets a specific object of factuur
+	 * by searching with the given number of factuur and the customer.
 	 *
 	 * @param factuur_nummer the factuur_nummer
 	 * @param klant the klant
@@ -73,7 +80,7 @@ public interface FacturatieManager {
 	public Factuur getFactuur(String factuur_nummer, Klant klant);
 	
 	/**
-	 * Gets the bdao.
+	 * This method will initiate the getBDAO() method from the FactoratieManagerImpl which returns an object of BehandelDAO
 	 *
 	 * @return the bdao
 	 */

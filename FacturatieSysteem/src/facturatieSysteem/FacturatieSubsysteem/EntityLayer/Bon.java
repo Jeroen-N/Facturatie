@@ -24,17 +24,42 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Bon.
+ */
 public class Bon {
 
+	/** The file. */
 	private String file;
+	
+	/** The fact manager. */
 	private FacturatieManager factManager;
 	//private BehandelingDAO behandelDAO;
+	/** The factuur. */
 	private Factuur factuur;
+	
+	/** The maatschappij. */
 	private Verzekeringsmaatschappij maatschappij;
+	
+	/** The klant. */
 	private Klant klant;
+	
+	/** The verzekeringsmanager. */
 	private VerzekeringsmaatschappijManager verzekeringsmanager;
+	
+	/** The verzekering. */
 	private Verzekeringstype verzekering;
 	
+	/**
+	 * Instantiates a new bon.
+	 *
+	 * @param factManager the fact manager
+	 * @param factuur the factuur
+	 * @param maatschappij the maatschappij
+	 * @param klant the klant
+	 * @param verzekeringsmanager the verzekeringsmanager
+	 */
 	public Bon(FacturatieManager factManager, Factuur factuur, Verzekeringsmaatschappij maatschappij, Klant klant, VerzekeringsmaatschappijManager verzekeringsmanager){
 		this.factManager = factManager;
 		this.factuur = factuur;
@@ -47,6 +72,9 @@ public class Bon {
 		create();
 	}
 	
+	/**
+	 * Creates the.
+	 */
 	private void create(){
 		try {
 
@@ -77,6 +105,11 @@ public class Bon {
         }
 	}
 	
+	/**
+	 * Header.
+	 *
+	 * @return the paragraph
+	 */
 	private Paragraph Header(){
 		Chunk maatschappijChunk = new Chunk(maatschappij.toString());
 		
@@ -89,6 +122,11 @@ public class Bon {
         return header;
 	}
 	
+	/**
+	 * Client.
+	 *
+	 * @return the paragraph
+	 */
 	private Paragraph Client(){
 		Chunk client = new Chunk(klant.toStringFactuur());
 		
@@ -101,6 +139,11 @@ public class Bon {
 		return clientParagraph;
 	}
 	
+	/**
+	 * Factuur info.
+	 *
+	 * @return the paragraph
+	 */
 	private Paragraph FactuurInfo(){
 		Chunk info = new Chunk(factuur.toStringBon(klant));
 		
@@ -114,6 +157,11 @@ public class Bon {
 		
 	}
 	
+	/**
+	 * Mid page.
+	 *
+	 * @return the paragraph
+	 */
 	private Paragraph midPage(){
 		Paragraph midPage = new Paragraph();
 		
@@ -139,6 +187,11 @@ public class Bon {
         return midPage;
 	}
 	
+	/**
+	 * Facturatie informatie.
+	 *
+	 * @return the paragraph
+	 */
 	private Paragraph facturatieInformatie(){
 		Paragraph vergoed = new Paragraph();
 		
