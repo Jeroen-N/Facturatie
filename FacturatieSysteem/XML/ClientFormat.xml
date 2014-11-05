@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ClientFormat.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ClientFormat.xsd">
 
-	<Client BSN="125651203">
+	<Client BSN="125651201">
 		<ClientGegevens>
 			<Naam>Xander Gerreman</Naam>
 			<Adres>Marialaan 9a</Adres>
@@ -28,20 +27,7 @@
 				<startDatum>10-06-2001</startDatum>
 				<eindDatum>10-06-2002</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen>
-			<Factuur FactuurNummer="262513">
-				<FactuurDatum>01-11-2014</FactuurDatum>
-				<VervalDatum>15-11-2014</VervalDatum>
-				<FactuurBehandelingen>
-					<FactuurBehandeling BehandelingID="12">
-						<BehandelafspraakID>126548</BehandelafspraakID>
-					</FactuurBehandeling>
-				</FactuurBehandelingen>
-				<TevergoedenBedrag>0.0</TevergoedenBedrag>
-				<Status>Niet betaald</Status>
-				<Totaalprijs>29.5</Totaalprijs>
-			</Factuur>
-			<Factuur FactuurNummer="262514"><FactuurDatum>01-11-2014</FactuurDatum><VervalDatum>15-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="56"><BehandelafspraakID>265481</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>25.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>20.0</Totaalprijs></Factuur></Facturen>
+		<Facturen><Factuur FactuurNummer="1"><FactuurDatum>05-11-2014</FactuurDatum><VervalDatum>19-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="12"><BehandelafspraakID>1847</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>150.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen>
 	</Client>
 	<Client BSN="125651202">
 		<ClientGegevens>
@@ -53,7 +39,7 @@
 			<Telefoonnummer>0625235100</Telefoonnummer>
 			<Email>sjmblijl@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>25.25</ResterendEigenRisico>
+			<ResterendEigenRisico>0.0</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052185</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
@@ -81,21 +67,6 @@
 				<startDatum>03-11-2014</startDatum>
 				<eindDatum>05-12-2015</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen>
-			<Factuur FactuurNummer="202738">
-				<FactuurDatum>01-06-2014</FactuurDatum>
-				<VervalDatum>01-07-2014</VervalDatum>
-				<FactuurBehandelingen>
-					<FactuurBehandeling BehandelingID="02">
-						<BehandelafspraakID>264683</BehandelafspraakID>
-					</FactuurBehandeling>
-					<FactuurBehandeling BehandelingID="03">
-						<BehandelafspraakID>927393</BehandelafspraakID>
-					</FactuurBehandeling>
-				</FactuurBehandelingen>
-				<TevergoedenBedrag>200</TevergoedenBedrag>
-				<Status>Niet betaald</Status>
-				<Totaalprijs>300</Totaalprijs>
-			</Factuur><Factuur FactuurNummer="262512"><FactuurDatum>28-10-2014</FactuurDatum><VervalDatum>11-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="02"><BehandelafspraakID>283619</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>35.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen>
+		<Facturen/>
 	</Client>
 </Clienten>

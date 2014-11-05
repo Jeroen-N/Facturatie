@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import facturatie.client.Client;
 import facturatieSysteem.FacturatieSubsysteem.DataStoreLayer.DAOFactoryFactuur;
@@ -59,9 +57,15 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	private Client client = new Client();
 
+
 	/*The constructor method to create an object of FacturatieManagerImpl
 	 * 
 	 */
+
+	private HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = new HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>>() ;
+
+
+
 	public FacturatieManagerImpl() {
 		this.factuurDAO = new FactuurDAO(daoFactoryBehandelcodes,
 				daoFactoryClient, daoFactoryFacturatie);
@@ -96,6 +100,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	@Override
 	public Factuur factureer(Klant klant,
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
+		String[] args = {};
+		client.main(args);
+		klanten = client.getGegevens();
 		// Nieuw factuurnummer aanmaken
 		facturen = factuurDAO.haalAlleFacturen();
 		int n1 = 0;
@@ -150,27 +157,29 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
 		double totaalPrijsFactuur = 0;
-		// TODO behandelingen ophalen uit andere systeem;
+		//TODO behandelingen ophalen uit andere systeem;
 
-		HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> klanten = client
-				.getGegevens();
+		for(String bsn : klanten.keySet()){
+			System.out.println("BSN: "+ bsn);
+			if (bsn.equals(klant.getBSN())){
+				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(klant.getBSN());
+				System.out.println("behandelingen: "+behandelingen.toString());
+				for(String behandeling : behandelingen.keySet()){
 
-		for (String bsn : klanten.keySet()) {
-			if (bsn.equals(klant.getBSN())) {
-				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten
-						.get(klant.getBSN());
-				for (String behandeling : behandelingen.keySet()) {
 					ArrayList<String> afspraakIDs = new ArrayList<String>();
 					String code = null;
-					for (ArrayList<String> afspraak : behandelingen
-							.get(behandeling)) {
-						afspraakIDs.add(afspraak.get(1));
-						code = afspraak.get(7);
+					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
+						if (afspraak.get(5).equals("Nee")){
+							afspraakIDs.add(afspraak.get(1));
+							code = afspraak.get(7);
+						}
+
 					}
-					if (afspraakIDs.size() >= 0) {
-						behandelingenlijst.add(new Behandeling(null,
-								behandeling, code, null, null, klant.getBSN(),
-								afspraakIDs, 00, afspraakIDs.size()));
+
+					
+					if (afspraakIDs.size() >= 0){
+						behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
+
 					}
 				}
 			}
@@ -267,23 +276,36 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		
-		//Vul de lijst facturen met facturen die matchen aan het BSN
-		ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
-		//Voor elke factuur in de lijst met facturen
-		for (Factuur factuur : facturen) {
-			//Voor elke behandeling in de behandelingenlijst in de factuur
-			//het BSN, het behandelingid en een string van afspraakID's op
-			for (Behandeling behandeling : factuur.getBehandelingen()) {
-				String BSN = behandeling.getBSN();
-				String behandelingId = behandeling.getbehandelingId();
-				ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();
 
-				// TODO rest van info ophalen uit ander systeem
-				// behandeling.setBehandelCode(behandelCode);
-			}
-		}
-		return facturen;
+
+		String[] args = {};
+		client.main(args);
+		klanten = client.getGegevens();
+		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
+		 for (Factuur factuur: facturen){
+			 for (Behandeling behandeling : factuur.getBehandelingen()){
+				for(String bsn : klanten.keySet()){
+					System.out.println("BSN: "+ bsn);
+					if (bsn.equals(invoerBSN)){
+						HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(invoerBSN);
+						System.out.println("behandelingen: "+behandelingen.toString());
+						for(String behandelingStr: behandelingen.keySet()){
+							for (ArrayList<String> afspraak : behandelingen.get(behandelingStr)){
+								behandeling.setBehandelCode(afspraak.get(7));
+							}
+						}
+					}	
+				}
+				 //String BSN = behandeling.getBSN();
+				 //String behandelingId = behandeling.getbehandelingId();
+				 //ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();			 
+				 
+				 //TODO rest van info ophalen uit ander systeem
+				 //behandeling.setBehandelCode(behandelCode);
+			 }
+		 }
+		 return facturen;
+
 	}
 
 	/**

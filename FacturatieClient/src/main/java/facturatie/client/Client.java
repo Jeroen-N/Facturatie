@@ -62,17 +62,18 @@ public class Client {
 
     public static void main(String[] args) {
 
-		String hostname = null;
+		String hostname = "145.48.112.85";
 		
+		/*
 		if(args.length != 1) {
 			System.out.println("Usage: Client [hostname]");
 			System.exit(1);
 		} else {
 			hostname = args[0];
 		}
-		
+		*/
 		// Configure logging. 
-		PropertyConfigurator.configure("./facturatieclient.logconf");
+		PropertyConfigurator.configure("C:/Users/Ricardo/Documents/GitHub/Facturatie/FacturatieClient/facturatieclient.logconf");
 	     
 		logger.info("Starting application ---------------------------------");
 
