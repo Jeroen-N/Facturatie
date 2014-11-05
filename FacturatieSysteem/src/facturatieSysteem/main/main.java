@@ -10,7 +10,6 @@ import facturatieSysteem.main.PresentationLayer.MainGUI;
 
 public class main {
 	public static void main(String[] args){
-		System.out.println("test");
 		//Instantieer alle managers hier
 		KlantManager klantManager = new KlantManagerImpl();
 		VerzekeringsmaatschappijManager maatschappijManager = new VerzekeringsmaatschappijManagerImpl();
