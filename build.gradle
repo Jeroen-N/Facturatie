@@ -39,14 +39,14 @@ project(':FacturatieSysteem') {
 			from ('configurations.runtime') {
 				into 'libs'
 			}
-			from ('../FacturatieSysteem/Libraries.log4j-1.2.17.jar'){
+			from ('../FacturatieSysteem/Libraries/log4j-1.2.17.jar'){
 				into 'libs'
 			}
 			from ('../FacturatieSysteem/Libraries/iText'){
 				into 'bin/iText'
 			}
 			from ('../FacturatieClient/build/classes/main/facturatie') {
-				into 'bin'
+				into 'bin/facturatieClient'
 			}
 			from ('../FacturatieSysteem/bin/facturatieSysteem') {
 				into 'bin/facturatieSysteem'
