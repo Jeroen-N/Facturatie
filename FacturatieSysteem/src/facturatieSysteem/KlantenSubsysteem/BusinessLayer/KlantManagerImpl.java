@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import Shared.KlantManagerIFrmi;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.DAOFactoryKlant;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO;
 import facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAOImpl;

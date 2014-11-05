@@ -47,6 +47,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import Shared.RapportageIF;
+
 public class Client {
 	
 	// Get a logger instance for the current class

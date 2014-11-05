@@ -7,3 +7,20 @@
 294  [main] INFO  facturatie.client.Client  - Contents of registry: [Facturatiesysteem]
 315  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
 0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+77   [main] DEBUG facturatie.client.Client  - Locating registry on 145.102.76.204
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+70   [main] DEBUG facturatie.client.Client  - Locating registry on 145.102.76.204
+21389 [main] ERROR facturatie.client.Client  - Error: Connection refused to host: 145.102.76.204; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+276  [main] DEBUG facturatie.client.Client  - Locating registry on 145.102.76.204
+21570 [main] ERROR facturatie.client.Client  - Error: Connection refused to host: 145.102.76.204; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+66   [main] DEBUG facturatie.client.Client  - Locating registry on 145.102.76.204
+21321 [main] ERROR facturatie.client.Client  - Error: Connection refused to host: 145.102.76.204; nested exception is: 
+	java.net.ConnectException: Connection timed out: connect
+1    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
