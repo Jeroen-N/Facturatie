@@ -61,7 +61,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 
 	@Override
 	public boolean deleteVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
-		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null && maatschappij.getTypes() == null){
+		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null && maatschappij.getTypes().size() < 1){
 			verzekeringsMaatschappijen.remove(maatschappij);
 			VerzekeringDAO.deleteMaatschappijXML(maatschappij.getNr());
 			return true;
@@ -272,6 +272,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		for (Verzekeringsmaatschappij mts: verzekeringsMaatschappijen){
 			if(mts.getKVK() == (maatschappij.getKVK())){
 				state = false;
+				break;
 			}else {
 				state = true;
 			}

@@ -81,12 +81,8 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		dateTableModelChangeType = new DataTableModelChangeType();
 		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
-
-		System.out.println("filltable");
-		fillTable();
 		
 		{
-
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
@@ -136,7 +132,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 					
 					}
 				}
-				
+				fillTable();
 				{
 					changeType_2 = new JPanel();
 					changeVerzekeringType.add(changeType_2, BorderLayout.EAST);
@@ -463,7 +459,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		};
 		String[] headers = new String[] { "Type Nr", "Naam", "Eigen risico"};
 		dateTableModelChangeType.setTableHeader(headers);
-		System.out.println("filltable");
 		TableColumn column = typetable.getColumnModel().getColumn(0);
 		column.setPreferredWidth(6);
 		

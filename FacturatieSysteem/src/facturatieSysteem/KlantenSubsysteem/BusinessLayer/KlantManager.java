@@ -72,4 +72,5 @@ public interface KlantManager {
 
 	boolean typeGebruikt(String typenaam);
 
+	public ArrayList<ArrayList<String>> getKlantenRMI();
 }

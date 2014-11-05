@@ -37,8 +37,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 				//Maak een nieuwe maatschappij met de gevonden gegevens
 				Verzekeringsmaatschappij maatschappij = new Verzekeringsmaatschappij(maatschappijnr,naam,adres,postcode,woonplaats,KVKnummer, rekeningnummer);
 				//Vind de verzekeringstypes
-				Element typesElement = (Element) document.getElementsByTagName("verzekeringsTypes").item(0);
+				Element typesElement = (Element) maatschappijElement.getElementsByTagName("verzekeringsTypes").item(0);
 				NodeList types = typesElement.getElementsByTagName("verzekeringsType");
+				
 				for(int j = 0; j < types.getLength(); j++){
 					Element typeElement = (Element) types.item(j);
 					String typenr = typeElement.getAttribute("typenr");
@@ -50,6 +51,7 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 					
 					Verzekeringstype type = new Verzekeringstype(typenr, eigenrisico, typenaam);
 					for(int k = 0; k < codes.getLength(); k++){
+						System.out.println(type.getNaam() + " " + maatschappij.getNaam());
 						type.addCode(codes.item(k).getTextContent());
 					}
 					maatschappij.addType(type);
