@@ -17,12 +17,19 @@ public class BehandelingDAO implements BehandelDAOinf {
 	private DAOFactoryFactuur daoFactoryClient;
 	private String behandelingId;
 
-	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode, DAOFactoryFactuur daoFactoryClient) {
+	public BehandelingDAO(DAOFactoryFactuur daoFactoryBehandelcode,
+			DAOFactoryFactuur daoFactoryClient) {
 		this.daoFactoryBehandelcode = daoFactoryBehandelcode;
 		this.daoFactoryClient = daoFactoryClient;
 
 	}
 
+	/**
+	 * gets the price of the specified treatment
+	 * 
+	 * @param behandelCode
+	 * @return double the price
+	 */
 	public double getPrijs(String invoerbehandelCode) {
 		document = daoFactoryBehandelcode.getDocument();
 		double tarief = 0;
@@ -50,6 +57,12 @@ public class BehandelingDAO implements BehandelDAOinf {
 		return tarief;
 	}
 
+	/**
+	 * gets an list of treatments given to the specified client
+	 * 
+	 * @param klant
+	 * @return an list of the given treatments
+	 */
 	public ArrayList<Behandeling> getBehandelingen(Klant klant) {
 		// Initialiseer een lijst voor behandelingen.
 		// Initialiseer een document van de daofactory en maak een string
@@ -82,10 +95,11 @@ public class BehandelingDAO implements BehandelDAOinf {
 							.getElementsByTagName("Behandeling");
 					// Haal in elke behandeling de behandelcode op.
 					for (int j = 0; j < behandelingnode.getLength(); j++) {
-						Element behandelElement = (Element) behandelingnode.item(j);
-						
+						Element behandelElement = (Element) behandelingnode
+								.item(j);
+
 						behandelingId = behandelElement.getAttribute("id");
-						
+
 						behandelcode = behandelElement
 								.getElementsByTagName("Behandelcode").item(0)
 								.getTextContent();
@@ -109,8 +123,13 @@ public class BehandelingDAO implements BehandelDAOinf {
 									.item(k);
 							// Als de afspraak niet gefactureerd is en deze wel
 							// voltooid is, wordt l opgehoogd met 1.
-							if (!afspraakElement.getElementsByTagName("Gefactureerd").item(0).getTextContent().equals("Ja")
-								&& afspraakElement.getElementsByTagName("Status").item(0).getTextContent().equals("Voltooid")) {
+							if (!afspraakElement
+									.getElementsByTagName("Gefactureerd")
+									.item(0).getTextContent().equals("Ja")
+									&& afspraakElement
+											.getElementsByTagName("Status")
+											.item(0).getTextContent()
+											.equals("Voltooid")) {
 								l++;
 								afspraakIDs.add(afspraakElement
 										.getAttribute("ID"));
@@ -123,13 +142,12 @@ public class BehandelingDAO implements BehandelDAOinf {
 								praktijkNummer, behandelingId, behandelcode,
 								behandelStartDatum, behandelEindDatum, BSN,
 								afspraakIDs, totaalprijs, l);
-						if(l > 0){
+						if (l > 0) {
 							behandelingen.add(behandeling);
 						}
-						
-						
+
 						l = 0;
-						//afspraakIDs.clear();
+						// afspraakIDs.clear();
 					}
 				}
 			}
@@ -142,6 +160,12 @@ public class BehandelingDAO implements BehandelDAOinf {
 
 	}
 
+	/**
+	 * get the name of the treatment
+	 * 
+	 * @param invoerbehandelCode
+	 * @return String of the name
+	 */
 	public String getNaam(String invoerbehandelCode) {
 		document = daoFactoryBehandelcode.getDocument();
 		String behandelingNaam = "";

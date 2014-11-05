@@ -58,10 +58,17 @@ public class Verzekeringstype {
 		this.Naam = Naam;
 	}
 	
+	/*
+	 * @param code de toe te voegen code
+	 */
 	public void addCode(String code){
 		this.behandelcodes.add(code);
 	}
 	
+	/*
+	 * @param code de te verwijderen code
+	 * @return boolean of de code is verwijderd
+	 */
 	public boolean deleteCode(String code){
 		return this.behandelcodes.remove(code);
 	}

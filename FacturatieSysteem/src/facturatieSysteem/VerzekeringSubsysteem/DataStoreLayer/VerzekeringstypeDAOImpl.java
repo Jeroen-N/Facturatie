@@ -10,10 +10,14 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
+public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
 	private Document document;
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#addVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean addVerzekeringstypeXML(String maatschappijnr,Verzekeringstype type) {
 		document = daoFactory.getDocument();
@@ -66,6 +70,10 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#deleteVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean deleteVerzekeringstypeXML(String maatschappijnr, Verzekeringstype type) {
 		document = daoFactory.getDocument();
@@ -100,6 +108,10 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#updateVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean updateVerzekeringstypeXML(String maatschappijnr, Verzekeringstype type) {
 		document = daoFactory.getDocument();
@@ -139,6 +151,10 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#addBehandelCode(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public boolean addBehandelCode(String maatschappijnr, String typenr, String behandelcode){
 		document = daoFactory.getDocument();
@@ -175,6 +191,10 @@ public class VerzekeringsDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#removeBehandelCode(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public boolean removeBehandelCode(String maatschappijnr, String typenr, String behandelcode){
 		document = daoFactory.getDocument();

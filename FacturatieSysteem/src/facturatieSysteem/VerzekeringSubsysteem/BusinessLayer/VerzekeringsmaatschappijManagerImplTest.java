@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
@@ -26,7 +25,6 @@ public class VerzekeringsmaatschappijManagerImplTest {
 	public void setUp() throws Exception {
 		instance = new Verzekeringsmaatschappij("001", "Naam", "Straat 12",
 				"3333HG", "Plaats", 87654321, 987654321);
-		new VerzekeringsDAOImpl();
 		verzekeringsMaatschappijen = new ArrayList<Verzekeringsmaatschappij>();
 		verzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 		type = new Verzekeringstype("001", 250, "Typenaam");
@@ -83,13 +81,7 @@ public class VerzekeringsmaatschappijManagerImplTest {
 		typelijst.add(type);
 		assertTrue(instance.getTypes().size() >= 1);
 	}
-	@Test
-	public void testgetVerzekeringstypeByName() throws Exception {
-		typelijst.clear();
-		typelijst.add(type);
-		assertTrue(instance.getTypes().size() >= 1);
-	}
-	@Test
+
 	public void testaddVerzekeringstype() throws Exception {
 		int i = instance.getTypes().size();
 		instance.addType(type);

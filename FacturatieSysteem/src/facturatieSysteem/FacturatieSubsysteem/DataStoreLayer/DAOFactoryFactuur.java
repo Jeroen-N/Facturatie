@@ -22,45 +22,57 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class DAOFactoryFactuur {
-	
-	private String xmlPath ;
+
+	private String xmlPath;
 	private String xsdPath;
 	private Document document;
-	
-	public DAOFactoryFactuur(String xml, String xsd){
+
+	public DAOFactoryFactuur(String xml, String xsd) {
 		this.xmlPath = xml;
 		this.xsdPath = xsd;
-		
+
 	}
 
-	
-	public Document validateXML(){
-		try{
+	/**
+	 * validates the xml file
+	 * 
+	 * @return Document the xml document
+	 */
+	public Document validateXML() {
+		try {
 			Schema schema = getValidationSchema();
 			if (schema == null) {
-				System.out.println("Schema file not found or contains errors, XML file not validated!");
-				// Here we could decide to cancel initialization of the application.
+				System.out
+						.println("Schema file not found or contains errors, XML file not validated!");
+				// Here we could decide to cancel initialization of the
+				// application.
 				// For now, we do not.
-				
+
 			} else {
 				validateDocument(schema);
 			}
-			
-			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+
+			DocumentBuilderFactory builderFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
 			document = dBuilder.parse(getXMLFile());
-			 
-		} catch (ParserConfigurationException e){
+
+		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
-		} catch (SAXException e){
+		} catch (SAXException e) {
 			e.printStackTrace();
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
+
 		return document;
 	}
-	
+
+	/**
+	 * gets the validation schema
+	 * 
+	 * @return schema the validation schema
+	 */
 	public Schema getValidationSchema() {
 		Schema schema = null;
 
@@ -76,6 +88,13 @@ public class DAOFactoryFactuur {
 		return schema;
 	}
 
+	/**
+	 * validate the document
+	 * 
+	 * @param schema
+	 * 
+	 * @return true if succesfull
+	 */
 	public boolean validateDocument(Schema schema) {
 
 		System.out.println("validateDocument");
@@ -95,45 +114,53 @@ public class DAOFactoryFactuur {
 		return result;
 
 	}
-	
 
+	/**
+	 * makes the pdf file
+	 * 
+	 * @return true, if successfull
+	 */
 	public boolean writeDocument() {
 
 		try {
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			TransformerFactory transformerFactory = TransformerFactory
+					.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
-			
+
 			DOMSource source = new DOMSource(document);
 			StreamResult result = new StreamResult(new File(xmlPath));
 			transformer.transform(source, result);
 			return true;
 		} catch (TransformerConfigurationException e) {
-			
+
 		} catch (TransformerException e) {
-			
+
 		}
 		return false;
 	}
-	
-	
-	public String getXMLFile(){
+
+	/**
+	 * gets the xml file
+	 * 
+	 * @return the xml file
+	 */
+	public String getXMLFile() {
 		return xmlPath;
 	}
-	
-	public Document getDocument(){
-		try{
-			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+
+	public Document getDocument() {
+		try {
+			DocumentBuilderFactory builderFactory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder dBuilder = builderFactory.newDocumentBuilder();
 			document = dBuilder.parse(xmlPath);
-		} catch (ParserConfigurationException e){
+		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
-		} catch (SAXException e){
+		} catch (SAXException e) {
 			e.printStackTrace();
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return document;
 	}
 }
-
-

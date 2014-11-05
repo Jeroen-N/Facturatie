@@ -11,6 +11,10 @@ public class BehandelDAOImpl implements BehandelDAO {
 	private Document document;
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/behandelcodes.xml","XML/behandelcodes.xsd");
 	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAO#getBehandelcodes()
+	 */
 	@Override
 	public ArrayList<String> getBehandelcodes(){
 		ArrayList<String> behandelcodes = new ArrayList<>();

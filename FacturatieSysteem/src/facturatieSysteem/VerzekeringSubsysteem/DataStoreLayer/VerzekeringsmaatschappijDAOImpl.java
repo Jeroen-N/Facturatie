@@ -16,6 +16,10 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 	private Document document;
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#getMaatschappijenXML()
+	 */
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getMaatschappijenXML() {
 		document = daoFactory.getDocument();
@@ -64,6 +68,10 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#addMaatschappijXML(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public boolean addMaatschappijXML(Verzekeringsmaatschappij maatschappij) {
 		document = daoFactory.getDocument();
@@ -167,6 +175,10 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#updateMaatschappijXML(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public boolean updateMaatschappijXML(Verzekeringsmaatschappij maatschappij) {
 		document = daoFactory.getDocument();
@@ -203,6 +215,10 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#deleteMaatschappijXML(java.lang.String)
+	 */
 	@Override
 	public boolean deleteMaatschappijXML(String nr) {
 		document = daoFactory.getDocument();
