@@ -31,13 +31,13 @@ public class DataTableModel extends AbstractTableModel {
 
 	// Get a logger instance for the current class
 	/** The logger. */
-	static Logger logger = Logger.getLogger(DataTableModel.class);
+	//static Logger logger = Logger.getLogger(DataTableModel.class);
 
 	/**
 	 * Constructor.
 	 */
 	public DataTableModel() {
-		logger.debug("Constructor");
+		//logger.debug("Constructor");
 
 		// colcount is hardcoded here; change if you want to display more columns.
 		colCount = 4;
@@ -51,7 +51,7 @@ public class DataTableModel extends AbstractTableModel {
 	 * @param values String[][] containing the values to be set.
 	 */
 	public void setValues(String[][] values) {
-		logger.debug("setValues String[][]");
+		//logger.debug("setValues String[][]");
 	
 		cache = new Vector<String[]>();
 		try {
@@ -68,7 +68,7 @@ public class DataTableModel extends AbstractTableModel {
 			fireTableChanged(null); 
 		} catch (Exception e) {
 			cache = new Vector<String[]>();
-			logger.error(e.getMessage());
+			//logger.error(e.getMessage());
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class DataTableModel extends AbstractTableModel {
 	 */
 	public void setValues(ArrayList<Klant> klanten) {
 		
-		logger.debug("setValues klanten");
+		//logger.debug("setValues klanten");
 		int colcount = getColumnCount();
 		int rowcount = klanten.size();
 		String[][] values = new String[rowcount][colcount];
@@ -107,7 +107,7 @@ public class DataTableModel extends AbstractTableModel {
 	 * @param header Array of strings containing the column names.
 	 */
 	public void setTableHeader(String[] header) {
-		logger.debug("setTableHeader");
+		//logger.debug("setTableHeader");
 	
 		headers = new String[colCount];
 		for (int h = 0; h < colCount; h++) {

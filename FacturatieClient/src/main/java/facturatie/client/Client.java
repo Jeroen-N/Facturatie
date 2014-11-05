@@ -62,7 +62,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-		String hostname = "145.48.112.85";
+		String hostname = "192.168.2.7";
 		
 		/*
 		if(args.length != 1) {
@@ -73,7 +73,7 @@ public class Client {
 		}
 		*/
 		// Configure logging. 
-		PropertyConfigurator.configure("C:/Users/Ricardo/Documents/GitHub/Facturatie/FacturatieClient/facturatieclient.logconf");
+		PropertyConfigurator.configure("C:/Users/Sander Blijlevens/Documents/Facturatie/FacturatieClient/facturatieclient.logconf");
 	     
 		logger.info("Starting application ---------------------------------");
 

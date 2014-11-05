@@ -14,6 +14,6 @@
 :: can access the code at the codebase.
 ::
 
-rmiregistry -J-Djava.rmi.server.codebase="http://145.102.71.247/facturatie/bin/"
+rmiregistry -J-Djava.rmi.server.codebase="http://192.168.2.2/facturatie/bin/"
 
 @pause

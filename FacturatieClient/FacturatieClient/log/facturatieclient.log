@@ -206,3 +206,25 @@
 457  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
 457  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
 498  [main] INFO  facturatie.client.Client  - Response: {125651201={12=[[125651201, 1847, 08:30, 09:00, 05-11-2014, Nee, Test, 001]]}, 125651202={15=[[125651202, 6798, 14:00, 17:30, 06-11-2014, Nee, Test Lang, 004]]}}
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+1468 [main] DEBUG facturatie.client.Client  - Locating registry on 192.168.2.7
+1600 [main] INFO  facturatie.client.Client  - Contents of registry: []
+1614 [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+974  [main] DEBUG facturatie.client.Client  - Locating registry on 192.168.2.7
+1112 [main] INFO  facturatie.client.Client  - Contents of registry: []
+1161 [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+172  [main] DEBUG facturatie.client.Client  - Locating registry on 192.168.2.7
+405  [main] INFO  facturatie.client.Client  - Contents of registry: []
+425  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+173  [main] DEBUG facturatie.client.Client  - Locating registry on 192.168.2.7
+306  [main] INFO  facturatie.client.Client  - Contents of registry: []
+321  [main] ERROR facturatie.client.Client  - Error: Fysiosysteem
+0    [main] INFO  facturatie.client.Client  - Starting application ---------------------------------
+47   [main] DEBUG facturatie.client.Client  - Locating registry on 192.168.2.7
+172  [main] INFO  facturatie.client.Client  - Contents of registry: [Fysiosysteem]
+218  [main] INFO  facturatie.client.Client  - Found 'Fysiosysteem' in registry
+218  [main] INFO  facturatie.client.Client  - Calling stub.getBehandelingen()
+234  [main] INFO  facturatie.client.Client  - Response: {}

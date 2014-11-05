@@ -55,7 +55,6 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 					
 					Verzekeringstype type = new Verzekeringstype(typenr, eigenrisico, typenaam);
 					for(int k = 0; k < codes.getLength(); k++){
-						System.out.println(type.getNaam() + " " + maatschappij.getNaam());
 						type.addCode(codes.item(k).getTextContent());
 					}
 					maatschappij.addType(type);

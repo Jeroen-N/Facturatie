@@ -7,7 +7,7 @@
 ::
 
 :: java -cp .\bin;.\libraries\log4j-1.2.17.jar facturatie.client.Client localhost
-java -cp .\bin;.\libraries\log4j-1.2.17.jar facturatie.client.Client 145.48.112.85
+java -cp .\bin;.\libraries\log4j-1.2.17.jar facturatie.client.Client 192.168.2.7
 
 :: Wanneer je securityproblemen wilt oplossen, voeg dan onderstaande optie aan het command toe.
 :: Hiermee krijg je inzicht in alle security instellingen.

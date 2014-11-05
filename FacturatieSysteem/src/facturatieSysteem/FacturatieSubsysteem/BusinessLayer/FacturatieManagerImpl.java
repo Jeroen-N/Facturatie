@@ -76,7 +76,9 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		// daoFactoryFacturatie.validateXML();
 		facturen = new ArrayList<>();
 		Behandelingen = new ArrayList<>();
-
+		String[] args = {};
+		client.main(args);
+		klanten = client.getGegevens();
 	}
 
 	/**
@@ -100,9 +102,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	@Override
 	public Factuur factureer(Klant klant,
 			VerzekeringsmaatschappijManager verzekeringsmanager) {
-		String[] args = {};
-		client.main(args);
-		klanten = client.getGegevens();
 		// Nieuw factuurnummer aanmaken
 		facturen = factuurDAO.haalAlleFacturen();
 		int n1 = 0;
@@ -170,10 +169,8 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		}
 		
 		for(String bsn : klanten.keySet()){
-			System.out.println("BSN: "+ bsn);
 			if (bsn.equals(klant.getBSN())){
 				HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(klant.getBSN());
-				System.out.println("behandelingen: "+behandelingen.toString());
 				for(String behandeling : behandelingen.keySet()){
 
 					ArrayList<String> afspraakIDs = new ArrayList<String>();
@@ -287,18 +284,12 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-
-		String[] args = {};
-		client.main(args);
-		klanten = client.getGegevens();
 		 ArrayList<Factuur> facturen = factuurDAO.haalFacturen(invoerBSN);
 		 for (Factuur factuur: facturen){
 			 for (Behandeling behandeling : factuur.getBehandelingen()){
 				for(String bsn : klanten.keySet()){
-					System.out.println("BSN: "+ bsn);
 					if (bsn.equals(invoerBSN)){
 						HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(invoerBSN);
-						System.out.println("behandelingen: "+behandelingen.toString());
 						for(String behandelingStr: behandelingen.keySet()){
 							for (ArrayList<String> afspraak : behandelingen.get(behandelingStr)){
 								behandeling.setBehandelCode(afspraak.get(7));

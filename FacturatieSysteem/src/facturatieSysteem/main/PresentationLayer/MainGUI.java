@@ -667,9 +667,7 @@ public class MainGUI {
 
 	public void fillTableZoekresultaat(String gebDatum) {
 		memberList = KlantManager.findKlant(gebDatum);
-
 		int count = (memberList == null) ? 0 : memberList.size();
-
 		if (count > 0) {
 			Klant_Table.removeAll();
 			Uitgebreide_Info.setText("");
