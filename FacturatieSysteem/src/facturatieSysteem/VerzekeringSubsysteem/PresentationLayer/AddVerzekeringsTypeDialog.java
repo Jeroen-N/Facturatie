@@ -219,7 +219,7 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 											dispose();
 											showConfirmationWindow("Type succesvol toegevoegd!");
 										} else {
-											showConfirmationWindow("Type niet succesvol toegevoegd!");
+											showConfirmationWindow("Type nummer in gebruik!");
 										}
 									}
 								}

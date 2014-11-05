@@ -272,6 +272,7 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		for (Verzekeringsmaatschappij mts: verzekeringsMaatschappijen){
 			if(mts.getKVK() == (maatschappij.getKVK())){
 				state = false;
+				break;
 			}else {
 				state = true;
 			}
