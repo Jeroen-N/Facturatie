@@ -9,14 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,7 +38,6 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
-import javax.swing.text.MaskFormatter;
 
 import org.apache.log4j.Logger;
 
@@ -87,17 +84,6 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
 		
 		{
-			
-			/*
-			 * masked formatter aanmaken
-			 */
-			MaskFormatter formatter = null;
-			  try {
-			    formatter = new MaskFormatter("###############");
-			  } catch (ParseException e) {
-			    e.printStackTrace();
-			  }
-
 			/*
 			 * JTabbedPane wordt aangemaakt
 			 */
@@ -462,9 +448,10 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 			}
 		}
 	}
-	@SuppressWarnings("serial")
 	public void fillTable(){
 		typetable = new JTable(dateTableModelChangeType) {
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
 			}
