@@ -25,11 +25,18 @@ public class DAOFactoryVerzekering {
 	private String xmlPath;
 	private String xsdPath;
 	private Document document;		
-		
+	
+	/* 
+	 * @param xml De locatie van de XML file
+	 * @param xsd De locatie van de XSD file
+	 */
 	public DAOFactoryVerzekering(String xml, String xsd){
 		xmlPath = xml;
 		xsdPath = xsd;
 	}
+	/*
+	 * @return Het document als deze geldig is
+	 */
 	public Document validateXML(){
 		try{
 			Schema schema = getValidationSchema();
@@ -56,7 +63,9 @@ public class DAOFactoryVerzekering {
 	
 		return document;
 	}
-	
+	/*
+	 * @return het validatie schema
+	 */
 	public Schema getValidationSchema() {
 		Schema schema = null;
 
@@ -71,7 +80,9 @@ public class DAOFactoryVerzekering {
 
 		return schema;
 	}
-
+	/*
+	 * @return True als het document overeenkomt met het schema
+	 */
 	public boolean validateDocument(Schema schema) {
 
 		System.out.println("validateDocument");
@@ -92,7 +103,9 @@ public class DAOFactoryVerzekering {
 
 	}
 	
-
+	/*
+	 * @return true als in het document succesvol is geschreven
+	 */
 	public boolean writeDocument() {
 
 		try {
@@ -111,6 +124,9 @@ public class DAOFactoryVerzekering {
 		return false;
 	}
 	
+	/*
+	 * @return Het Document
+	 */
 	public Document getDocument(){
 		try{
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();

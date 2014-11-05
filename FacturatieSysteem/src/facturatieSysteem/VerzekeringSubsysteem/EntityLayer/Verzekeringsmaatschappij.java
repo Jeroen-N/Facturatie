@@ -35,6 +35,9 @@ public class Verzekeringsmaatschappij {
 		this.setRekeningNR(RekeningNR);
 	}
 	
+	/*
+	 * @return Het maatschappijnr
+	 */
 	public String getNr(){
 		return maatschappijnr;
 	}
@@ -145,6 +148,10 @@ public class Verzekeringsmaatschappij {
 		return types;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString(){
 		return 	Naam 									+ "\n" +
 				Adres									+ "\n" +

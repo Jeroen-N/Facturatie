@@ -14,13 +14,18 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 public class VerzekeringsmaatschappijManagerImpl implements VerzekeringsmaatschappijManager {
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen = new ArrayList<>();
 	private VerzekeringsmaatschappijDAO VerzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
-	private VerzekeringstypeDAO VerzekeringtypeDAO = new VerzekeringsDAOImpl();
+	private VerzekeringstypeDAO VerzekeringtypeDAO = new VerzekeringstypeDAOImpl();
 	private String errorMessage;
 
 	public VerzekeringsmaatschappijManagerImpl(){
 		ArrayList<Verzekeringsmaatschappij> lijst = VerzekeringDAO.getMaatschappijenXML();
 		this.importData(lijst);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringsmaatschappij(java.lang.String)
+	 */
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
 		for(Verzekeringsmaatschappij maatschappij : verzekeringsMaatschappijen){
@@ -31,6 +36,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) == null){
@@ -42,6 +51,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#updateVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public boolean updateVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null){
@@ -59,6 +72,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public boolean deleteVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null && maatschappij.getTypes().size() < 1){
@@ -69,11 +86,19 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringsmaatschappijen()
+	 */
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, java.lang.String)
+	 */
 	@Override
 	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String nr) {
 		for(Verzekeringstype type : maatschappij.getTypes()){
@@ -84,6 +109,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringstypeByName(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, java.lang.String)
+	 */
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam) {
 		for(Verzekeringstype type : maatschappij.getTypes()){
 			if(type.getNaam().equals(naam)){
@@ -93,6 +122,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) == null){
@@ -102,6 +135,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#updateVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
@@ -113,6 +150,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	 */
 	@Override
 	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
@@ -122,6 +163,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addBehandelcode(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype, java.lang.String)
+	 */
 	@Override
 	public boolean addBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){			
@@ -133,6 +178,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteBehandelcode(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype, java.lang.String)
+	 */
 	@Override
 	public boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
 		if(getVerzekeringstype(maatschappij, type.getNr()) != null){
@@ -143,15 +192,30 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#importData(java.util.ArrayList)
+	 */
+	@Override
 	public void importData(ArrayList<Verzekeringsmaatschappij> lijst){
 		for(Verzekeringsmaatschappij maatschappij : lijst){
 			verzekeringsMaatschappijen.add(maatschappij);
 		}
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#maatschappijInfo(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	@Override
 	public String maatschappijInfo(Verzekeringsmaatschappij maatschappij) {
 		return "Verzekeringsmaatschappij \n\nNaam: "+ maatschappij.getNaam() + "\nAdres: " + maatschappij.getAdres() + "\nPlaats: " + maatschappij.getPlaats() + "\nPostcode: " + maatschappij.getPostcode() + "\nKVKnummer: " + maatschappij.getKVK() + "\nRekeningnummer: " + maatschappij.getRekeningNR();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkVerzekering(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public String checkVerzekering(String maatschappijnr, String Naam, String Adres,
 			String Postcode, String Plaats, String KVK, String RekeningNr) {
@@ -229,6 +293,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		return errorMessage;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkType(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public String checkType(String typenr, String EigenRisico, String Naam) {
 		errorMessage = "";
@@ -267,6 +336,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return errorMessage;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkKvk(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	 */
 	public boolean checkKvk(Verzekeringsmaatschappij maatschappij){
 		boolean state = false;
 		for (Verzekeringsmaatschappij mts: verzekeringsMaatschappijen){

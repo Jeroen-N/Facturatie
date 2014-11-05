@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsDAOImpl;
+import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO;
@@ -29,7 +29,7 @@ public class VerzekeringsmaatschappijManagerTest {
 	public void setUp() throws Exception {
 		instance = new Verzekeringsmaatschappij("001", "Naam", "Straat 12",
 				"3333HG", "Plaats", 87654321, 987654321);
-		typeDAO = new VerzekeringsDAOImpl();
+		typeDAO = new VerzekeringstypeDAOImpl();
 		naam = "Alex";
 		Nr = "1";
 		verzekeringsMaatschappijen = new ArrayList<Verzekeringsmaatschappij>();
