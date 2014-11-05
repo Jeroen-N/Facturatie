@@ -142,8 +142,18 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		ArrayList<Behandeling> behandelingenlijst = new ArrayList<>();
 		int z = 0;
 		double totaalPrijsFactuur = 0;
-		//TODO behandelingen ophalen uit andere systeem;
-
+		
+		
+		ArrayList<String> afspraakIDs1 = new ArrayList<String>();
+		afspraakIDs1.add("0");
+		for (Factuur factuur : haalFacturen(klant.getBSN())){
+			for(Behandeling behandeling : factuur.getBehandelingen()){
+				for (String afspraakID : behandeling.getAfspraakIDs()){
+					afspraakIDs1.add(afspraakID);
+				}
+			}
+		}
+		
 		for(String bsn : klanten.keySet()){
 			System.out.println("BSN: "+ bsn);
 			if (bsn.equals(klant.getBSN())){
@@ -154,22 +164,23 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					ArrayList<String> afspraakIDs = new ArrayList<String>();
 					String code = null;
 					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
-						if (afspraak.get(5).equals("Nee")){
-							afspraakIDs.add(afspraak.get(1));
-							code = afspraak.get(7);
+						for (String afspraakID : afspraakIDs1){
+							if(afspraakID != afspraak.get(1)){
+								afspraakIDs.add(afspraak.get(1));
+								
+							}
 						}
-
+						code = afspraak.get(7);
 					}
-
 					
-					if (afspraakIDs.size() >= 0){
+					if (afspraakIDs.size() > 0){
 						behandelingenlijst.add(new Behandeling(null,behandeling,code,null,null,klant.getBSN(),afspraakIDs,00,afspraakIDs.size()));
-
 					}
 				}
 			}
 		}
-
+		
+		if(behandelingenlijst.size() > 0){
 		for (Behandeling behandeling : behandelingenlijst) {
 			totalePrijs = 00;
 			for (String code : verzekering.getBehandelcodes()) {
@@ -228,13 +239,13 @@ public class FacturatieManagerImpl implements FacturatieManager {
 			totaalPrijsFactuur += totalePrijs;
 
 		}
-		if (behandelingenlijst.size() != 0) {
-			Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
-					teVergoedenPrijs, behandelingenlijst, "Niet betaald",
-					totaalPrijsFactuur);
-			factuurDAO.maakFactuur(klant, f);
-
-			return f;
+		Factuur f = new Factuur(factuurNummer, vandaag, vDatum, BSN,
+				teVergoedenPrijs, behandelingenlijst, "Niet betaald",
+				totaalPrijsFactuur);
+		factuurDAO.maakFactuur(klant, f);
+		teVergoedenPrijs = 00;
+		totaalPrijsFactuur = 00;
+		return f;
 		}
 		return null;
 
@@ -249,7 +260,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-
 		String[] args = {};
 		client.main(args);
 		klanten = client.getGegevens();
@@ -268,12 +278,6 @@ public class FacturatieManagerImpl implements FacturatieManager {
 						}
 					}	
 				}
-				 //String BSN = behandeling.getBSN();
-				 //String behandelingId = behandeling.getbehandelingId();
-				 //ArrayList<String> afspraakIDs = behandeling.getAfspraakIDs();			 
-				 
-				 //TODO rest van info ophalen uit ander systeem
-				 //behandeling.setBehandelCode(behandelCode);
 			 }
 		 }
 		 return facturen;

@@ -267,9 +267,38 @@ public class FactuurDAO implements FactuurDAOinf {
 					double totaalPrijs = Double.parseDouble(factuurElement
 							.getElementsByTagName("Totaalprijs").item(0)
 							.getTextContent());
+					
+					ArrayList<Behandeling> behandelingen = new ArrayList<>();
+					Element factuurBehandelingenElement = (Element) factuurElement
+							.getElementsByTagName("FactuurBehandelingen")
+							.item(0);
+					NodeList behandelingenNode = factuurBehandelingenElement
+							.getElementsByTagName("FactuurBehandeling");
 
+					for (int k = 0; k < behandelingenNode.getLength(); k++) {
+
+						Element behandelingElement = (Element) behandelingenNode
+								.item(k);
+						String behandelingId = behandelingElement
+								.getAttribute("BehandelingID");
+
+						NodeList BehandelafspraakIDsNode = behandelingElement
+								.getElementsByTagName("BehandelafspraakID");
+						ArrayList<String> AfsprakenIDs = new ArrayList<>();
+						for (int y = 0; y < BehandelafspraakIDsNode
+								.getLength(); y++) {
+							String behandelafspraakID = BehandelafspraakIDsNode
+									.item(y).getTextContent();
+							AfsprakenIDs.add(behandelafspraakID);
+						}
+						Behandeling behandeling = new Behandeling(null,
+								behandelingId, null, null, null, BSN,
+								AfsprakenIDs, 00, AfsprakenIDs.size());
+						behandelingen.add(behandeling);
+					}
+					
 					factuur = new Factuur(factuurNummer, factuurDatum,
-							vervalDatum, BSN, vergoedeBedrag, null, status,
+							vervalDatum, BSN, vergoedeBedrag, behandelingen, status,
 							totaalPrijs);
 					facturen.add(factuur);
 
