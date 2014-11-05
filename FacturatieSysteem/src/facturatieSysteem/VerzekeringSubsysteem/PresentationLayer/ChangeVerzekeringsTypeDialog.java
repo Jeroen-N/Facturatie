@@ -9,14 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,8 +38,6 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
-import javax.swing.text.MaskFormatter;
-
 import org.apache.log4j.Logger;
 
 
@@ -85,18 +81,11 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		dateTableModelChangeType = new DataTableModelChangeType();
 		maatschappij = manager.getVerzekeringsmaatschappij(nummer);
+
+		System.out.println("filltable");
+		fillTable();
 		
 		{
-			
-			/*
-			 * masked formatter aanmaken
-			 */
-			MaskFormatter formatter = null;
-			  try {
-			    formatter = new MaskFormatter("###############");
-			  } catch (ParseException e) {
-			    e.printStackTrace();
-			  }
 
 			/*
 			 * JTabbedPane wordt aangemaakt
@@ -144,7 +133,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							panel.add(lblKlant, BorderLayout.WEST);
 						}
 					}
-					fillTable();
+					
 					}
 				}
 				
@@ -326,7 +315,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    "Weet u het zeker?",
 											    JOptionPane.YES_NO_OPTION);
 										if(n == 0){
-											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											manager.addBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()), behandelcode);
 											fillField(typetable.getSelectedRow());
 										}
 			
@@ -376,7 +365,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 											    JOptionPane.YES_NO_OPTION);
 												
 										if(n == 0){
-											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr), behandelcode);
+											manager.deleteBehandelcode(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()), behandelcode);
 											fillField(typetable.getSelectedRow());
 										}
 										
@@ -412,6 +401,7 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 							Verzekeringstype type = new Verzekeringstype(textFieldTypeNr.getText(),Integer.parseInt(textFieldEigenRisico.getText()),textFieldNaam.getText());
 							if(manager.updateVerzekeringstype(maatschappij, type)){
 								showConfirmationWindow("Verzekeringstype aangepast");
+								dateTableModelChangeType.fireTableDataChanged();
 								fillTable();
 							} else {
 								showConfirmationWindow("Verzekeringstype niet aangepast");
@@ -446,8 +436,9 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 									if(klantmanager.typeGebruikt(type.getNaam())){
 										showConfirmationWindow("Verzekeringstype nog in gebruik");
 									} else {
-										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,TypeNr))){
+										if(manager.deleteVerzekeringstype(maatschappij, manager.getVerzekeringstype(maatschappij,textFieldTypeNr.getText()))){
 											showConfirmationWindow("Verzekeringstype verwijderd");
+											dateTableModelChangeType.fireTableDataChanged();
 											fillTable();
 										} else {
 											showConfirmationWindow("Verzekeringstype niet verwijderd");
@@ -462,16 +453,17 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 			}
 		}
 	}
-	@SuppressWarnings("serial")
 	public void fillTable(){
 		typetable = new JTable(dateTableModelChangeType) {
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
 			}
 		};
 		String[] headers = new String[] { "Type Nr", "Naam", "Eigen risico"};
 		dateTableModelChangeType.setTableHeader(headers);
-		
+		System.out.println("filltable");
 		TableColumn column = typetable.getColumnModel().getColumn(0);
 		column.setPreferredWidth(6);
 		
