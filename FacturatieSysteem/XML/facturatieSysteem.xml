@@ -42,4 +42,14 @@
 			</verzekeringsTypes>    
    </verzekeringsmaatschappij>	
    
+	<verzekeringsmaatschappij maatschappijnr="001">
+		<naam>Naam</naam>
+		<adres>Straat 12</adres>
+		<postcode>3333HG</postcode>
+		<woonplaats>Plaats</woonplaats>
+		<KVKNummer>87654321</KVKNummer>
+		<rekeningNummer>987654321</rekeningNummer>
+		<verzekeringsTypes>
+		</verzekeringsTypes>
+	</verzekeringsmaatschappij>
 </facturatieSysteem>

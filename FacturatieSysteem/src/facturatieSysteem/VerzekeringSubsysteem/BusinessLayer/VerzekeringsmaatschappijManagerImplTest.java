@@ -4,53 +4,47 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsDAOImpl;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO;
 import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAOImpl;
-import facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-public class VerzekeringsmaatschappijManagerTest {
+public class VerzekeringsmaatschappijManagerImplTest {
 	private Verzekeringsmaatschappij instance;
 	private VerzekeringsmaatschappijManager manager;
-	private VerzekeringstypeDAO typeDAO;
 	private VerzekeringsmaatschappijDAO verzekeringDAO;
 	private ArrayList<Verzekeringsmaatschappij> verzekeringsMaatschappijen;
 	private ArrayList<Verzekeringstype> typelijst;
-	private String naam;
-	private String Nr;
 	private Verzekeringstype type;
 
 	@Before
 	public void setUp() throws Exception {
 		instance = new Verzekeringsmaatschappij("001", "Naam", "Straat 12",
 				"3333HG", "Plaats", 87654321, 987654321);
-		typeDAO = new VerzekeringsDAOImpl();
-		naam = "Alex";
-		Nr = "1";
 		verzekeringsMaatschappijen = new ArrayList<Verzekeringsmaatschappij>();
 		verzekeringDAO = new VerzekeringsmaatschappijDAOImpl();
 		type = new Verzekeringstype("001", 250, "Typenaam");
 		typelijst = new ArrayList<Verzekeringstype>();
 	}
 
+	@After
 	public void tearDown() throws Exception {
 	}
-
+	@Test
 	public void testgetVerzekeringsMaatschappij() throws Exception {
 		assertTrue(2 == verzekeringDAO.getMaatschappijenXML().size());
 	}
-
+	@Test
 	public void testaddVerzekeringsmaatschappij() throws Exception {
 		int i = verzekeringDAO.getMaatschappijenXML().size();
 		verzekeringDAO.addMaatschappijXML(instance);
 		assertTrue(i + 1 == verzekeringDAO.getMaatschappijenXML().size());
 	}
-
+	@Test
 	public void testupdateVerzekeringsmaatschappij() throws Exception {
 		String nr = "002";
 		String rekNr = "987654322";
@@ -69,19 +63,19 @@ public class VerzekeringsmaatschappijManagerTest {
 		}
 		assertEquals(expRes, plaats);
 	}
-
+	@Test
 	public void testdeleteVerzekeringsmaatschappij() throws Exception {
 		manager.addVerzekeringsmaatschappij(instance);
 		manager.deleteVerzekeringsmaatschappij(instance);
 		assertTrue(manager.getVerzekeringsmaatschappij("002") == null);
 	}
-
+	@Test
 	public void testgetVerzekeringsmaatschappijen() throws Exception {
 		verzekeringsMaatschappijen.clear();
 		verzekeringsMaatschappijen.add(instance);
 		assertTrue(manager.getVerzekeringsmaatschappijen().size() >= 1);
 	}
-
+	@Test
 	public void testgetVerzekeringstype() throws Exception {
 		typelijst.clear();
 		typelijst.add(type);
@@ -93,7 +87,7 @@ public class VerzekeringsmaatschappijManagerTest {
 		instance.addType(type);
 		assertTrue(i + 1 == instance.getTypes().size());
 	}
-
+	@Test
 	public void testupdateVerzekeringstype() throws Exception {
 		String nummer = "255";
 		String naam = null;
@@ -107,7 +101,7 @@ public class VerzekeringsmaatschappijManagerTest {
 		}
 		assertEquals(expRes, naam);
 	}
-
+	@Test
 	public void testImportdata() throws Exception {
 		verzekeringsMaatschappijen.clear();
 		verzekeringsMaatschappijen.add(instance);
