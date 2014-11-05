@@ -101,10 +101,10 @@ public class Client {
             
             RapportageIF stub = (RapportageIF) registry.lookup(RapportageIF.servicename);
     		logger.info("Found '" + RapportageIF.servicename + "' in registry");
-            
+    		
     		if(stub != null){
-	    		logger.trace("Calling stub.getBehandelingen()");
-	            HashMap<String, ArrayList<ArrayList<String>>> response = stub.getGegevens();
+	    		logger.info("Calling stub.getBehandelingen()");
+	            HashMap<String, HashMap<String, ArrayList<ArrayList<String>>>> response = stub.getGegevens();
 	            logger.info("Response: " + response);
     		} else {
     			logger.info("stub is null");
