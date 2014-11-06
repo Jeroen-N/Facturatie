@@ -1,3 +1,8 @@
+/*
+ * This is the class that creates the HelpPanel, that has the text that explains everything about this system.
+ * 
+ * @author IVH5B2
+ */
 package facturatieSysteem.main.helpPanel;
 
 import java.awt.BorderLayout;
@@ -10,16 +15,32 @@ import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 
 public class HelpPanel {
+	
+	/** The help. */
 	private JTextArea help;
+	
+	/** The scroll pane. */
 	private JScrollPane scrollPane;
+	
+	/** The main panel. */
 	private JPanel mainPanel;
 	
+	/**
+	 * Help panel.
+	 *
+	 * @return the JPanel containing the helptext
+	 */
 	public JPanel HelpPanel(){
 		JPanel paneel = new JPanel();
 		paneel.setName("HELP");
 		return initComponents();
 	}
 	
+	/**
+	 * Inits the components.
+	 *
+	 * @return the JPanel containing the helptext
+	 */
 	public JPanel initComponents(){
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout(0, 0));
