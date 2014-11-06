@@ -66,6 +66,24 @@ project(':FacturatieSysteem') {
 			from('../FacturatieSysteem/bin/org'){
 				into 'bin/org'
 			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/main/dataTableModel'){
+				into 'bin/facturatieSysteem/main'
+			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/main/helpPanel'){
+				into 'bin/facturatieSysteem/main'
+			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/main/PresentationLayer'){
+				into 'bin/facturatieSysteem/main'
+			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/LoginSubSysteem/BusinessLayer'){
+				into 'bin/facturatieSysteem/main'
+			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/LoginSubSysteem/DataStoreLayer'){
+				into 'bin/facturatieSysteem/main'
+			}
+			from('../FacturatieSysteem/bin/facturatieSysteem/LoginSubSysteem/EntityLayer'){
+				into 'bin/facturatieSysteem/main'
+			}
 			into { classesDir }
 		}
 		dependsOn classesDirExists
