@@ -139,16 +139,14 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		}
 		
 		//Loop door de verzekeringsmaatschappijen heen
-		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager
-				.getVerzekeringsmaatschappijen()) {
+		for (Verzekeringsmaatschappij maatschappij : verzekeringsmanager.getVerzekeringsmaatschappijen()) {
 			//Loop per verzekeringsmaatschappij door alle types
 			for (Verzekeringstype type : maatschappij.getTypes()) {
 				//Als de polisnaam van de klant overeen komt met de naam van de verzekeringsmaatschappij
 				//vul dan het Verzekeringstype veld verzekering met het type dat opgehaald
 				//wordt bij de betreffende manager met de maatschappij en de polisnaam die eerder gevonden zijn.
 				if (polisNaam.equals(type.getNaam())) {
-					verzekering = verzekeringsmanager
-							.getVerzekeringstypeByName(maatschappij, polisNaam);
+					verzekering = verzekeringsmanager.getVerzekeringstypeByName(maatschappij, polisNaam);
 				}
 			}
 		}
@@ -160,7 +158,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 		
 		ArrayList<String> afspraakIDs1 = new ArrayList<String>();
 		afspraakIDs1.add("0");
-		for (Factuur factuur : haalFacturen(klant.getBSN())){
+		for (Factuur factuur : factuurDAO.haalFacturen(klant.getBSN())){
 			for(Behandeling behandeling : factuur.getBehandelingen()){
 				for (String afspraakID : behandeling.getAfspraakIDs()){
 					afspraakIDs1.add(afspraakID);
@@ -178,7 +176,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 					for (ArrayList<String> afspraak : behandelingen.get(behandeling)){
 						int z1 =0;
 						for (String afspraakID : afspraakIDs1){
-							if(afspraakID == afspraak.get(1)){
+							if(afspraakID.equals(afspraak.get(1))){
 								z1 = 1;
 							}
 						}
@@ -289,7 +287,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	@Override
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
-		
+		ArrayList<Factuur> facturen = new ArrayList<Factuur>();
 		 facturen = factuurDAO.haalFacturen(invoerBSN);
 		 for (Factuur factuur: facturen){
 			 for (Behandeling behandeling : factuur.getBehandelingen()){
@@ -298,7 +296,10 @@ public class FacturatieManagerImpl implements FacturatieManager {
 						HashMap<String, ArrayList<ArrayList<String>>> behandelingen = klanten.get(invoerBSN);
 						for(String behandelingStr: behandelingen.keySet()){
 							for (ArrayList<String> afspraak : behandelingen.get(behandelingStr)){
-								behandeling.setBehandelCode(afspraak.get(7));
+								if(behandelingStr.equals(behandeling.getbehandelingId())){
+									behandeling.setBehandelCode(afspraak.get(7));
+								}
+								
 							}
 						}
 					}	
@@ -359,16 +360,14 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	 */
 	public String loopBehandelingen(Factuur factuur) {
 		String naam = "";
+		naam += "Behandelingen: \n";
 		Behandelingen = factuur.getBehandelingen();
 		for (Behandeling behandeling : Behandelingen) {
 			String code = behandeling.getBehandelCode();
 			// for(int i = 0; i < Behandelingen.size(); i++){
-
-			naam += "Behandelingen: \t" + behandelingDAO.getNaam(code) + "\n";
+			naam += "\t\t" + behandelingDAO.getNaam(code) + "\n";
 			// }
-
 		}
-
 		return naam;
 	}
 

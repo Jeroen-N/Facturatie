@@ -42,6 +42,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	 */
 	public ArrayList<Factuur> haalFacturen(String invoerBSN) {
 		document = daoFactoryClient.getDocument();
+		facturen.clear();
 		try {
 			Element clientenElement = (Element) document.getElementsByTagName(
 					"Clienten").item(0);
@@ -80,6 +81,7 @@ public class FactuurDAO implements FactuurDAOinf {
 						// factuur
 
 						ArrayList<Behandeling> behandelingen = new ArrayList<>();
+						behandelingen.clear();
 						Element factuurBehandelingenElement = (Element) factuurElement
 								.getElementsByTagName("FactuurBehandelingen")
 								.item(0);
@@ -112,7 +114,6 @@ public class FactuurDAO implements FactuurDAOinf {
 								vervalDatum, invoerBSN, vergoedeBedrag,
 								behandelingen, status, totaalPrijs);
 						facturen.add(factuur); //factuur objecten maken en aan de arraylist toevoegen
-						behandelingen.clear();
 					}
 				}
 			}

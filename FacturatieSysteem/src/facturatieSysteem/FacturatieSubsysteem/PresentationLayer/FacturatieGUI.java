@@ -289,10 +289,8 @@ public class FacturatieGUI extends JFrame {
 	 * @param row
 	 */
 	public void fillField(int row) {
-		String factuur_nummer = overzicht.getModel().getValueAt(row, 0)
-				.toString();
-		factuur.setText(facturatieManagerImpl
-				.toonFactuur(factuur_nummer, klant));
+		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
+		factuur.setText(facturatieManagerImpl.toonFactuur(factuur_nummer, klant));
 		facturen.clear();
 	}
 
@@ -303,8 +301,7 @@ public class FacturatieGUI extends JFrame {
 	 * @return Factuur
 	 */
 	public Factuur vindFactuur(int row2) {
-		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0)
-				.toString();
+		String factuur_nummer2 = overzicht.getModel().getValueAt(row2, 0).toString();
 		return facturatieManagerImpl.getFactuur(factuur_nummer2, klant);
 	}
 

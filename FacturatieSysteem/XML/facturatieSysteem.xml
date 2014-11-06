@@ -8,7 +8,7 @@
       <rekeningNummer>921386577</rekeningNummer>
 	  <verzekeringsTypes>
 	  	  <verzekeringsType typenr="001">
-	         <naam>Basic</naam>
+	         <naam>CGZ-Basic</naam>
 	         <verplichtEigenRisico>200</verplichtEigenRisico>
 	         <behandelCodes>
 	            <behandelcode>004</behandelcode>
@@ -47,6 +47,17 @@
 		<KVKNummer>87654321</KVKNummer>
 		<rekeningNummer>987654321</rekeningNummer>
 		<verzekeringsTypes>
+		<verzekeringsType typenr="005">
+	        <naam>Betering-Basic</naam>
+	        <verplichtEigenRisico>285</verplichtEigenRisico>
+	        <behandelCodes>
+				<behandelcode>002</behandelcode>
+	            <behandelcode>004</behandelcode>
+	            <behandelcode>006</behandelcode>
+	            <behandelcode>008</behandelcode>
+	            <behandelcode>010</behandelcode>
+			</behandelCodes>
+	    </verzekeringsType>
 		</verzekeringsTypes>
 	</verzekeringsmaatschappij>
 </facturatieSysteem>
