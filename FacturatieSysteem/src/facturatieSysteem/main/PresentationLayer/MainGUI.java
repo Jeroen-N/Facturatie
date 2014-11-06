@@ -144,12 +144,19 @@ public class MainGUI {
 		btnKlantenbeheer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Klant_Table.removeAll();
+				fillTable();
+				Uitgebreide_Info.setText("");
+				PolisInfo.setText("");
+				Klant_Table.setRowSelectionInterval(row, row);
+				fillField(row);
 				VerzekeringPanel.setVisible(false);
 				VerzekeringsMaatschappijPanel.setVisible(false);
 				KlantenPanel.setVisible(true);
 				FacturatiePanel.removeAll();
 				FacturatiePanel.setVisible(false);
 				helpPanel.setVisible(false);
+				
 			}
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
@@ -380,7 +387,7 @@ public class MainGUI {
 		 */
 		Uitgebreide_Info = new JTextArea();
 		Uitgebreide_Info.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(30, 144, 255)));
-		Uitgebreide_Info.setRows(20);
+		Uitgebreide_Info.setRows(10);
 		Uitgebreide_Info.setColumns(30);
 		Uitgebreide_Info.setEditable(false);
 		Klant_info.add(Uitgebreide_Info, BorderLayout.NORTH);
@@ -408,11 +415,12 @@ public class MainGUI {
 		 * Polis informatie panel wordt aangemaakt en gevuld
 		 */
 		Info_Polis = new JPanel();
-		Info_Polis.setMinimumSize(new Dimension(10, 50));
+		Info_Polis.setMinimumSize(new Dimension(10, 80));
 		Info_Polis.setBorder(null);
 		Klant_info.add(Info_Polis, BorderLayout.CENTER);
 		Info_Polis.setLayout(new BorderLayout(0, 0));
 		PolisInfo = new JTextArea();
+		PolisInfo.setRows(20);
 		PolisInfo.setBorder(null);
 		PolisInfo.setColumns(40);
 		PolisInfo.setEditable(false);

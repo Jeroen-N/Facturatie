@@ -10,7 +10,7 @@
 			<Telefoonnummer>0682739024</Telefoonnummer>
 			<Email>xpjgerre@avans.nl</Email>
 			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>0.0</ResterendEigenRisico>
+			<ResterendEigenRisico>232.5</ResterendEigenRisico>
 			<Rekeningnummer>NL47RABO0136052159</Rekeningnummer>
 		</ClientGegevens>
 		<VerzekeringPolissen>
@@ -27,31 +27,19 @@
 				<startDatum>10-06-2001</startDatum>
 				<eindDatum>10-06-2002</eindDatum>
 			</VerzekeringPolis>
-			<VerzekeringPolis PolisNummer="K5UT9X">
-				<VerzekeringType>Basic</VerzekeringType>
-				<EigenRisico>200.0</EigenRisico>
-				<startDatum>01-01-2014</startDatum>
-				<eindDatum>01-01-2015</eindDatum>
-			</VerzekeringPolis>
-			<VerzekeringPolis PolisNummer="8827DG">
-				<VerzekeringType>CGZ-Basic</VerzekeringType>
-				<EigenRisico>200.0</EigenRisico>
-				<startDatum>01-01-2014</startDatum>
-				<eindDatum>01-01-2015</eindDatum>
-			</VerzekeringPolis>
-			<VerzekeringPolis PolisNummer="FBTJ6J">
-				<VerzekeringType>CGZ-Basic</VerzekeringType>
-				<EigenRisico>200.0</EigenRisico>
+			<VerzekeringPolis PolisNummer="JX1OPY">
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
+				<EigenRisico>285.0</EigenRisico>
 				<startDatum>01-01-2014</startDatum>
 				<eindDatum>01-01-2015</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen><Factuur FactuurNummer="1"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="1916"><BehandelafspraakID>12</BehandelafspraakID><BehandelafspraakID>1847</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>90.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen></Client>
+		<Facturen><Factuur FactuurNummer="1"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="1916"><BehandelafspraakID>12</BehandelafspraakID><BehandelafspraakID>1847</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>90.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur><Factuur FactuurNummer="3"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="1918"><BehandelafspraakID>15</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>0.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>17.5</Totaalprijs></Factuur></Facturen></Client>
 	<Client BSN="125651202">
 		<ClientGegevens>
-			<Naam>                                                  </Naam>
+			<Naam>Sander Blijlevens</Naam>
 			<Adres>Schijfstraat 26B</Adres>
 			<Postcode>4847SM</Postcode>
-			<Woonplaats>                                                  </Woonplaats>
+			<Woonplaats>Teteringen                                                  </Woonplaats>
 			<Geboortedatum>31-12-1995</Geboortedatum>
 			<Telefoonnummer>0625235100</Telefoonnummer>
 			<Email>sjmblijl@avans.nl</Email>
@@ -84,7 +72,7 @@
 				<startDatum>03-11-2014</startDatum>
 				<eindDatum>05-12-2015</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen/>
+		<Facturen><Factuur FactuurNummer="2"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="2349"><BehandelafspraakID>3498</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="6845"><BehandelafspraakID>684</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="9856"><BehandelafspraakID>3654</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="4745"><BehandelafspraakID>6798</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>295.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen>
 	</Client>
 
 	<Client BSN="287496358">

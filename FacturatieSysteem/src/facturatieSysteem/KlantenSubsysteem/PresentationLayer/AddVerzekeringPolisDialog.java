@@ -782,6 +782,8 @@ public class AddVerzekeringPolisDialog extends JDialog {
 										textFieldEindDatum.getText())){
 									showConfirmationWindow("Polis Teovoegen Mislukt");
 								}else{
+									klant.setTotaalEigenRisico(Double.parseDouble(textFieldEigenRisico.getText()));
+									manager.updateKlant(klant.getBSN(), klant.getNaam(), klant.getAdres(), klant.getPostcode(), klant.getWoonplaats(), klant.getGeboortedatum(), klant.getTelefoonnummer(), klant.getEmail(), klant.getRekeningnummer(), klant.getResterendEigenRisico(), klant.getVerzekeringPolissen(), klant.getBetaalMethode());
 									dispose();
 								}
 							}

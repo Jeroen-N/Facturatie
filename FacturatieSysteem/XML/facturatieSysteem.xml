@@ -20,7 +20,7 @@
 			</behandelCodes>
 	      </verzekeringsType>
 	      <verzekeringsType typenr="002">
-	         <naam>All-risk</naam>
+	         <naam>CGZ-All-risk</naam>
 	         <verplichtEigenRisico>285</verplichtEigenRisico>
 	         <behandelCodes>
 	            <behandelcode>004</behandelcode>
