@@ -60,6 +60,12 @@ project(':FacturatieSysteem') {
 			from ('../FacturatieSysteem/bin'){
 				into 'bin'
 			}
+			from('../Facturatiesysteem/bin/facturatieSysteem/KlantenSubsysteem/BusinessLayer/KlantManagerIFrmi.class'){
+				into 'bin/Shared'
+			}
+			from('../FacturatieSysteem/bin/org'){
+				into 'bin/org'
+			}
 			into { classesDir }
 		}
 		dependsOn classesDirExists
