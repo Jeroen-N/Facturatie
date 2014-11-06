@@ -9,12 +9,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +29,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
@@ -43,34 +50,34 @@ public class AddKlantDialog extends JDialog {
 	private JTextField textFieldNaam;
 	
 	/** The text field geb datum. */
-	private JTextField textFieldGebDatum;
+	private JFormattedTextField textFieldGebDatum;
 	
 	/** The text field bsn. */
-	private JTextField textFieldBSN;
+	private JFormattedTextField textFieldBSN;
 	
 	/** The text field adres. */
 	private JTextField textFieldAdres;
 	
 	/** The text field post code. */
-	private JTextField textFieldPostCode;
+	private JFormattedTextField textFieldPostCode;
 	
 	/** The text field plaats. */
 	private JTextField textFieldPlaats;
 	
 	/** The text field telefoonnummer. */
-	private JTextField textFieldTelefoonnummer;
+	private JFormattedTextField textFieldTelefoonnummer;
 	
 	/** The text field email. */
 	private JTextField textFieldEmail;
 	
 	/** The text field rk nummer. */
-	private JTextField textFieldRkNummer;
+	private JFormattedTextField textFieldRkNummer;
 	
 	/** The text field polis nummer. */
 	private JTextField textFieldPolisNummer;
 	
 	/** The text field start datum. */
-	private JTextField textFieldStartDatum;
+	private JFormattedTextField textFieldStartDatum;
 	
 	/** The text field eind datum. */
 	private JTextField textFieldEindDatum;
@@ -167,13 +174,13 @@ public class AddKlantDialog extends JDialog {
 							splitPaneBSN.setLeftComponent(lblBsn);
 						}
 						{
-							textFieldBSN = new JTextField("123456789");
-							textFieldBSN.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldBSN.setText("");
-								}
-							});
+							MaskFormatter formatterBSN = null;
+							try {
+								formatterBSN = new MaskFormatter("#########");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldig BSN invult");
+							}
+							textFieldBSN = new JFormattedTextField(formatterBSN);
 							splitPaneBSN.setRightComponent(textFieldBSN);
 							textFieldBSN.setColumns(15);
 						}
@@ -196,13 +203,7 @@ public class AddKlantDialog extends JDialog {
 							splitPaneNaam.setLeftComponent(lblNaam);
 						}
 						{
-							textFieldNaam = new JTextField("Voor en achternaam");
-							textFieldNaam.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldNaam.setText("");
-								}
-							});
+							textFieldNaam = new JTextField();
 							splitPaneNaam.setRightComponent(textFieldNaam);
 							textFieldNaam.setColumns(15);
 						}
@@ -235,15 +236,14 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblGeboortedatum);
 						}
 						{
-							textFieldGebDatum = new JTextField("dag-maand-jaar");
-							textFieldGebDatum.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldGebDatum.setText("");
-								}
-							});
-							splitPaneGebDatum
-									.setRightComponent(textFieldGebDatum);
+							MaskFormatter formatterGebDatum = null;
+							try {
+								formatterGebDatum = new MaskFormatter("##-##-####");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldige datum invult");
+							}
+							textFieldGebDatum = new JFormattedTextField(formatterGebDatum);
+							splitPaneGebDatum.setRightComponent(textFieldGebDatum);
 							textFieldGebDatum.setColumns(15);
 
 						}
@@ -266,13 +266,7 @@ public class AddKlantDialog extends JDialog {
 							splitPaneAdres.setLeftComponent(lblAdres);
 						}
 						{
-							textFieldAdres = new JTextField("Straat + nummer");
-							textFieldAdres.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldAdres.setText("");
-								}
-							});
+							textFieldAdres = new JTextField();
 							splitPaneAdres.setRightComponent(textFieldAdres);
 							textFieldAdres.setColumns(15);
 						}
@@ -301,15 +295,14 @@ public class AddKlantDialog extends JDialog {
 							splitPanePostCode.setLeftComponent(lblPostcode);
 						}
 						{
-							textFieldPostCode = new JTextField("1234AB");
-							textFieldPostCode.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldPostCode.setText("");
-								}
-							});
-							splitPanePostCode
-									.setRightComponent(textFieldPostCode);
+							MaskFormatter formatterPostCode = null;
+							try {
+								formatterPostCode = new MaskFormatter("####??");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldige postcode invult");
+							}
+							textFieldPostCode = new JFormattedTextField(formatterPostCode);
+							splitPanePostCode.setRightComponent(textFieldPostCode);
 							textFieldPostCode.setColumns(15);
 						}
 					}
@@ -334,13 +327,7 @@ public class AddKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats);
 						}
 						{
-							textFieldPlaats = new JTextField("Plaatsnaam");
-							textFieldPlaats.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldPlaats.setText("");
-								}
-							});
+							textFieldPlaats = new JTextField();
 							splitPanePlaats.setRightComponent(textFieldPlaats);
 							textFieldPlaats.setColumns(15);
 						}
@@ -373,15 +360,14 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblTelefoonnummer);
 						}
 						{
-							textFieldTelefoonnummer = new JTextField("Mobiel");
-							textFieldTelefoonnummer.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldTelefoonnummer.setText("");
-								}
-							});
-							splitPaneTelefoonnummer
-									.setRightComponent(textFieldTelefoonnummer);
+							MaskFormatter formatterPhone = null;
+							try {
+								formatterPhone = new MaskFormatter("06########");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldig telefoonnummer invult");
+							}
+							textFieldTelefoonnummer = new JFormattedTextField(formatterPhone);
+							splitPaneTelefoonnummer.setRightComponent(textFieldTelefoonnummer);
 							textFieldTelefoonnummer.setColumns(15);
 						}
 					}
@@ -403,13 +389,7 @@ public class AddKlantDialog extends JDialog {
 							splitPaneEmail.setLeftComponent(lblEmail);
 						}
 						{
-							textFieldEmail = new JTextField("emailadres");
-							textFieldEmail.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldEmail.setText("");
-								}
-							});
+							textFieldEmail = new JTextField();
 							splitPaneEmail.setRightComponent(textFieldEmail);
 							textFieldEmail.setColumns(15);
 						}
@@ -445,8 +425,7 @@ public class AddKlantDialog extends JDialog {
 							comboBoxBetaalwijze.addItem("Selecteer 1 van de 2");
 							comboBoxBetaalwijze.addItem("Incasso");
 							comboBoxBetaalwijze.addItem("Acceptgiro");
-							splitPaneBetaalwijze
-									.setRightComponent(comboBoxBetaalwijze);
+							splitPaneBetaalwijze.setRightComponent(comboBoxBetaalwijze);
 						}
 					}
 					{
@@ -462,7 +441,7 @@ public class AddKlantDialog extends JDialog {
 						addKlant_1.add(splitPaneRkNummer);
 						{
 							JLabel lblRekeningnummer = new JLabel(
-									"Rekeningnummer: ");
+									"IBAN: ");
 							lblRekeningnummer
 									.setHorizontalTextPosition(SwingConstants.RIGHT);
 							lblRekeningnummer
@@ -477,15 +456,14 @@ public class AddKlantDialog extends JDialog {
 									.setLeftComponent(lblRekeningnummer);
 						}
 						{
-							textFieldRkNummer = new JTextField("Rekeningnummer");
-							textFieldRkNummer.addMouseListener(new MouseAdapter() {
-								@Override
-								public void mouseClicked(MouseEvent e) {
-									textFieldRkNummer.setText("");
-								}
-							});
-							splitPaneRkNummer
-									.setRightComponent(textFieldRkNummer);
+							MaskFormatter formatterRN = null;
+							try {
+								formatterRN = new MaskFormatter("??##????##########");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldig IBAN nummer invult");
+							}
+							textFieldRkNummer = new JFormattedTextField(formatterRN);
+							splitPaneRkNummer.setRightComponent(textFieldRkNummer);
 							textFieldRkNummer.setColumns(15);
 						}
 					}
@@ -712,10 +690,15 @@ public class AddKlantDialog extends JDialog {
 							splitPaneStartDatum.setLeftComponent(lblStartDatum);
 						}
 						{
-							textFieldStartDatum = new JTextField();
+							MaskFormatter formatterSD = null;
+							try {
+								formatterSD = new MaskFormatter("##-##-####");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldig IBAN nummer invult");
+							}
+							textFieldStartDatum = new JFormattedTextField(formatterSD);
 							textFieldStartDatum.setColumns(15);
-							splitPaneStartDatum
-									.setRightComponent(textFieldStartDatum);
+							splitPaneStartDatum.setRightComponent(textFieldStartDatum);
 						}
 					}
 					{
@@ -743,9 +726,30 @@ public class AddKlantDialog extends JDialog {
 						}
 						{
 							textFieldEindDatum = new JTextField();
+							textFieldEindDatum.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+									Calendar cal = Calendar.getInstance();
+									Date vandaag;
+									try {
+										vandaag = dateFormat.parse(textFieldStartDatum.getText());
+										SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+										Calendar c = Calendar.getInstance();
+										c.setTime(vandaag); // Now use today date.
+										c.add(Calendar.DATE, 365); // Adding 14 days
+										String vDatum = sdf.format(c.getTime());
+										textFieldEindDatum.setText(vDatum);
+									} catch (ParseException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+							});
+							// De factuurdatum aanmaken
+							
 							textFieldEindDatum.setColumns(15);
-							splitPaneEindDatum
-									.setRightComponent(textFieldEindDatum);
+							splitPaneEindDatum.setRightComponent(textFieldEindDatum);
 						}
 					}
 				}
