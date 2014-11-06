@@ -297,7 +297,7 @@ public class AddKlantDialog extends JDialog {
 						{
 							MaskFormatter formatterPostCode = null;
 							try {
-								formatterPostCode = new MaskFormatter("####??");
+								formatterPostCode = new MaskFormatter("####UU");
 							} catch (ParseException e1) {
 								showConfirmationWindow("Zorg ervoor dat u een geldige postcode invult");
 							}
