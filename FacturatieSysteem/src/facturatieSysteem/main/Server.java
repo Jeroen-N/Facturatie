@@ -11,15 +11,30 @@ import org.apache.log4j.PropertyConfigurator;
 import Shared.KlantManagerIFrmi;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Server.
+ */
 public class Server {
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(Server.class);
 
+	/**
+	 * Instantiates a new server.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	public Server() throws RemoteException {
 		logger.debug("Constructor");
 		logger.debug("Done");
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 
 		String hostname = null;

@@ -1,3 +1,9 @@
+/*
+ * The MainGUI is the most important Frame of the application. Here the cardlayout is made, and the panels are added 
+ * to the layout.
+ * 
+ * @author IVH5B2
+ */
 package facturatieSysteem.main.PresentationLayer;
 
 import java.awt.*;
@@ -39,44 +45,110 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.border.MatteBorder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainGUI.
+ */
 public class MainGUI {
+	
+	/** The row. */
 	private Integer row;
+	
+	/** The frm facturatiesysteem. */
 	private JFrame frmFacturatiesysteem;
+	
+	/** The Klant_ table. */
 	private JTable Klant_Table;
+	
+	/** The Klant_zoeken. */
 	private JPanel Header, Footer, MainPanel, FacturatiePanel, KlantenPanel,
 			VerzekeringsMaatschappijPanel, knoppen, Klant_info,
 			VerzekeringPanel, Header_Button, PanelEast, Klant_zoeken;
+	
+	/** The Klanten table panel. */
 	private JScrollPane KlantenTablePanel;
+	
+	/** The Klant manager. */
 	private KlantManager KlantManager;
+	
+	/** The lbl facturatiesysteem. */
 	private JLabel lblCreatedByInfosys, lblFacturatiesysteem;
+	
+	/** The Uitgebreide_ info. */
 	private JTextArea Uitgebreide_Info;
+	
+	/** The text field zoeken. */
 	private JFormattedTextField textFieldZoeken;
+	
+	/** The btn zoek klant. */
 	private JButton btnAddKlant, btnChangeKlant, btnFacturatie,
 			btnVerzekeringmaatschapij, btnKlantenbeheer, btnAddPolis,
 			btnZoekKlant;
+	
+	/** The facturatie manager. */
 	private FacturatieManager facturatieManager;
+	
+	/** The maatschappij manager. */
 	private VerzekeringsmaatschappijManager maatschappijManager;
+	
+	/** The login manager. */
 	private LoginManager loginManager;
+	
+	/** The Polis info. */
 	private JTextArea PolisInfo;
+	
+	/** The Info_ polis. */
 	private JPanel Info_Polis;
+	
+	/** The scroll. */
 	private JScrollPane scroll;
+	
+	/** The login panel2. */
 	private JPanel loginPanel2 = new JPanel(new GridLayout(3, 2));
+	
+	/** The input field user. */
 	private JTextField inputFieldUser = new JTextField(10);
+	
+	/** The input field pass. */
 	private JPasswordField inputFieldPass = new JPasswordField(10);
+	
+	/** The login button. */
 	private JButton loginButton = new JButton("Login");
 
 	// The datamodel to be displayed in the JTable.
+	/** The data table model. */
 	private DataTableModel dataTableModel;
+	
+	/** The member list. */
 	private ArrayList<Klant> memberList = null;
 
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(MainGUI.class);
+	
+	/** The btn change polis. */
 	private JButton btnChangePolis;
+	
+	/** The btn reset. */
 	private JButton btnReset;
+	
+	/** The login panel. */
 	private JPanel loginPanel;
+	
+	/** The help panel. */
 	private JPanel helpPanel;
+	
+	/** The btn help. */
 	private JButton btnHelp;
 
+	/**
+	 * Instantiates a new main gui.
+	 *
+	 * @param klantManager the klant manager
+	 * @param verzekeringsmaatschappijmanager the verzekeringsmaatschappijmanager
+	 * @param facturatieManager the facturatie manager
+	 * @param loginManager the login manager
+	 */
 	public MainGUI(KlantManager klantManager, VerzekeringsmaatschappijManager verzekeringsmaatschappijmanager, FacturatieManager facturatieManager, LoginManager loginManager) {
 		logger.debug("Constructor main gui");
 		this.KlantManager = klantManager;
@@ -87,6 +159,9 @@ public class MainGUI {
 		makeFrame();
 	}
 
+	/**
+	 * Make the frame
+	 */
 	@SuppressWarnings({ "serial" })
 	public void makeFrame() {
 		/*
@@ -100,9 +175,10 @@ public class MainGUI {
 		frmFacturatiesysteem.setName("Facturatiesysteem");
 		frmFacturatiesysteem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFacturatiesysteem.setExtendedState(MAXIMIZED_BOTH);
+		frmFacturatiesysteem.setMinimumSize(new Dimension(800,600));
 		frmFacturatiesysteem.getContentPane().setLayout(new BorderLayout(0, 0));
 
-		/*
+		/**
 		 * Create the Header
 		 */
 		Header = new JPanel();
@@ -111,7 +187,7 @@ public class MainGUI {
 		frmFacturatiesysteem.getContentPane().add(Header, BorderLayout.NORTH);
 		Header.setBackground(new Color(30, 144, 255));
 
-		/*
+		/**
 		 * Add JLabel in header + add to header
 		 */
 		lblFacturatiesysteem = new JLabel("FacturatieSysteem");
@@ -121,7 +197,7 @@ public class MainGUI {
 		Header.setLayout(new BorderLayout(5, 5));
 		Header.add(lblFacturatiesysteem, BorderLayout.WEST);
 
-		/*
+		/**
 		 * Create the Panel in the header for the buttons + add to header
 		 */
 		Header_Button = new JPanel();
@@ -129,10 +205,13 @@ public class MainGUI {
 		Header_Button.setBackground(new Color(30, 144, 255));
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		Header.add(Header_Button, BorderLayout.EAST);
-
 		Header_Button.setLayout(new BorderLayout(0, 50));
 		JPanel gui = new VerzekeringsmaatschappijGUI().VerzekeringsGUI(maatschappijManager, KlantManager);
 		Header_Button.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		/**
+		 * Create the btnKlantenbeheer and add this to the header panel
+		 */
 		btnKlantenbeheer = new JButton("");
 		btnKlantenbeheer.setToolTipText("Deze knop brengt u naar het klantenbeheer");
 		btnKlantenbeheer.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -161,6 +240,9 @@ public class MainGUI {
 		});
 		btnKlantenbeheer.setBackground(SystemColor.inactiveCaption);
 		
+		/**
+		 * Create the button verzekeringsmaatschappij and add this to the header panel
+		 */
 		btnVerzekeringmaatschapij = new JButton();
 		btnVerzekeringmaatschapij.setToolTipText("Deze knop brengt u naar het verzekeringsmaatschappij beheer");
 		btnVerzekeringmaatschapij.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -182,6 +264,9 @@ public class MainGUI {
 		});
 		btnVerzekeringmaatschapij.setBackground(SystemColor.inactiveCaption);
 		
+		/**
+		 * Create the button help and add this to the header panel
+		 */
 		HelpPanel help = new HelpPanel();
 		btnHelp = new JButton();
 		btnHelp.setToolTipText("Deze knop geeft u alles over deze applicatie");
@@ -203,15 +288,15 @@ public class MainGUI {
 			}
 		});
 		
-		/*
+		/**
 		 * Create the Main Panel
 		 */
 		MainPanel = new JPanel();
 		frmFacturatiesysteem.getContentPane().add(MainPanel);
 		MainPanel.setLayout(new CardLayout(0, 0));
 
-		/*
-		 * 
+		/**
+		 * Create the login panel
 		 */
 		loginPanel = new JPanel();
 		MainPanel.add(loginPanel, "name_49998732677638");
@@ -225,6 +310,9 @@ public class MainGUI {
 		loginPanel2.setMaximumSize(loginPanel.getPreferredSize());
 		loginPanel2.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
 
+		/**
+		 * Create the standard button pressed
+		 */
 		InputMap im = loginButton.getInputMap();
         im.put(KeyStroke.getKeyStroke("ENTER"), "pressed");
         im.put(KeyStroke.getKeyStroke("released ENTER"), "released");
@@ -259,15 +347,15 @@ public class MainGUI {
 		});
 		loginPanel.add(loginPanel2);
 		
-		/*
-		 * 
+		/**
+		 * create klantenpanel
 		 */
 		KlantenPanel = new JPanel();
 		KlantenPanel.setBackground(Color.WHITE);
 		MainPanel.add(KlantenPanel, "name_11236108644850");
 		KlantenPanel.setLayout(new BorderLayout(0, 0));
 
-		/*
+		/**
 		 * fill the table
 		 */
 		Klant_Table = new JTable(dataTableModel) {
@@ -289,6 +377,9 @@ public class MainGUI {
 
 		fillTable();
 
+		/**
+		 * add a scrollpane to add the table to
+		 */
 		KlantenTablePanel = new JScrollPane(Klant_Table);
 		Klant_Table.setFillsViewportHeight(true);
 		KlantenTablePanel.setBorder(new TitledBorder(new LineBorder(new Color(30, 144, 255)), "Clientenlijst", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -296,11 +387,17 @@ public class MainGUI {
 		Klant_Table.getTableHeader().setResizingAllowed(false);
 		KlantenPanel.add(KlantenTablePanel, BorderLayout.CENTER);
 
+		/**
+		 * Create a big panel in the east to add the information about clients
+		 */
 		PanelEast = new JPanel();
 		PanelEast.setPreferredSize(new Dimension(500, 10));
 		KlantenPanel.add(PanelEast, BorderLayout.EAST);
 		PanelEast.setLayout(new BorderLayout(0, 0));
 
+		/**
+		 * Create a JPanel to build the search
+		 */
 		Klant_zoeken = new JPanel();
 		Klant_zoeken.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(30, 144, 255)));
 		Klant_zoeken.setBackground(new Color(255, 255, 255));
@@ -316,6 +413,9 @@ public class MainGUI {
 		splitPaneZoeken.setBorder(null);
 		Klant_zoeken.add(splitPaneZoeken, BorderLayout.WEST);
 
+		/**
+		 * Create a formatter for the JFormattedtextfield
+		 */
 		MaskFormatter formatter = null;
 		try {
 			formatter = new MaskFormatter("##-##-####");
@@ -335,6 +435,9 @@ public class MainGUI {
 		});
 		splitPaneZoeken.setRightComponent(textFieldZoeken);
 
+		/**
+		 * lbl to show where the searchbar is 
+		 */
 		JLabel lblZoeken = new JLabel("Klant zoeken: ");
 		lblZoeken.setBackground(new Color(255, 255, 255));
 		lblZoeken.setPreferredSize(new Dimension(120, 16));
@@ -344,6 +447,9 @@ public class MainGUI {
 		lblZoeken.setHorizontalAlignment(SwingConstants.RIGHT);
 		splitPaneZoeken.setLeftComponent(lblZoeken);
 
+		/**
+		 * create btn to activate the search action
+		 */
 		btnZoekKlant = new JButton("Zoeken");
 		btnZoekKlant.setToolTipText("Zoek naar de ingevulde geboortedatum");
 		btnZoekKlant.setIconTextGap(0);
@@ -360,6 +466,9 @@ public class MainGUI {
 		});
 		Klant_zoeken.add(btnZoekKlant, BorderLayout.EAST);
 		
+		/**
+		 * btn to reset the table
+		 */
 		btnReset = new JButton("Reset");
 		btnReset.setToolTipText("Reset de tabel.");
 		btnReset.setIconTextGap(0);
@@ -374,7 +483,7 @@ public class MainGUI {
 		});
 		Klant_zoeken.add(btnReset);
 
-		/*
+		/**
 		 * Create panel for more information about klant
 		 */
 		Klant_info = new JPanel();
@@ -382,7 +491,7 @@ public class MainGUI {
 		PanelEast.add(Klant_info, BorderLayout.CENTER);
 		Klant_info.setLayout(new BorderLayout(0, 0));
 
-		/*
+		/**
 		 * Add function to see more information
 		 */
 		Uitgebreide_Info = new JTextArea();
@@ -411,7 +520,7 @@ public class MainGUI {
 					}
 				});
 
-		/*
+		/**
 		 * Polis informatie panel wordt aangemaakt en gevuld
 		 */
 		Info_Polis = new JPanel();
@@ -432,7 +541,7 @@ public class MainGUI {
 		DefaultCaret caret = (DefaultCaret) PolisInfo.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
-		/*
+		/**
 		 * add panel for buttons underneath more information panel
 		 */
 		knoppen = new JPanel();
@@ -442,6 +551,9 @@ public class MainGUI {
 
 		knoppen.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+		/**
+		 * create change polis btn to change a polis
+		 */
 		btnChangePolis = new JButton("");
 		btnChangePolis.setToolTipText("Deze knop maakt het mogelijk de polissen van deze klant te bekijken, en te bewerken.");
 		btnChangePolis.setMargin(new Insets(0, 0, 0, 0));
@@ -482,6 +594,9 @@ public class MainGUI {
 			}
 		});
 
+		/**
+		 * create a facturatie btn to go the the facturatie system.
+		 */
 		btnFacturatie = new JButton("");
 		btnFacturatie.setToolTipText("Hiermee gaat u naar het facturatiesysteem, en kan u facturen maken en printen voor de in de tabel geselecteerde klant.");
 		btnFacturatie.setEnabled(false);
@@ -501,6 +616,9 @@ public class MainGUI {
 			}
 		});
 
+		/**
+		 * create a btn to add a klant
+		 */
 		btnAddKlant = new JButton("");
 		btnAddKlant.setToolTipText("Door gebruik van deze knop, kan u een klant toevoegen");
 		btnAddKlant.setMargin(new Insets(0, 0, 0, 0));
@@ -526,6 +644,9 @@ public class MainGUI {
 			}
 		});
 
+		/**
+		 * create a btn to change a klant
+		 */
 		btnChangeKlant = new JButton("");
 		btnChangeKlant.setToolTipText("Deze knop zorgt ervoor dat u de geselecteerde klant kan bewerken.");
 		btnChangeKlant.setMargin(new Insets(0, 0, 0, 0));
@@ -565,6 +686,9 @@ public class MainGUI {
 			}
 		});
 
+		/**
+		 * create a btn to add a polis
+		 */
 		btnAddPolis = new JButton("");
 		btnAddPolis.setToolTipText("Deze knop maakt het mogelijk om een polis toe te voegen aan een geselecteerde klant.");
 		btnAddPolis.setMargin(new Insets(0, 0, 0, 0));
@@ -594,13 +718,16 @@ public class MainGUI {
 			}
 		});
 
+		/**
+		 * add the btns to the knoppen panel
+		 */
 		knoppen.add(btnAddKlant);
 		knoppen.add(btnChangeKlant);
 		knoppen.add(btnAddPolis);
 		knoppen.add(btnChangePolis);
 		knoppen.add(btnFacturatie);
 
-		/*
+		/**
 		 * Create the footer
 		 */
 		Footer = new JPanel();
@@ -610,7 +737,7 @@ public class MainGUI {
 		Footer.setBackground(new Color(30, 144, 255));
 		Footer.getLayout();
 
-		/*
+		/**
 		 * Set text in the footer
 		 */
 		lblCreatedByInfosys = new JLabel("Created by InfoSys");
@@ -620,7 +747,7 @@ public class MainGUI {
 		lblCreatedByInfosys.setFont(new Font("Lucida Sans", Font.BOLD | Font.ITALIC, 12));
 		Footer.add(lblCreatedByInfosys);
 
-		/*
+		/**
 		 * Create facturatiePanel + add to mainpanel
 		 */
 		FacturatiePanel = new JPanel();
@@ -628,25 +755,28 @@ public class MainGUI {
 		MainPanel.add(FacturatiePanel, "name_11228791079497");
 		FacturatiePanel.setLayout(new BorderLayout(0, 0));
 
-		/*
+		/**
 		 * Create verzekeringPanel + add to mainpanel
 		 */
 		VerzekeringPanel = new JPanel();
 		MainPanel.add(VerzekeringPanel, "name_11244230620371");
 		VerzekeringPanel.setLayout(new BorderLayout(0, 0));
 
-		/*
+		/**
 		 * create verzekeringsmaatschappijpanel + add to mainpanel
 		 */
 		VerzekeringsMaatschappijPanel = new JPanel();
 		MainPanel.add(VerzekeringsMaatschappijPanel, "name_11248877742559");
 		VerzekeringsMaatschappijPanel.setLayout(new BorderLayout(0, 0));
 		
+		/**
+		 * create panel for cardlayout to add the helppanel to
+		 */
 		helpPanel = new JPanel();
 		MainPanel.add(helpPanel, "name_4048322699538");
 		helpPanel.setLayout(new BorderLayout(0,0));
 
-		/*
+		/**
 		 * Set the visibility of the panels
 		 */
 		VerzekeringPanel.setVisible(false);
@@ -655,13 +785,14 @@ public class MainGUI {
 		FacturatiePanel.setVisible(false);
 		loginPanel.setVisible(true);
 		helpPanel.setVisible(false);
-		/*
+		
+		/**
 		 * Set visibility of the frame
 		 */
 		frmFacturatiesysteem.setVisible(true);
 	}
 
-	/*
+	/**
 	 * Methode om de table te kunnen vullen en updaten
 	 */
 	public void fillTable() {
@@ -673,6 +804,11 @@ public class MainGUI {
 		}
 	}
 
+	/**
+	 * Fill table with the zoekresultaat.
+	 *
+	 * @param gebDatum the geb datum
+	 */
 	public void fillTableZoekresultaat(String gebDatum) {
 		memberList = KlantManager.findKlant(gebDatum);
 		int count = (memberList == null) ? 0 : memberList.size();
@@ -689,6 +825,11 @@ public class MainGUI {
 	/*
 	 * Methode om het informatie veld te kunnen vullen en updaten
 	 */
+	/**
+	 * Fill field.
+	 *
+	 * @param row the row
+	 */
 	public void fillField(int row) {
 		String b_s_n = Klant_Table.getModel().getValueAt(row, 1).toString();
 		Uitgebreide_Info.setText(KlantManager.toonKlant(b_s_n));
@@ -698,6 +839,11 @@ public class MainGUI {
 		}
 	}
 
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

@@ -156,28 +156,8 @@ public class KlantManagerImplTest {
 		}
 	}
 
-	
-
 	/**
-	 * Test check klant.
-	 */
-	@Test
-	public void testCheckKlant() {
-		//check functions worden niet getest
-		//assertTrue(1 == 1);
-	}
-
-	/**
-	 * Test check polis.
-	 */
-	@Test
-	public void testCheckPolis() {
-		//check functions worden niet getest
-		//assertTrue(1 == 1);
-	}
-
-	/**
-	 * Test create polis.
+	 *  Test create polis.
 	 */
 	@Test
 	public void testCreatePolis() {
@@ -252,22 +232,7 @@ public class KlantManagerImplTest {
 		
 	}
 
-	/**
-	 * Test create polisnummer.
-	 */
-	@Test
-	public void testCreatePolisnummer() {
-		//niet testbaar, random generator
-		//assertTrue(1 == 1);
-	}
 
-	/**
-	 * Test get bs ns.
-	 */
-	@Test
-	public void testGetBSNs() {
-		assertTrue(2 == klantDAO.getBSNs().size());
-	}
 
 	/**
 	 * Test verwijder klant xml.
