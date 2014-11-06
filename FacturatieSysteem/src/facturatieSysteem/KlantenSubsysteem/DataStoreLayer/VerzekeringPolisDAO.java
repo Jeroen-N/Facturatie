@@ -2,7 +2,6 @@ package facturatieSysteem.KlantenSubsysteem.DataStoreLayer;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface VerzekeringPolisDAO.
  */

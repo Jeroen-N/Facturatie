@@ -9,7 +9,6 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeaderAndFooter.
  */

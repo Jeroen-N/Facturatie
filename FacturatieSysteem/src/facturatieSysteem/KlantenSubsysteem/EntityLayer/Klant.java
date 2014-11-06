@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Klant.
  */

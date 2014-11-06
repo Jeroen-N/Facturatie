@@ -1,6 +1,5 @@
 package facturatieSysteem.FacturatieSubsysteem.EntityLayer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Behandelcode.
  */

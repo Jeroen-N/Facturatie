@@ -32,7 +32,6 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ChangeKlantDialog.
  */

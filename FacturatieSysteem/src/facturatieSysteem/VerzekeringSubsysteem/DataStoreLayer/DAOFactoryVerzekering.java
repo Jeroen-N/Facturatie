@@ -21,21 +21,35 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+/**
+ * The Class DAOFactoryVerzekering.
+ */
 public class DAOFactoryVerzekering {
+	
+	/** The xml path. */
 	private String xmlPath;
+	
+	/** The xsd path. */
 	private String xsdPath;
+	
+	/** The document. */
 	private Document document;		
 	
-	/* 
-	 * @param xml De locatie van de XML file
-	 * @param xsd De locatie van de XSD file
+	/**
+	 * Instantiates a new DAO factory verzekering.
+	 *
+	 * @param xml the xml
+	 * @param xsd the xsd
 	 */
 	public DAOFactoryVerzekering(String xml, String xsd){
 		xmlPath = xml;
 		xsdPath = xsd;
 	}
-	/*
-	 * @return Het document als deze geldig is
+	
+	/**
+	 * Validate xml.
+	 *
+	 * @return the document
 	 */
 	public Document validateXML(){
 		try{
@@ -63,8 +77,11 @@ public class DAOFactoryVerzekering {
 	
 		return document;
 	}
-	/*
-	 * @return het validatie schema
+
+	/**
+	 * Gets the validation schema.
+	 *
+	 * @return the validation schema
 	 */
 	public Schema getValidationSchema() {
 		Schema schema = null;
@@ -80,8 +97,12 @@ public class DAOFactoryVerzekering {
 
 		return schema;
 	}
-	/*
-	 * @return True als het document overeenkomt met het schema
+	
+	/**
+	 * Validate document.
+	 *
+	 * @param schema the schema
+	 * @return true, if successful
 	 */
 	public boolean validateDocument(Schema schema) {
 
@@ -103,8 +124,11 @@ public class DAOFactoryVerzekering {
 
 	}
 	
-	/*
-	 * @return true als in het document succesvol is geschreven
+	
+	/**
+	 * Write document.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean writeDocument() {
 
@@ -124,8 +148,11 @@ public class DAOFactoryVerzekering {
 		return false;
 	}
 	
-	/*
-	 * @return Het Document
+	
+	/**
+	 * Gets the document.
+	 *
+	 * @return the document
 	 */
 	public Document getDocument(){
 		try{

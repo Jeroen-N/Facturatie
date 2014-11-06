@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 import facturatieSysteem.main.dataTableModel.DataTableModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DataTableModelChangePolis.
  */

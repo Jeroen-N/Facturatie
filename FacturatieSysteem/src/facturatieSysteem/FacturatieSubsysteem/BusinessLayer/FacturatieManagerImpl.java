@@ -19,7 +19,6 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FacturatieManagerImpl which implements the FacturatieManager interface.
  */
@@ -58,7 +57,7 @@ public class FacturatieManagerImpl implements FacturatieManager {
 	private Client client = new Client();
 
 
-	/*The constructor method to create an object of FacturatieManagerImpl
+	/**The constructor method to create an object of FacturatieManagerImpl
 	 * 
 	 */
 

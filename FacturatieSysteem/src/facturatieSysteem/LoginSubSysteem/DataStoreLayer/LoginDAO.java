@@ -9,16 +9,35 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.LoginSubSysteem.EntityLayer.Gebruiker;
 
+/**
+ * The Class LoginDAO.
+ */
 public class LoginDAO {
+	
+	/** The document. */
 	private Document document = null;
+	
+	/** The dao factory login. */
 	private DAOFactoryLogin daoFactoryLogin;
+	
+	/** The gebruikers. */
 	private ArrayList<Gebruiker> gebruikers;
 
+	/**
+	 * Instantiates a new login dao.
+	 *
+	 * @param daoFactoryLogin the dao factory login
+	 */
 	public LoginDAO(DAOFactoryLogin daoFactoryLogin) {
 		this.daoFactoryLogin = daoFactoryLogin;
 
 	}
 
+	/**
+	 * Gets the users.
+	 *
+	 * @return the users in an arraylist
+	 */
 	public ArrayList<Gebruiker> getGebruikers() {
 		document = daoFactoryLogin.getDocument();
 		gebruikers = new ArrayList<Gebruiker>();

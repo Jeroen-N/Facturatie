@@ -10,13 +10,23 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+/**
+ * The Class VerzekeringstypeDAOImpl.
+ */
 public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
+	
+	/** The document. */
 	private Document document;
+	
+	/** The dao factory. */
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#addVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/**
+	 * Adds the verzekeringstype xml.
+	 *
+	 * @param maatschappijnr het nr van de maatschappij waar het type aan wordt toegevoegd
+	 * @param type the type
+	 * @return true als het succesvol is toegevoegd
 	 */
 	@Override
 	public boolean addVerzekeringstypeXML(String maatschappijnr,Verzekeringstype type) {
@@ -70,9 +80,12 @@ public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#deleteVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/**
+	 * Delete verzekeringstype xml.
+	 *
+	 * @param maatschappijnr het nr van de maatschappij waar het type wordt geupdatet
+	 * @param type the type
+	 * @return true als het succesvol is geupdatet
 	 */
 	@Override
 	public boolean deleteVerzekeringstypeXML(String maatschappijnr, Verzekeringstype type) {
@@ -108,9 +121,12 @@ public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#updateVerzekeringstypeXML(java.lang.String, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/**
+	 * Update verzekeringstype xml.
+	 *
+	 * @param maatschappijnr het nr van de maatschappij waar het type wordt verwijderd
+	 * @param type the type
+	 * @return true als het succesvol is verwijderd
 	 */
 	@Override
 	public boolean updateVerzekeringstypeXML(String maatschappijnr, Verzekeringstype type) {
@@ -151,9 +167,13 @@ public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#addBehandelCode(java.lang.String, java.lang.String, java.lang.String)
+	/**
+	 * Adds the behandel code.
+	 *
+	 * @param maatschappijnr het nr van de maatschappij waar de behandelcode aan wordt toegevoegd
+	 * @param typenr het typenr waar de behandelcode wordt toegevoegd
+	 * @param behandelcode the behandelcode
+	 * @return true als het succesvol is toegevoegd
 	 */
 	@Override
 	public boolean addBehandelCode(String maatschappijnr, String typenr, String behandelcode){
@@ -191,9 +211,13 @@ public class VerzekeringstypeDAOImpl implements VerzekeringstypeDAO {
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringstypeDAO#removeBehandelCode(java.lang.String, java.lang.String, java.lang.String)
+	/**
+	 * Removes the behandel code.
+	 *
+	 * @param maatschappijnr het nr van de maatschappij waar de behandelcode wordt verwijderd
+	 * @param typenr het typenr waar de behandelcode wordt verwijderd
+	 * @param behandelcode the behandelcode
+	 * @return true als het succesvol is verwijderd
 	 */
 	@Override
 	public boolean removeBehandelCode(String maatschappijnr, String typenr, String behandelcode){

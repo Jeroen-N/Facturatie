@@ -3,7 +3,6 @@ package facturatieSysteem.KlantenSubsysteem.EntityLayer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class VerzekeringPolis.
  */

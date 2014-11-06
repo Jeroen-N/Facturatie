@@ -41,36 +41,65 @@ import javax.swing.table.TableColumn;
 import org.apache.log4j.Logger;
 
 
+/**
+ * The Class ChangeVerzekeringsTypeDialog.
+ */
 public class ChangeVerzekeringsTypeDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
+	
+	/** The button pane. */
 	private  JPanel changeVerzekeringType, changeType_1, changeType_2, buttonPane;
+	
+	/** The typetable. */
 	private  JTable typetable;
+	
+	/** The type scroll pane. */
 	private  JScrollPane typeScrollPane;
+	
+	/** The text field type nr. */
 	private  JTextField textFieldTypeNr;
+	
+	/** The text field naam. */
 	private  JTextField textFieldNaam;
+	
+	/** The text field eigen risico. */
 	private  JTextField textFieldEigenRisico;
+	
+	/** The row. */
 	private  Integer row;
+	
+	/** The combo box behandel code add. */
 	private  JComboBox<String> comboBoxBehandelCode, comboBoxBehandelCodeAdd;
+	
+	/** The manager. */
 	private VerzekeringsmaatschappijManager manager;
+	
+	/** The maatschappij. */
 	private Verzekeringsmaatschappij maatschappij;
+	
+	/** The Type nr. */
 	private String TypeNr;
 	
 	// The datamodel to be displayed in the JTable.
+	/** The date table model change type. */
 	private DataTableModelChangeType dateTableModelChangeType;
+	
+	/** The typen. */
 	private ArrayList<Verzekeringstype> typen = null;
 	
 	// Get a logger instance for the current class
-	 Logger logger = Logger.getLogger(MainGUI.class);
+	 /** The logger. */
+	Logger logger = Logger.getLogger(MainGUI.class);
 	
 	
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param klantmanager the klantmanager
+	 * @param nummer the nummer
 	 */
 	public ChangeVerzekeringsTypeDialog(VerzekeringsmaatschappijManager manager, KlantManager klantmanager, String nummer) {
 		this.manager = manager;
@@ -449,6 +478,10 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Fill table.
+	 */
 	public void fillTable(){
 		typetable = new JTable(dateTableModelChangeType) {
 			private static final long serialVersionUID = 1L;
@@ -487,6 +520,12 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 				}
 		});
 	}
+	
+	/**
+	 * Fill field.
+	 *
+	 * @param row the row
+	 */
 	public  void fillField(int row){
 		comboBoxBehandelCode.removeAllItems();
 		comboBoxBehandelCodeAdd.removeAllItems();
@@ -505,6 +544,12 @@ public class ChangeVerzekeringsTypeDialog extends JDialog {
 		textFieldEigenRisico.setText(eigenRisico);
 		textFieldNaam.setText(naam);			
 	}
+	
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		 Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

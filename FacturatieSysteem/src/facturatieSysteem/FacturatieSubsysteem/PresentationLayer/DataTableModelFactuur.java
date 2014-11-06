@@ -14,7 +14,7 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
  * enables us to quickly perform operations on the table containing member information. The contents of 
  * this data model are automatically displayed in the corresponding JTable. 
  * 
- * @author Robin Schellius
+ * 
  */
 @SuppressWarnings("serial")
 public class DataTableModelFactuur extends AbstractTableModel {

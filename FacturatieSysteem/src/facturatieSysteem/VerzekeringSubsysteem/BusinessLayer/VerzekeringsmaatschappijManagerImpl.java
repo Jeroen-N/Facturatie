@@ -1,4 +1,4 @@
-/* @author Jeroen Nuijten
+/** @author Jeroen Nuijten
  * @version 0.2
  * 
  * De verzekeringsmaatschappij manager
@@ -22,9 +22,8 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		this.importData(lijst);
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringsmaatschappij(java.lang.String)
+	/** Gets the insurance company with the given number
+	 *@param nr the number of the company which is used to search te company
 	 */
 	@Override
 	public Verzekeringsmaatschappij getVerzekeringsmaatschappij(String nr) {
@@ -36,9 +35,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/** Adds an insurance company with the given company object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which represents the object to be added
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean addVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
@@ -51,9 +50,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#updateVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/** Update an insurance company with the given company object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which represents the object to be the new version
+	 * @return boolean true if succesfull
+	 *
 	 */
 	@Override
 	public boolean updateVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
@@ -72,10 +72,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteVerzekeringsmaatschappij(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
-	 */
+	/** Deletes an insurance company with the given company object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which represents the object to be deleted
+	 * @return boolean true if succesfull
+	 * 
+     */
 	@Override
 	public boolean deleteVerzekeringsmaatschappij(Verzekeringsmaatschappij maatschappij) {
 		if(getVerzekeringsmaatschappij(maatschappij.getNr()) != null && maatschappij.getTypes().size() < 1){
@@ -86,18 +87,18 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringsmaatschappijen()
+	/** Gets all the insurance companies in an list
+	 * @return arraylist of the type Verzekeringsmaatschappij
 	 */
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getVerzekeringsmaatschappijen() {
 		return verzekeringsMaatschappijen;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, java.lang.String)
+	/** Gets the insurance type with the given company object and the number
+	 * @param maatschappij the insurance company object
+	 * @param nr the number of the type which needs to be searched for
+	 * @return the wanted insurance type
 	 */
 	@Override
 	public Verzekeringstype getVerzekeringstype(Verzekeringsmaatschappij maatschappij, String nr) {
@@ -109,9 +110,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#getVerzekeringstypeByName(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, java.lang.String)
+	/** Gets the insurance type with the given company object and the name
+	 * @param maatschappij the insurance company object
+	 * @param naam the name to be searched for
+	 * @return the wanted insurance type
 	 */
 	public Verzekeringstype getVerzekeringstypeByName(Verzekeringsmaatschappij maatschappij, String naam) {
 		for(Verzekeringstype type : maatschappij.getTypes()){
@@ -122,9 +124,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/** Adds an insurance type with the given company object and the type object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which needs to be used for a number
+	 * @param type the type object to be added
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean addVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
@@ -134,10 +137,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 		return false;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#updateVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/** Updates an insurance type with the given company object and the type object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which needs to be used for a number
+	 * @param type the type object to be the new version
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean updateVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
@@ -150,9 +153,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteVerzekeringstype(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype)
+	/** Deletes an insurance type with the given company object and the type object
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which needs to be used for a number
+	 * @param type the type object to be deleted
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean deleteVerzekeringstype(Verzekeringsmaatschappij maatschappij, Verzekeringstype type) {
@@ -163,9 +167,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#addBehandelcode(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype, java.lang.String)
+	/** Adds an treatment code with the given company object, type object and the code itself
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which needs to be used for a number
+	 * @param type the object of the type Verzekeringstype which needs to be used for an number
+	 * @param behandelcode the code that will be linked to the company and the type
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean addBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
@@ -178,9 +184,11 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#deleteBehandelcode(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij, facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype, java.lang.String)
+	/** Updates an treatment code with the given company object, type object and the code itself
+	 * @param maatschappij the object of the type Verzekeringsmaatschappij which needs to be used for a number
+	 * @param type the object of the type Verzekeringstype which needs to be used for an number
+	 * @param behandelcode the code that will be linked to the company and the type that will be deleted
+	 * @return boolean true if succesfull
 	 */
 	@Override
 	public boolean deleteBehandelcode(Verzekeringsmaatschappij maatschappij, Verzekeringstype type, String behandelcode){
@@ -192,9 +200,9 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#importData(java.util.ArrayList)
+	/** Imports a list of companies to be added to the list of companies in this class
+	 * @param lijst the list of insurance companies
+	 * 
 	 */
 	@Override
 	public void importData(ArrayList<Verzekeringsmaatschappij> lijst){
@@ -203,18 +211,26 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#maatschappijInfo(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/** Gets the information of an insurance company
+	 *	@param maatschappij the maatschappij from which the information needs to be extracted
+	 *	@return string of the information from the company
 	 */
 	@Override
 	public String maatschappijInfo(Verzekeringsmaatschappij maatschappij) {
 		return "Verzekeringsmaatschappij \n\nNaam: "+ maatschappij.getNaam() + "\nAdres: " + maatschappij.getAdres() + "\nPlaats: " + maatschappij.getPlaats() + "\nPostcode: " + maatschappij.getPostcode() + "\nKVKnummer: " + maatschappij.getKVK() + "\nRekeningnummer: " + maatschappij.getRekeningNR();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkVerzekering(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	/** Checks if the parameters of the insurance are correct
+	 * @param maatschappijnr the number of the company
+	 * @param Naam the name of the company
+	 * @param Adres the adress of the company
+	 * @param Postcode the zip adress of the company
+	 * @param Plaats the location of the company
+	 * @param KVK the KVK number of the company
+	 * @param RekeningNr the bank account number of the company
+	 * 
+	 * @return String returns a error message if one of the parameters in incorrect
+	 * 
 	 */
 	@Override
 	public String checkVerzekering(String maatschappijnr, String Naam, String Adres,
@@ -294,9 +310,12 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return errorMessage;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkType(java.lang.String, java.lang.String, java.lang.String)
+	/** Checks the insurance type with the given number, risk value and the name
+	 * @param typenr the type number of the insurance type
+	 * @param EigenRisico the risk of the type
+	 * @param Naam the name of the type
+	 * 
+	 * @return returns an error message if one of the checks gives an error
 	 */
 	@Override
 	public String checkType(String typenr, String EigenRisico, String Naam) {
@@ -336,9 +355,10 @@ public class VerzekeringsmaatschappijManagerImpl implements Verzekeringsmaatscha
 		return errorMessage;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager#checkKvk(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/**Checks if the KVK matches with the KVK of any of the companies
+	 * @param maatschappij the object of the company to be checked with the others
+	 * 
+	 * @return boolean true if the KVK of the company matches the KVK of any of the other companies
 	 */
 	public boolean checkKvk(Verzekeringsmaatschappij maatschappij){
 		boolean state = false;

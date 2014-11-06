@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class KlantDAOImpl.
  */
@@ -38,8 +38,10 @@ public class KlantDAOImpl implements KlantDAO {
 	/** The BS ns. */
 	private ArrayList<String> BSNs;
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#addKlantXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	
+	/** Adds a customer in the xml file
+	 * @param klant the customer used
+	 * @return boolean returns true of succesfull
 	 */
 	@Override
 	public boolean addKlantXML(Klant klant){
@@ -174,13 +176,9 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 	}
 	
-	/*
-	 * 
-	 * @param
-	 * @return
-	 */
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#getKlantenXML()
+	
+	/** Returns an arraylist of the type customer 
+	 * @return returns an arraylist of the type customer
 	 */
 	@Override
 	public ArrayList<Klant> getKlantenXML() {
@@ -234,8 +232,10 @@ public class KlantDAOImpl implements KlantDAO {
 		return klantOverzicht;	    
 	}
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#findKlantXML(java.lang.String)
+	
+	/**Returns an arraylist of the type customer which finds all the customers with the given birth date
+	 * @param gebDatum The birth date given to search with
+	 * @return returns an arraylist of the type customer
 	 */
 	@Override
 	public ArrayList<Klant> findKlantXML(String gebDatum){
@@ -285,8 +285,10 @@ public class KlantDAOImpl implements KlantDAO {
 		return zoekResultaat;	
 	}
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#updateKlantXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant)
+	
+	/**Updates an customer in the XML with the given customer details
+	 * @param klant The given customer
+	 * @return boolean returns true if succesfull
 	 */
 	@Override
 	public boolean updateKlantXML(Klant klant) {
@@ -331,8 +333,10 @@ public class KlantDAOImpl implements KlantDAO {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#verwijderKlantXML(java.lang.String)
+	
+	/** Deletes a customer from the XML with the given identification number of the customer
+	 * @param verwijderBSN the identification number of the customer
+	 * @return boolean returns true if succesfull
 	 */
 	@Override
 	public boolean verwijderKlantXML(String verwijderBSN) {
@@ -359,8 +363,10 @@ public class KlantDAOImpl implements KlantDAO {
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.KlantDAO#getBSNs()
+	
+	/**Gets a list of identification numbers
+	 * 
+	 * @return returns an arraylist of the type String with the given identification numbers
 	 */
 	@Override
 	public ArrayList<String> getBSNs(){

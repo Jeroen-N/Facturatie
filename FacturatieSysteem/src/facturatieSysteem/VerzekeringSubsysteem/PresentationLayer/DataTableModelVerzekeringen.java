@@ -6,21 +6,24 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.log4j.Logger;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
+
 /**
- * This class provides a data model for the JTable component in the UI. Using this data model
- * enables us to quickly perform operations on the table containing member information. The contents of 
- * this data model are automatically displayed in the corresponding JTable. 
- * 
- * @author Robin Schellius
+ * The Class DataTableModelVerzekeringen.
  */
 @SuppressWarnings("serial")
 public class DataTableModelVerzekeringen extends AbstractTableModel {
 
+	/** The cache. */
 	private Vector<String[]> cache; // will hold String[] objects . . .
+	
+	/** The col count. */
 	private int colCount;
+	
+	/** The headers. */
 	private String[] headers;
 
 	// Get a logger instance for the current class
+	/** The logger. */
 	static Logger logger = Logger.getLogger(DataTableModelVerzekeringen.class);
 
 	/**
@@ -64,8 +67,8 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 	
 	/**
 	 * Set the values of the data table model.
-	 * 
-	 * @param members ArrayList containing the values to be set.
+	 *
+	 * @param verzekeringen the new values
 	 */
 	public void setValues(ArrayList<Verzekeringsmaatschappij> verzekeringen) {
 		
@@ -112,6 +115,9 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 
 	/**
 	 * Get the name of column [i].
+	 *
+	 * @param i the i
+	 * @return the column name
 	 */
 	public String getColumnName(int i) { 
 		return headers[i];
@@ -119,6 +125,8 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 
 	/**
 	 * Get the number of columns in the model.
+	 *
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		return colCount;
@@ -126,6 +134,8 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 
 	/**
 	 * Get the number of rows.
+	 *
+	 * @return the row count
 	 */
 	public int getRowCount() {
 		return cache.size();
@@ -133,6 +143,10 @@ public class DataTableModelVerzekeringen extends AbstractTableModel {
 
 	/**
 	 * Get the value at [row,col].
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @return the value at
 	 */
 	public Object getValueAt(int row, int col) {
 		return ((String[]) cache.elementAt(row))[col];

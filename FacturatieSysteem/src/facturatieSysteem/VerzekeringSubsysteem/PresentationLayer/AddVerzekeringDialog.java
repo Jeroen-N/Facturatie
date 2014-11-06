@@ -22,22 +22,40 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
+/**
+ * The Class AddVerzekeringDialog.
+ */
 public class AddVerzekeringDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The text field naam. */
 	private JTextField textFieldNaam;
+	
+	/** The text field adres. */
 	private JTextField textFieldAdres;
+	
+	/** The text field postcode. */
 	private JTextField textFieldPostcode;
+	
+	/** The text field plaats. */
 	private JTextField textFieldPlaats;
+	
+	/** The text field kvk. */
 	private JTextField textFieldKVK;
+	
+	/** The text field rekening nr. */
 	private JTextField textFieldRekeningNr;
+	
+	/** The text field nr. */
 	private JTextField textFieldNr;
 	
 
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
 	 */
 	public AddVerzekeringDialog(final VerzekeringsmaatschappijManager manager) {
 
@@ -335,7 +353,6 @@ public class AddVerzekeringDialog extends JDialog {
 						okButton.addMouseListener(new MouseAdapter() {
 
 							public void mouseClicked(MouseEvent e) {
-								// TODO extra attribuut maatschappijnr
 								String errorMessage = manager.checkVerzekering(
 										textFieldNr.getText(),
 										textFieldNaam.getText(),
@@ -394,6 +411,11 @@ public class AddVerzekeringDialog extends JDialog {
 
 	}
 
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message) {
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

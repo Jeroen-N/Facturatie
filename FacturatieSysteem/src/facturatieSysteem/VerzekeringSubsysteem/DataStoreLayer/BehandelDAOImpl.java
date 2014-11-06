@@ -7,13 +7,21 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * The Class BehandelDAOImpl.
+ */
 public class BehandelDAOImpl implements BehandelDAO {
+	
+	/** The document. */
 	private Document document;
+	
+	/** The dao factory. */
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/behandelcodes.xml","XML/behandelcodes.xsd");
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.BehandelDAO#getBehandelcodes()
+	/**
+	 * Gets the behandelcodes.
+	 *
+	 * @return the behandelcodes
 	 */
 	@Override
 	public ArrayList<String> getBehandelcodes(){

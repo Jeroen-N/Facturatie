@@ -7,7 +7,6 @@ import facturatieSysteem.FacturatieSubsysteem.EntityLayer.Factuur;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface FacturatieManager.
  * This interface will be implemented by the FacturatieManagerImpl

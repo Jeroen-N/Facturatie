@@ -21,32 +21,86 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+/**
+ * The Class FacturatieGUI.
+ */
 @SuppressWarnings("serial")
 public class FacturatieGUI extends JFrame {
 
+	/** The facturatie manager impl. */
 	private FacturatieManager facturatieManagerImpl;
+	
+	/** The row. */
 	private Integer row;
+	
+	/** The button panel. */
 	private JPanel buttonPanel;
+	
+	/** The zoekbalk. */
 	private JTextField zoekbalk;
+	
+	/** The zoek knop. */
 	private JButton zoekKnop;
+	
+	/** The terug knop. */
 	private JButton terugKnop;
+	
+	/** The factureer knop. */
 	private JButton factureerKnop;
+	
+	/** The open factuur knop. */
 	private JButton openFactuurKnop;
+	
+	/** The print factuur knop. */
 	private JButton printFactuurKnop;
+	
+	/** The overzicht. */
 	private JTable overzicht;
+	
+	/** The factuur. */
 	private JTextArea factuur;
+	
+	/** The factuur table panel. */
 	private JScrollPane factuurTablePanel;
+	
+	/** The scroll pane. */
 	private JScrollPane scrollPane = new JScrollPane();
+	
+	/** The main panel. */
 	private JPanel mainPanel = new JPanel();
+	
+	/** The klant. */
 	private Klant klant;
+	
+	/** The facturen. */
 	private ArrayList<Factuur> facturen;
+	
+	/** The data table model. */
 	private DataTableModelFactuur dataTableModel;
+	
+	/** The east panel. */
 	private JPanel eastPanel;
+	
+	/** The factuur panel. */
 	private JPanel factuurPanel;
+	
+	/** The scroll factuur. */
 	private JScrollPane scrollFactuur;
+	
+	/** The m1. */
 	private VerzekeringsmaatschappijManager m1;
+	
+	/** The maatschappij eind. */
 	private Verzekeringsmaatschappij maatschappijEind;
 
+	/**
+	 * Fact gui.
+	 *
+	 * @param facturatieManagerImpl the facturatie manager impl
+	 * @param klant the klant
+	 * @param m1 the manager of the facturatie system
+	 * @return the jpanel
+	 */
 	public JPanel FactGUI(FacturatieManager facturatieManagerImpl, Klant klant,
 			VerzekeringsmaatschappijManager m1) {
 		JPanel paneel = new JPanel();
@@ -60,6 +114,12 @@ public class FacturatieGUI extends JFrame {
 		return initComponents(facturatieManagerImpl);
 	}
 
+	/**
+	 * Inits the components.
+	 *
+	 * @param factManagerImpl the fact manager impl
+	 * @return the j panel
+	 */
 	public JPanel initComponents(FacturatieManager factManagerImpl) {
 
 		// panels aanmaken
@@ -277,6 +337,11 @@ public class FacturatieGUI extends JFrame {
 
 	}
 
+	/**
+	 * Fill table.
+	 *
+	 * @param klant the klant
+	 */
 	public void fillTable(Klant klant) {
 		facturen = facturatieManagerImpl.haalFacturen(klant.getBSN());
 		dataTableModel.setValues(facturen);
@@ -284,9 +349,9 @@ public class FacturatieGUI extends JFrame {
 	}
 
 	/**
-	 * method to fill the field with the linked information
-	 * 
-	 * @param row
+	 * method to fill the field with the linked information.
+	 *
+	 * @param row the row
 	 */
 	public void fillField(int row) {
 		String factuur_nummer = overzicht.getModel().getValueAt(row, 0).toString();
@@ -295,9 +360,9 @@ public class FacturatieGUI extends JFrame {
 	}
 
 	/**
-	 * finds the factuur
-	 * 
-	 * @param row2
+	 * finds the factuur.
+	 *
+	 * @param row2 the row2
 	 * @return Factuur
 	 */
 	public Factuur vindFactuur(int row2) {
@@ -306,9 +371,9 @@ public class FacturatieGUI extends JFrame {
 	}
 
 	/**
-	 * shows a confirmation window with a costum message
-	 * 
-	 * @param message
+	 * shows a confirmation window with a costum message.
+	 *
+	 * @param message the message
 	 */
 	public void showConfirmationWindow(String message) {
 		Component frame = null;

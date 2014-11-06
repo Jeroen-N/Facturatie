@@ -23,17 +23,28 @@ import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.Verzekeringsmaatsch
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+/**
+ * The Class AddVerzekeringsTypeDialog.
+ */
 public class AddVerzekeringsTypeDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The text field naam. */
 	private JTextField textFieldNaam;
+	
+	/** The text field eigen risico. */
 	private JTextField textFieldEigenRisico;
+	
+	/** The text field type nr. */
 	private JTextField textFieldTypeNr;
 
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param maatschappij the maatschappij
 	 */
 	public AddVerzekeringsTypeDialog(
 			final VerzekeringsmaatschappijManager manager,
@@ -201,7 +212,6 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 							okButton.addMouseListener(new MouseAdapter() {
 
 								public void mouseClicked(MouseEvent e) {
-									// TODO extra attribuut maatschappijnr
 									String errorMessage = manager.checkType(
 											textFieldTypeNr.getText(),
 											textFieldEigenRisico.getText(),
@@ -245,6 +255,12 @@ public class AddVerzekeringsTypeDialog extends JDialog {
 			}
 		}
 	}
+	
+	/**
+	 * Show confirmation window.
+	 *
+	 * @param message the message
+	 */
 	public void showConfirmationWindow(String message){
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);

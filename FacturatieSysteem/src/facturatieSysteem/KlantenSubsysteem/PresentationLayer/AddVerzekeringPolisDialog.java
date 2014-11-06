@@ -36,7 +36,6 @@ import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschap
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AddVerzekeringPolisDialog.
  */

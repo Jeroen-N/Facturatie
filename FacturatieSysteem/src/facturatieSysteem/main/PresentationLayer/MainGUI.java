@@ -45,7 +45,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.border.MatteBorder;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MainGUI.
  */

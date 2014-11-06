@@ -252,7 +252,6 @@ public class KlantManagerImpl implements KlantManager, KlantManagerIFrmi {
 							+ "\nDe geboortedatum kan niet in de toekomst zijn";
 				}
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

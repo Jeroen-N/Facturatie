@@ -22,30 +22,67 @@ import javax.swing.SwingConstants;
 import facturatieSysteem.VerzekeringSubsysteem.BusinessLayer.VerzekeringsmaatschappijManager;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 
+/**
+ * The Class ChangeVerzekeringDialog.
+ */
 public class ChangeVerzekeringDialog extends JDialog {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The change verzekering_1. */
 	private JPanel changeVerzekering, changeVerzekering_1;
+	
+	/** The verzekering. */
 	private Verzekeringsmaatschappij verzekering;
+	
+	/** The text field nr. */
 	private JTextField textFieldNr;
+	
+	/** The text field naam. */
 	private JTextField textFieldNaam;
+	
+	/** The text field adres. */
 	private JTextField textFieldAdres;
+	
+	/** The text field postcode. */
 	private JTextField textFieldPostcode;
+	
+	/** The text field plaats. */
 	private JTextField textFieldPlaats;
+	
+	/** The text field kvk. */
 	private JTextField textFieldKVK;
+	
+	/** The text field rekening nr. */
 	private JTextField textFieldRekeningNr;
+	
+	/** The text field nr2. */
 	private JTextField textFieldNr2;
+	
+	/** The text field naam2. */
 	private JTextField textFieldNaam2;
+	
+	/** The text field adres2. */
 	private JTextField textFieldAdres2;
+	
+	/** The text field postcode2. */
 	private JTextField textFieldPostcode2;
+	
+	/** The text field plaats2. */
 	private JTextField textFieldPlaats2;
+	
+	/** The text field kv k2. */
 	private JTextField textFieldKVK2;
+	
+	/** The text field rekening nr2. */
 	private JTextField textFieldRekeningNr2;
 
 	/**
 	 * Create the dialog.
+	 *
+	 * @param manager the manager
+	 * @param maatschappijnr the maatschappijnr
 	 */
 	public ChangeVerzekeringDialog(VerzekeringsmaatschappijManager manager,
 			String maatschappijnr) {

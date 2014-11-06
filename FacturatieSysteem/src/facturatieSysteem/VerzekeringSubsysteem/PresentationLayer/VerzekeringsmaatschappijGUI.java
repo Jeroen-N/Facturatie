@@ -392,7 +392,11 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 		});
 
 	}
-
+	/**
+	 * Fill table with the search results
+	 *
+	 * @param klant the klant
+	 */
 	public void fillTableZoekresultaat(String naam) {
 		verzekeringList2 = new ArrayList<Verzekeringsmaatschappij>();
 		for (Verzekeringsmaatschappij maatschappij : verzekeringList) {
@@ -412,13 +416,20 @@ public class VerzekeringsmaatschappijGUI extends JFrame {
 			showConfirmationWindow("Geen maatschappij gevonden");
 		}
 	}
-
+	/**
+	 * shows a confirmation window with a costum message.
+	 *
+	 * @param message the message
+	 */
 	private void showConfirmationWindow(String message) {
 		Component frame = null;
 		JOptionPane.showMessageDialog(frame, message);
 
 	}
-	
+	/**
+	 * Updates the table.
+	 *
+	 */
 	private void updateTable(){
 		dataTableModelVerzekeringen.fireTableDataChanged();
 	}

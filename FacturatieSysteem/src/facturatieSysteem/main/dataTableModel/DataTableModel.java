@@ -5,8 +5,6 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.apache.log4j.Logger;
-
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
 /**

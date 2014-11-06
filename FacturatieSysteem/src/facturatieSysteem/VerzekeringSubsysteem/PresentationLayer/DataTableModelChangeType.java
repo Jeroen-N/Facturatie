@@ -10,21 +10,26 @@ import org.apache.log4j.Logger;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 import facturatieSysteem.main.dataTableModel.DataTableModel;
 
+/**
+ * The Class DataTableModelChangeType.
+ */
 public class DataTableModelChangeType extends AbstractTableModel{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
+	
+	/** The cache. */
 	private  Vector<String[]> cache; // will hold String[] objects . . .
+	
+	/** The col count. */
 	private  int colCount;
+	
+	/** The headers. */
 	private  String[] headers;
 
 	// Get a logger instance for the current class
-	 Logger logger = Logger.getLogger(DataTableModel.class);
+	 /** The logger. */
+	Logger logger = Logger.getLogger(DataTableModel.class);
 
 	/**
 	 * Constructor.
@@ -67,8 +72,8 @@ public class DataTableModelChangeType extends AbstractTableModel{
 	
 	/**
 	 * Set the values of the data table model.
-	 * 
-	 * @param members ArrayList containing the values to be set.
+	 *
+	 * @param verType the new values
 	 */
 	public void setValues(ArrayList<Verzekeringstype> verType) {
 		
@@ -109,6 +114,9 @@ public class DataTableModelChangeType extends AbstractTableModel{
 
 	/**
 	 * Get the name of column [i].
+	 *
+	 * @param i the i
+	 * @return the column name
 	 */
 	public String getColumnName(int i) { 
 		return headers[i];
@@ -116,6 +124,8 @@ public class DataTableModelChangeType extends AbstractTableModel{
 
 	/**
 	 * Get the number of columns in the model.
+	 *
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		return colCount;
@@ -123,6 +133,8 @@ public class DataTableModelChangeType extends AbstractTableModel{
 
 	/**
 	 * Get the number of rows.
+	 *
+	 * @return the row count
 	 */
 	public int getRowCount() {
 		return cache.size();
@@ -130,6 +142,10 @@ public class DataTableModelChangeType extends AbstractTableModel{
 
 	/**
 	 * Get the value at [row,col].
+	 *
+	 * @param row the row
+	 * @param col the col
+	 * @return the value at
 	 */
 	public Object getValueAt(int row, int col) {
 		return ((String[]) cache.elementAt(row))[col];

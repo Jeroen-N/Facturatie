@@ -21,17 +21,37 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+/**
+ * The Class DAOFactoryLogin.
+ */
 public class DAOFactoryLogin {
+	
+	/** The xml path. */
 	private String xmlPath ;
+	
+	/** The xsd path. */
 	private String xsdPath;
+	
+	/** The document. */
 	private Document document;
 	
+	/**
+	 * Instantiates a new DAO factory login.
+	 *
+	 * @param xml the xml
+	 * @param xsd the xsd
+	 */
 	public DAOFactoryLogin(String xml, String xsd){
 		this.xmlPath = xml;
 		this.xsdPath = xsd;
 		
 	}
 	
+	/**
+	 * Validate xml.
+	 *
+	 * @return the document
+	 */
 	public Document validateXML(){
 		try{
 			Schema schema = getValidationSchema();
@@ -59,6 +79,11 @@ public class DAOFactoryLogin {
 		return document;
 	}
 	
+	/**
+	 * Gets the validation schema.
+	 *
+	 * @return the validation schema
+	 */
 	public Schema getValidationSchema() {
 		Schema schema = null;
 
@@ -74,6 +99,12 @@ public class DAOFactoryLogin {
 		return schema;
 	}
 
+	/**
+	 * Validate document.
+	 *
+	 * @param schema the schema
+	 * @return true, if successful
+	 */
 	public boolean validateDocument(Schema schema) {
 
 		System.out.println("validateDocument");
@@ -95,6 +126,11 @@ public class DAOFactoryLogin {
 	}
 	
 
+	/**
+	 * Write document.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean writeDocument() {
 
 		try {
@@ -114,10 +150,20 @@ public class DAOFactoryLogin {
 	}
 	
 	
+	/**
+	 * Gets the XML file.
+	 *
+	 * @return the XML file
+	 */
 	public String getXMLFile(){
 		return xmlPath;
 	}
 	
+	/**
+	 * Gets the document.
+	 *
+	 * @return the document
+	 */
 	public Document getDocument(){
 		try{
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();

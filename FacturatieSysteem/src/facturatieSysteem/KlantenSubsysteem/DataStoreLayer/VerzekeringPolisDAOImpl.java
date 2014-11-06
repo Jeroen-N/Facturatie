@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class VerzekeringPolisDAOImpl.
  */
@@ -20,8 +20,12 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 	/** The dao factory. */
 	private DAOFactoryKlant daoFactory = new DAOFactoryKlant();
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#addVerzekeringPolisXML(java.lang.String, facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis)
+	/** Adds an insurance polis in the XML with the given identification number and an object of the type VerzekeringPolis
+	 * 
+	 * @param addBSN the BSN to be included in the polis
+	 * @param polis the polis object to be added
+	 * 
+	 * @return boolean returns true if succesfull
 	 */
 	@Override
 	public boolean addVerzekeringPolisXML(String addBSN, VerzekeringPolis polis){
@@ -75,8 +79,9 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#updateVerzekeringPolisXML(facturatieSysteem.KlantenSubsysteem.EntityLayer.VerzekeringPolis)
+	/** Updates an insurance polis in the XML with the given object of VerzekeringPolis
+	 * @param polis the new object of the type VerzekeringPolis
+	 * @return boolean returns true if succesfull
 	 */
 	@Override
 	public boolean updateVerzekeringPolisXML(VerzekeringPolis polis) {
@@ -118,8 +123,11 @@ public class VerzekeringPolisDAOImpl implements VerzekeringPolisDAO {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see facturatieSysteem.KlantenSubsysteem.DataStoreLayer.VerzekeringPolisDAO#verwijderPolisXML(java.lang.String, java.lang.String)
+	/**Deletes a insurance polis with the given polis number and a identification number
+	 * @param Polisnummer the number of the polis
+	 * @param BSN the identification number
+	 * 
+	 * @return boolean returns true if succesfull
 	 */
 	@Override
 	public boolean verwijderPolisXML(String Polisnummer, String BSN) {

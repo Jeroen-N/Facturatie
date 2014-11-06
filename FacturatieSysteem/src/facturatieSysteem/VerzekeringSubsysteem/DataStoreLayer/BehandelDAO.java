@@ -2,10 +2,15 @@ package facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer;
 
 import java.util.ArrayList;
 
+/**
+ * The Interface BehandelDAO.
+ */
 public interface BehandelDAO {
 
-	/*
-	 * @return De gevonden behandelcodes uit de behandelcodes XML
+	/**
+	 * Gets the behandelcodes.
+	 *
+	 * @return the behandelcodes
 	 */
 	ArrayList<String> getBehandelcodes();
 

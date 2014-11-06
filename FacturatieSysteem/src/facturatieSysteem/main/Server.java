@@ -11,7 +11,6 @@ import org.apache.log4j.PropertyConfigurator;
 import Shared.KlantManagerIFrmi;
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManagerImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Server.
  */

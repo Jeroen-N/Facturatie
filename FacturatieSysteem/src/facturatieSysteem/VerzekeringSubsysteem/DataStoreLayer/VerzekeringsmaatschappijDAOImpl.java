@@ -12,13 +12,19 @@ import org.w3c.dom.NodeList;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij;
 import facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringstype;
 
+/**
+ * The Class VerzekeringsmaatschappijDAOImpl.
+ */
 public class VerzekeringsmaatschappijDAOImpl implements VerzekeringsmaatschappijDAO {
+	
+	/** The document. */
 	private Document document;
+	
+	/** The dao factory. */
 	private DAOFactoryVerzekering daoFactory = new DAOFactoryVerzekering("XML/facturatieSysteem.xml","XML/facturatieSysteem.xsd");
 	
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#getMaatschappijenXML()
+	/**
+	 * @return een arraylist van alle maatschappijen
 	 */
 	@Override
 	public ArrayList<Verzekeringsmaatschappij> getMaatschappijenXML() {
@@ -67,9 +73,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#addMaatschappijXML(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/**
+	 * @param maatschappij de toe te voegen maatschappij
+	 * @return true als het succesvol is toegevoegd
 	 */
 	@Override
 	public boolean addMaatschappijXML(Verzekeringsmaatschappij maatschappij) {
@@ -174,9 +180,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#updateMaatschappijXML(facturatieSysteem.VerzekeringSubsysteem.EntityLayer.Verzekeringsmaatschappij)
+	/**
+	 * @param maatschappij de aan te passen maatschappij
+	 * @return true als het succesvol is aangepast
 	 */
 	@Override
 	public boolean updateMaatschappijXML(Verzekeringsmaatschappij maatschappij) {
@@ -214,9 +220,9 @@ public class VerzekeringsmaatschappijDAOImpl implements Verzekeringsmaatschappij
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see facturatieSysteem.VerzekeringSubsysteem.DataStoreLayer.VerzekeringsmaatschappijDAO#deleteMaatschappijXML(java.lang.String)
+	/**
+	 * @param naam de naam van de te verwijderen maatschappij
+	 * @return true als het succesvol is verwijderd
 	 */
 	@Override
 	public boolean deleteMaatschappijXML(String nr) {

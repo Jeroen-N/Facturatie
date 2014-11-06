@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Factuur.
  */
