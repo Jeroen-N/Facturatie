@@ -252,7 +252,7 @@ public class FacturatieGUI extends JFrame {
 							} catch (IOException e1) {
 								showConfirmationWindow("There was no printer found.");
 							}
-							file.delete();
+							file.deleteOnExit();
 						}
 					} else {
 						showConfirmationWindow("File doesn't exist, the invoice couldn't be created");

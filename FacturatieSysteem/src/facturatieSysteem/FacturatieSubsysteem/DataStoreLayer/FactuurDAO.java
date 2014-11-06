@@ -35,8 +35,7 @@ public class FactuurDAO implements FactuurDAOinf {
 	/**
 	 * Haalt alle facturen op van de klant waarvan deze geladen moeten worden.
 	 * 
-	 * @param De
-	 *            klant waarvan de facturen geladen worden.
+	 * @param invoerBSN De klant waarvan de facturen geladen worden.
 	 * 
 	 * @return ArrayList van facturen van de desbetreffende klant
 	 */
