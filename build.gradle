@@ -48,6 +48,12 @@ project(':FacturatieSysteem') {
 			from ('../FacturatieClient/build/classes/main/facturatie') {
 				into 'bin/facturatieClient'
 			}
+			from('../FacturatieClient/bin/Shared'){
+				into 'bin/facturatieClient/client'
+			}
+			from('../FacturatieClient/bin/facturatie/client'){
+				into 'bin/facturatieClient/client'
+			}
 			from ('../FacturatieSysteem/bin/facturatieSysteem') {
 				into 'bin/facturatieSysteem'
 			}
