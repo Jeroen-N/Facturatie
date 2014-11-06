@@ -60,7 +60,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldPostCode;
 	
 	/** The text field plaats. */
-	private JFormattedTextField textFieldPlaats;
+	private JTextField textFieldPlaats;
 	
 	/** The text field telefoonnummer. */
 	private JTextField textFieldTelefoonnummer;
@@ -72,7 +72,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldRkNummer;
 	
 	/** The text field naam2. */
-	private JFormattedTextField textFieldNaam2;
+	private JTextField textFieldNaam2;
 	
 	/** The text field geb datum2. */
 	private JTextField textFieldGebDatum2;
@@ -87,7 +87,7 @@ public class ChangeKlantDialog extends JDialog {
 	private JTextField textFieldPostCode2;
 	
 	/** The text field plaats2. */
-	private JFormattedTextField textFieldPlaats2;
+	private JTextField textFieldPlaats2;
 	
 	/** The text field telefoonnummer2. */
 	private JTextField textFieldTelefoonnummer2;
@@ -117,15 +117,7 @@ public class ChangeKlantDialog extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 632, 480);
 		getContentPane().setLayout(new BorderLayout());
-		/**
-		 * masked format aanmaken
-		 */
-		MaskFormatter formatter = null;
-		  try {
-		    formatter = new MaskFormatter("U?????????????????????????????????????????????????");
-		  } catch (ParseException e) {
-		    e.printStackTrace();
-		  }
+
 		/*
 		 * Klant wordt opgehaald
 		 */
@@ -340,7 +332,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats);
 						}
 						{
-							textFieldPlaats = new JFormattedTextField(formatter);
+							textFieldPlaats = new JTextField();
 							splitPanePlaats.setRightComponent(textFieldPlaats);
 							textFieldPlaats.setText(klant.getWoonplaats());
 							textFieldPlaats.setEditable(false);
@@ -544,7 +536,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPaneNaam.setLeftComponent(lblNaam);
 						}
 						{
-							textFieldNaam2 = new JFormattedTextField(formatter);
+							textFieldNaam2 = new JTextField();
 							splitPaneNaam.setRightComponent(textFieldNaam2);
 							textFieldNaam2.setText(klant.getNaam());
 							textFieldNaam2.setColumns(15);
@@ -660,7 +652,7 @@ public class ChangeKlantDialog extends JDialog {
 							splitPanePlaats.setLeftComponent(lblPlaats2);
 						}
 						{
-							textFieldPlaats2 = new JFormattedTextField(formatter);
+							textFieldPlaats2 = new JTextField();
 							splitPanePlaats.setRightComponent(textFieldPlaats2);
 							textFieldPlaats2.setText(klant.getWoonplaats());
 							textFieldPlaats2.setColumns(15);
