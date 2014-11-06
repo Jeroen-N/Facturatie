@@ -458,7 +458,7 @@ public class AddKlantDialog extends JDialog {
 						{
 							MaskFormatter formatterRN = null;
 							try {
-								formatterRN = new MaskFormatter("??##????##########");
+								formatterRN = new MaskFormatter("UU##UUUU##########");
 							} catch (ParseException e1) {
 								showConfirmationWindow("Zorg ervoor dat u een geldig IBAN nummer invult");
 							}
