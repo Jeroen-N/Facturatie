@@ -325,7 +325,7 @@ public class Bon {
         cell.setBorder(Rectangle.TOP);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((totaalPrijsPolis)), fontbold));
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(totaalPrijsPolis))), fontbold));
         cell.setColspan(3);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setBorder(Rectangle.TOP);
@@ -357,7 +357,7 @@ public class Bon {
         cell.setBorder(Rectangle.TOP);
         table2.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((totaalPrijsZelf)), fontbold));
+        cell = new PdfPCell(new Phrase("\u20ac " + String.valueOf((getallenOpmaker.format(totaalPrijsZelf))), fontbold));
         cell.setColspan(3);
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.setBorder(Rectangle.TOP);

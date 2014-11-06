@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Clienten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ClientFormat.xsd">
 
-	<Client BSN="125651201">
-		<ClientGegevens>
-			<Naam>Xander Gerreman</Naam>
-			<Adres>Marialaan 9a</Adres>
-			<Postcode>4834VG</Postcode>
-			<Woonplaats>Breda</Woonplaats>
-			<Geboortedatum>10-06-1994</Geboortedatum>
-			<Telefoonnummer>0682739024</Telefoonnummer>
-			<Email>xpjgerre@avans.nl</Email>
-			<BetaalMethode>incasso</BetaalMethode>
-			<ResterendEigenRisico>232.5</ResterendEigenRisico>
-			<Rekeningnummer>NL47RABO0136052159</Rekeningnummer>
-		</ClientGegevens>
-		<VerzekeringPolissen>
-			<VerzekeringPolis PolisNummer="87JH9G">
-				<VerzekeringType>CGZ-Basic</VerzekeringType>
-				<EigenRisico>200.0</EigenRisico>
-				<startDatum>01-01-2013</startDatum>
-				<eindDatum>31-12-2013</eindDatum>
-			</VerzekeringPolis>
-		
-			<VerzekeringPolis PolisNummer="BDVJLX">
-				<VerzekeringType>CGZ-Basic</VerzekeringType>
-				<EigenRisico>250.0</EigenRisico>
-				<startDatum>10-06-2001</startDatum>
-				<eindDatum>10-06-2002</eindDatum>
-			</VerzekeringPolis>
-			<VerzekeringPolis PolisNummer="JX1OPY">
-				<VerzekeringType>CGZ-All-risk</VerzekeringType>
-				<EigenRisico>285.0</EigenRisico>
-				<startDatum>01-01-2014</startDatum>
-				<eindDatum>01-01-2015</eindDatum>
-			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen><Factuur FactuurNummer="1"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="1916"><BehandelafspraakID>12</BehandelafspraakID><BehandelafspraakID>1847</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>90.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur><Factuur FactuurNummer="3"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="1918"><BehandelafspraakID>15</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>0.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>17.5</Totaalprijs></Factuur></Facturen></Client>
+	
 	<Client BSN="125651202">
 		<ClientGegevens>
 			<Naam>Sander Blijlevens</Naam>
@@ -54,12 +21,7 @@
 				<startDatum>01-01-2013</startDatum>
 				<eindDatum>31-12-2013</eindDatum>
 			</VerzekeringPolis>
-			<VerzekeringPolis PolisNummer="123456">
-				<VerzekeringType>CGZ-Basic</VerzekeringType>
-				<EigenRisico>1125.48</EigenRisico>
-				<startDatum>01-01-2010</startDatum>
-				<eindDatum>31-12-2011</eindDatum>
-			</VerzekeringPolis>
+			
 			<VerzekeringPolis PolisNummer="BJOWB2">
 				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>250.0</EigenRisico>
@@ -71,8 +33,15 @@
 				<EigenRisico>250.0</EigenRisico>
 				<startDatum>03-11-2014</startDatum>
 				<eindDatum>05-12-2015</eindDatum>
+			</VerzekeringPolis>
+			
+			<VerzekeringPolis PolisNummer="123456">
+				<VerzekeringType>CGZ-Basic</VerzekeringType>
+				<EigenRisico>1125.48</EigenRisico>
+				<startDatum>01-01-2010</startDatum>
+				<eindDatum>31-12-2011</eindDatum>
 			</VerzekeringPolis></VerzekeringPolissen>
-		<Facturen><Factuur FactuurNummer="2"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="2349"><BehandelafspraakID>3498</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="6845"><BehandelafspraakID>684</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="9856"><BehandelafspraakID>3654</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="4745"><BehandelafspraakID>6798</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>295.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>0.0</Totaalprijs></Factuur></Facturen>
+		<Facturen><Factuur FactuurNummer="1"><FactuurDatum>06-11-2014</FactuurDatum><VervalDatum>20-11-2014</VervalDatum><FactuurBehandelingen><FactuurBehandeling BehandelingID="2349"><BehandelafspraakID>3498</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="6845"><BehandelafspraakID>684</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="9856"><BehandelafspraakID>3654</BehandelafspraakID></FactuurBehandeling><FactuurBehandeling BehandelingID="4745"><BehandelafspraakID>6798</BehandelafspraakID></FactuurBehandeling></FactuurBehandelingen><TevergoedenBedrag>240.0</TevergoedenBedrag><Status>Niet betaald</Status><Totaalprijs>55.0</Totaalprijs></Factuur></Facturen>
 	</Client>
 
 	<Client BSN="287496358">
@@ -90,7 +59,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="DD8NCN">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>06-11-2014</startDatum>
 				<eindDatum>06-11-2015</eindDatum>
@@ -142,7 +111,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="4AY22B">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>17-09-2000</startDatum>
 				<eindDatum>17-09-2020</eindDatum>
@@ -194,7 +163,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="ZYL8CH">
-				<VerzekeringType>Basic</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>05-04-2002</startDatum>
 				<eindDatum>05-04-2022</eindDatum>
@@ -220,7 +189,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="CL5GL3">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-Basic</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>05-05-2000</startDatum>
 				<eindDatum>05-05-2030</eindDatum>
@@ -246,7 +215,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="WZZBOC">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>01-01-2000</startDatum>
 				<eindDatum>01-01-2050</eindDatum>
@@ -272,7 +241,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="7AQKKV">
-				<VerzekeringType>Basic</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>01-25-2014</startDatum>
 				<eindDatum>01-25-2015</eindDatum>
@@ -298,7 +267,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="XB76DU">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-Basic</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>31-02-2014</startDatum>
 				<eindDatum>31-02-2015</eindDatum>
@@ -324,7 +293,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="I7JP97">
-				<VerzekeringType>Basic</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>200.0</EigenRisico>
 				<startDatum>21-04-2014</startDatum>
 				<eindDatum>21-04-2015</eindDatum>
@@ -350,7 +319,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="8I7QRV">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>12-06-2014</startDatum>
 				<eindDatum>12-06-2015</eindDatum>
@@ -376,7 +345,7 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="GFEW11">
-				<VerzekeringType>Betering-Basic</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>01-01-2015</startDatum>
 				<eindDatum>01-01-2016</eindDatum>
@@ -402,10 +371,44 @@
 		</ClientGegevens>
 		<VerzekeringPolissen>
 			<VerzekeringPolis PolisNummer="JOXRTM">
-				<VerzekeringType>All-risk</VerzekeringType>
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
 				<EigenRisico>285.0</EigenRisico>
 				<startDatum>31-12-2016</startDatum>
 				<eindDatum>01-01-2018</eindDatum>
+			</VerzekeringPolis>
+		</VerzekeringPolissen>
+		<Facturen/>
+		<Behandelingen/>
+		<Diagnoses/>
+	</Client>
+
+	
+
+	
+
+	
+
+	
+
+	<Client BSN="289228944">
+		<ClientGegevens>
+			<Naam>Kees Betonmolen</Naam>
+			<Adres>Allerheiligeweg 39B</Adres>
+			<Postcode>4834BW</Postcode>
+			<Woonplaats>Breda</Woonplaats>
+			<Geboortedatum>31-12-1995</Geboortedatum>
+			<Telefoonnummer>0619199954</Telefoonnummer>
+			<Email>kpb93@kpnmail.com</Email>
+			<BetaalMethode>Acceptgiro</BetaalMethode>
+			<ResterendEigenRisico>285.0</ResterendEigenRisico>
+			<Rekeningnummer>NL02ASNB0654854422</Rekeningnummer>
+		</ClientGegevens>
+		<VerzekeringPolissen>
+			<VerzekeringPolis PolisNummer="WFUNLX">
+				<VerzekeringType>CGZ-All-risk</VerzekeringType>
+				<EigenRisico>285.0</EigenRisico>
+				<startDatum>21-02-2014</startDatum>
+				<eindDatum>21-02-2015</eindDatum>
 			</VerzekeringPolis>
 		</VerzekeringPolissen>
 		<Facturen/>

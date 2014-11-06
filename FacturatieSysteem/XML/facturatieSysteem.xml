@@ -14,7 +14,6 @@
 	            <behandelcode>004</behandelcode>
 	            <behandelcode>005</behandelcode>
 	            <behandelcode>007</behandelcode>
-	            <behandelcode>008</behandelcode>
 				<behandelcode>001</behandelcode>
 				<behandelcode>002</behandelcode>
 			</behandelCodes>
@@ -37,27 +36,5 @@
 	      </verzekeringsType>
 		
 			</verzekeringsTypes>    
-   </verzekeringsmaatschappij>	
-   
-	<verzekeringsmaatschappij maatschappijnr="002">
-		<naam>Betering Verzekeringen</naam>
-		<adres>Toulonselaan 12</adres>
-		<postcode>3333HG</postcode>
-		<woonplaats>Dordrecht</woonplaats>
-		<KVKNummer>87654321</KVKNummer>
-		<rekeningNummer>987654321</rekeningNummer>
-		<verzekeringsTypes>
-		<verzekeringsType typenr="005">
-	        <naam>Betering-Basic</naam>
-	        <verplichtEigenRisico>285</verplichtEigenRisico>
-	        <behandelCodes>
-				<behandelcode>002</behandelcode>
-	            <behandelcode>004</behandelcode>
-	            <behandelcode>006</behandelcode>
-	            <behandelcode>008</behandelcode>
-	            <behandelcode>010</behandelcode>
-			</behandelCodes>
-	    </verzekeringsType>
-		</verzekeringsTypes>
-	</verzekeringsmaatschappij>
+   </verzekeringsmaatschappij>
 </facturatieSysteem>
