@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import facturatieSysteem.KlantenSubsysteem.BusinessLayer.KlantManager;
 import facturatieSysteem.KlantenSubsysteem.EntityLayer.Klant;
@@ -681,7 +683,13 @@ public class AddVerzekeringPolisDialog extends JDialog {
 							splitPaneStartDatum.setLeftComponent(lblStartDatum);
 						}
 						{
-							textFieldStartDatum = new JTextField();
+							MaskFormatter formatterGebDatum = null;
+							try {
+								formatterGebDatum = new MaskFormatter("##-##-####");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldige datum invult");
+							}
+							textFieldStartDatum = new JFormattedTextField(formatterGebDatum);
 							textFieldStartDatum.setColumns(15);
 							splitPaneStartDatum
 									.setRightComponent(textFieldStartDatum);
@@ -711,7 +719,13 @@ public class AddVerzekeringPolisDialog extends JDialog {
 							splitPaneEindDatum.setLeftComponent(lblEindDatum);
 						}
 						{
-							textFieldEindDatum = new JTextField();
+							MaskFormatter formatterGebDatum = null;
+							try {
+								formatterGebDatum = new MaskFormatter("##-##-####");
+							} catch (ParseException e1) {
+								showConfirmationWindow("Zorg ervoor dat u een geldige datum invult");
+							}
+							textFieldEindDatum = new JFormattedTextField(formatterGebDatum);
 							textFieldEindDatum.addMouseListener(new MouseAdapter() {
 								@Override
 								public void mouseClicked(MouseEvent e) {
