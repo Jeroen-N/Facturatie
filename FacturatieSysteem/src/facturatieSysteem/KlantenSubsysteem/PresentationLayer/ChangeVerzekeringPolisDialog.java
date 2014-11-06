@@ -9,9 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BoxLayout;
@@ -439,6 +441,26 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 						}
 						{
 							textFieldEindDatum = new JTextField();
+							textFieldEindDatum.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent e) {
+									DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+									Calendar cal = Calendar.getInstance();
+									Date vandaag;
+									try {
+										vandaag = dateFormat.parse(textFieldStartDatum.getText());
+										SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+										Calendar c = Calendar.getInstance();
+										c.setTime(vandaag); // Now use today date.
+										c.add(Calendar.DATE, 365); // Adding 14 days
+										String vDatum = sdf.format(c.getTime());
+										textFieldEindDatum.setText(vDatum);
+									} catch (ParseException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+							});
 							textFieldEindDatum.setColumns(15);
 							splitPaneEindDatum.setRightComponent(textFieldEindDatum);
 						}
@@ -555,11 +577,8 @@ public class ChangeVerzekeringPolisDialog extends JDialog {
 		try {
 			Date date = new Date();
 			Date date1 = new SimpleDateFormat("dd-MM-yyyy").parse(StartDatum);
-			Date date2 = new SimpleDateFormat("dd-MM-yyyy").parse(EindDatum);
 			if (date.after(date1)){
 				textFieldStartDatum.setEditable(false);
-			}
-			if (date.after(date2)){
 				textFieldEindDatum.setEditable(false);
 			}
 		} catch (ParseException e) {
